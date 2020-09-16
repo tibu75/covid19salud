@@ -28,25 +28,25 @@ export class MixedWidget1Component implements OnInit {
   }
 
   getChartOptions() {
-    const strokeColor = '#D13647';
+    const strokeColor = '#97EEE9';
     return {
       series: [
         {
-          name: 'Net Profit',
-          data: [30, 45, 32, 70, 40, 40, 40],
-        },
+          name: 'Llamadas en el dia',
+          data: [60, 55, 65, 0, 0, 0, 0]
+        }
       ],
       chart: {
         type: 'area',
         height: 200,
         toolbar: {
-          show: false,
+          show: false
         },
         zoom: {
-          enabled: false,
+          enabled: false
         },
         sparkline: {
-          enabled: true,
+          enabled: true
         },
         dropShadow: {
           enabled: true,
@@ -55,41 +55,41 @@ export class MixedWidget1Component implements OnInit {
           left: 0,
           blur: 3,
           color: strokeColor,
-          opacity: 0.5,
-        },
+          opacity: 0.5
+        }
       },
       plotOptions: {},
       legend: {
-        show: false,
+        show: true
       },
       dataLabels: {
-        enabled: false,
+        enabled: false
       },
       fill: {
         type: 'solid',
-        opacity: 0,
+        opacity: 0
       },
       stroke: {
         curve: 'smooth',
         show: true,
         width: 3,
-        colors: [strokeColor],
+        colors: [strokeColor]
       },
       xaxis: {
-        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        categories: ['Domingo 13','Lunes 14', 'Martes 15', 'Miercoles 16', 'Jueves 17', 'Viernes 18', 'Sabado 19'],
         axisBorder: {
-          show: false,
+          show: false
         },
         axisTicks: {
-          show: false,
+          show: false
         },
         labels: {
           show: false,
           style: {
             colors: this.colorsGrayGray500,
             fontSize: '12px',
-            fontFamily: this.fontFamily,
-          },
+            fontFamily: this.fontFamily
+          }
         },
         crosshairs: {
           show: false,
@@ -97,9 +97,9 @@ export class MixedWidget1Component implements OnInit {
           stroke: {
             color: this.colorsGrayGray300,
             width: 1,
-            dashArray: 3,
-          },
-        },
+            dashArray: 3
+          }
+        }
       },
       yaxis: {
         min: 0,
@@ -109,52 +109,52 @@ export class MixedWidget1Component implements OnInit {
           style: {
             colors: this.colorsGrayGray500,
             fontSize: '12px',
-            fontFamily: this.fontFamily,
-          },
-        },
+            fontFamily: this.fontFamily
+          }
+        }
       },
       states: {
         normal: {
           filter: {
             type: 'none',
-            value: 0,
-          },
+            value: 0
+          }
         },
         hover: {
           filter: {
             type: 'none',
-            value: 0,
-          },
+            value: 0
+          }
         },
         active: {
           allowMultipleDataPointsSelection: false,
           filter: {
             type: 'none',
-            value: 0,
-          },
-        },
+            value: 0
+          }
+        }
       },
       tooltip: {
         style: {
           fontSize: '12px',
-          fontFamily: this.fontFamily,
+          fontFamily: this.fontFamily
         },
         y: {
           // tslint:disable-next-line
           formatter: function (val) {
-            return '$' + val + ' thousands';
-          },
+            return val + ' Registros';
+          }
         },
         marker: {
-          show: false,
-        },
+          show: false
+        }
       },
       colors: ['transparent'],
       markers: {
         colors: this.colorsThemeBaseDanger,
         strokeColor: [strokeColor],
-        strokeWidth: 3,
-      },
+        strokeWidth: 3
+      }
     };
   }
 }

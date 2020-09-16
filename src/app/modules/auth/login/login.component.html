@@ -1,5 +1,6 @@
 <!--begin::Signin-->
 <div class="login-form login-signin">
+
   <!--begin::Form-->
   <form class="form" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form" (ngSubmit)="submit()">
     <!--begin::Title-->
@@ -13,7 +14,6 @@
       </span>
     </div>
     <!--end::Title-->
-
     <!-- begin::Alert info-->
     <!-- <ng-container *ngIf="!hasError">
       <div class="mb-10 alert alert-custom alert-light-info alert-dismissible">
@@ -41,12 +41,12 @@
         [ngClass]="{ 'is-invalid': loginForm.controls['documento'].invalid }" />
       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
           validation: 'required',
-          message: 'Email is required',
+          message: 'El numero de documento es necesario',
           control: loginForm.controls['documento']
         }"></ng-container>
       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
           validation: 'number',
-          message: 'Email is invalid',
+          message: 'El documento ingresado es invalido',
           control: loginForm.controls['documento']
         }"></ng-container>
       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
@@ -56,11 +56,12 @@
         }"></ng-container>
       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
           validation: 'maxLength',
-          message: 'Email should have maximum 360 symbols',
+          message: 'El documento tiene 8 caracteres como maximo',
           control: loginForm.controls['documento']
         }"></ng-container>
     </div>
     <!--end::Form group-->
+
 
     <!--begin::Form group-->
     <div class="form-group">
@@ -77,7 +78,7 @@
         [ngClass]="{ 'is-invalid': loginForm.controls['password'].invalid }" />
       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
           validation: 'required',
-          message: 'Password is required',
+          message: 'Password es necesaria',
           control: loginForm.controls['password']
         }"></ng-container>
       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
