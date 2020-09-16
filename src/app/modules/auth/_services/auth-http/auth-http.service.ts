@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserModel } from '../../_models/user.model';
-import { environment } from '../../../../../environments/environment';
-import { AuthModel } from '../../_models/auth.model';
+import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { UserModel } from "../../_models/user.model";
+import { environment } from "../../../../../environments/environment";
+import { AuthModel } from "../../_models/auth.model";
 
 const API_USERS_URL = `${environment.apiUrl}/login`;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthHTTPService {
   constructor(private http: HttpClient) {}
@@ -16,7 +16,6 @@ export class AuthHTTPService {
   // public methods
   login(documento: string, password: string): Observable<any> {
     return this.http.post<AuthModel>(API_USERS_URL, { documento, password });
-
   }
 
   // CREATE =>  POST: add a new user to the server
@@ -32,10 +31,10 @@ export class AuthHTTPService {
   }
 
   getUserByToken(token): Observable<UserModel> {
-    const httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.get<UserModel>(`${API_USERS_URL}`, {
+    console.log(token);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set("Authorization", "Bearer " + token);
+    return this.http.get<UserModel>(`${environment.apiUrl}/usuario`, {
       headers: httpHeaders,
     });
   }

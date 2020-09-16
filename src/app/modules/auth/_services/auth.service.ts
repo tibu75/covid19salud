@@ -1,31 +1,34 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
-import { map, catchError, switchMap, finalize } from 'rxjs/operators';
-import { UserModel } from '../_models/user.model';
-import { AuthModel } from '../_models/auth.model';
-import { AuthHTTPService } from './auth-http';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { Injectable, OnDestroy, NgZone } from "@angular/core";
+import { Observable, BehaviorSubject, of, Subscription } from "rxjs";
+import { map, catchError, switchMap, finalize } from "rxjs/operators";
+import { UserModel } from "../_models/user.model";
+import { AuthModel } from "../_models/auth.model";
+import { AuthHTTPService } from "./auth-http";
+import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService implements OnDestroy {
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private isLoadingSubject: BehaviorSubject<boolean>;
-  private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
+  private authLocalStorageToken = `${environment.TOKEN}`;
 
   // public fields
   currentUser$: Observable<UserModel>;
   isLoading$: Observable<boolean>;
   currentUserSubject: BehaviorSubject<UserModel>;
 
+  auth2: any;
+
   get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
   }
 
   constructor(
+    private ngZone: NgZone,
     private authHttpService: AuthHTTPService,
     private router: Router
   ) {
@@ -48,7 +51,7 @@ export class AuthService implements OnDestroy {
       }),
       switchMap(() => this.getUserByToken()),
       catchError((err) => {
-        console.error('err', err);
+        console.error("err", err);
         return of(undefined);
       }),
       finalize(() => this.isLoadingSubject.next(false))
@@ -57,20 +60,26 @@ export class AuthService implements OnDestroy {
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login'], {
-      queryParams: {},
+    this.ngZone.run(() => {
+      this.router.navigateByUrl("/auth/login");
     });
   }
+  /* this.router.navigate(["/auth/login"], {
+      queryParams: {},
+    }); */
 
   getUserByToken(): Observable<UserModel> {
-    const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.token) {
+    const token = this.getAuthFromLocalStorage();
+    console.log("Token", token);
+    if (!token) {
       return of(undefined);
     }
 
     this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken(auth.token).pipe(
+    // console.log("paso2");
+    return this.authHttpService.getUserByToken(token).pipe(
       map((user: UserModel) => {
+        // console.log("paso3", user);
         if (user) {
           this.currentUserSubject = new BehaviorSubject<UserModel>(user);
         } else {
@@ -91,7 +100,7 @@ export class AuthService implements OnDestroy {
       }),
       switchMap(() => this.login(user.documento, user.password)),
       catchError((err) => {
-        console.error('err', err);
+        console.error("err", err);
         return of(undefined);
       }),
       finalize(() => this.isLoadingSubject.next(false))
@@ -106,9 +115,11 @@ export class AuthService implements OnDestroy {
   }
   // private methods
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
+    const token = auth.token;
+
     // store auth token/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
-    if (auth && auth.token) {
-      localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
+    if (token) {
+      localStorage.setItem(this.authLocalStorageToken, JSON.stringify(token));
       return true;
     }
     return false;
