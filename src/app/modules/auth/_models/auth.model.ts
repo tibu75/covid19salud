@@ -1,11 +1,11 @@
-export class AuthModel {
-  token: string;
-  refreshToken: string;
-  expiresIn: Date;
+import { UserModel } from "./user.model";
 
-  setAuth(auth: any) {
+export class AuthModel extends UserModel {
+  token: string;
+  usuario: UserModel;
+
+  /* setAuth(auth: any) {
     this.token = auth.token;
-    this.refreshToken = auth.refreshToken;
-    this.expiresIn = auth.expiresIn;
-  }
+    this.id = auth.id;
+  } */
 }
