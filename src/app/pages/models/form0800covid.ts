@@ -13,6 +13,8 @@ export class Form0800Model {
       telefono: string,
       calle: string,
       numero: string,
+      departamento: string,
+      piso: string,
       localidad: string,
       img: string,
     },

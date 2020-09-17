@@ -3,7 +3,8 @@
     <div class="card-title">
       <h3 class="card-label">
         Registro 0800 COVID 19 <i class="mr-2"></i>
-        <small class="">Nueva llamada</small>
+        <small class="">Nueva llamada -</small>
+        <input type="datetime" name="fechahora" step="1" min="2013-01-01T00:00Z" max="2023-12-31T12:00Z">
       </h3>
     </div>
     <div class="card-toolbar">
@@ -88,164 +89,216 @@
       <form class="form" [formGroup]="form_registro">
         <div class="form-group" formGroupName="persona">
           <div class="row">
-            <div class="col-xl-12">
+            <div class="col-12">
               <div class="my-5">
-                <h3 class="text-dark font-weight-bold mb-10">
+                <h3 class="text-dark font-weight-bold">
                   Informacion del Contacto:
                 </h3>
-                <div clas="row">
-                  <div class="col-3">
+                <div class="row">
+
+                  <div class="col-xl-2">
                     <div class="form-group">
-                      <label class="col-12">Documento de Identidad</label>
-                      <div class="col-12">
-                        <input class="form-control form-control-solid" type="text" formControlName="documento"
-                          name="documento" placeholder="" />
-                        <span class="form-text text-muted">Ingrese el número sin puntos.</span>
-                      </div>
+                      <label>Doc. de Identidad</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="documento"
+                        name="documento" placeholder="" />
+                      <span class="form-text text-muted">Ingrese el número sin puntos.</span>
                     </div>
                   </div>
-                  <div class="col-6">
+
+                  <div class="col-xl-1">
                     <div class="form-group">
-                      <label class="col-12">Nombre/s</label>
-                      <div class="col-12">
-                        <input class="form-control form-control-solid" type="text" formControlName="nombre"
-                          name="nombre" placeholder="" />
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-12">Apellido/s</label>
-                      <div class="col-12">
-                        <input class="form-control form-control-solid" type="text" formControlName="apellido"
-                          name="apellido" placeholder="" />
-                      </div>
+                      <label>Sexo</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="sexo" name="sexo"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
                     </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">Telefono de Contacto</label>
-                  <div class="col-9">
-                    <div class="input-group input-group-solid">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="la la-phone"></i></span>
-                      </div>
-                      <input type="text" class="form-control form-control-solid" formControlName="telefono"
+
+                  <div class="col-xl-1">
+                    <div class="form-group">
+                      <label>Edad</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-3">
+                    <div class="form-group">
+                      <label>Nombre/s</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="nombre" name="nombre"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-3">
+                    <div class="form-group">
+                      <label>Apellido/s</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="apellido"
+                        name="apellido" placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>Tel. de Contacto</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="telefono"
                         name="telefono" placeholder="" />
+                      <span class="form-text text-muted"></span>
                     </div>
                   </div>
+
+
                 </div>
               </div>
-              <div class="separator separator-dashed my-10"></div>
+              <!-- Cierra Row -->
+
+              <div class="separator separator-dashed "></div>
               <div class="my-5">
-                <h3 class="text-dark font-weight-bold mb-10">
+                <h3 class="text-dark font-weight-bold ">
                   Datos del Domicilio:
                 </h3>
 
-                <div class="form-group row">
-                  <label class="col-3">Calle</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" formControlName="calle" name="calle"
-                      placeholder="" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">Número</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" formControlName="numero" name="numero"
-                      placeholder="" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">Barrio</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="Centro" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">Ciudad</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="Neuquén" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">Provincia</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="Neuquén" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">Pais</label>
-                  <div class="col-9">
-                    <select class="form-control form-control-solid">
-                      <option value="AR">Argentina</option>
-                      <option value="BO">Bolivia</option>
-                      <option value="BR">Brazil</option>
-                      <option value="CL">Chile</option>
-                      <option value="CO">Colombia</option>
-                      <option value="UY">Uruguay</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">Código Postal</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="8316" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">FECHA DE INICIO DE SINTOMAS</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="12/09/2020" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">SINTOMAS ACTUALES</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="Dolor de Cabeza" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">ANTECEDENTES PERSONALES</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="Fumador" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">TIENE ALGUNA ENFERMEDAD</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="Ninguna" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">TOMA ACTUALMENTE ALGÚN MEDICAMENTO</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="No" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">CUANTAS PERSONAS COMPARTEN LA VIVIENDA</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="3" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">CUÁL ES SU LUGAR DE TRABAJO ACTUAL</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text"
-                      value="Ministerio de Ciudadania de Neuquen" />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-3">DIRECCIÓN DE TRABAJO</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-solid" type="text" value="Mendoza y Alderete" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="exampleTextarea">CIERRE DE CONTACTO</label>
-                  <textarea class="form-control form-control-solid" rows="3"></textarea>
-                </div>
+                <div class="row">
 
-                <div class="col-xl-2"></div>
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>Calle</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="calle" name="calle"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-1">
+                    <div class="form-group">
+                      <label>Número</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="numero" name="numero"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>Ciudad</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="localidad"
+                        name="localidad" placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>CP</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="cpostal"
+                        name="cpostal" placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>Provincia</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="provincia"
+                        name="provincia" placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>Pais</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="separator separator-dashed "></div>
+              <div class="my-5">
+                <h3 class="text-dark font-weight-bold ">
+                  Presenta Sintomas?
+                </h3>
+
+                <div class="row">
+
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>FECHA DE INICIO DE SINTOMAS</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label>SINTOMAS ACTUALES</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label>ANTECEDENTES PERSONALES</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>TIENE ALGUNA ENFERMEDAD</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-2">
+                    <div class="form-group">
+                      <label>TOMA ACTUALMENTE ALGÚN MEDICAMENTO</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-1">
+                    <div class="form-group">
+                      <label>CUANTAS PERSONAS COMPARTEN LA VIVIENDA</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-3">
+                    <div class="form-group">
+                      <label>CUÁL ES SU LUGAR DE TRABAJO ACTUAL</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-4">
+                    <div class="form-group">
+                      <label>DIRECCIÓN DE TRABAJO</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleTextarea">CIERRE DE CONTACTO</label>
+                    <textarea class="form-control form-control-solid" rows="3"></textarea>
+                  </div>
+
+                  <div class="col-xl-2"></div>
+                </div>
               </div>
             </div>
           </div>

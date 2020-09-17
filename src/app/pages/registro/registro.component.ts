@@ -37,8 +37,6 @@ export class RegistroComponent implements OnInit, AfterViewInit {
 
 
     this.personaForm = new FormGroup({
-    
-    
     documento: new FormControl("", [
         Validators.required,
         Validators.maxLength(8),
@@ -47,111 +45,124 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     });
     this.form_registro = new FormGroup({
       nroRegistro: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
-      ]),
+        Validators.required]),
       fecha: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
+        Validators.required
       ]),
       tipo_registro: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
+        Validators.required
       ]),
       motivo_consulta: new FormControl("", [
         Validators.required,
-        Validators.maxLength(8),
+        Validators.maxLength(500),
       ]),
       persona: new FormGroup({
         nombre: new FormControl("", [
-          Validators.required,
-          Validators.maxLength(8),
-        ]),
+          Validators.required]),
         apellido: new FormControl("", [
           Validators.required,
-          Validators.maxLength(8),
+          Validators.maxLength(25),
         ]),
         documento: new FormControl("", [
           Validators.required,
           Validators.maxLength(8),
         ]),
         fechaNacimiento: new FormControl("", [
-          Validators.required,
-          Validators.maxLength(8),
+          Validators.required
         ]),
         sexo: new FormControl("", [
-          Validators.required,
-          Validators.maxLength(8),
+          Validators.required
         ]),
-        telefono: new FormControl("", [
+        telefono1: new FormControl("", [
           Validators.required,
-          Validators.maxLength(8),
+          Validators.maxLength(10),
+        ]),
+        telefono2: new FormControl("", [
+          Validators.required,
+          Validators.maxLength(10),
         ]),
         calle: new FormControl("", [
           Validators.required,
-          Validators.maxLength(8),
+          Validators.maxLength(20),
         ]),
         numero: new FormControl("", [
           Validators.required,
-          Validators.maxLength(8),
+          Validators.maxLength(4),
+        ]),
+        departamento: new FormControl("", [
+          Validators.required,
+          Validators.maxLength(5),
+        ]),
+        piso: new FormControl("", [
+          Validators.required,
+          Validators.maxLength(2),
         ]),
         localidad: new FormControl("", [
           Validators.required,
-          Validators.maxLength(8),
+          Validators.maxLength(50),
+        ]),
+        cpostal: new FormControl("", [
+          Validators.required,
+          Validators.maxLength(4),
+        ]),
+        provincia: new FormControl("", [
+          Validators.required,
+          Validators.maxLength(25),
+        ]),
+        pais: new FormControl("", [
+          Validators.required,
+          Validators.maxLength(25),
         ]),
         img: new FormControl("", [
-          Validators.required,
-          Validators.maxLength(8),
+          Validators.required
         ]),
       }),
       fecha_ini_sint: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
+        Validators.required
       ]),
       sintomas: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
+        Validators.required
       ]),
       antencedentes_p: new FormControl("", [
         Validators.required,
-        Validators.maxLength(8),
       ]),
       enfermedad_pre: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
+        Validators.required
       ]),
       toma_medicamentos: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
+        Validators.required
       ]),
       vivienda_personas: new FormControl("", [
         Validators.required,
-        Validators.maxLength(8),
+        Validators.maxLength(2),
       ]),
 
       trabajo: new FormArray([
         new FormGroup({
+          lugar: new FormControl("", [
+            Validators.required,
+            Validators.maxLength(50),
+          ]),
           telefono: new FormControl("", [
             Validators.required,
-            Validators.maxLength(8),
+            Validators.maxLength(10),
           ]),
           calle: new FormControl("", [
             Validators.required,
-            Validators.maxLength(8),
+            Validators.maxLength(25),
           ]),
           numero: new FormControl("", [
             Validators.required,
-            Validators.maxLength(8),
+            Validators.maxLength(4),
           ]),
           localidad: new FormControl("", [
             Validators.required,
-            Validators.maxLength(8),
+            Validators.maxLength(25),
           ]),
         }),
       ]),
       usuario: new FormControl("", [
-        Validators.required,
-        Validators.maxLength(8),
+        Validators.required
       ]),
     });
   }
