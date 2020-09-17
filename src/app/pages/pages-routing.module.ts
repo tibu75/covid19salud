@@ -1,59 +1,59 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LayoutComponent } from './_layout/layout.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { LayoutComponent } from "./_layout/layout.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: LayoutComponent,
     children: [
       {
-        path: 'dashboard',
+        path: "dashboard",
         loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+          import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
+          
       },
       {
-        path: 'builder',
+        path: "builder",
         loadChildren: () =>
-          import('./builder/builder.module').then((m) => m.BuilderModule),
+          import("./builder/builder.module").then((m) => m.BuilderModule),
       },
       {
-        path: 'registro',
+        path: "registro",
         loadChildren: () =>
-          import('../pages/registro/registro.module').then(
-            (m) => m.RegistroModule
+          import("../pages/registro/registro.module").then((m) => m.RegistroModule
           ),
       },
       {
-        path: 'user-management',
+        path: "user-management",
         loadChildren: () =>
-          import('../modules/user-management/user-management.module').then(
+          import("../modules/user-management/user-management.module").then(
             (m) => m.UserManagementModule
           ),
       },
       {
-        path: 'ngbootstrap',
+        path: "ngbootstrap",
         loadChildren: () =>
-          import('../modules/ngbootstrap/ngbootstrap.module').then(
+          import("../modules/ngbootstrap/ngbootstrap.module").then(
             (m) => m.NgbootstrapModule
           ),
       },
       {
-        path: 'material',
+        path: "material",
         loadChildren: () =>
-          import('../modules/material/material.module').then(
+          import("../modules/material/material.module").then(
             (m) => m.MaterialModule
           ),
       },
       {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
+        path: "",
+        redirectTo: "dashboard",
+        pathMatch: "full",
       },
       {
-        path: '**',
-        redirectTo: 'errors/404',
-        pathMatch: 'full',
+        path: "**",
+        redirectTo: "errors/404",
+        pathMatch: "full",
       },
     ],
   },

@@ -4,14 +4,13 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef,
-  
 } from "@angular/core";
 import { Form0800Model } from "../models/form0800covid";
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { RenaperService } from "../../services/ws/renaper.service";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-registro",
@@ -25,20 +24,22 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   form_registro: FormGroup;
   renaper: any = {};
   data: any = {};
-  cargando: boolean = false;
-
+  cargando: boolean = true;
 
   constructor(
     public _renaperService: RenaperService,
     private modalService: NgbModal,
     private ruta: Router,
     private activadeRoute: ActivatedRoute
-
   ) {}
 
   ngOnInit(): void {
+
+
     this.personaForm = new FormGroup({
-      documento: new FormControl("", [
+    
+    
+    documento: new FormControl("", [
         Validators.required,
         Validators.maxLength(8),
       ]),
@@ -156,13 +157,12 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    
     this.open(this.contenidoDelModal);
   }
 
-  recargar(){
+  recargar() {
     document.getElementById("formulario");
-}
+  }
   open(content) {
     this.modalService
       .open(content, { ariaLabelledBy: "modal-basic-title" })
@@ -187,13 +187,11 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   Renaper() {
-    
     let params = `documento=${this.personaForm.value.documento}&sexo=${this.personaForm.value.sexo}`;
     console.log(params);
-      this._renaperService.getPersona(params).subscribe((data) => {
-      this.renaper=data;
-      if (data) {
-        this.cargando = true;
+    this._renaperService.getPersona(params).subscribe((data) => {
+      this.renaper = data;
+      if (this.renaper) {
         console.log(this.renaper);
         this.form_registro.patchValue({
           persona: { documento: this.personaForm.value.documento },
@@ -238,12 +236,11 @@ export class RegistroComponent implements OnInit, AfterViewInit {
           persona: { pais: this.renaper.datos.pais },
         });
         console.log(this.form_registro);
+        return this.ruta.navigateByUrl(`/registro`);
       } else {
-       this.cargando=false;
-       return this.ruta.navigateByUrl(`/dashboard`);
+        this.cargando = false;
+        return this.ruta.navigateByUrl(`/dashboard`);
       }
     });
-
-
   }
 }

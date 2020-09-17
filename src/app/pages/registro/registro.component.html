@@ -1,5 +1,3 @@
-
-
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
   <div class="card-header">
     <div class="card-title">
@@ -9,10 +7,7 @@
       </h3>
     </div>
     <div class="card-toolbar">
-      <a
-        routerLink="/dashboard"
-        class="btn btn-light-primary font-weight-bolder mr-2"
-      >
+      <a routerLink="/dashboard" class="btn btn-light-primary font-weight-bolder mr-2">
         <i class="ki ki-long-arrow-back icon-sm"></i> Volver
       </a>
       <div class="btn-group">
@@ -20,13 +15,8 @@
           <i class="ki ki-check icon-sm"></i>
           Guardar el Formulario
         </button>
-        <button
-          type="button"
-          class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        ></button>
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
           <ul class="nav nav-hover flex-column">
             <li class="nav-item">
@@ -38,9 +28,7 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon flaticon2-add-1"></i>
-                <span class="nav-text"
-                  >Guardar y agregar una nueva llamada</span
-                >
+                <span class="nav-text">Guardar y agregar una nueva llamada</span>
               </a>
             </li>
             <li class="nav-item">
@@ -64,68 +52,39 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="recipient-name" class="control-label"
-            >Ingrese el Numero de Documento:</label
-          >
-          <input
-            type="text"
-            formControlName="documento"
-            class="form-control"
-            id="documento"
-            placeholder="Numero de Documento"
-          />
+          <label for="recipient-name" class="control-label">Ingrese el Numero de Documento:</label>
+          <input type="text" formControlName="documento" class="form-control" id="documento"
+            placeholder="Numero de Documento" />
 
           <label class="btn btn-outline btn-info active">
-            <input
-              type="radio"
-              name="sexo"
-              autocomplete="off"
-              value="M"
-              formControlName="sexo"
-            />
+            <input type="radio" name="sexo" autocomplete="off" value="M" formControlName="sexo" />
             <i class="ti-check text-active" aria-hidden="true"></i>
             Masculino
           </label>
           <label class="btn btn-outline btn-info">
-            <input
-              type="radio"
-              name="sexo"
-              autocomplete="off"
-              formControlName="sexo"
-              value="F"
-            />
+            <input type="radio" name="sexo" autocomplete="off" formControlName="sexo" value="F" />
             <i class="ti-check text-active" aria-hidden="true"></i>
             Femenino
           </label>
         </div>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          routerLink="/dashboard"
-          class="btn btn-default waves-effect"
-          data-dismiss="modal"
-          (click)="modal.dismiss('Cross click')"
-        >
+        <button type="button" routerLink="/dashboard" class="btn btn-default waves-effect" data-dismiss="modal"
+          (click)="modal.dismiss('Cross click')">
           Salir
         </button>
-        <button
-          type="button"
-          (click)="modal.dismiss(Renaper())"
-          routerLink="/registro"
-          class="btn btn-danger waves-effect waves-light"
-          data-dismiss="modal"
-        >
+        <button type="button" (click)="modal.dismiss(Renaper())" routerLink="/registro"
+          class="btn btn-danger waves-effect waves-light" data-dismiss="modal">
           Buscar
         </button>
       </div>
     </ng-template>
   </form>
   <!--///////////////////////////////////////////////////////////////////////////////////////////-->
-  
+  <div *ngIf="cargando">
     <div class="card-body">
       <!--begin::Form-->
-      
+
       <form class="form" [formGroup]="form_registro">
         <div class="form-group" formGroupName="persona">
           <div class="row">
@@ -135,20 +94,13 @@
                   Informacion del Contacto:
                 </h3>
                 <div clas="row">
-                  <div class="col-6">
+                  <div class="col-3">
                     <div class="form-group">
                       <label class="col-12">Documento de Identidad</label>
                       <div class="col-12">
-                        <input
-                          class="form-control form-control-solid"
-                          type="text"
-                          formControlName="documento"
-                          name="documento"
-                          placeholder=""
-                        />
-                        <span class="form-text text-muted"
-                          >Ingrese el número sin puntos.</span
-                        >
+                        <input class="form-control form-control-solid" type="text" formControlName="documento"
+                          name="documento" placeholder="" />
+                        <span class="form-text text-muted">Ingrese el número sin puntos.</span>
                       </div>
                     </div>
                   </div>
@@ -156,25 +108,15 @@
                     <div class="form-group">
                       <label class="col-12">Nombre/s</label>
                       <div class="col-12">
-                        <input
-                          class="form-control form-control-solid"
-                          type="text"
-                          formControlName="nombre"
-                          name="nombre"
-                          placeholder=""
-                        />
+                        <input class="form-control form-control-solid" type="text" formControlName="nombre"
+                          name="nombre" placeholder="" />
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-12">Apellido/s</label>
                       <div class="col-12">
-                        <input
-                          class="form-control form-control-solid"
-                          type="text"
-                          formControlName="apellido"
-                          name="apellido"
-                          placeholder=""
-                        />
+                        <input class="form-control form-control-solid" type="text" formControlName="apellido"
+                          name="apellido" placeholder="" />
                       </div>
                     </div>
                   </div>
@@ -184,17 +126,10 @@
                   <div class="col-9">
                     <div class="input-group input-group-solid">
                       <div class="input-group-prepend">
-                        <span class="input-group-text"
-                          ><i class="la la-phone"></i
-                        ></span>
+                        <span class="input-group-text"><i class="la la-phone"></i></span>
                       </div>
-                      <input
-                        type="text"
-                        class="form-control form-control-solid"
-                        formControlName="telefono"
-                        name="telefono"
-                        placeholder=""
-                      />
+                      <input type="text" class="form-control form-control-solid" formControlName="telefono"
+                        name="telefono" placeholder="" />
                     </div>
                   </div>
                 </div>
@@ -206,45 +141,35 @@
                 </h3>
 
                 <div class="form-group row">
-                  <label class="col-3">Direccion</label>
+                  <label class="col-3">Calle</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      formControlName="apellido"
-                      name="apellido"
-                      placeholder=""
-                    />
+                    <input class="form-control form-control-solid" type="text" formControlName="calle" name="calle"
+                      placeholder="" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-3">Número</label>
+                  <div class="col-9">
+                    <input class="form-control form-control-solid" type="text" formControlName="numero" name="numero"
+                      placeholder="" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">Barrio</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Centro"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="Centro" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">Ciudad</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Neuquén"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="Neuquén" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">Provincia</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Neuquén"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="Neuquén" />
                   </div>
                 </div>
                 <div class="form-group row">
@@ -263,105 +188,61 @@
                 <div class="form-group row">
                   <label class="col-3">Código Postal</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="8316"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="8316" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">FECHA DE INICIO DE SINTOMAS</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="12/09/2020"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="12/09/2020" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">SINTOMAS ACTUALES</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Dolor de Cabeza"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="Dolor de Cabeza" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">ANTECEDENTES PERSONALES</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Fumador"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="Fumador" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">TIENE ALGUNA ENFERMEDAD</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Ninguna"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="Ninguna" />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-3"
-                    >TOMA ACTUALMENTE ALGÚN MEDICAMENTO</label
-                  >
+                  <label class="col-3">TOMA ACTUALMENTE ALGÚN MEDICAMENTO</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="No"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="No" />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-3"
-                    >CUANTAS PERSONAS COMPARTEN LA VIVIENDA</label
-                  >
+                  <label class="col-3">CUANTAS PERSONAS COMPARTEN LA VIVIENDA</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="3"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="3" />
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-3"
-                    >CUÁL ES SU LUGAR DE TRABAJO ACTUAL</label
-                  >
+                  <label class="col-3">CUÁL ES SU LUGAR DE TRABAJO ACTUAL</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Ministerio de Ciudadania de Neuquen"
-                    />
+                    <input class="form-control form-control-solid" type="text"
+                      value="Ministerio de Ciudadania de Neuquen" />
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-3">DIRECCIÓN DE TRABAJO</label>
                   <div class="col-9">
-                    <input
-                      class="form-control form-control-solid"
-                      type="text"
-                      value="Mendoza y Alderete"
-                    />
+                    <input class="form-control form-control-solid" type="text" value="Mendoza y Alderete" />
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleTextarea">CIERRE DE CONTACTO</label>
-                  <textarea
-                    class="form-control form-control-solid"
-                    rows="3"
-                  ></textarea>
+                  <textarea class="form-control form-control-solid" rows="3"></textarea>
                 </div>
 
                 <div class="col-xl-2"></div>
@@ -372,5 +253,5 @@
       </form>
       <!--end::Form-->
     </div>
-  
+  </div>
 </div>
