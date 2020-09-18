@@ -1,64 +1,63 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
-} from "@angular/core";
-import { Form0800Model } from "../models/form0800covid";
-import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { RenaperService } from "../../services/ws/renaper.service";
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
+import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
+import { RenaperService } from "../../../services/ws/renaper.service";
+import { Subscription, Observable } from "rxjs";
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from "@angular/router";
+
 
 @Component({
   selector: "app-registro",
   templateUrl: "./registro.component.html",
   styleUrls: ["./registro.component.scss"],
 })
-export class RegistroComponent implements OnInit, AfterViewInit {
+export class RegistroComponent implements OnInit {
   closeResult: string;
-  @ViewChild("content") contenidoDelModal: any;
   personaForm: FormGroup;
   form_registro: FormGroup;
   renaper: any = {};
   data: any = {};
-  cargando: boolean = true;
+  public cargando_datos: boolean = true;
+  public buscar_persona: boolean = true;
+  mostrar: boolean = false;
+  mostrarsintomas: boolean;
+  sololectura: boolean;
 
+  fecha = new FormControl(new Date().toLocaleDateString());
+  
+  
+  private unsubscribe: Subscription[] = []; 
   constructor(
+    
     public _renaperService: RenaperService,
-    private modalService: NgbModal,
-    private ruta: Router,
-    private activadeRoute: ActivatedRoute
+    private router: Router,
+    private activadeRoute: ActivatedRoute,
+    private _sanitizer: DomSanitizer
   ) {}
 
+  sexo: string[] = ["F", "M"];
+
   ngOnInit(): void {
-
-
     this.personaForm = new FormGroup({
-    documento: new FormControl("", [
+      documento: new FormControl("", [
         Validators.required,
         Validators.maxLength(8),
       ]),
       sexo: new FormControl(null, Validators.required),
+      img: new FormControl(null, Validators.required),
     });
+
     this.form_registro = new FormGroup({
-      nroRegistro: new FormControl("", [
-        Validators.required]),
-      fecha: new FormControl("", [
-        Validators.required
-      ]),
-      tipo_registro: new FormControl("", [
-        Validators.required
-      ]),
+      nroRegistro: new FormControl("", [Validators.required]),
+      fecha: new FormControl("", [Validators.required]),
+      tipo_registro: new FormControl("", [Validators.required]),
       motivo_consulta: new FormControl("", [
         Validators.required,
         Validators.maxLength(500),
       ]),
       persona: new FormGroup({
-        nombre: new FormControl("", [
-          Validators.required]),
+        nombre: new FormControl("", [Validators.required]),
         apellido: new FormControl("", [
           Validators.required,
           Validators.maxLength(25),
@@ -67,12 +66,8 @@ export class RegistroComponent implements OnInit, AfterViewInit {
           Validators.required,
           Validators.maxLength(8),
         ]),
-        fechaNacimiento: new FormControl("", [
-          Validators.required
-        ]),
-        sexo: new FormControl("", [
-          Validators.required
-        ]),
+        fechaNacimiento: new FormControl("", [Validators.required]),
+        sexo: new FormControl("", [Validators.required]),
         telefono1: new FormControl("", [
           Validators.required,
           Validators.maxLength(10),
@@ -113,25 +108,13 @@ export class RegistroComponent implements OnInit, AfterViewInit {
           Validators.required,
           Validators.maxLength(25),
         ]),
-        img: new FormControl("", [
-          Validators.required
-        ]),
+        img: new FormControl("", [Validators.required]),
       }),
-      fecha_ini_sint: new FormControl("", [
-        Validators.required
-      ]),
-      sintomas: new FormControl("", [
-        Validators.required
-      ]),
-      antencedentes_p: new FormControl("", [
-        Validators.required,
-      ]),
-      enfermedad_pre: new FormControl("", [
-        Validators.required
-      ]),
-      toma_medicamentos: new FormControl("", [
-        Validators.required
-      ]),
+      fecha_ini_sint: new FormControl("", [Validators.required]),
+      sintomas: new FormControl("", [Validators.required]),
+      antencedentes_p: new FormControl("", [Validators.required]),
+      enfermedad_pre: new FormControl("", [Validators.required]),
+      toma_medicamentos: new FormControl("", [Validators.required]),
       vivienda_personas: new FormControl("", [
         Validators.required,
         Validators.maxLength(2),
@@ -161,97 +144,71 @@ export class RegistroComponent implements OnInit, AfterViewInit {
           ]),
         }),
       ]),
-      usuario: new FormControl("", [
-        Validators.required
-      ]),
+      usuario: new FormControl("", [Validators.required]),
     });
+
+    
   }
 
-  ngAfterViewInit() {
-    this.open(this.contenidoDelModal);
-  }
-
-  recargar() {
-    document.getElementById("formulario");
-  }
-  open(content) {
-    this.modalService
-      .open(content, { ariaLabelledBy: "modal-basic-title" })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
   Renaper() {
+    this.cargando_datos = true;
+      this.buscar_persona = true;
+    
     let params = `documento=${this.personaForm.value.documento}&sexo=${this.personaForm.value.sexo}`;
     console.log(params);
-    this._renaperService.getPersona(params).subscribe((data) => {
+    this._renaperService.getPersona(params).subscribe((data: any) => {
       this.renaper = data;
-      if (this.renaper) {
-        console.log(this.renaper);
-        this.form_registro.patchValue({
-          persona: { documento: this.personaForm.value.documento },
-        });
-        this.form_registro.patchValue({
-          persona: { sexo: this.personaForm.value.sexo },
-        });
-        this.form_registro.patchValue({
-          persona: { img: this.renaper.datos.foto },
-        });
-        this.form_registro.patchValue({
-          persona: { apellido: this.renaper.datos.apellido },
-        });
-        this.form_registro.patchValue({
-          persona: { nombre: this.renaper.datos.nombres },
-        });
-        this.form_registro.patchValue({
-          persona: { fechaNacimiento: this.renaper.datos.fechaNacimiento },
-        });
-        this.form_registro.patchValue({
-          persona: { calle: this.renaper.datos.calle },
-        });
-        this.form_registro.patchValue({
-          persona: { numero: this.renaper.datos.numero },
-        });
-        this.form_registro.patchValue({
-          persona: { piso: this.renaper.datos.piso },
-        });
-        this.form_registro.patchValue({
-          persona: { departamento: this.renaper.datos.departamento },
-        });
-        this.form_registro.patchValue({
-          persona: { cpostal: this.renaper.datos.cpostal },
-        });
-        this.form_registro.patchValue({
-          persona: { localidad: this.renaper.datos.ciudad },
-        });
-        this.form_registro.patchValue({
-          persona: { provincia: this.renaper.datos.provincia },
-        });
-        this.form_registro.patchValue({
-          persona: { pais: this.renaper.datos.pais },
-        });
-        console.log(this.form_registro);
-        return this.ruta.navigateByUrl(`/registro`);
-      } else {
-        this.cargando = false;
-        return this.ruta.navigateByUrl(`/dashboard`);
-      }
+      this.cargando_datos = true;
+      this.buscar_persona = true;
+      console.log(this.renaper.datos.foto);
+      this.form_registro.patchValue({
+        persona: { documento: this.personaForm.value.documento },
+      });
+      this.form_registro.patchValue({
+        persona: { sexo: this.personaForm.value.sexo },
+      });
+      this.form_registro.patchValue({
+        persona: { img: this.renaper.datos.foto },
+      });
+      this.form_registro.patchValue({
+        persona: { apellido: this.renaper.datos.apellido },
+      });
+      this.form_registro.patchValue({
+        persona: { nombre: this.renaper.datos.nombres },
+      });
+      this.form_registro.patchValue({
+        persona: { fechaNacimiento: this.renaper.datos.fechaNacimiento },
+      });
+      this.form_registro.patchValue({
+        persona: { calle: this.renaper.datos.calle },
+      });
+      this.form_registro.patchValue({
+        persona: { numero: this.renaper.datos.numero },
+      });
+      this.form_registro.patchValue({
+        persona: { piso: this.renaper.datos.piso },
+      });
+      this.form_registro.patchValue({
+        persona: { departamento: this.renaper.datos.departamento },
+      });
+      this.form_registro.patchValue({
+        persona: { cpostal: this.renaper.datos.cpostal },
+      });
+      this.form_registro.patchValue({
+        persona: { localidad: this.renaper.datos.ciudad },
+      });
+      
+      this.form_registro.patchValue({
+        persona: { provincia: this.renaper.datos.provincia },
+      });
+      this.form_registro.patchValue({
+        persona: { pais: this.renaper.datos.pais },
+      });
+      this.router.navigate(["/registro"]);
     });
+  };
+  ngOnDestroy() {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }

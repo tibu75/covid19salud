@@ -21,7 +21,13 @@ const routes: Routes = [
       {
         path: "registro",
         loadChildren: () =>
-          import("../pages/registro/registro.module").then((m) => m.RegistroModule
+          import("../pages/registros/registro/registro.module").then((m) => m.RegistroModule
+          ),
+      },
+      {
+        path: "registros",
+        loadChildren: () =>
+          import("../pages/registros/registros.module").then((m) => m.RegistrosModule
           ),
       },
       {

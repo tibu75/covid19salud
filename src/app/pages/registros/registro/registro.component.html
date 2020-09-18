@@ -4,11 +4,10 @@
       <h3 class="card-label">
         Registro 0800 COVID 19 <i class="mr-2"></i>
         <small class="">Nueva llamada -</small>
-        <input type="datetime" name="fechahora" step="1" min="2013-01-01T00:00Z" max="2023-12-31T12:00Z">
       </h3>
     </div>
     <div class="card-toolbar">
-      <a routerLink="/dashboard" class="btn btn-light-primary font-weight-bolder mr-2">
+      <a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
         <i class="ki ki-long-arrow-back icon-sm"></i> Volver
       </a>
       <div class="btn-group">
@@ -43,47 +42,50 @@
       </div>
     </div>
   </div>
-
-  <form class="form-horizontal p-t-20" [formGroup]="personaForm">
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title">
-          <i class="fas fa-exclamation-circle"></i> Busqueda de Personas
-        </h5>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="recipient-name" class="control-label">Ingrese el Numero de Documento:</label>
-          <input type="text" formControlName="documento" class="form-control" id="documento"
-            placeholder="Numero de Documento" />
-
-          <label class="btn btn-outline btn-info active">
-            <input type="radio" name="sexo" autocomplete="off" value="M" formControlName="sexo" />
-            <i class="ti-check text-active" aria-hidden="true"></i>
-            Masculino
-          </label>
-          <label class="btn btn-outline btn-info">
-            <input type="radio" name="sexo" autocomplete="off" formControlName="sexo" value="F" />
-            <i class="ti-check text-active" aria-hidden="true"></i>
-            Femenino
-          </label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" routerLink="/dashboard" class="btn btn-default waves-effect" data-dismiss="modal"
-          (click)="modal.dismiss('Cross click')">
-          Salir
-        </button>
-        <button type="button" (click)="modal.dismiss(Renaper())" routerLink="/registro"
-          class="btn btn-danger waves-effect waves-light" data-dismiss="modal">
-          Buscar
-        </button>
-      </div>
-    </ng-template>
-  </form>
-  <!--///////////////////////////////////////////////////////////////////////////////////////////-->
-  <div *ngIf="cargando">
+  <ng-container *ngIf="cargando_datos">
     <div class="card-body">
+      <form class="form-horizontal p-t-20" [formGroup]="personaForm">
+        <div class="row" style="margin-top: 18px;">
+
+          <div class="col-4">
+            <h4 class="text">Buscar datos de Persona</h4>
+            <div class="form-group  ">
+              <label for="recipient-name" class="control-label" style="margin-top: 20px;">Ingrese el Numero de
+                Documento:</label>
+              <input type="text" formControlName="documento" class="form-control" id="documento"
+                placeholder="Numero de Documento">
+            </div>
+          </div>
+          <div class="col-2">
+            <h4 class="text">Seleccione el Sexo</h4>
+            <label style="margin-right: 20px;">
+              <input type="radio" name="sexo" autocomplete="off" value="M" formControlName="sexo">
+              <i class="ti-check text-active" aria-hidden="true"></i> Masculino
+            </label>
+            <label>
+              <input type="radio" name="sexo" autocomplete="off" formControlName="sexo" value="F">
+              <i class="ti-check text-active" aria-hidden="true"></i> Femenino
+            </label>
+          </div>
+          <div class="col-3">
+
+            <div class="row" style="margin-top: 40px;">
+
+              <button type="button" (click)="Renaper()" routerLink="/registro"
+                class="btn btn-light-primary font-weight-bolder mr-2 btn-lg">Buscar Persona</button>
+
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+
+
+
+
+      <!--///////////////////////////////////////////////////////////////////////////////////////////-->
+
       <!--begin::Form-->
 
       <form class="form" [formGroup]="form_registro">
@@ -95,13 +97,19 @@
                   Informacion del Contacto:
                 </h3>
                 <div class="row">
+                  <div class="col-xl-2">
 
+                    <label for="recipient-name" class="control-label" style="margin-top: 20px;">Imagen segun
+                      Renaper</label>
+                      <img [src]="'data:image/jpg;base64,' + imagePath">
+
+                  </div>
                   <div class="col-xl-2">
                     <div class="form-group">
                       <label>Doc. de Identidad</label>
                       <input class="form-control form-control-solid" type="text" formControlName="documento"
                         name="documento" placeholder="" />
-                      <span class="form-text text-muted">Ingrese el número sin puntos.</span>
+                      <span class="form-text text-muted"></span>
                     </div>
                   </div>
 
@@ -117,8 +125,8 @@
                   <div class="col-xl-1">
                     <div class="form-group">
                       <label>Edad</label>
-                      <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad"
-                        placeholder="" />
+                      <input class="form-control form-control-solid" type="text" formControlName="fechaNacimiento"
+                        name="fechaNacimiento" placeholder="" />
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
@@ -132,7 +140,7 @@
                     </div>
                   </div>
 
-                  <div class="col-xl-3">
+                  <div class="col-xl-2">
                     <div class="form-group">
                       <label>Apellido/s</label>
                       <input class="form-control form-control-solid" type="text" formControlName="apellido"
@@ -143,9 +151,9 @@
 
                   <div class="col-xl-2">
                     <div class="form-group">
-                      <label>Tel. de Contacto</label>
-                      <input class="form-control form-control-solid" type="text" formControlName="telefono"
-                        name="telefono" placeholder="" />
+                      <label>Telefono</label>
+                      <input class="form-control form-control-solid" type="text" formControlName="telefono1"
+                        name="telefono1" placeholder="" />
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
@@ -229,13 +237,13 @@
 
                   <div class="col-xl-2">
                     <div class="form-group">
-                      <label>FECHA DE INICIO DE SINTOMAS</label>
+                      <label>INICIO DE SINTOMAS</label>
                       <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
                         placeholder="" />
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
-                  <div class="col-xl-6">
+                  <div class="col-xl-10">
                     <div class="form-group">
                       <label>SINTOMAS ACTUALES</label>
                       <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
@@ -243,7 +251,7 @@
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
-                  <div class="col-xl-6">
+                  <div class="col-xl-12">
                     <div class="form-group">
                       <label>ANTECEDENTES PERSONALES</label>
                       <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
@@ -251,7 +259,7 @@
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
-                  <div class="col-xl-2">
+                  <div class="col-xl-12">
                     <div class="form-group">
                       <label>TIENE ALGUNA ENFERMEDAD</label>
                       <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
@@ -259,7 +267,7 @@
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
-                  <div class="col-xl-2">
+                  <div class="col-xl-12">
                     <div class="form-group">
                       <label>TOMA ACTUALMENTE ALGÚN MEDICAMENTO</label>
                       <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
@@ -267,37 +275,45 @@
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
-                  <div class="col-xl-1">
-                    <div class="form-group">
-                      <label>CUANTAS PERSONAS COMPARTEN LA VIVIENDA</label>
-                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
-                        placeholder="" />
-                      <span class="form-text text-muted"></span>
-                    </div>
-                  </div>
                   <div class="col-xl-3">
                     <div class="form-group">
-                      <label>CUÁL ES SU LUGAR DE TRABAJO ACTUAL</label>
-                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
-                        placeholder="" />
-                      <span class="form-text text-muted"></span>
+                      <div class="col-10">
+                        <label>CUANTAS PERSONAS COMPARTEN LA VIVIENDA</label>
+                      </div>
+                      <div class="col-6">
+
+                        <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                          placeholder="" />
+                        <span class="form-text text-muted"></span>
+                      </div>
+
                     </div>
                   </div>
                   <div class="col-xl-4">
                     <div class="form-group">
-                      <label>DIRECCIÓN DE TRABAJO</label>
+                      <label>CUÁL ES SU LUGAR DE TRABAJO ACTUAL </label>
                       <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
-                        placeholder="" />
+                        placeholder="" style="margin-top: 18px;" />
+                      <span class="form-text text-muted"></span>
+                    </div>
+                  </div>
+                  <div class="col-xl-5">
+                    <div class="form-group">
+                      <label>DIRECCIÓN DE TRABAJO </label>
+                      <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais"
+                        placeholder="" style="margin-top: 18px;" />
                       <span class="form-text text-muted"></span>
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label for="exampleTextarea">CIERRE DE CONTACTO</label>
-                    <textarea class="form-control form-control-solid" rows="3"></textarea>
-                  </div>
 
-                  <div class="col-xl-2"></div>
+
+                  <div class="col-xl-12">
+                    <div class="form-group">
+                      <label for="exampleTextarea">CIERRE DE CONTACTO</label>
+                      <textarea class="form-control form-control-solid" rows="5"></textarea>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -306,5 +322,5 @@
       </form>
       <!--end::Form-->
     </div>
-  </div>
+  </ng-container>
 </div>
