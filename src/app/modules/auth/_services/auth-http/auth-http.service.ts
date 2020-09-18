@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { UserModel } from "../../_models/user.model";
 import { environment } from "../../../../../environments/environment";
 import { AuthModel } from "../../_models/auth.model";
+import { LoginForm } from "../../interfaces/login-form.interfaces";
 
 const API_USERS_URL = `${environment.apiUrl}/login`;
 
@@ -23,6 +24,7 @@ export class AuthHTTPService {
     return this.http.post<UserModel>(API_USERS_URL, user);
   }
 
+  // tslint:disable-next-line: max-line-length
   // Your server should check documento => If documento exists send link to the user and return true | If documento doesn't exist return false
   forgotPassword(documento: string): Observable<boolean> {
     return this.http.post<boolean>(`${API_USERS_URL}/forgot-password`, {
@@ -30,12 +32,7 @@ export class AuthHTTPService {
     });
   }
 
-  getUserByToken(token): Observable<UserModel> {
-    console.log(token);
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set("Authorization", "Bearer " + token);
-    return this.http.get<UserModel>(`${environment.apiUrl}/usuario`, {
-      headers: httpHeaders,
-    });
+  getUserByToken(token: any): Observable<any> {
+    return this.http.get<UserModel>(API_USERS_URL, token);
   }
 }

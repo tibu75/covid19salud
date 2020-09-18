@@ -1,10 +1,18 @@
+// tslint:disable-next-line: quotemark
 import { Injectable, OnDestroy, NgZone } from "@angular/core";
+// tslint:disable-next-line: quotemark
 import { Observable, BehaviorSubject, of, Subscription } from "rxjs";
+// tslint:disable-next-line: quotemark
 import { map, catchError, switchMap, finalize } from "rxjs/operators";
+// tslint:disable-next-line: quotemark
 import { UserModel } from "../_models/user.model";
+// tslint:disable-next-line: quotemark
 import { AuthModel } from "../_models/auth.model";
+// tslint:disable-next-line: quotemark
 import { AuthHTTPService } from "./auth-http";
+// tslint:disable-next-line: quotemark
 import { environment } from "src/environments/environment";
+// tslint:disable-next-line: quotemark
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -15,6 +23,8 @@ export class AuthService implements OnDestroy {
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private isLoadingSubject: BehaviorSubject<boolean>;
   private authLocalStorageToken = `${environment.TOKEN}`;
+  private authLocalStorageId = `${environment.ID}`;
+  private authLocalStorageUser = `${environment.USER}`;
 
   // public fields
   currentUser$: Observable<UserModel>;
@@ -43,10 +53,11 @@ export class AuthService implements OnDestroy {
   // public methods
   login(documento: string, password: string): Observable<UserModel> {
     this.isLoadingSubject.next(true);
+
     return this.authHttpService.login(documento, password).pipe(
       map((auth: any) => {
         const result = this.setAuthFromLocalStorage(auth);
-        console.log(auth);
+        // console.log(auth);
         return result;
       }),
       switchMap(() => this.getUserByToken()),
@@ -60,6 +71,8 @@ export class AuthService implements OnDestroy {
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
+    localStorage.removeItem(this.authLocalStorageId);
+    localStorage.removeItem(this.authLocalStorageUser);
     this.ngZone.run(() => {
       this.router.navigateByUrl("/auth/login");
     });
@@ -70,14 +83,15 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(): Observable<UserModel> {
     const token = this.getAuthFromLocalStorage();
-    console.log("Token", token);
+    const id = this.getIdFromLocalStorage();
+
     if (!token) {
       return of(undefined);
     }
 
     this.isLoadingSubject.next(true);
     // console.log("paso2");
-    return this.authHttpService.getUserByToken(token).pipe(
+    return this.authHttpService.getUserByToken(id).pipe(
       map((user: UserModel) => {
         // console.log("paso3", user);
         if (user) {
@@ -115,11 +129,13 @@ export class AuthService implements OnDestroy {
   }
   // private methods
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
-    const token = auth.token;
+    const { id, token, usuario } = auth;
 
     // store auth token/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
     if (token) {
       localStorage.setItem(this.authLocalStorageToken, JSON.stringify(token));
+      localStorage.setItem(this.authLocalStorageId, JSON.stringify(id));
+      localStorage.setItem(this.authLocalStorageUser, JSON.stringify(usuario));
       return true;
     }
     return false;
@@ -131,6 +147,26 @@ export class AuthService implements OnDestroy {
         localStorage.getItem(this.authLocalStorageToken)
       );
       return authData;
+    } catch (error) {
+      console.error(error);
+      return undefined;
+    }
+  }
+  private getIdFromLocalStorage(): AuthModel {
+    try {
+      const authId = JSON.parse(localStorage.getItem(this.authLocalStorageId));
+      return authId;
+    } catch (error) {
+      console.error(error);
+      return undefined;
+    }
+  }
+  private getUserFromLocalStorage(): AuthModel {
+    try {
+      const authUser = JSON.parse(
+        localStorage.getItem(this.authLocalStorageUser)
+      );
+      return authUser;
     } catch (error) {
       console.error(error);
       return undefined;

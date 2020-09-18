@@ -12,7 +12,7 @@ export class UserModel {
   public lastLogin?: Date;
   public role?: string;
   // tslint:disable-next-line: variable-name
-  public _id?: string;
+  public id?: string;
 
   setUser(user: any) {
     // tslint:disable-next-line: quotemark
@@ -36,6 +36,6 @@ export class UserModel {
     // tslint:disable-next-line: quotemark
     this.role = user.role || "";
     // tslint:disable-next-line: quotemark
-    this._id = user.id;
+    this.id = user.id;
   }
 }
