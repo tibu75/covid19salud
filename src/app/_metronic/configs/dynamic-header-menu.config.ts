@@ -1,6 +1,6 @@
 export const DynamicHeaderMenuConfig = {
   items: [
-    {
+/*     {
       title: 'Dashboards',
       root: true,
       alignment: 'left',
@@ -12,8 +12,8 @@ export const DynamicHeaderMenuConfig = {
       root: true,
       alignment: 'left',
       page: '/builder',
-    },
-    {
+    }, */
+/*     {
       title: 'Material UI',
       bullet: 'dot',
       page: '/material',
@@ -205,8 +205,8 @@ export const DynamicHeaderMenuConfig = {
           ]
         }
       ]
-    },
-    {
+    }, */
+/*     {
       title: 'NgBootstrap',
       bullet: 'dot',
       icon: 'flaticon-web',
@@ -288,8 +288,8 @@ export const DynamicHeaderMenuConfig = {
           ]
         }
       ]
-    },
-    {
+    }, */
+/*     {
       title: 'Custom',
       root: true,
       alignment: 'left',
@@ -386,6 +386,6 @@ export const DynamicHeaderMenuConfig = {
         //   ]
         // }
       ]
-    }
+    } */
   ]
 };
