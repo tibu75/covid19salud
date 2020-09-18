@@ -23,7 +23,7 @@ export class RegistroComponent implements OnInit {
   mostrar: boolean = false;
   mostrarsintomas: boolean;
   sololectura: boolean;
-  image: string='';
+  public image: string='';
 
   fecha = new FormControl(new Date().toLocaleDateString());
   
