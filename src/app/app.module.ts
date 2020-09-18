@@ -20,7 +20,7 @@ import json from "highlight.js/lib/languages/json";
 import scss from "highlight.js/lib/languages/scss";
 import typescript from "highlight.js/lib/languages/typescript";
 import { SplashScreenModule } from "./_metronic/partials/layout/splash-screen/splash-screen.module";
-import { RegistroComponent } from "./pages/registro/registro.component";
+import { RegistroComponent } from "./pages/registros/registro/registro.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 function appInitializer(authService: AuthService) {

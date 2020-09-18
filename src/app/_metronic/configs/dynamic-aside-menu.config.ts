@@ -17,10 +17,10 @@ export const DynamicAsideMenuConfig = {
     }, */
     { section: 'Registro de LLamadas' },
     {
-      title: 'Nuevo Registro',
+      title: 'Registros',
       root: true,
       bullet: 'dot',
-      page: '/registro',
+      page: '/registros',
       icon: 'flaticon2-browser-2',
       svg: './assets/media/svg/icons/Communication/Active-call.svg',
     }
