@@ -23,6 +23,7 @@ export class RegistroComponent implements OnInit {
   mostrar: boolean = false;
   mostrarsintomas: boolean;
   sololectura: boolean;
+  image: string='';
 
   fecha = new FormControl(new Date().toLocaleDateString());
   
@@ -207,6 +208,7 @@ export class RegistroComponent implements OnInit {
       });
       this.router.navigate(["/registro"]);
     });
+    this.image=this.renaper.datos.foto;
   };
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
