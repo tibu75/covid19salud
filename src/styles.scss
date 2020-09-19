@@ -72,6 +72,31 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 1920px){
+    body {
+        font-size : 18px;
+    }
+    h4 {
+        font-size : 18px;
+    }
+    .btn.btn-info {
+        height: fit-content;
+        font-size : 18px;
+    }
+    .img-50 {
+        object-position: top;
+        object-fit: cover;
+        width: 120px;
+        height: 145px;
+    }
+    .img-100 {
+        object-position: top;
+        object-fit: cover;
+        height: 400px;
+        align-content: space-between;
+    }
+ }
+
 @media screen and (max-width: 1366px) {
   body {
       font-size: 12px;
@@ -132,8 +157,8 @@
   .img-50 {
       object-position: top;
       object-fit: cover;
-      width: 60px;
-      height: 65px;
+      width: 120px;
+      height: 145px;
   }
   .img-100 {
       object-position: top;

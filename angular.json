@@ -35,7 +35,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss", "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
@@ -102,7 +102,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss", "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
@@ -138,5 +138,6 @@
   "defaultProject": "demo1-app",
   "cli": {
     "analytics": false
-  }
+  },
+  
 }
