@@ -27,10 +27,11 @@ export class Form0800Model {
 
 		public trabajo: [
 			{
-				telefono: string;
-				calle: string;
-				numero: string;
-				localidad: string;
+				lugar: string;
+				telefonol: string;
+				callel: string;
+				numerol: string;
+				localidadl: string;
 			}
 		],
 		public usuario: string
