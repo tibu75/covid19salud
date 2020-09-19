@@ -2,12 +2,22 @@
 	<div class="card-header">
 		<div class="card-title">
 			<div class="row">
+				<div class="col-10">
+
+				</div>
 				<h3 class="card-label">
 					Registro 0800 COVID 19 <i class="mr-2"></i>
 					<small class=""> Nueva llamada </small>
 				</h3>
 
-				<div class="card-toolbar"></div>
+
+				<div class="card-toolbar">
+
+				</div>
+				<a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
+					<i class="ki ki-long-arrow-back icon-sm"></i>
+					Volver
+				</a>
 			</div>
 		</div>
 	</div>
@@ -16,646 +26,437 @@
 		<form class="form" [formGroup]="personaForm" (ngSubmit)="submit()">
 			<!--begin::Form-->
 			<ng-container *ngIf="buscar_datos">
-				<div
-					formGroupName="persona"
-					class="row"
-					style="margin-top: 18px"
-				>
+				<div formGroupName="persona" class="row" style="margin-top: 18px">
 					<div class="col-4">
 						<h4 class="text">Buscar datos de Persona</h4>
 						<div class="form-group">
-							<label
-								for="recipient-name"
-								class="control-label"
-								style="margin-top: 20px"
-								>Ingrese el Numero de Documento:</label
-							>
-							<input
-								type="text"
-								formControlName="documento"
-								class="form-control"
-								id="documento"
-								placeholder="Numero de Documento"
-							/>
+							<label for="recipient-name" class="control-label" style="margin-top: 20px">Ingrese el Numero
+								de Documento:</label>
+							<input type="text" formControlName="documento" class="form-control" id="documento"
+								placeholder="Numero de Documento" />
 						</div>
 					</div>
 
 					<div class="col-2">
 						<h4 class="text">Seleccione el Sexo</h4>
 						<label style="margin-right: 20px">
-							<input
-								type="radio"
-								name="sexo"
-								autocomplete="off"
-								value="M"
-								formControlName="sexo"
-							/>
-							<i
-								class="ti-check text-active"
-								aria-hidden="true"
-							></i>
+							<input type="radio" name="sexo" autocomplete="off" value="M" formControlName="sexo" />
+							<i class="ti-check text-active" aria-hidden="true"></i>
 							Masculino
 						</label>
 						<label>
-							<input
-								type="radio"
-								name="sexo"
-								autocomplete="off"
-								formControlName="sexo"
-								value="F"
-							/>
-							<i
-								class="ti-check text-active"
-								aria-hidden="true"
-							></i>
+							<input type="radio" name="sexo" autocomplete="off" formControlName="sexo" value="F" />
+							<i class="ti-check text-active" aria-hidden="true"></i>
 							Femenino
 						</label>
 					</div>
 					<div class="col-3">
 						<div class="row" style="margin-top: 40px">
-							<button
-								type="button"
-								(click)="renaper()"
-								class="btn btn-light-primary font-weight-bolder mr-2 btn-lg"
-							>
+							<button type="button" (click)="renaper()"
+								class="btn btn-light-primary font-weight-bolder mr-2 btn-lg">
 								Buscar Persona
 							</button>
 						</div>
 					</div>
 				</div>
 			</ng-container>
+
+
+			<!-- Termina el Contenedor de Busqueda -->
+
+
+			<!-- Comienza la muestra  del formulario con los datos recogidos de Renaper -->
+
+
 			<ng-container *ngIf="cargar_datos">
+
 				<div class="form-group" formGroupName="persona">
+					<div class="separator separator-dashed"></div>
+					<div class="row" style="margin-top: 10px;">
+
+						<h3 class="text-dark font-weight-bold">
+							Datos de la Persona:
+						</h3>
+					</div>
+
+					<div class="row">
+
+
+
+						<div class="col-2 padding-1">
+							<div class="rowfoto" style="margin-top: 18px">
+								<img id="foto" *ngIf="
+										personaForm.get(
+											'persona.img'
+										).value
+									" [src]="
+										personaForm.get(
+											'persona.img'
+										).value
+									" class="img-50" />
+							</div>
+						</div>
+
+
+
+						<div class="col-10 padding-1">
+							<div class="row">
+								<div class="col-xl-2 col-documento padding-1">
+									<div class="form-group">
+										<label>Documento</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="documento" name="documento" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-1 col-sexo padding-1">
+									<div class="form-group">
+										<label>Sexo</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="sexo" name="sexo" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-1 col-edad padding-1">
+									<div class="form-group">
+										<label>Edad</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="fechaNacimiento" name="fechaNacimiento" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-nombre padding-1">
+									<div class="form-group">
+										<label>Nombre/s</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="nombre" name="nombre" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-apellido padding-1">
+									<div class="form-group">
+										<label>Apellido/s</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="apellido" name="apellido" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-telefono padding-1">
+									<div class="form-group">
+										<label>Teléfono</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="telefono" name="telefono1" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+							</div>
+
+							<h3 class="text-dark font-weight-bold">
+								Datos del Domicilio:
+							</h3>
+							<div class="row">
+								<div class="col-xl-2 col-calle padding-1">
+									<div class="form-group">
+										<label>Calle</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="calle" name="calle" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-numero padding-1">
+									<div class="form-group">
+										<label>Número</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="numero" name="numero" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-localidad padding-1">
+									<div class="form-group">
+										<label>Localidad</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="localidad" name="localidad" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-2 col-cpostal padding-1">
+									<div class="form-group">
+										<label>CP</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="cpostal" name="cpostal" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-provincia padding-1">
+									<div class="form-group">
+										<label>Provincia</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="provincia" name="provincia" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-pais padding-1">
+									<div class="form-group">
+										<label>Pais</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="pais" name="pais" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
 					<div class="row">
 						<div class="col-12">
+
+							<div class="separator separator-dashed" [formGroup]="personaForm"></div>
 							<div class="my-5">
-								<h3 class="text-dark font-weight-bold"></h3>
-								<a
-									routerLink="/registros"
-									class="btn btn-light-primary font-weight-bolder mr-2"
-								>
-									<i
-										class="ki ki-long-arrow-back icon-sm"
-									></i>
-									Volver
-								</a>
-								<div class="btn-group">
-									<button
-										type="button"
-										(click)="submit()"
-										class="btn btn-primary font-weight-bolder"
-									>
-										<i class="ki ki-check icon-sm"></i>
-										Guardar el Formulario
-									</button>
-								</div>
 								<div class="row">
-									<div class="col-xl-1">
-										<div
-											class="rowfoto"
-											style="margin-top: 18px"
-										>
-											<img
-												id="foto"
-												*ngIf="
-													personaForm.get(
-														'persona.img'
-													).value
-												"
-												[src]="
-													personaForm.get(
-														'persona.img'
-													).value
-												"
-												class="img-50"
-											/>
-										</div>
-									</div>
-
-									<div class="col-xl-2">
-										<div class="form-group">
-											<label>Doc. de Identidad</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="documento"
-												name="documento"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-									</div>
-
-									<div class="col-xl-1">
-										<div class="form-group">
-											<label>Sexo</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="sexo"
-												name="sexo"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-									</div>
-
-									<div class="col-xl-1">
-										<div class="form-group">
-											<label>Edad</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="fechaNacimiento"
-												name="fechaNacimiento"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-									</div>
-
-									<div class="col-xl-3">
-										<div class="form-group">
-											<label>Nombre/s</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="nombre"
-												name="nombre"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-									</div>
-
-									<div class="col-xl-2">
-										<div class="form-group">
-											<label>Apellido/s</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="apellido"
-												name="apellido"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-									</div>
-
-									<div class="col-xl-2">
-										<div class="form-group">
-											<label>Teléfono</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="telefono"
-												name="telefono1"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-									</div>
-								</div>
-
-								<div class="separator separator-dashed"></div>
-
-								<div class="my-5">
 									<h3 class="text-dark font-weight-bold">
-										Datos del Domicilio:
+										Presenta Sintomas?
 									</h3>
-
-									<div class="row">
-										<div class="col-xl-2">
-											<div class="form-group">
-												<label>Calle</label>
-												<input
-													class="form-control form-control-solid"
-													type="text"
-													formControlName="calle"
-													name="calle"
-													placeholder=""
-												/>
-												<span
-													class="form-text text-muted"
-												></span>
-											</div>
-										</div>
-
-										<div class="col-xl-1">
-											<div class="form-group">
-												<label>Número</label>
-												<input
-													class="form-control form-control-solid"
-													type="text"
-													formControlName="numero"
-													name="numero"
-													placeholder=""
-												/>
-												<span
-													class="form-text text-muted"
-												></span>
-											</div>
-										</div>
-
-										<div class="col-xl-2">
-											<div class="form-group">
-												<label>Localidad</label>
-												<input
-													class="form-control form-control-solid"
-													type="text"
-													formControlName="localidad"
-													name="localidad"
-													placeholder=""
-												/>
-												<span
-													class="form-text text-muted"
-												></span>
-											</div>
-										</div>
-
-										<div class="col-xl-2">
-											<div class="form-group">
-												<label>CP</label>
-												<input
-													class="form-control form-control-solid"
-													type="text"
-													formControlName="cpostal"
-													name="cpostal"
-													placeholder=""
-												/>
-												<span
-													class="form-text text-muted"
-												></span>
-											</div>
-										</div>
-
-										<div class="col-xl-2">
-											<div class="form-group">
-												<label>Provincia</label>
-												<input
-													class="form-control form-control-solid"
-													type="text"
-													formControlName="provincia"
-													name="provincia"
-													placeholder=""
-												/>
-												<span
-													class="form-text text-muted"
-												></span>
-											</div>
-										</div>
-
-										<div class="col-xl-2">
-											<div class="form-group">
-												<label>Pais</label>
-												<input
-													class="form-control form-control-solid"
-													type="text"
-													formControlName="pais"
-													name="pais"
-													placeholder=""
-												/>
-												<span
-													class="form-text text-muted"
-												></span>
-											</div>
-										</div>
+									<div class="col-2">
+										<label style="margin-right: 20px">
+											<input type="radio" name="sintomas_si" autocomplete="off" value="SI"
+												formControlName="sintomas" />
+											<i class="ti-check text-active" aria-hidden="true"></i>
+											SI
+										</label>
+										<label>
+											<input type="radio" name="sintomas_si" autocomplete="off"
+												formControlName="sintomas" value="NO" />
+											<i class="ti-check text-active" aria-hidden="true"></i>
+											NO
+										</label>
 									</div>
 								</div>
-							</div>
-							<div
-								class="separator separator-dashed"
-								[formGroup]="personaForm"
-							></div>
-							<div class="my-5">
-								<h3 class="text-dark font-weight-bold">
-									Presenta Sintomas?
-								</h3>
 
 								<div class="row">
 									<div class="col-xl-2">
 										<div class="form-group">
-											<label>INICIO DE SINTOMAS</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="fecha_ini_sint"
-												name="fecha_ini_sint"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Inicio de Síntomas</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="fecha_ini_sint" name="fecha_ini_sint" placeholder="" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 									<div class="col-xl-10">
 										<div class="form-group">
-											<label>SINTOMAS ACTUALES</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="sintomas"
-												name="sintomas"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Síntomas Actuales</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="sintomas" name="sintomas" placeholder="" />
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-xl-12">
+										<div class="form-group">
+											<label>Antecedentes Personales</label>
+
+											<input class="form-control form-control-solid" type="text"
+												formControlName="antencedentes_p" name="antencedentes_p"
+												placeholder="" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 									<div class="col-xl-12">
 										<div class="form-group">
-											<label
-												>ANTECEDENTES PERSONALES</label
-											>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="antencedentes_p"
-												name="antencedentes_p"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Tiene alguna Enfermedad?</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="enfermedad_pre" name="enfermedad_pre" placeholder="" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 									<div class="col-xl-12">
 										<div class="form-group">
-											<label
-												>TIENE ALGUNA ENFERMEDAD</label
-											>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="enfermedad_pre"
-												name="enfermedad_pre"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Toma algún Medicamento?</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="toma_medicamentos" name="toma_medicamentos"
+												placeholder="" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
-									<div class="col-xl-12">
-										<div class="form-group">
-											<label
-												>TOMA ACTUALMENTE ALGÚN
-												MEDICAMENTO</label
-											>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="toma_medicamentos"
-												name="toma_medicamentos"
-												placeholder=""
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-									</div>
-									<div class="col-xl-3">
+									<div class="col-xl-2">
 										<div class="form-group">
 											<div class="col-10">
-												<label
-													>CUANTAS PERSONAS COMPARTEN
-													LA VIVIENDA</label
-												>
-												<input
-													class="form-control form-control-solid"
-													type="text"
-													formControlName="vivienda_personas"
-													name="vivienda_personas"
-													placeholder=""
-												/>
-												<span
-													class="form-text text-muted"
-												></span>
+												<label>Con cuantas personas Convive</label>
+												<input class="form-control form-control-solid" type="text"
+													formControlName="vivienda_personas" name="vivienda_personas"
+													placeholder="" />
+												<span class="form-text text-muted"></span>
 											</div>
 										</div>
 									</div>
 									<div class="col-xl-4">
 										<div class="form-group">
-											<label
-												>CUÁL ES SU LUGAR DE TRABAJO
-												ACTUAL
-											</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="lugar"
-												name="lugar"
-												placeholder=""
-												style="margin-top: 18px"
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Lugar de Trabajo Actual </label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="lugar" name="lugar" placeholder=""
+												style="margin-top: 18px" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 									<div class="col-xl-5">
 										<div class="form-group">
-											<label>Telefono Laboral </label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="telefonol"
-												name="telefonol"
-												placeholder=""
-												style="margin-top: 18px"
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Teléfono Laboral</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="telefonol" name="telefonol" placeholder=""
+												style="margin-top: 18px" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 									<div class="col-xl-5">
 										<div class="form-group">
-											<label>Calle </label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="callel"
-												name="callel"
-												placeholder=""
-												style="margin-top: 18px"
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Calle</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="callel" name="callel" placeholder=""
+												style="margin-top: 18px" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 									<div class="col-xl-5">
 										<div class="form-group">
-											<label>Numero</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="numerol"
-												name="numerol"
-												placeholder=""
-												style="margin-top: 18px"
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<label>Número</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="numerol" name="numerol" placeholder=""
+												style="margin-top: 18px" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 									<div class="col-xl-5">
 										<div class="form-group">
 											<label>Localidad</label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="localidadl"
-												name="localidadl"
-												placeholder=""
-												style="margin-top: 18px"
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="localidadl" name="localidadl" placeholder=""
+												style="margin-top: 18px" />
+											<span class="form-text text-muted"></span>
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label>Inline Checkboxes</label>
+
 										<div class="checkbox-inline">
 											<label class="checkbox">
-												<input
-													type="checkbox"
-													name="Checkdomiciliaria"
-												/>
+												<input type="checkbox" name="chkDomiciliaria" />
 												<span></span>
-												Derivacion Atencion
-												Domiciliaria?
+												Derivacion Atencion Domiciliaria?
 											</label>
 											<label class="checkbox">
-												<input
-													type="checkbox"
-													name="Checkcertificado"
-												/>
+												<input type="checkbox" name="chkCertificado" />
 												<span></span>
 												Requiere certificado de
 												aislamiento
 											</label>
 											<label class="checkbox">
-												<input
-													type="checkbox"
-													name="Checkresultado"
-												/>
+												<input type="checkbox" name="chkResultado" />
 												<span></span>
 												Solicita resultado de hisopado
 											</label>
 											<label class="checkbox">
-												<input
-													type="checkbox"
-													name="Checkderivacion"
-												/>
+												<input type="checkbox" name="chkDerivacion" />
 												<span></span>
 												Derivacion 107?
 											</label>
-											<label class="checkbox">
-												<input
-													type="checkbox"
-													name="Checkmovilidad"
-												/>
-												<span></span>
-												Tiene Movilidad?
-											</label>
+											<div class="row">
+												<div class="col-4" style="margin-top: 10px;">
+													<label class="checkbox">
+														<input type="checkbox" name="chkMovilidad" />
+														<span></span>
+														Tiene Movilidad?
+													</label>
 
-											<div class="form-group">
-												<label for="exampleSelect1"
-													>Cumple criterio hisopado?
-													<span class="text-danger"
-														>*</span
-													></label
-												>
-												<select
-													class="form-control"
-													id="cbm_criterio"
-												>
-													<option>Si</option>
-													<option>No</option>
-													<option>No Sé</option>
-												</select>
+												</div>
+												<div class="col-4">
+													<div class="form-group row">
+														<div class="col-8" style="margin-top: 10px;">
+															<label for="exampleSelect1">Cumple criterio hisopado?
+																<span class="text-danger">*</span></label>
+														</div>
+														<div class="col-4">
+															<select class="form-control" id="cbmCriterio">
+																<option>Si</option>
+																<option>No</option>
+																<option>No Sé</option>
+															</select>
+														</div>
+
+													</div>
+												</div>
+												<div class="col-4">
+													<div class="form-group row">
+														<div class="col-8" style="margin-top: 10px;">
+															<label for="exampleSelect1">Se ha realizado un hisopado?
+																<span class="text-danger">*</span></label>
+														</div>
+														<div class="col-4">
+															<select class="form-control" id="cbmHisopado">
+																<option>Si</option>
+																<option>No</option>
+															</select>
+														</div>
+
+
+													</div>
+												</div>
+
 											</div>
-											<div class="form-group">
-												<label for="exampleSelect1"
-													>Se ha realizado un
-													hisopado?
-													<span class="text-danger"
-														>*</span
-													></label
-												>
-												<select
-													class="form-control"
-													id="cbm_hisopado"
-												>
-													<option>Si</option>
-													<option>No</option>
-												</select>
+
+										</div>
+										<div class="row">
+											<div class="form-group col-9">
+												<label>Lugar de Hisopado </label>
+												<input class="form-control form-control-solid" type="text"
+													formControlName="lugarhisopado" name="lugarhisopado" placeholder=""
+													style="margin-top: 18px" />
+												<span class="form-text text-muted"></span>
+											</div>
+											<div class="form-group col-3">
+												<label>Fehca de Hisopado </label>
+												<input class="form-control form-control-solid" type="text"
+													formControlName="fechahisopado" name="fechahisopado" placeholder=""
+													style="margin-top: 18px" />
+												<span class="form-text text-muted"></span>
 											</div>
 										</div>
-										<div class="form-group">
-											<label>Lugar de Hisopado </label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="pais"
-												name="pais"
-												placeholder=""
-												style="margin-top: 18px"
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-										<div class="form-group">
-											<label>Fehca de Hisopado </label>
-											<input
-												class="form-control form-control-solid"
-												type="text"
-												formControlName="pais"
-												name="pais"
-												placeholder=""
-												style="margin-top: 18px"
-											/>
-											<span
-												class="form-text text-muted"
-											></span>
-										</div>
-										<span class="form-text text-muted"
-											>Some help text goes here</span
-										>
+
+										<span class="form-text text-muted"></span>
 									</div>
 
 									<div class="col-xl-12">
 										<div class="form-group">
-											<label for="exampleTextarea"
-												>CIERRE DE CONTACTO</label
-											>
-											<textarea
-												class="form-control form-control-solid"
-												rows="5"
-											></textarea>
+											<label for="txtcierre">Cierre de Contacto</label>
+											<textarea class="form-control form-control-solid" rows="5"></textarea>
 										</div>
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+
+
+						<div class="btn-group">
+							<button type="button" (click)="submit()" class="btn btn-primary font-weight-bolder">
+								<i class="ki ki-check icon-sm"></i>
+								Guardar el Formulario
+							</button>
 						</div>
 					</div>
 				</div>

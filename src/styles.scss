@@ -100,7 +100,7 @@
 @media screen and (max-width: 1366px) {
   body {
       font-size: 12px;
-  }
+  }/* 
   h1 {
       font-size: 12px;
   }
@@ -109,7 +109,7 @@
   }
   h4 {
       font-size: 14px;
-  }
+  } */
   .page-wrapper {
       margin-left: 200px;
   }
@@ -159,6 +159,7 @@
       object-fit: cover;
       width: 120px;
       height: 145px;
+      margin-top: 10px;
   }
   .img-100 {
       object-position: top;
@@ -166,4 +167,43 @@
       height: 250px;
       align-content: space-between;
   }
+
+  .col-documento{
+      min-width: 90px;
+  }
+  .col-sexo{
+    min-width: 45px;
+}
+.col-edad{
+    min-width: 45px;
+}
+.col-nombre{
+    min-width: 200px;
+}
+.col-apellido{
+    min-width: 200px;
+}
+.col-telefono{
+    min-width: 90px;
+}
+
+.col-calle{
+    min-width: 240px;
+}
+.col-numero{
+  max-width: 85px;
+}
+.col-localidad{
+  min-width: 140px;
+}
+.col-cpostal{
+  max-width: 85px;
+}
+.col-provincia{
+  min-width: 120px;
+}
+.col-pais{
+  min-width: 80px;
+}
+
 }
