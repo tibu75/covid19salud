@@ -1,4 +1,4 @@
-export class Form0800Model {
+export class Forms {
 	constructor(
 		public nroRegistro: string,
 		public fecha: string,
