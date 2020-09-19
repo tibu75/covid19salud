@@ -47,12 +47,12 @@ export class RegistroComponent implements OnInit {
 			persona: this.fb.group({
 				nombre: [datos ? datos.nombres : "", Validators.required],
 				apellido: [datos ? datos.apellido : "", Validators.required],
-				documento: ["", Validators.required],
+				documento: [datos ? datos.documento:"", Validators.required],
 				fechaNacimiento: [
 					datos ? datos.fechaNacimiento : "",
 					Validators.required,
 				],
-				sexo: ["", Validators.required],
+				sexo: [datos?  datos.sexo:"", Validators.required],
 				telefono1: ["", [Validators.required, Validators.maxLength(10)]],
 				telefono2: ["", [Validators.required, Validators.maxLength(10)]],
 				calle: [
@@ -121,6 +121,8 @@ export class RegistroComponent implements OnInit {
 			if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
 				this.buscar_datos = false;
 				this.cargar_datos = true;
+				data.datos.documento = this.personaForm.get("persona.documento").value;
+				data.datos.sexo = this.personaForm.get("persona.sexo").value;
 				this.initForm(data.datos);
 				this.cdr.markForCheck();
 			} else {

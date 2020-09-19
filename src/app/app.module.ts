@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule,HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { ClipboardModule } from "ngx-clipboard";
 import { TranslateModule } from "@ngx-translate/core";
@@ -12,6 +12,7 @@ import { AppComponent } from "./app.component";
 import { AuthService } from "./modules/auth/_services/auth.service";
 import { FakeAPIService } from "./_helpers/fake/fake-api.service";
 import { environment } from "src/environments/environment";
+import { AuthInterceptorService } from "../app/modules/auth/_services/auth-interceptor.service"
 // Highlight JS
 import { HighlightModule, HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 import highlight from "highlight.js/lib/highlight";
@@ -87,6 +88,11 @@ export function getHighlightLanguages() {
         languages: getHighlightLanguages,
       },
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })
