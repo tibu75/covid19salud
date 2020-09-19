@@ -23,6 +23,9 @@ import { SplashScreenModule } from "./_metronic/partials/layout/splash-screen/sp
 import { RegistroComponent } from "./pages/registros/registro/registro.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ToastrModule } from 'ngx-toastr';
+
+
 function appInitializer(authService: AuthService) {
   return () => {
     return new Promise((resolve) => {
@@ -48,6 +51,11 @@ export function getHighlightLanguages() {
   declarations: [AppComponent, RegistroComponent],
   imports: [
     BrowserModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
     BrowserAnimationsModule,
     SplashScreenModule,
     TranslateModule.forRoot(),

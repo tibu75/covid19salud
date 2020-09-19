@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.0.5",
+    "@angular/animations": "^10.0.14",
     "@angular/cdk": "^10.1.1",
     "@angular/common": "~10.0.5",
     "@angular/compiler": "~10.0.5",
@@ -38,6 +38,7 @@
     "ngx-clipboard": "^13.0.1",
     "ngx-highlightjs": "3.0.3",
     "ngx-perfect-scrollbar": "^9.0.0",
+    "ngx-toastr": "^13.0.0",
     "object-path": "^0.11.4",
     "perfect-scrollbar": "^1.5.0",
     "rxjs": "~6.5.5",
