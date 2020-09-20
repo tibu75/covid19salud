@@ -16,6 +16,8 @@ export class Forms {
 			departamento: string;
 			piso: string;
 			localidad: string;
+			provincia: string;
+			pais: string;
 			img: string;
 		},
 		public fecha_ini_sint: string,
@@ -34,6 +36,19 @@ export class Forms {
 				localidadl: string;
 			}
 		],
+		public estados: [
+			{
+				atencion_domiciliaria: string;
+				certificado: string;
+				resultado_hisopado: string;
+				derivacion_107: string;
+				criterio_hisopado: string;
+				realizo_hisopado: string;
+				lugar_hisopado: string;
+				fecha_hisopado: string;
+			}
+		],
+		public cierre_contacto: string,
 		public usuario: string
 	) {}
 }
