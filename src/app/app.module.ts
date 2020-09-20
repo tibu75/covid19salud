@@ -53,7 +53,7 @@ export function getHighlightLanguages() {
   imports: [
     BrowserModule,
     ToastrModule.forRoot({
-      timeOut: 10000,
+      timeOut: 5000,
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),

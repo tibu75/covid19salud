@@ -130,6 +130,7 @@ export class RegistroComponent implements OnInit {
 			let pepe = data; // Eliminar esta línea si anda todo bien
 		});
 		debugger;
+		this.router.navigate(["/registros"]);
 		console.log(datosPersona);
 		// this.router.navigateByUrl('/registros');
 	}
