@@ -23,10 +23,13 @@ export class RegistroComponent implements OnInit {
 		vivienda_personas: ''
 	};
 
+	edad;
+	mostrarEdad;
+
 	closeResult: string;
 	personaForm: FormGroup;
 	data: any = {};
-	public cargar_datos: boolean = true;
+	public cargar_datos: boolean = false;
 	public buscar_datos: boolean = true;
 	sololectura: boolean;
 
@@ -42,6 +45,14 @@ export class RegistroComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.initForm();
+	}
+
+	calcularEdad(){
+		if(this.edad){
+			const convertAge= new Date(this.edad);
+			const timeDiff= Math.abs(Date.now() - convertAge.getTime());
+			this.mostrarEdad = Math.floor((timeDiff/(1000 * 3600 *24))/365);
+		}
 	}
 
 	initForm(datos?) {
@@ -102,6 +113,8 @@ export class RegistroComponent implements OnInit {
 				data.datos.documento = this.personaForm.get('persona.documento').value;
 				data.datos.sexo = this.personaForm.get('persona.sexo').value;
 				this.initForm(data.datos);
+				this.edad= this.personaForm.get('persona.fechaNacimiento').value;
+				this.calcularEdad();
 				this.cdr.markForCheck();
 			} else {
 				this.toast.error('Persona No encontrada, por favor Verifique los datos ingresados.');
@@ -117,6 +130,7 @@ export class RegistroComponent implements OnInit {
 			let pepe = data; // Eliminar esta línea si anda todo bien
 		});
 		debugger;
+		this.router.navigate(["/registros"]);
 		console.log(datosPersona);
 		// this.router.navigateByUrl('/registros');
 	}
