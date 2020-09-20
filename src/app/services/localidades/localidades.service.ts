@@ -1,23 +1,25 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Localidades } from "../../models/localidades.model";
+import { Localidades } from "../../pages/models/localidades";
 import { map } from "rxjs/operators";
+import { environment } from "../../../environments/environment";
+
+const API_USERS_URL = `${environment.apiUrl}/localidades`;
 
 @Injectable({
-	providedIn: "root",
+  providedIn: "root",
 })
 export class LocalidadesService {
-	constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-	cargarLocalidades() {
-		let url = url_servicios + "/localidades";
-		return this.http
-			.get(url)
-			.pipe(
-				map(
-					(resp: { ok: boolean; localidades: Localidades[] }) =>
-						resp.localidades
-				)
-			);
-	}
+  getLocalidades() {
+    return this.http
+      .get(API_USERS_URL)
+      .pipe(
+        map(
+          (resp: { ok: boolean; localidades: Localidades[] }) =>
+            resp.localidades
+        )
+      );
+  }
 }
