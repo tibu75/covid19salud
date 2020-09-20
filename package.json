@@ -37,6 +37,7 @@
     "ng-inline-svg": "^10.1.0",
     "ngx-clipboard": "^13.0.1",
     "ngx-highlightjs": "3.0.3",
+    "ngx-pagination": "^5.0.0",
     "ngx-perfect-scrollbar": "^9.0.0",
     "ngx-toastr": "^13.0.0",
     "object-path": "^0.11.4",

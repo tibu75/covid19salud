@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientModule,HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { ClipboardModule } from "ngx-clipboard";
 import { TranslateModule } from "@ngx-translate/core";
@@ -12,7 +12,7 @@ import { AppComponent } from "./app.component";
 import { AuthService } from "./modules/auth/_services/auth.service";
 import { FakeAPIService } from "./_helpers/fake/fake-api.service";
 import { environment } from "src/environments/environment";
-import { AuthInterceptorService } from "../app/modules/auth/_services/auth-interceptor.service"
+import { AuthInterceptorService } from "../app/modules/auth/_services/auth-interceptor.service";
 // Highlight JS
 import { HighlightModule, HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 import highlight from "highlight.js/lib/highlight";
@@ -22,10 +22,9 @@ import scss from "highlight.js/lib/languages/scss";
 import typescript from "highlight.js/lib/languages/typescript";
 import { SplashScreenModule } from "./_metronic/partials/layout/splash-screen/splash-screen.module";
 import { RegistroComponent } from "./pages/registros/registro/registro.component";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { ToastrModule } from 'ngx-toastr';
-
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgxPaginationModule } from "ngx-pagination";
+import { ToastrModule } from "ngx-toastr";
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -54,7 +53,7 @@ export function getHighlightLanguages() {
     BrowserModule,
     ToastrModule.forRoot({
       timeOut: 10000,
-      positionClass: 'toast-top-center',
+      positionClass: "toast-top-center",
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
@@ -73,7 +72,8 @@ export function getHighlightLanguages() {
     InlineSVGModule.forRoot(),
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
   ],
   providers: [
     {
@@ -91,8 +91,8 @@ export function getHighlightLanguages() {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

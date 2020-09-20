@@ -145,6 +145,8 @@
             class="form-control datatable-input"
             placeholder="Ej:3275847"
             data-col-index="1"
+            #txtDni
+            (keyup)="buscarDoc(txtDni.value)"
           />
         </div>
         <div class="col-lg-3 mb-lg-0 mb-6">
@@ -349,7 +351,7 @@
                 <th rowspan="1" colspan="1">Fecha de Registro</th>
                 <th rowspan="1" colspan="1">Apellido</th>
                 <th rowspan="1" colspan="1">Nombre</th>
-                <th rowspan="1" colspan="1">Localidad</th>
+                <th rowspan="1" colspan="1">Tipo de Registro</th>
                 <th rowspan="1" colspan="1" style="display: none">Ship Date</th>
                 <th rowspan="1" colspan="1" style="display: none">Status</th>
                 <th rowspan="1" colspan="1" style="display: none">
@@ -359,12 +361,12 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr role="row" class="odd" *ngFor="let f of form">
+              <tr role="row" class="odd" *ngFor="let f of form ">
                 <td class="sorting_1 dtr-control">{{f.nroForm}}</td>
                 <td>{{f.fecha|date}}</td>
-                <td>{{f.persona.apellido}}</td>
-                <td>{{f.persona.nombre}}</td>
-                <td>{{f.tipo_registro}}</td>
+                <td>{{f.persona?.apellido}}</td>
+                <td>{{f.persona?.nombre}}</td>
+                <td>{{f?.tipo_registro}}</td>
                 <td style="display: none">10/15/2017</td>
                 <td style="display: none">
                   <span
@@ -445,7 +447,7 @@
             role="status"
             aria-live="polite"
           >
-            Showing 1 to 10 of 350 entries
+            Showing 1 to 10 of {{form.length}} entries
           </div>
         </div>
         <div class="col-sm-12 col-md-7 dataTables_pager">
