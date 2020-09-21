@@ -167,12 +167,13 @@ export class RegistroComponent implements OnInit {
 			if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
 				this.buscar_datos = false;
 				this.cargar_datos = true;
+
+				this.cdr.markForCheck();
 				data.datos.documento = this.personaForm.get("persona.documento").value;
 				data.datos.sexo = this.personaForm.get("persona.sexo").value;
 				this.initForm(data.datos);
 				this.edad = this.personaForm.get("persona.fechaNacimiento").value;
 				this.calcularEdad();
-				this.cdr.markForCheck();
 			} else {
 				this.toast.error(
 					"Persona No encontrada, por favor Verifique los datos ingresados."
