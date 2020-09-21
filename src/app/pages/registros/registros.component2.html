@@ -1,21 +1,15 @@
 <div class="card card-custom">
-  <div class="card-header">
-    <div class="card-title">
-      <span class="card-icon">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon">
         <i class="flaticon2-delivery-package text-primary"></i>
       </span>
-      <h3 class="card-label">Formulario de busqueda avanzada</h3>
-    </div>
-    <div class="card-toolbar">
-      <!--begin::Dropdown-->
-      <div class="dropdown dropdown-inline mr-2">
-        <button
-          type="button"
-          class="btn btn-light-primary font-weight-bolder dropdown-toggle"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
+            <h3 class="card-label">Formulario de busqueda avanzada</h3>
+        </div>
+        <div class="card-toolbar">
+            <!--begin::Dropdown-->
+            <div class="dropdown dropdown-inline mr-2">
+                <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="svg-icon svg-icon-md">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
             <svg
@@ -42,64 +36,62 @@
             <!--end::Svg Icon--> </span
           >Exportar
         </button>
-        <!--begin::Dropdown Menu-->
-        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-          <!--begin::Navigation-->
-          <ul class="navi flex-column navi-hover py-2">
-            <li
-              class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2"
-            >
-              Elija una opcion:
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
+                <!--begin::Dropdown Menu-->
+                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                    <!--begin::Navigation-->
+                    <ul class="navi flex-column navi-hover py-2">
+                        <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
+                            Elija una opcion:
+                        </li>
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+                                <span class="navi-icon">
                   <i class="la la-print"></i>
                 </span>
-                <span class="navi-text">Imprimir</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
+                                <span class="navi-text">Imprimir</span>
+                            </a>
+                        </li>
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+                                <span class="navi-icon">
                   <i class="la la-copy"></i>
                 </span>
-                <span class="navi-text">Copiar</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
+                                <span class="navi-text">Copiar</span>
+                            </a>
+                        </li>
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+                                <span class="navi-icon">
                   <i class="la la-file-excel-o"></i>
                 </span>
-                <span class="navi-text">Excel</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
+                                <span class="navi-text">Excel</span>
+                            </a>
+                        </li>
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+                                <span class="navi-icon">
                   <i class="la la-file-text-o"></i>
                 </span>
-                <span class="navi-text">CSV</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
+                                <span class="navi-text">CSV</span>
+                            </a>
+                        </li>
+                        <li class="navi-item">
+                            <a href="#" class="navi-link">
+                                <span class="navi-icon">
                   <i class="la la-file-pdf-o"></i>
                 </span>
-                <span class="navi-text">PDF</span>
-              </a>
-            </li>
-          </ul>
-          <!--end::Navigation-->
-        </div>
-        <!--end::Dropdown Menu-->
-      </div>
-      <!--end::Dropdown-->
-      <!--begin::Button-->
-      <a routerLink="/registro" class="btn btn-primary font-weight-bolder">
-        <span class="svg-icon svg-icon-md">
+                                <span class="navi-text">PDF</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!--end::Navigation-->
+                </div>
+                <!--end::Dropdown Menu-->
+            </div>
+            <!--end::Dropdown-->
+            <!--begin::Button-->
+            <a routerLink="/registro" class="btn btn-primary font-weight-bolder">
+                <span class="svg-icon svg-icon-md">
           <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +138,7 @@
             placeholder="Ej:3275847"
             data-col-index="1"
             #txtDni
-            (keyup)="buscarDoc(txtDni.value)"
+            (keyup)="cargarForms(txtDni.value)"
           />
         </div>
         <div class="col-lg-3 mb-lg-0 mb-6">
@@ -174,27 +166,21 @@
               <span class="input-group-text">
                 <i class="la la-ellipsis-h"></i>
               </span>
-            </div>
-            <input
-              type="text"
-              class="form-control datatable-input"
-              name="end"
-              placeholder="Hasta"
-              data-col-index="5"
-            />
-          </div>
         </div>
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Tipo de Registro:</label>
-          <select class="form-control datatable-input" data-col-index="6">
+        <input type="text" class="form-control datatable-input" name="end" placeholder="Hasta" data-col-index="5" />
+    </div>
+</div>
+<div class="col-lg-3 mb-lg-0 mb-6">
+    <label>Tipo de Registro:</label>
+    <select class="form-control datatable-input" data-col-index="6">
             <option value="">Seleccionar</option>
             <option value="1">Sin sintomas</option>
             <option value="2">Sintomas</option>
           </select>
-        </div>
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Localidad:</label>
-          <select class="form-control datatable-input data-col-index=2">
+</div>
+<div class="col-lg-3 mb-lg-0 mb-6">
+    <label>Localidad:</label>
+    <select class="form-control datatable-input data-col-index=2">
             <option
               value="localidad.nombre"
               *ngFor="let localidad of localidades"
@@ -202,9 +188,9 @@
               {{localidad.nombre}}
             </option>
           </select>
-        </div>
+</div>
 
-        <!-- <div class="col-lg-3 mb-lg-0 mb-6">
+<!-- <div class="col-lg-3 mb-lg-0 mb-6">
           <label>Type:</label>
           <select class="form-control datatable-input" data-col-index="7">
             <option value="">Select</option>
@@ -213,10 +199,10 @@
             <option value="3">Direct</option>
           </select>
         </div> -->
-      </div>
-      <div class="row mt-8">
-        <div class="col-lg-12">
-          <button class="btn btn-primary btn-primary--icon" id="kt_search">
+</div>
+<div class="row mt-8">
+    <div class="col-lg-12">
+        <button class="btn btn-primary btn-primary--icon" id="kt_search">
             <span>
               <i class="la la-search"></i>
               <span>Buscar</span>
@@ -228,172 +214,86 @@
               <span>Reiniciar</span>
             </span>
           </button>
-        </div>
-      </div>
-    </form>
-    <!--begin: Datatable-->
-    <!--begin: Datatable-->
-    <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-      <div class="row">
+    </div>
+</div>
+</form>
+<!--begin: Datatable-->
+<!--begin: Datatable-->
+<div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+    <div class="row">
         <div class="col-sm-12">
-          <table
-            class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed"
-            id="kt_datatable"
-            role="grid"
-            aria-describedby="kt_datatable_info"
-            style="width: 1229px"
-          >
-            <thead>
-              <tr role="row">
-                <th
-                  class="sorting_asc"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 1px"
-                  aria-sort="ascending"
-                  aria-label="Record ID: activate to sort column descending"
-                >
-                  Reg.Nro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 30px"
-                  aria-label="Order ID: activate to sort column ascending"
-                >
-                  Fecha de Registro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 126px"
-                  aria-label="Country: activate to sort column ascending"
-                >
-                  Apellido
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 165px"
-                  aria-label="Ship City: activate to sort column ascending"
-                >
-                  Nombre
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 121px"
-                  aria-label="Company Agent: activate to sort column ascending"
-                >
-                  Tipo de Registro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 71px; display: none"
-                  aria-label="Ship Date: activate to sort column ascending"
-                >
-                  Fecha de Registro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 66px; display: none"
-                  aria-label="Status: activate to sort column ascending"
-                >
-                  Status
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 45px; display: none"
-                  aria-label="Type: activate to sort column ascending"
-                >
-                  Tipo de Registro
-                </th>
-                <th
-                  class="sorting_disabled"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 117px"
-                  aria-label="Actions"
-                >
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tfoot>
-              <tr>
-                <th rowspan="1" colspan="1">Reg.Nro</th>
-                <th rowspan="1" colspan="1">Fecha de Registro</th>
-                <th rowspan="1" colspan="1">Apellido</th>
-                <th rowspan="1" colspan="1">Nombre</th>
-                <th rowspan="1" colspan="1">Tipo de Registro</th>
-                <th rowspan="1" colspan="1" style="display: none">Ship Date</th>
-                <th rowspan="1" colspan="1" style="display: none">Status</th>
-                <th rowspan="1" colspan="1" style="display: none">
-                  Tipo de Registro
-                </th>
-                <th rowspan="1" colspan="1">Actions</th>
-              </tr>
-            </tfoot>
-            <tbody>
-              <tr role="row" class="odd" *ngFor="let f of form ">
-                <td class="sorting_1 dtr-control">{{f.nroForm}}</td>
-                <td>{{f.fecha|date}}</td>
-                <td>{{f.persona?.apellido}}</td>
-                <td>{{f.persona?.nombre}}</td>
-                <td>{{f?.tipo_registro}}</td>
-                <td style="display: none">10/15/2017</td>
-                <td style="display: none">
-                  <span
-                    class="label label-lg font-weight-bold label-light-info label-inline"
-                    >Info</span
+            <table class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info" style="width: 1229px">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 1px" aria-sort="ascending" aria-label="Record ID: activate to sort column descending">
+                            Reg.Nro
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 30px" aria-label="Order ID: activate to sort column ascending">
+                            Fecha de Registro
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 126px" aria-label="Country: activate to sort column ascending">
+                            Apellido
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 165px" aria-label="Ship City: activate to sort column ascending">
+                            Nombre
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 121px" aria-label="Company Agent: activate to sort column ascending">
+                            Tipo de Registro
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 71px; display: none" aria-label="Ship Date: activate to sort column ascending">
+                            Fecha de Registro
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 66px; display: none" aria-label="Status: activate to sort column ascending">
+                            Status
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 45px; display: none" aria-label="Type: activate to sort column ascending">
+                            Tipo de Registro
+                        </th>
+                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 117px" aria-label="Actions">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th rowspan="1" colspan="1">Reg.Nro</th>
+                        <th rowspan="1" colspan="1">Fecha de Registro</th>
+                        <th rowspan="1" colspan="1">Apellido</th>
+                        <th rowspan="1" colspan="1">Nombre</th>
+                        <th rowspan="1" colspan="1">Tipo de Registro</th>
+                        <th rowspan="1" colspan="1" style="display: none">Ship Date</th>
+                        <th rowspan="1" colspan="1" style="display: none">Status</th>
+                        <th rowspan="1" colspan="1" style="display: none">
+                            Tipo de Registro
+                        </th>
+                        <th rowspan="1" colspan="1">Actions</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr role="row" class="odd" *ngFor="let f of form ">
+                        <td class="sorting_1 dtr-control">{{f.nroForm}}</td>
+                        <td>{{f.fecha|date}}</td>
+                        <td>{{f.persona?.apellido}}</td>
+                        <td>{{f.persona?.nombre}}</td>
+                        <td>{{f?.tipo_registro}}</td>
+                        <td style="display: none">10/15/2017</td>
+                        <td style="display: none">
+                            <span class="label label-lg font-weight-bold label-light-info label-inline">Info</span
                   >
                 </td>
                 <td style="display: none">
                   <span class="label label-danger label-dot mr-2"></span
                   ><span class="font-weight-bold text-danger">Online</span>
-                </td>
-                <td>
-                  <div class="dropdown dropdown-inline">
-                    <a
-                      href="javascript:;"
-                      class="btn btn-sm btn-clean btn-icon"
-                      data-toggle="dropdown"
-                    >
-                      <i class="la la-cog"></i>
-                    </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-sm dropdown-menu-right"
-                    >
-                      <ul class="nav nav-hoverable flex-column">
-                        <li class="nav-item">
-                          <a class="nav-link" href="#"
-                            ><i class="nav-icon la la-edit"></i
+                        </td>
+                        <td>
+                            <div class="dropdown dropdown-inline">
+                                <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">
+                                    <i class="la la-cog"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                    <ul class="nav nav-hoverable flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="nav-icon la la-edit"></i
                             ><span class="nav-text">Edit Details</span></a
                           >
                         </li>
@@ -419,41 +319,27 @@
                   >
                     <i class="la la-edit"></i>
                   </a>
-                  <a
-                    href="javascript:;"
-                    class="btn btn-sm btn-clean btn-icon"
-                    title="Delete"
-                  >
-                    <i class="la la-trash"></i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div
-            id="kt_datatable_processing"
-            class="dataTables_processing card"
-            style="display: none"
-          >
-            Processing...
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-5">
-          <div
-            class="dataTables_info"
-            id="kt_datatable_info"
-            role="status"
-            aria-live="polite"
-          >
-            Showing 1 to 10 of {{form.length}} entries
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-7 dataTables_pager">
-          <div class="dataTables_length" id="kt_datatable_length">
-            <label
-              >Display
+                                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                                                <i class="la la-trash"></i>
+                                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="kt_datatable_processing" class="dataTables_processing card" style="display: none">
+                Processing...
+            </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">
+                        Showing 1 to 10 of {{form.length}} entries
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-7 dataTables_pager">
+                    <div class="dataTables_length" id="kt_datatable_length">
+                        <label>Display
               <select
                 name="kt_datatable_length"
                 aria-controls="kt_datatable"

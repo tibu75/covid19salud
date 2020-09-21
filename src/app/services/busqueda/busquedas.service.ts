@@ -21,7 +21,8 @@ export class BusquedasService {
   }
 
   buscarDni(dni: string) {
-    let url = API_USERS_URL + "/+dnif";
-    return this.http.get<any[]>(url).pipe(map((resp: any) => resp.results));
+    let url = API_USERS_URL + "/formulario/"+dni;
+    return this.http.get<any[]>(url).pipe(map((resp: any) => resp.results,
+    ));
   }
 }

@@ -18,6 +18,7 @@ export class RegistrosComponent implements OnInit {
   public localidades: Localidades[] = [];
   soloLectura: boolean;
   data: any = [];
+  dni: any = [] ;
 
   constructor(
     private form0800Service: Form0800Service,
@@ -27,8 +28,9 @@ export class RegistrosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cargarForms();
+    this.cargarForms(this.dni);
     this.cargarLocalidades();
+    
   }
 
   cargarLocalidades() {
@@ -38,8 +40,10 @@ export class RegistrosComponent implements OnInit {
     });
   }
 
-  cargarForms() {
+  cargarForms(dni: string) {
     this.cargando = true;
+    if (dni.length <= 0) {
+      
     this.form0800Service.getForms().subscribe((data: any) => {
       console.log(data.forms);
       //debugger
@@ -49,12 +53,10 @@ export class RegistrosComponent implements OnInit {
     this.cargando = false;
     this.soloLectura = true;
   }
-  buscarDoc(dni: string) {
-    if (dni.length === 0) {
-      return this.cargarForms();
-    }
-    this.busquedaService.buscarDni(dni).subscribe((resp) => {
+     this.busquedaService.buscarDni(dni).subscribe((resp) => {
+      console.log (resp)
       this.form = resp;
+      this.cdr.markForCheck();
     });
   }
 }
