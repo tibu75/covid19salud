@@ -7,7 +7,6 @@ import { Forms } from "../../pages/models/form0800covid";
 import { Router } from "@angular/router";
 import { AuthService } from "../../modules/auth/_services/auth.service";
 import { Observable } from "rxjs";
-import { Form } from "@angular/forms";
 
 const API_USERS_URL = `${environment.apiUrl}/form`;
 
@@ -27,9 +26,9 @@ export class Form0800Service {
     public authService: AuthService
   ) {}
 
-  getForms(): Observable<Forms[]> {
-    let url = API_USERS_URL;
-    return this.http.get<Forms[]>(url);
+  getForms(desde: number, hasta: number): Observable<Form0800> {
+    let url = `${API_USERS_URL}/?desde=${desde} /?desde=${hasta}`;
+    return this.http.get<Form0800>(url);
   }
 
   crearForm(formData: Form0800) {

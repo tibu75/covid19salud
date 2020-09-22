@@ -3,22 +3,25 @@ import { Form0800Service } from "../../services/form0800/form0800.service";
 import { Forms } from "../models/form0800covid";
 import { Localidades } from "../models/localidades";
 import { LocalidadesService } from "../../services/localidades/localidades.service";
-import { Form0800 } from "../../interfaces/form0800Interface";
+
 import { BusquedasService } from "src/app/services/busqueda/busquedas.service";
 
 @Component({
   selector: "app-registros",
-  templateUrl: "./registros.component2.html",
+  templateUrl: "./registros.component.html",
   styleUrls: [],
 })
 export class RegistrosComponent implements OnInit {
   public cargando: boolean = true;
-  public formI: Form0800[] = [];
+  public formtemp: Forms[] = [];
   public form: Forms[] = [];
   public localidades: Localidades[] = [];
+  public paginaD: number = 0;
+  public paginaH: number = 0;
+  public totalForm: number = 0;
   soloLectura: boolean;
   data: any = [];
-  dni: any = [] ;
+  dni: any = [];
 
   constructor(
     private form0800Service: Form0800Service,
@@ -28,9 +31,8 @@ export class RegistrosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cargarForms(this.dni);
+    this.cargarForms();
     this.cargarLocalidades();
-    
   }
 
   cargarLocalidades() {
@@ -40,23 +42,45 @@ export class RegistrosComponent implements OnInit {
     });
   }
 
-  cargarForms(dni: string) {
+  cargarForms() {
     this.cargando = true;
-    if (dni.length <= 0) {
-      
-    this.form0800Service.getForms().subscribe((data: any) => {
-      console.log(data.forms);
-      //debugger
-      this.form = data.forms;
-      this.cdr.markForCheck();
-    });
-    this.cargando = false;
-    this.soloLectura = true;
+
+    this.form0800Service
+      .getForms(this.paginaD, this.paginaH)
+      .subscribe(({ total, forms }) => {
+        //console.log(forms);
+        //debugger
+        this.form = forms;
+        this.formtemp = forms;
+        this.totalForm = total;
+        this.cdr.markForCheck();
+
+        this.cargando = false;
+        this.soloLectura = true;
+      });
   }
-     this.busquedaService.buscarDni(dni).subscribe((resp) => {
-      console.log (resp)
+
+  buscarDocumento(dni: string) {
+    if (dni.length === 0) {
+      return (this.form = this.formtemp);
+    }
+    this.busquedaService.buscarDni(dni).subscribe((resp: Forms[]) => {
+      console.log(resp);
       this.form = resp;
       this.cdr.markForCheck();
     });
+  }
+
+  paginacion(valor: number) {
+    this.paginaD += valor;
+
+    if (this.paginaD < 0) {
+      this.paginaD = 0;
+    } else if (this.paginaD >= this.totalForm) {
+      this.paginaD -= valor;
+    }
+
+    this.cdr.markForCheck();
+    this.cargarForms();
   }
 }
