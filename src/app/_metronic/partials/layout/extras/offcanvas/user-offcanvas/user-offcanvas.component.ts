@@ -12,6 +12,7 @@ import { AuthService } from '../../../../../../modules/auth/_services/auth.servi
 export class UserOffcanvasComponent implements OnInit {
   extrasUserOffcanvasDirection = 'offcanvas-right';
   user$: Observable<UserModel>;
+  usuarios: any = { };
 
   constructor(private layout: LayoutService, private auth: AuthService) {}
 
@@ -20,6 +21,8 @@ export class UserOffcanvasComponent implements OnInit {
       'extras.user.offcanvas.direction'
     )}`;
     this.user$ = this.auth.currentUserSubject.asObservable();
+    this.usuarios = sessionStorage.getItem('USER');
+    console.log ('usuarios', this.usuarios)
   }
 
   logout() {

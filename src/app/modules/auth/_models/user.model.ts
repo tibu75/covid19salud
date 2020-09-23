@@ -6,36 +6,35 @@ export class UserModel {
   public documento: string;
   public password: string;
   public organismo: string;
-  public interno: string;
-  public box: string;
+  public active: string;
+  public picture?: string;
   public signupDate?: Date;
   public lastLogin?: Date;
   public role?: string;
   // tslint:disable-next-line: variable-name
   public id?: string;
 
-  setUser(user: any) {
+  setUser(USER: any) {
     // tslint:disable-next-line: quotemark
-    this.nombre = user.nombre || " ";
+    this.nombre = USER.nombre || " ";
     // tslint:disable-next-line: quotemark
-    this.apellido = user.apellido || "";
+    this.apellido = USER.apellido || "";
     // tslint:disable-next-line: quotemark
-    this.documento = user.documento || "";
+    this.documento = USER.documento || "";
     // tslint:disable-next-line: quotemark
-    this.password = user.password || "";
+    this.password = USER.password || "";
     // tslint:disable-next-line: quotemark
-    this.organismo = user.organismo || "";
+    this.organismo = USER.organismo || "";
     // tslint:disable-next-line: quotemark
-    this.interno = user.interno || "";
+    this.active = USER.active || "";
     // tslint:disable-next-line: quotemark
-    this.signupDate = user.signupDate || "";
+    this.signupDate = USER.signupDate || "";
     // tslint:disable-next-line: quotemark
-    this.lastLogin = user.lastLogin || "";
+    this.lastLogin = USER.lastLogin || "";
+    this.picture = USER.picture ||"";
     // tslint:disable-next-line: quotemark
-    this.box = user.box || "";
+    this.role = USER.role || "";
     // tslint:disable-next-line: quotemark
-    this.role = user.role || "";
-    // tslint:disable-next-line: quotemark
-    this.id = user.id;
+    this.id = USER.id;
   }
 }
