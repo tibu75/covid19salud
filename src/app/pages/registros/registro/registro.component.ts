@@ -235,12 +235,7 @@ export class RegistroComponent implements OnInit {
 			this.personaForm.get("antencedentes_p").value !== "" &&
 			this.personaForm.get("enfermedad_pre").value !== "" &&
 			this.personaForm.get("toma_medicamentos").value !== "" &&
-			this.personaForm.get("vivienda_personas").value !== "" &&
-			this.personaForm.get("trabajo.lugar").value !== "" &&
-			this.personaForm.get("trabajo.telefonol").value !== "" &&
-			this.personaForm.get("trabajo.callel").value !== "" &&
-			this.personaForm.get("trabajo.numerol").value !== "" &&
-			this.personaForm.get("trabajo.localidadl").value !== ""
+			this.personaForm.get("vivienda_personas").value !== ""
 		) {
 			this.submit();
 		} else if (
@@ -255,11 +250,6 @@ export class RegistroComponent implements OnInit {
 			this.personaForm.get("enfermedad_pre").value !== "" &&
 			this.personaForm.get("toma_medicamentos").value !== "" &&
 			this.personaForm.get("vivienda_personas").value !== "" &&
-			this.personaForm.get("trabajo.lugar").value !== "" &&
-			this.personaForm.get("trabajo.telefonol").value !== "" &&
-			this.personaForm.get("trabajo.callel").value !== "" &&
-			this.personaForm.get("trabajo.numerol").value !== "" &&
-			this.personaForm.get("trabajo.localidadl").value !== "" &&
 			this.personaForm.get("lugar_hisopado").value !== "" &&
 			this.personaForm.get("fecha_hisopado").value !== ""
 		) {
