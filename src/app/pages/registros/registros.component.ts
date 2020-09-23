@@ -17,7 +17,6 @@ export class RegistrosComponent implements OnInit {
   public form: Forms[] = [];
   public localidades: Localidades[] = [];
   public paginaD: number = 0;
-  public paginaH: number = 0;
   public totalForm: number = 0;
   soloLectura: boolean;
   data: any = [];
@@ -46,7 +45,7 @@ export class RegistrosComponent implements OnInit {
     this.cargando = true;
 
     this.form0800Service
-      .getForms(this.paginaD, this.paginaH)
+      .getForms(this.paginaD)
       .subscribe(({ total, forms }) => {
         //console.log(forms);
         //debugger

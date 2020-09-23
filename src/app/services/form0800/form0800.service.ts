@@ -26,8 +26,8 @@ export class Form0800Service {
     public authService: AuthService
   ) {}
 
-  getForms(desde: number, hasta: number): Observable<Form0800> {
-    let url = `${API_USERS_URL}/?desde=${desde} /?desde=${hasta}`;
+  getForms(desde: number): Observable<Form0800> {
+    let url = `${API_USERS_URL}/?desde=${desde}`;
     return this.http.get<Form0800>(url);
   }
 
