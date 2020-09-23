@@ -8,6 +8,7 @@ import { ToastrService } from "ngx-toastr";
 
 import { Form0800Service } from "./../../../services/form0800/form0800.service";
 import * as moment from "moment";
+import { Message } from "@angular/compiler/src/i18n/i18n_ast";
 
 @Component({
 	selector: "app-registro",
@@ -36,6 +37,7 @@ export class RegistroComponent implements OnInit {
 	data: any = {};
 	public cargar_datos: boolean = false;
 	public buscar_datos: boolean = true;
+	public guardar: boolean = false;
 
 	sololectura: boolean;
 
@@ -63,21 +65,24 @@ export class RegistroComponent implements OnInit {
 
 	initForm(datos?) {
 		this.personaForm = this.fb.group({
-			nroRegistro: ["", Validators.required],
-			fecha: ["", Validators.required],
 			tipo_registro: ["Sin Sintomas", Validators.required],
 			motivo_consulta: ["", [Validators.required, Validators.maxLength(500)]],
 			persona: this.fb.group({
-				nombre: [datos ? datos.nombres : "", Validators.required],
-				apellido: [datos ? datos.apellido : "", Validators.required],
-				documento: [datos ? datos.documento : "", Validators.required],
+				nombre: [datos ? datos.nombres : ""],
+				apellido: [datos ? datos.apellido : ""],
+				documento: [datos ? datos.documento : ""],
 				fechaNacimiento: [
 					datos ? datos.fechaNacimiento : "",
 					Validators.required,
 				],
-				sexo: [datos ? datos.sexo : "M", Validators.required],
-				telefono: ["", [Validators.required, Validators.maxLength(10)]],
-				telefono2: ["", [Validators.required, Validators.maxLength(10)]],
+				sexo: [datos ? datos.sexo : "M"],
+				telefono: [
+					"",
+					[
+						Validators.required,
+						Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
+					],
+				],
 				calle: [
 					datos ? datos.calle : "",
 					[Validators.required, Validators.maxLength(20)],
@@ -110,52 +115,37 @@ export class RegistroComponent implements OnInit {
 					datos ? datos.pais : "",
 					[Validators.required, Validators.maxLength(25)],
 				],
-				img: [datos ? datos.foto : "", Validators.required],
+				img: [datos ? datos.foto : ""],
 			}),
-			fecha_ini_sint: [datos ? datos.fecha_ini_sint : "", Validators.required],
-			antencedentes_p: [
-				datos ? datos.antencedentes_p : "",
-				Validators.required,
-			],
-			enfermedad_pre: [datos ? datos.enfermedad_pre : "", Validators.required],
-			toma_medicamentos: [
-				datos ? datos.toma_medicamentos : "No",
-				Validators.required,
-			],
-			vivienda_personas: [
-				datos ? datos.vivienda_personas : "",
-				[Validators.required],
-			],
+			fecha_ini_sint: ["", Validators.required],
+			sintomas: ["", Validators.required],
+			antencedentes_p: ["", Validators.required],
+			enfermedad_pre: ["", Validators.required],
+			toma_medicamentos: ["", Validators.required],
+			vivienda_personas: ["", [Validators.required]],
 			trabajo: this.fb.group({
 				lugar: ["", [Validators.required, Validators.maxLength(50)]],
-				telefonol: ["", [Validators.required, Validators.maxLength(10)]],
+				telefonol: [
+					"",
+					[
+						Validators.required,
+						Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
+					],
+				],
 				callel: ["", [Validators.required, Validators.maxLength(25)]],
 				numerol: ["", [Validators.required, Validators.maxLength(4)]],
 				localidadl: ["", [Validators.required, Validators.maxLength(25)]],
 			}),
-
-			atencion_domiciliaria: [
-				datos ? datos.atencion_domiciliaria : "",
-				Validators.required,
-			],
-			cert_aislamiento: [
-				datos ? datos.cert_aislamiento : "",
-				Validators.required,
-			],
-			resultado_hisopado: [
-				datos ? datos.resultado_hisopado : "",
-				Validators.required,
-			],
-			derivacion_107: [datos ? datos.derivacion_107 : "", Validators.required],
-			mov_propia: [datos ? datos.mov_propia : "", Validators.required],
-			realizo_hisopado: ["No", Validators.required],
-			lugar_hisopado: [""],
-			fecha_hisopado: [""],
-			cierre_contacto: [
-				datos ? datos.cierre_contacto : "",
-				Validators.required,
-			],
-			usuario: [datos ? datos.usuario : "", Validators.required],
+			atencion_domiciliaria: [false],
+			cert_aislamiento: [false],
+			resultado_hisopado: [false],
+			derivacion_107: [false],
+			mov_propia: [false],
+			realizo_hisopado: ["", Validators.required],
+			lugar_hisopado: ["", Validators.required],
+			fecha_hisopado: ["", Validators.required],
+			cierre_contacto: ["", [Validators.required, Validators.maxLength(500)]],
+			usuario: ["", Validators.required],
 		});
 		console.log(this.personaForm);
 	}
@@ -185,42 +175,128 @@ export class RegistroComponent implements OnInit {
 			}
 		});
 	}
+	get telNoValido() {
+		return (
+			this.personaForm.get("persona.telefono").invalid &&
+			this.personaForm.get("persona.telefono").enabled
+		);
+	}
+	get motivoNoValido() {
+		return (
+			this.personaForm.get("motivo_consulta").invalid &&
+			this.personaForm.get("motivo_consulta").enabled
+		);
+	}
+	get fechaNoValido() {
+		return this.personaForm.get("fecha_ini_sint").invalid;
+	}
+	get fechahisoNoValido() {
+		return this.personaForm.get("fecha_hisopado").invalid;
+	}
+	get conviveNoValido() {
+		return this.personaForm.get("vivienda_personas").invalid;
+	}
+	get lugarhisoNoValido() {
+		return this.personaForm.get("lugar_hisopado").invalid;
+	}
+	get cierreNoValido() {
+		return this.personaForm.get("cierre_contacto").invalid;
+	}
+	get sintomaNoValido() {
+		return this.personaForm.get("sintomas").invalid;
+	}
+	get medicamentoNoValido() {
+		return this.personaForm.get("toma_medicamentos").invalid;
+	}
+	get enfermedadNoValido() {
+		return this.personaForm.get("enfermedad_pre").invalid;
+	}
+	get antecedentesNoValido() {
+		return this.personaForm.get("antencedentes_p").invalid;
+	}
+
+	validar() {
+		if (
+			this.tipo_registro === "Sin Sintomas" &&
+			this.realizo_hisopado === "No" &&
+			this.personaForm.get("motivo_consulta").value !== "" &&
+			this.personaForm.get("cierre_contacto").value !== "" &&
+			this.personaForm.get("persona.telefono").value !== ""
+		) {
+			this.submit();
+		} else if (
+			this.tipo_registro === "Sintomas" &&
+			this.realizo_hisopado === "No" &&
+			this.personaForm.get("motivo_consulta").value !== "" &&
+			this.personaForm.get("cierre_contacto").value !== "" &&
+			this.personaForm.get("persona.telefono").value !== "" &&
+			this.personaForm.get("fecha_ini_sint").value !== "" &&
+			this.personaForm.get("sintomas").value !== "" &&
+			this.personaForm.get("antencedentes_p").value !== "" &&
+			this.personaForm.get("enfermedad_pre").value !== "" &&
+			this.personaForm.get("toma_medicamentos").value !== "" &&
+			this.personaForm.get("vivienda_personas").value !== "" &&
+			this.personaForm.get("trabajo.lugar").value !== "" &&
+			this.personaForm.get("trabajo.telefonol").value !== "" &&
+			this.personaForm.get("trabajo.callel").value !== "" &&
+			this.personaForm.get("trabajo.numerol").value !== "" &&
+			this.personaForm.get("trabajo.localidadl").value !== ""
+		) {
+			this.submit();
+		} else if (
+			this.tipo_registro === "Sintomas" &&
+			this.realizo_hisopado === "Si" &&
+			this.personaForm.get("motivo_consulta").value !== "" &&
+			this.personaForm.get("cierre_contacto").value !== "" &&
+			this.personaForm.get("persona.telefono").value !== "" &&
+			this.personaForm.get("fecha_ini_sint").value !== "" &&
+			this.personaForm.get("sintomas").value !== "" &&
+			this.personaForm.get("antencedentes_p").value !== "" &&
+			this.personaForm.get("enfermedad_pre").value !== "" &&
+			this.personaForm.get("toma_medicamentos").value !== "" &&
+			this.personaForm.get("vivienda_personas").value !== "" &&
+			this.personaForm.get("trabajo.lugar").value !== "" &&
+			this.personaForm.get("trabajo.telefonol").value !== "" &&
+			this.personaForm.get("trabajo.callel").value !== "" &&
+			this.personaForm.get("trabajo.numerol").value !== "" &&
+			this.personaForm.get("trabajo.localidadl").value !== "" &&
+			this.personaForm.get("lugar_hisopado").value !== "" &&
+			this.personaForm.get("fecha_hisopado").value !== ""
+		) {
+			this.submit();
+		} else if (
+			this.tipo_registro === "Sin Sintomas" &&
+			this.realizo_hisopado === "Si" &&
+			this.personaForm.get("motivo_consulta").value !== "" &&
+			this.personaForm.get("cierre_contacto").value !== "" &&
+			this.personaForm.get("persona.telefono").value !== "" &&
+			this.personaForm.get("lugar_hisopado").value !== "" &&
+			this.personaForm.get("fecha_hisopado").value !== ""
+		) {
+			this.submit();
+		} else {
+			this.toast.error(
+				"Faltan algunos datos por completar, por favor Verifique los datos ingresados."
+			);
+		}
+	}
 
 	submit() {
 		// Acá están todos los datos del formulario para guardar en la BD
 		this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
-		if (this.personaForm.get("atencion_domiciliaria").value) {
-			this.personaForm.patchValue({ atencion_domiciliaria: "Si" });
-		} else {
-			this.personaForm.patchValue({ atencion_domiciliaria: "No" });
-		}
-		if (this.personaForm.get("cert_aislamiento").value) {
-			this.personaForm.patchValue({ cert_aislamiento: "Si" });
-		} else {
-			this.personaForm.patchValue({ cert_aislamiento: "No" });
-		}
-		if (this.personaForm.get("resultado_hisopado").value) {
-			this.personaForm.patchValue({ resultado_hisopado: "Si" });
-		} else {
-			this.personaForm.patchValue({ resultado_hisopado: "No" });
-		}
-		if (this.personaForm.get("derivacion_107").value) {
-			this.personaForm.patchValue({ derivacion_107: "Si" });
-		} else {
-			this.personaForm.patchValue({ derivacion_107: "No" });
-		}
-		if (this.personaForm.get("mov_propia").value) {
-			this.personaForm.patchValue({ mov_propia: "Si" });
-		} else {
-			this.personaForm.patchValue({ mov_propia: "No" });
-		}
+
 		let datosPersona = this.personaForm.value;
 		console.log(datosPersona);
+
+		/* if (this.personaForm.valid) { */
 		this.formService.crearForm(datosPersona).subscribe((data) => {
-			let pepe = data; // Eliminar esta línea si anda todo bien
+			/* 
+				let pepe = data; // Eliminar esta línea si anda todo bien */
 		});
 		this.router.navigate(["/registros"]);
-		console.log(datosPersona);
+		/* } else {
+			console.log(this.personaForm);
+		} */
 		// this.router.navigateByUrl('/registros');
 	}
 }

@@ -1,32 +1,35 @@
 <div class="card card-custom">
 	<div class="card-header">
-		<div class="card-title">
-			<div class="row">
-				<div class="col-10"></div>
-				<h3 class="card-label">
-					Registro 0800 COVID 19 <i class="mr-2"></i>
-					<small class=""> Nueva llamada </small>
-				</h3>
-
-				<div class="card-toolbar"></div>
-				<a
-					routerLink="/registros"
-					class="btn btn-light-primary font-weight-bolder mr-2"
-				>
-					<i class="ki ki-long-arrow-back icon-sm"></i>
-					Volver
-				</a>
-				<div class="btn-group" *ngIf="cargar_datos">
-					<button
-						type="button"
-						(click)="submit()"
-						class="btn btn-primary font-weight-bolder"
+		<div class="card-title" style="width: 100%">
+			<div class="row" style="width: 100%">
+				<div class="col-8">
+					<h3 class="card-label">
+						Registro 0800 COVID 19 <i class="mr-2"></i>
+						<small class=""> Nueva llamada </small>
+					</h3>
+				</div>
+				<div class="col-4" style="text-align: left">
+					<a
+						routerLink="/registros"
+						class="btn btn-light-primary font-weight-bolder mr-2"
 					>
-						<i class="ki ki-check icon-sm"></i>
-						Guardar el Formulario
-					</button>
+						<i class="ki ki-long-arrow-back icon-sm"></i>
+						Volver
+					</a>
+					<div class="btn-group" *ngIf="cargar_datos">
+						<button
+							type="button"
+							(click)="validar()"
+							class="btn btn-primary font-weight-bolder"
+						>
+							<i class="ki ki-check icon-sm"></i>
+							Guardar el Formulario
+						</button>
+					</div>
 				</div>
 			</div>
+
+			<div class="card-toolbar"></div>
 		</div>
 	</div>
 
@@ -221,10 +224,13 @@
 											class="form-control form-control-solid"
 											type="text"
 											formControlName="telefono"
-											name="telefono1"
-											placeholder=""
+											name="telefono"
+											[class.is-invalid]="telNoValido"
+											placeholder="10 dígitos"
 										/>
-										<span class="form-text text-muted"></span>
+										<small *ngIf="telNoValido" class="text-danger"
+											>Debe ingresar un número de contacto!</small
+										>
 									</div>
 								</div>
 							</div>
@@ -343,20 +349,23 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-12">
-							<div class="form-group">
-								<label for="motivo_consulta">Motivo de la Consulta</label>
-								<textarea
-									class="form-control form-control-solid"
-									rows="3"
-									formControlName="motivo_consulta"
-									name="cierre_contacto"
-								></textarea>
-							</div>
-						</div>
 					</div>
 				</div>
-
+				<div class="col-xl-12">
+					<div class="form-group">
+						<label for="motivo_consulta">Motivo Consulta</label>
+						<textarea
+							class="form-control form-control-solid"
+							rows="3"
+							formControlName="motivo_consulta"
+							name="motivo_consulta"
+							[class.is-invalid]="motivoNoValido"
+						></textarea>
+						<small *ngIf="motivoNoValido" class="text-danger"
+							>Debe ingresar un número de contacto!</small
+						>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-12">
 						<div class="separator separator-dashed"></div>
@@ -378,7 +387,7 @@
 									<label>
 										<input
 											type="radio"
-											name="tipo_registros"
+											name="tipo_registro"
 											formControlName="tipo_registro"
 											value="Sin Sintomas"
 											[(ngModel)]="tipo_registro"
@@ -401,11 +410,11 @@
 												formControlName="fecha_ini_sint"
 												name="fecha_ini_sint"
 												max="{{ fechahoy }}"
+												[class.is-invalid]="fechaNoValido"
 											/>
-											<span class="form-text text-muted"></span>
-											<!-- 
-											<label for="fecha_ini_sint">Inicio de Síntomas</label>
-											<input class="form-control" type="date" id="fecha_ini_sint" /> -->
+											<small *ngIf="fechaNoValido" class="text-danger"
+												>Debe ingresar una fecha!</small
+											>
 										</div>
 									</div>
 									<div class="col-xl-9">
@@ -417,8 +426,11 @@
 												formControlName="sintomas"
 												name="sintomas"
 												placeholder=""
+												[class.is-invalid]="sintomaNoValido"
 											/>
-											<span class="form-text text-muted"></span>
+											<small *ngIf="sintomaNoValido" class="text-danger"
+												>Debe ingresar los sintomas que posee!</small
+											>
 										</div>
 									</div>
 								</div>
@@ -433,8 +445,11 @@
 												formControlName="antencedentes_p"
 												name="antencedentes_p"
 												placeholder=""
+												[class.is-invalid]="antecedentesNoValido"
 											/>
-											<span class="form-text text-muted"></span>
+											<small *ngIf="antecedentesNoValido" class="text-danger"
+												>Debe ingresar un dato!</small
+											>
 										</div>
 									</div>
 									<div class="col-xl-12">
@@ -446,8 +461,11 @@
 												formControlName="enfermedad_pre"
 												name="enfermedad_pre"
 												placeholder=""
+												[class.is-invalid]="enfermedadNoValido"
 											/>
-											<span class="form-text text-muted"></span>
+											<small *ngIf="enfermedadNoValido" class="text-danger"
+												>Debe ingresar algun dato!</small
+											>
 										</div>
 									</div>
 								</div>
@@ -461,8 +479,11 @@
 												formControlName="toma_medicamentos"
 												name="toma_medicamentos"
 												placeholder=""
+												[class.is-invalid]="medicamentoNoValido"
 											/>
-											<span class="form-text text-muted"></span>
+											<small *ngIf="medicamentoNoValido" class="text-danger"
+												>Debe ingresar algun dato!</small
+											>
 										</div>
 									</div>
 									<div class="col-3 padding-1">
@@ -473,9 +494,12 @@
 												type="text"
 												formControlName="vivienda_personas"
 												name="vivienda_personas"
-												placeholder=""
+												placeholder="Numero de Personas"
+												[class.is-invalid]="conviveNoValido"
 											/>
-											<span class="form-text text-muted"></span>
+											<small *ngIf="conviveNoValido" class="text-danger"
+												>Debe ingresar un numero de personas!</small
+											>
 										</div>
 									</div>
 								</div>
@@ -638,8 +662,11 @@
 											formControlName="lugar_hisopado"
 											name="lugar_hisopado"
 											placeholder=""
+											[class.is-invalid]="lugarhisoNoValido"
 										/>
-										<span class="form-text text-muted"></span>
+										<small *ngIf="lugarhisoNoValido" class="text-danger"
+											>Debe ingresar una Lugar!</small
+										>
 									</div>
 									<div class="form-group col-3">
 										<label for="start1">Fecha de Hisopado</label>
@@ -651,8 +678,11 @@
 											name="fecha_hisopado"
 											min=" {{ fechamin }}"
 											max="{{ fechahoy }}"
+											[class.is-invalid]="fechahisoNoValido"
 										/>
-										<span class="form-text text-muted"></span>
+										<small *ngIf="fechahisoNoValido" class="text-danger"
+											>Debe ingresar una fecha!</small
+										>
 									</div>
 								</div>
 							</div>
@@ -661,13 +691,17 @@
 
 						<div class="col-xl-12">
 							<div class="form-group">
-								<label for="motivo_consulta">Cierre de Contacto</label>
+								<label for="cierre_contacto">Cierre de Contacto</label>
 								<textarea
 									class="form-control form-control-solid"
 									rows="5"
 									formControlName="cierre_contacto"
 									name="cierre_contacto"
+									[class.is-invalid]="cierreNoValido"
 								></textarea>
+								<small *ngIf="cierreNoValido" class="text-danger"
+									>Debe ingresar un cierre con el contacto!</small
+								>
 							</div>
 						</div>
 					</div>
