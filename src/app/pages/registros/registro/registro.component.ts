@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 
 import { Form0800Service } from "./../../../services/form0800/form0800.service";
+import * as moment from "moment";
 
 @Component({
 	selector: "app-registro",
@@ -26,6 +27,9 @@ export class RegistroComponent implements OnInit {
 	realizo_hisopado = "No";
 	edad;
 	mostrarEdad;
+
+	public fechahoy: string = moment().format("YYYY-MM-DD");
+	public fechamin: string = "2020-03-01";
 
 	closeResult: string;
 	personaForm: FormGroup;
