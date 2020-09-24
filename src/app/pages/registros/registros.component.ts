@@ -3,7 +3,7 @@ import { Form0800Service } from "../../services/form0800/form0800.service";
 import { Forms } from "../models/form0800covid";
 import { Localidades } from "../models/localidades";
 import { LocalidadesService } from "../../services/localidades/localidades.service";
-
+import { ExporterService } from "../../services/exporter/exporter.service";
 import { BusquedasService } from "src/app/services/busqueda/busquedas.service";
 
 @Component({
@@ -26,7 +26,8 @@ export class RegistrosComponent implements OnInit {
     private form0800Service: Form0800Service,
     private localidadesService: LocalidadesService,
     private busquedaService: BusquedasService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private excelExports: ExporterService
   ) {}
 
   ngOnInit(): void {
@@ -43,11 +44,10 @@ export class RegistrosComponent implements OnInit {
 
   cargarForms() {
     this.cargando = true;
-
     this.form0800Service
       .getForms(this.paginaD)
       .subscribe(({ total, forms }) => {
-        //console.log(forms);
+        //   console.log(this.form);
         //debugger
         this.form = forms;
         this.formtemp = forms;
@@ -64,7 +64,7 @@ export class RegistrosComponent implements OnInit {
       return (this.form = this.formtemp);
     }
     this.busquedaService.buscarDni(dni).subscribe((resp: Forms[]) => {
-      console.log(resp);
+      //  console.log(resp);
       this.form = resp;
       this.cdr.markForCheck();
     });
@@ -72,7 +72,6 @@ export class RegistrosComponent implements OnInit {
 
   paginacion(valor: number) {
     this.paginaD += valor;
-
     if (this.paginaD < 0) {
       this.paginaD = 0;
     } else if (this.paginaD >= this.totalForm) {
@@ -81,5 +80,9 @@ export class RegistrosComponent implements OnInit {
 
     this.cdr.markForCheck();
     this.cargarForms();
+  }
+  exportAsXlsx(): void {
+    console.log("export", this.form);
+    this.excelExports.exportAsExcelFile(this.form, "Reporte");
   }
 }
