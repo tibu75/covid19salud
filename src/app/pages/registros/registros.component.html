@@ -7,95 +7,31 @@
       <h3 class="card-label">Formulario de busqueda avanzada</h3>
     </div>
     <div class="card-toolbar">
-      <!--begin::Dropdown-->
-      <div class="dropdown dropdown-inline mr-2">
-        <button
-          type="button"
-          class="btn btn-light-primary font-weight-bolder dropdown-toggle"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <span class="svg-icon svg-icon-md">
-            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="24px"
-              height="24px"
-              viewBox="0 0 24 24"
-              version="1.1"
-            >
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <rect x="0" y="0" width="24" height="24"></rect>
-                <path
-                  d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z"
-                  fill="#000000"
-                  opacity="0.3"
-                ></path>
-                <path
-                  d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-            <!--end::Svg Icon--> </span
-          >Exportar
-        </button>
-        <!--begin::Dropdown Menu-->
-        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-          <!--begin::Navigation-->
-          <ul class="navi flex-column navi-hover py-2">
-            <li
-              class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2"
-            >
-              Elija una opcion:
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="la la-print"></i>
-                </span>
-                <span class="navi-text">Imprimir</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="la la-copy"></i>
-                </span>
-                <span class="navi-text">Copiar</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="la la-file-excel-o"></i>
-                </span>
-                <span class="navi-text">Excel</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="la la-file-text-o"></i>
-                </span>
-                <span class="navi-text">CSV</span>
-              </a>
-            </li>
-            <li class="navi-item">
-              <a href="#" class="navi-link">
-                <span class="navi-icon">
-                  <i class="la la-file-pdf-o"></i>
-                </span>
-                <span class="navi-text">PDF</span>
-              </a>
-            </li>
-          </ul>
-          <!--end::Navigation-->
-        </div>
-        <!--end::Dropdown Menu-->
-      </div>
+      <!--begin::Dropdown que no existe!!!! Fuck Jquery-->
+      <a (click)="exportAsXlsx()" class="btn btn-secondary font-weight-bolder">
+        <span class="svg-icon"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="24px"
+            height="24px"
+            viewBox="0 0 24 24"
+            version="1.1"
+          >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <rect x="0" y="0" width="24" height="24" />
+              <path
+                d="M21.4451171,17.7910156 C21.4451171,16.9707031 21.6208984,13.7333984 19.0671874,11.1650391 C17.3484374,9.43652344 14.7761718,9.13671875 11.6999999,9 L11.6999999,4.69307548 C11.6999999,4.27886191 11.3642135,3.94307548 10.9499999,3.94307548 C10.7636897,3.94307548 10.584049,4.01242035 10.4460626,4.13760526 L3.30599678,10.6152626 C2.99921905,10.8935795 2.976147,11.3678924 3.2544639,11.6746702 C3.26907199,11.6907721 3.28437331,11.7062312 3.30032452,11.7210037 L10.4403903,18.333467 C10.7442966,18.6149166 11.2188212,18.596712 11.5002708,18.2928057 C11.628669,18.1541628 11.6999999,17.9721616 11.6999999,17.7831961 L11.6999999,13.5 C13.6531249,13.5537109 15.0443703,13.6779456 16.3083984,14.0800781 C18.1284272,14.6590944 19.5349747,16.3018455 20.5280411,19.0083314 L20.5280247,19.0083374 C20.6363903,19.3036749 20.9175496,19.5 21.2321404,19.5 L21.4499999,19.5 C21.4499999,19.0068359 21.4451171,18.2255859 21.4451171,17.7910156 Z"
+                fill="#000000"
+                fill-rule="nonzero"
+                transform="translate(12.254964, 11.721538) scale(-1, 1) translate(-12.254964, -11.721538) "
+              />
+            </g></svg
+        ></span>
+        Exportar
+      </a>
+
+      &nbsp;
       <!--end::Dropdown-->
       <!--begin::Button-->
       <a routerLink="/registro" class="btn btn-primary font-weight-bolder">

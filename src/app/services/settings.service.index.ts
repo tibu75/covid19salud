@@ -1,3 +1,4 @@
+export { ExporterService } from "./exporter/exporter.service";
 export { Form0800Service } from "./form0800/form0800.service";
 export { LocalidadesService } from "./localidades/localidades.service";
 
