@@ -5,28 +5,28 @@ import { UserModel } from "../../../../../../modules/auth/_models/user.model";
 import { AuthService } from "../../../../../../modules/auth/_services/auth.service";
 
 @Component({
-	selector: "app-user-offcanvas",
-	templateUrl: "./user-offcanvas.component.html",
-	styleUrls: ["./user-offcanvas.component.scss"],
+  selector: "app-user-offcanvas",
+  templateUrl: "./user-offcanvas.component.html",
+  styleUrls: ["./user-offcanvas.component.scss"],
 })
 export class UserOffcanvasComponent implements OnInit {
-	extrasUserOffcanvasDirection = "offcanvas-right";
-	user$: Observable<UserModel>;
-	public usuarios: any = {};
+  extrasUserOffcanvasDirection = "offcanvas-right";
+  user$: Observable<UserModel>;
+  public usuarios: any = {};
 
-	constructor(private layout: LayoutService, private auth: AuthService) {}
+  constructor(private layout: LayoutService, private auth: AuthService) {}
 
-	ngOnInit(): void {
-		this.extrasUserOffcanvasDirection = `offcanvas-${this.layout.getProp(
-			"extras.user.offcanvas.direction"
-		)}`;
-		this.user$ = this.auth.currentUserSubject.asObservable();
-		this.usuarios = JSON.parse(sessionStorage.getItem("USER"));
-		console.log("usuarios", this.usuarios);
-	}
+  ngOnInit(): void {
+    this.extrasUserOffcanvasDirection = `offcanvas-${this.layout.getProp(
+      "extras.user.offcanvas.direction"
+    )}`;
+    this.user$ = this.auth.currentUserSubject.asObservable();
+    this.usuarios = JSON.parse(sessionStorage.getItem("USER"));
+    //console.log("usuarios", this.usuarios);
+  }
 
-	logout() {
-		this.auth.logout();
-		document.location.reload();
-	}
+  logout() {
+    this.auth.logout();
+    document.location.reload();
+  }
 }
