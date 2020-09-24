@@ -1,4 +1,5 @@
 <div class="card card-custom">
+
   <div class="card-header">
     <div class="card-title">
       <span class="card-icon">
@@ -140,7 +141,7 @@
           </select>
         </div>
 
-        <!-- <div class="col-lg-3 mb-lg-0 mb-6">
+				<!-- <div class="col-lg-3 mb-lg-0 mb-6">
           <label>Type:</label>
           <select class="form-control datatable-input" data-col-index="7">
             <option value="">Select</option>
@@ -149,257 +150,223 @@
             <option value="3">Direct</option>
           </select>
         </div> -->
-      </div>
-      <div class="row mt-8">
-        <div class="col-lg-12">
-          <button class="btn btn-primary btn-primary--icon" id="kt_search">
-            <span>
-              <i class="la la-search"></i>
-              <span>Buscar</span>
-            </span></button
-          >&nbsp;&nbsp;
-          <button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
-            <span>
-              <i class="la la-close"></i>
-              <span>Reiniciar</span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </form>
-    <!--begin: Datatable-->
-    <!--begin: Datatable-->
-    <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-      <div class="row">
-        <div class="col-sm-12">
-          <table
-            class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed"
-            id="kt_datatable"
-            role="grid"
-            aria-describedby="kt_datatable_info"
-            style="width: 1229px"
-          >
-            <thead>
-              <tr role="row">
-                <th
-                  class="sorting_asc"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 1px"
-                  aria-sort="ascending"
-                  aria-label="Record ID: activate to sort column descending"
-                >
-                  Reg.Nro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 30px"
-                  aria-label="Order ID: activate to sort column ascending"
-                >
-                  Fecha de Registro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 126px"
-                  aria-label="Country: activate to sort column ascending"
-                >
-                  Apellido
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 165px"
-                  aria-label="Ship City: activate to sort column ascending"
-                >
-                  Nombre
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 121px"
-                  aria-label="Company Agent: activate to sort column ascending"
-                >
-                  Tipo de Registro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 71px; display: none"
-                  aria-label="Ship Date: activate to sort column ascending"
-                >
-                  Fecha de Registro
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 66px; display: none"
-                  aria-label="Status: activate to sort column ascending"
-                >
-                  Status
-                </th>
-                <th
-                  class="sorting"
-                  tabindex="0"
-                  aria-controls="kt_datatable"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 45px; display: none"
-                  aria-label="Type: activate to sort column ascending"
-                >
-                  Tipo de Registro
-                </th>
-                <th
-                  class="sorting_disabled"
-                  rowspan="1"
-                  colspan="1"
-                  style="width: 117px"
-                  aria-label="Actions"
-                >
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tfoot>
-              <tr>
-                <th rowspan="1" colspan="1">Reg.Nro</th>
-                <th rowspan="1" colspan="1">Fecha de Registro</th>
-                <th rowspan="1" colspan="1">Apellido</th>
-                <th rowspan="1" colspan="1">Nombre</th>
-                <th rowspan="1" colspan="1">Tipo de Registro</th>
-                <th rowspan="1" colspan="1" style="display: none">Ship Date</th>
-                <th rowspan="1" colspan="1" style="display: none">Status</th>
-                <th rowspan="1" colspan="1" style="display: none">
-                  Tipo de Registro
-                </th>
-                <th rowspan="1" colspan="1">Actions</th>
-              </tr>
-            </tfoot>
-            <tbody>
-              <tr role="row" class="odd" *ngFor="let f of form">
-                <td class="sorting_1 dtr-control">{{ f.nroForm }}</td>
-                <td>{{ f.fecha | date }}</td>
-                <td>{{ f.persona?.apellido }}</td>
-                <td>{{ f.persona?.nombre }}</td>
-                <td>
-                  <span
-                    *ngIf="f?.tipo_registro == 'Sintomas'"
-                    class="label label-lg font-weight-bold label-light-danger label-inline"
-                  >
-                    {{ f?.tipo_registro }}</span
-                  >
-                  <span
-                    *ngIf="f?.tipo_registro == 'Sin Sintomas'"
-                    class="label label-lg font-weight-bold label-light-primary label-inline"
-                    >{{ f?.tipo_registro }}</span
-                  >
-                </td>
-                <td style="display: none">10/15/2017</td>
-                <td style="display: none">
-                  <span
-                    class="label label-lg font-weight-bold label-light-info label-inline"
-                    >Info</span
-                  >
-                </td>
-                <td style="display: none">
-                  <span class="label label-danger label-dot mr-2"></span
-                  ><span class="font-weight-bold text-danger">Online</span>
-                </td>
-                <td>
-                  <div class="dropdown dropdown-inline">
-                    <a
-                      href="javascript:;"
-                      class="btn btn-sm btn-clean btn-icon"
-                      data-toggle="dropdown"
-                    >
-                      <i class="la la-cog"></i>
-                    </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-sm dropdown-menu-right"
-                    >
-                      <ul class="nav nav-hoverable flex-column">
-                        <li class="nav-item">
-                          <a class="nav-link" href="#"
-                            ><i class="nav-icon la la-edit"></i
-                            ><span class="nav-text">Edit Details</span></a
-                          >
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#"
-                            ><i class="nav-icon la la-leaf"></i
-                            ><span class="nav-text">Update Status</span></a
-                          >
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#"
-                            ><i class="nav-icon la la-print"></i
-                            ><span class="nav-text">Print</span></a
-                          >
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <a
-                    href="javascript:;"
-                    class="btn btn-sm btn-clean btn-icon"
-                    title="Edit details"
-                  >
-                    <i class="la la-edit"></i>
-                  </a>
-                  <a
-                    href="javascript:;"
-                    class="btn btn-sm btn-clean btn-icon"
-                    title="Delete"
-                  >
-                    <i class="la la-trash"></i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div
-            id="kt_datatable_processing"
-            class="dataTables_processing card"
-            style="display: none"
-          >
-            Processing...
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-5">
-          <div
-            class="dataTables_info"
-            id="kt_datatable_info"
-            role="status"
-            aria-live="polite"
-          >
-            Pagina 1 de 10 | {{ totalForm }} Registros en total.
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-7 dataTables_pager">
-          <!--  <div class="dataTables_length" id="PaginaH">
+			</div>
+			<div class="row mt-8">
+				<div class="col-lg-12">
+					<button class="btn btn-primary btn-primary--icon" id="kt_search">
+						<span>
+							<i class="la la-search"></i>
+							<span>Buscar</span>
+						</span></button
+					>&nbsp;&nbsp;
+					<button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
+						<span>
+							<i class="la la-close"></i>
+							<span>Reiniciar</span>
+						</span>
+					</button>
+				</div>
+			</div>
+		</form>
+		<!--begin: Datatable-->
+		<!--begin: Datatable-->
+		<div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+			<div class="row">
+				<div class="col-12">
+					<table
+						class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed"
+						id="kt_datatable"
+						role="grid"
+						aria-describedby="kt_datatable_info"
+					>
+						<thead>
+							<tr role="row">
+								<th
+									class="sorting_asc"
+									tabindex="0"
+									aria-controls="kt_datatable"
+									rowspan="1"
+									colspan="1"
+									style="width: 1px"
+									aria-sort="ascending"
+									aria-label="Record ID: activate to sort column descending"
+								>
+									Reg.Nro
+								</th>
+								<th
+									class="sorting"
+									tabindex="0"
+									aria-controls="kt_datatable"
+									rowspan="1"
+									colspan="1"
+									style="width: 30px"
+									aria-label="Order ID: activate to sort column ascending"
+								>
+									Fecha de Registro
+								</th>
+								<th
+									class="sorting"
+									tabindex="0"
+									aria-controls="kt_datatable"
+									rowspan="1"
+									colspan="1"
+									style="width: 126px"
+									aria-label="Country: activate to sort column ascending"
+								>
+									Apellido
+								</th>
+								<th
+									class="sorting"
+									tabindex="0"
+									aria-controls="kt_datatable"
+									rowspan="1"
+									colspan="1"
+									style="width: 165px"
+									aria-label="Ship City: activate to sort column ascending"
+								>
+									Nombre
+								</th>
+								<th
+									class="sorting"
+									tabindex="0"
+									aria-controls="kt_datatable"
+									rowspan="1"
+									colspan="1"
+									style="width: 121px"
+									aria-label="Company Agent: activate to sort column ascending"
+								>
+									Tipo de Registro
+								</th>
+								<th
+									class="sorting_disabled"
+									rowspan="1"
+									colspan="1"
+									style="width: 117px"
+									aria-label="Actions"
+								>
+									Ver Registro
+								</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th rowspan="1" colspan="1">Reg.Nro</th>
+								<th rowspan="1" colspan="1">Fecha de Registro</th>
+								<th rowspan="1" colspan="1">Apellido</th>
+								<th rowspan="1" colspan="1">Nombre</th>
+								<th rowspan="1" colspan="1">Tipo de Registro</th>
+								<th rowspan="1" colspan="1" style="display: none">Ship Date</th>
+								<th rowspan="1" colspan="1" style="display: none">Status</th>
+								<th rowspan="1" colspan="1" style="display: none">
+									Tipo de Registro
+								</th>
+								<th rowspan="1" colspan="1">Actions</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr role="row" class="odd" *ngFor="let f of form">
+								<td class="sorting_1 dtr-control">{{ f.nroForm }}</td>
+								<td>{{ f.fecha | date: "dd/MM/yyyy" }}</td>
+								<td>{{ f.persona?.apellido }}</td>
+								<td>{{ f.persona?.nombre }}</td>
+								<td>
+									<span
+										*ngIf="f?.tipo_registro == 'Sintomas'"
+										class="label label-lg font-weight-bold label-light-danger label-inline"
+									>
+										{{ f?.tipo_registro }}</span
+									>
+									<span
+										*ngIf="f?.tipo_registro == 'Sin Sintomas'"
+										class="label label-lg font-weight-bold label-light-primary label-inline"
+										>{{ f?.tipo_registro }}</span
+									>
+								</td>
+								<td style="display: none">10/15/2017</td>
+								<td style="display: none">
+									<span
+										class="label label-lg font-weight-bold label-light-info label-inline"
+										>Info</span
+									>
+								</td>
+								<td style="display: none">
+									<span class="label label-danger label-dot mr-2"></span
+									><span class="font-weight-bold text-danger">Online</span>
+								</td>
+								<td>
+									<div class="dropdown dropdown-inline">
+										<a
+											href="javascript:;"
+											class="btn btn-sm btn-clean btn-icon"
+											data-toggle="dropdown"
+										>
+											<i class="la la-cog"></i>
+										</a>
+										<div
+											class="dropdown-menu dropdown-menu-sm dropdown-menu-right"
+										>
+											<ul class="nav nav-hoverable flex-column">
+												<li class="nav-item">
+													<a class="nav-link" href="#"
+														><i class="nav-icon la la-edit"></i
+														><span class="nav-text">Edit Details</span></a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" href="#"
+														><i class="nav-icon la la-leaf"></i
+														><span class="nav-text">Update Status</span></a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" href="#"
+														><i class="nav-icon la la-print"></i
+														><span class="nav-text">Print</span></a
+													>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<a
+										href="javascript:;"
+										class="btn btn-sm btn-clean btn-icon"
+										title="Edit details"
+									>
+										<i class="la la-edit"></i>
+									</a>
+									<a
+										href="javascript:;"
+										class="btn btn-sm btn-clean btn-icon"
+										title="Delete"
+									>
+										<i class="la la-trash"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div
+						id="kt_datatable_processing"
+						class="dataTables_processing card"
+						style="display: none"
+					>
+						Processing...
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-md-5">
+					<div
+						class="dataTables_info"
+						id="kt_datatable_info"
+						role="status"
+						aria-live="polite"
+					>
+						Pagina 1 de 10 | {{ totalForm }} Registros en total.
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-7 dataTables_pager">
+					<!--  <div class="dataTables_length" id="PaginaH">
             <label
               >Paginar
               <select
@@ -413,23 +380,23 @@
               </select></label
             >
           </div> -->
-          <div
-            class="dataTables_paginate paging_simple_numbers"
-            id="kt_datatable_paginate"
-          >
-            <ul class="pagination">
-              <button (click)="paginacion(-10)" class="btn btn-secondary">
-                Anteriores
-              </button>
-              &nbsp;
-              <button (click)="paginacion(10)" class="btn btn-secondary">
-                Siguientes
-              </button>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--end: Datatable-->
-  </div>
+					<div
+						class="dataTables_paginate paging_simple_numbers"
+						id="kt_datatable_paginate"
+					>
+						<ul class="pagination">
+							<button (click)="paginacion(-10)" class="btn btn-secondary">
+								Anteriores
+							</button>
+							&nbsp;
+							<button (click)="paginacion(10)" class="btn btn-secondary">
+								Siguientes
+							</button>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end: Datatable-->
+	</div>
 </div>

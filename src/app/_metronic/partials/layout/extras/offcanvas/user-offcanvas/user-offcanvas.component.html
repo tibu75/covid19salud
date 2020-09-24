@@ -1,50 +1,51 @@
 <!-- begin::User Panel-->
 <div
-  id="kt_quick_user"
-  class="offcanvas p-10"
-  [ngClass]="extrasUserOffcanvasDirection"
+	id="kt_quick_user"
+	class="offcanvas p-10"
+	[ngClass]="extrasUserOffcanvasDirection"
 >
-  <ng-container *ngIf="user$ | async as _user">
-    <!--begin::Header-->
-    <div
-      class="offcanvas-header d-flex align-items-center justify-content-between pb-5"
-    >
-      <h3 class="font-weight-bold m-0">
-        Perfil de Usuario
-      </h3>
-      <a
-        href="/auth/login"
-        class="btn btn-xs btn-icon btn-light btn-hover-primary"
-        id="kt_quick_user_close"
-      >
-        <i class="ki ki-close icon-xs text-muted"></i>
-      </a>
-    </div>
-    <!--end::Header-->
+	<ng-container *ngIf="user$ | async as _user">
+		<!--begin::Header-->
+		<div
+			class="offcanvas-header d-flex align-items-center justify-content-between pb-5"
+		>
+			<h3 class="font-weight-bold m-0">Perfil de Usuario</h3>
+			<a
+				href="/auth/login"
+				class="btn btn-xs btn-icon btn-light btn-hover-primary"
+				id="kt_quick_user_close"
+			>
+				<i class="ki ki-close icon-xs text-muted"></i>
+			</a>
+		</div>
+		<!--end::Header-->
 
-    <!--begin::Content-->
-    <div class="offcanvas-content pr-5 mr-n5">
-      <!--begin::Header-->
-      <div class="d-flex align-items-center mt-5">
-        <div class="symbol symbol-100 mr-5">
-          <div
-            class="symbol-label"
-            style="background-image: url('./assets/media/users/300_21.jpg');"
-          ></div>
-          <i class="symbol-badge bg-success"></i>
-        </div>
-        <div class="d-flex flex-column">
-          <a
-            href="#"
-            class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
-          >
-            {{ _user.fullname }}
-          </a>
-          <div class="text-muted mt-1">
-            Usuario Operador
-          </div>
-          <div class="navi mt-2">
-<!--             <a href="#" class="navi-item">
+		<!--begin::Content-->
+		<div class="offcanvas-content pr-5 mr-n5">
+			<!--begin::Header-->
+			<div class="d-flex align-items-center mt-5">
+				<div class="symbol symbol-100 mr-5">
+					<div
+						class="symbol-label"
+						style="
+							background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQEuCofjIP21ZjVnJIwuzqEKZRsssdcmBd3fA&usqp=CAU');
+						"
+					></div>
+					<i class="symbol-badge bg-success"></i>
+				</div>
+				<div class="d-flex flex-column">
+					<a
+						href="#"
+						class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
+					>
+						{{ _user.nombre }}
+					</a>
+					<div class="text-muted mt-1">Usuario:</div>
+					<div class="text-muted mt-1">
+						<a>{{ usuarios?.nombre }}</a>
+					</div>
+					<div class="navi mt-2">
+						<!--             <a href="#" class="navi-item">
               <span class="navi-link p-0 pb-2">
                 <span class="navi-icon mr-1">
                   <span
@@ -61,24 +62,27 @@
               </span>
             </a> -->
 
-            <a
-              class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 cursor-pointer"
-              (click)="logout()"
-              >Cerrar Sesion</a
-            >
-          </div>
-        </div>
-      </div>
-      <!--end::Header-->
+						<a
+							class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 cursor-pointer"
+							(click)="logout()"
+							>Cerrar Sesion</a
+						>
+					</div>
+					<div class="text-muted mt-1">
+						<a>Ultima Sesion: {{ usuarios?.lastLogin | date: "dd-MM-yyyy" }}</a>
+					</div>
+				</div>
+			</div>
+			<!--end::Header-->
 
-      <!--begin::Separator-->
-      <div class="separator separator-dashed mt-8 mb-5"></div>
-      <!--end::Separator-->
+			<!--begin::Separator-->
+			<div class="separator separator-dashed mt-8 mb-5"></div>
+			<!--end::Separator-->
 
-      <!--begin::Nav-->
-      <div class="navi navi-spacer-x-0 p-0">
-        <!--begin::Item-->
-<!--         <a class="navi-item cursor-pointer">
+			<!--begin::Nav-->
+			<div class="navi navi-spacer-x-0 p-0">
+				<!--begin::Item-->
+				<!--         <a class="navi-item cursor-pointer">
           <div class="navi-link">
             <div class="symbol symbol-40 bg-light mr-3">
               <div class="symbol-label">
@@ -105,10 +109,10 @@
             </div>
           </div>
         </a> -->
-        <!--end:Item-->
+				<!--end:Item-->
 
-        <!--begin::Item-->
-<!--         <a class="navi-item cursor-pointer">
+				<!--begin::Item-->
+				<!--         <a class="navi-item cursor-pointer">
           <div class="navi-link">
             <div class="symbol symbol-40 bg-light mr-3">
               <div class="symbol-label">
@@ -131,10 +135,10 @@
             </div>
           </div>
         </a> -->
-        <!--end:Item-->
+				<!--end:Item-->
 
-        <!--begin::Item-->
-<!--         <a class="navi-item cursor-pointer">
+				<!--begin::Item-->
+				<!--         <a class="navi-item cursor-pointer">
           <div class="navi-link">
             <div class="symbol symbol-40 bg-light mr-3">
               <div class="symbol-label">
@@ -157,10 +161,10 @@
             </div>
           </div>
         </a> -->
-        <!--end:Item-->
+				<!--end:Item-->
 
-        <!--begin::Item-->
-<!--         <a class="navi-item cursor-pointer">
+				<!--begin::Item-->
+				<!--         <a class="navi-item cursor-pointer">
           <div class="navi-link">
             <div class="symbol symbol-40 bg-light mr-3">
               <div class="symbol-label">
@@ -183,24 +187,22 @@
             </div>
           </div>
         </a> -->
-        <!--end:Item-->
-      </div>
-      <!--end::Nav-->
+				<!--end:Item-->
+			</div>
+			<!--end::Nav-->
 
-      <!--begin::Separator-->
-      <div class="separator separator-dashed my-7"></div>
-      <!--end::Separator-->
+			<!--begin::Separator-->
+			<div class="separator separator-dashed my-7"></div>
+			<!--end::Separator-->
 
-      <!--begin::Notifications-->
-      <div>
-        <!--begin:Heading-->
-        <h5 class="mb-5">
-          Notificaciones
-        </h5>
-        <!--end:Heading-->
+			<!--begin::Notifications-->
+			<div>
+				<!--begin:Heading-->
+				<h5 class="mb-5">Notificaciones</h5>
+				<!--end:Heading-->
 
-        <!--begin::Item-->
-<!--         <div
+				<!--begin::Item-->
+				<!--         <div
           class="d-flex align-items-center bg-light-warning rounded p-5 gutter-b"
         >
           <span class="svg-icon svg-icon-warning mr-5">
@@ -224,10 +226,10 @@
             >+28%</span
           >
         </div> -->
-        <!--end::Item-->
+				<!--end::Item-->
 
-        <!--begin::Item-->
-<!--         <div
+				<!--begin::Item-->
+				<!--         <div
           class="d-flex align-items-center bg-light-success rounded p-5 gutter-b"
         >
           <span class="svg-icon svg-icon-success mr-5">
@@ -250,10 +252,10 @@
             >+50%</span
           >
         </div> -->
-        <!--end::Item-->
+				<!--end::Item-->
 
-        <!--begin::Item-->
-<!--         <div
+				<!--begin::Item-->
+				<!--         <div
           class="d-flex align-items-center bg-light-danger rounded p-5 gutter-b"
         >
           <span class="svg-icon svg-icon-danger mr-5">
@@ -278,32 +280,32 @@
             >-27%</span
           >
         </div> -->
-        <!--end::Item-->
+				<!--end::Item-->
 
-        <!--begin::Item-->
-        <div class="d-flex align-items-center bg-light-info rounded p-5">
-          <span class="svg-icon svg-icon-info mr-5">
-            <span
-              [inlineSVG]="'./assets/media/svg/icons/General/Attachment2.svg'"
-              cacheSVG="true"
-              class="svg-icon svg-icon-lg"
-            ></span>
-          </span>
+				<!--begin::Item-->
+				<div class="d-flex align-items-center bg-light-info rounded p-5">
+					<span class="svg-icon svg-icon-info mr-5">
+						<span
+							[inlineSVG]="'./assets/media/svg/icons/General/Attachment2.svg'"
+							cacheSVG="true"
+							class="svg-icon svg-icon-lg"
+						></span>
+					</span>
 
-          <div class="d-flex flex-column flex-grow-1 mr-2">
-            <a
-              href="#"
-              class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1"
-              >Calendario</a
-            >
-            <span class="text-muted font-size-sm">0800</span>
-          </div>
-        </div>
-        <!--end::Item-->
-      </div>
-      <!--end::Notifications-->
-    </div>
-    <!--end::Content-->
-  </ng-container>
+					<div class="d-flex flex-column flex-grow-1 mr-2">
+						<a
+							href="#"
+							class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1"
+							>Calendario</a
+						>
+						<span class="text-muted font-size-sm">0800</span>
+					</div>
+				</div>
+				<!--end::Item-->
+			</div>
+			<!--end::Notifications-->
+		</div>
+		<!--end::Content-->
+	</ng-container>
 </div>
 <!-- end::User Panel-->
