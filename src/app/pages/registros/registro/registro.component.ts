@@ -185,6 +185,7 @@ export class RegistroComponent implements OnInit {
 				this.toast.error(
 					"Persona No encontrada, por favor Verifique los datos ingresados."
 				);
+				this.isLoadingSubject.next(false);
 			}
 		});
 	}
