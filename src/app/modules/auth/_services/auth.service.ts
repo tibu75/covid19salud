@@ -73,8 +73,11 @@ export class AuthService implements OnDestroy {
 		sessionStorage.removeItem(this.authSessionStorageToken);
 		sessionStorage.removeItem(this.authSessionStorageId);
 		sessionStorage.removeItem(this.authSessionStorageUser);
-		this.ngZone.run(() => {
+		/* this.ngZone.run(() => {
 			this.router.navigateByUrl("/auth/login");
+		}); */
+		this.router.navigate(["/auth/login"], {
+			queryParams: {},
 		});
 	}
 	/* this.router.navigate(["/auth/login"], {
