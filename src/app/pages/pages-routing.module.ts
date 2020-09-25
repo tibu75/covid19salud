@@ -25,6 +25,13 @@ const routes: Routes = [
 					),
 			},
 			{
+				path: "mostrar",
+				loadChildren: () =>
+					import("../pages/registros/mostrar/mostrar.module").then(
+						(m) => m.MostrarModule
+					),
+			},
+			{
 				path: "registros",
 				loadChildren: () =>
 					import("../pages/registros/registros.module").then(
