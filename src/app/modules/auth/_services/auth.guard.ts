@@ -19,9 +19,9 @@ export class AuthGuard implements CanActivate {
 			return false;
 		}
 
-		console.log("Bloq for the guard");
+		////console.log("Bloq for the guard");
 		// not logged in so redirect to login page with the return url
-		//console.log("currentUser", currentUser);
+		////console.log("currentUser", currentUser);
 		return true;
 	}
 }

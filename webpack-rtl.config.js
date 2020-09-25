@@ -37,7 +37,7 @@ const mainConfig = function() {
       // webpack log message
       new WebpackMessages({
         name: themeName,
-        logger: str => console.log(`>> ${str}`)
+        logger: str => //console.log(`>> ${str}`)
       }),
       // create css file
       new MiniCssExtractPlugin({

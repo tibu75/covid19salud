@@ -187,14 +187,6 @@
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
-								<!-- <div class="col-xl-1 col-edad padding-1">
-									<div class="form-group">
-										<label>Edad</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="fechaNacimiento" name="fechaNacimiento" placeholder="" />
-										<span class="form-text text-muted"></span>
-									</div>
-								</div> -->
 
 								<div class="col-xl-3 col-nombre padding-1">
 									<div class="form-group">
@@ -362,8 +354,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-12">
-					<div class="form-group">
+				<div class="row">
+					<div class="col-12 form-group">
 						<label for="motivo_consulta">Motivo Consulta</label>
 						<textarea
 							class="form-control form-control-solid"
@@ -412,7 +404,7 @@
 							<div *ngIf="tipo_registro === 'Sintomas'">
 								<div class="row">
 									<div class="col-3">
-										<div class="form-group row">
+										<div class="form-group">
 											<label for="start">Inicio de Síntomas</label>
 											<input
 												id="start"
@@ -703,15 +695,16 @@
 							<span class="form-text text-muted"></span>
 						</div>
 
-						<div class="col-xl-12">
-							<div class="form-group">
+						<div class="row">
+							<div class="col-12 form-group">
 								<label for="cierre_contacto">Cierre de Contacto</label>
 								<textarea
 									class="form-control form-control-solid"
-									rows="5"
+									rows="3"
 									formControlName="cierre_contacto"
 									name="cierre_contacto"
 									[class.is-invalid]="cierreNoValido"
+									style="width: 100%"
 								></textarea>
 								<small *ngIf="cierreNoValido" class="text-danger"
 									>Debe ingresar un cierre con el contacto!</small

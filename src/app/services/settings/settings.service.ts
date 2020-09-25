@@ -1,56 +1,48 @@
-import { Injectable, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Injectable, Inject } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
 
 @Injectable()
 export class SettingsService {
+	ajustes: Ajustes = {
+		temaUrl: "assets/css/colors/default.css",
+		tema: "default",
+	};
 
-  ajustes: Ajustes = {
-    temaUrl: 'assets/css/colors/default.css',
-    tema: 'default'
-  };
+	constructor(@Inject(DOCUMENT) private _document) {
+		this.cargarAjustes();
+	}
 
-  constructor( @Inject(DOCUMENT) private _document ) {
-    this.cargarAjustes();
-  }
+	guardarAjustes() {
+		// //console.log('Guardado en el localStorage');
+		localStorage.setItem("ajustes", JSON.stringify(this.ajustes));
+		//uso json.stringify () para convertir el objeto a string
+	}
 
-  guardarAjustes() {
-    // console.log('Guardado en el localStorage');
-    localStorage.setItem('ajustes', JSON.stringify( this.ajustes )  );
-    //uso json.stringify () para convertir el objeto a string
-  }
+	cargarAjustes() {
+		if (localStorage.getItem("ajustes")) {
+			this.ajustes = JSON.parse(localStorage.getItem("ajustes"));
+			//Uso json.parse () convertir string a json
+			// //console.log( 'Cargando del localstorage' );
 
-  cargarAjustes() {
+			this.aplicarTema(this.ajustes.tema);
+		} else {
+			// //console.log( 'Usando valores por defecto' );
+			this.aplicarTema(this.ajustes.tema);
+		}
+	}
 
-    if ( localStorage.getItem('ajustes') ) {
-      this.ajustes = JSON.parse( localStorage.getItem('ajustes') );
-      //Uso json.parse () convertir string a json
-      // console.log( 'Cargando del localstorage' );
+	aplicarTema(tema: string) {
+		let url = `assets/css/colors/${tema}.css`;
+		this._document.getElementById("tema").setAttribute("href", url);
 
-      this.aplicarTema( this.ajustes.tema );
+		this.ajustes.tema = tema;
+		this.ajustes.temaUrl = url;
 
-    }else {
-      // console.log( 'Usando valores por defecto' );
-      this.aplicarTema( this.ajustes.tema );
-    }
-
-  }
-
-  aplicarTema( tema: string ) {
-
-
-    let url = `assets/css/colors/${ tema }.css`;
-    this._document.getElementById('tema').setAttribute('href', url );
-
-    this.ajustes.tema = tema;
-    this.ajustes.temaUrl = url;
-
-    this.guardarAjustes();
-
-  }
-
+		this.guardarAjustes();
+	}
 }
 
 interface Ajustes {
-  temaUrl: string;
-  tema: string;
+	temaUrl: string;
+	tema: string;
 }
