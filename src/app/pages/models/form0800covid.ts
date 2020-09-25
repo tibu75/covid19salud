@@ -24,26 +24,26 @@ export class Forms {
 			apellido: string;
 			documento: string;
 			fechaNacimiento: string;
+			edad: string;
 			sexo: string;
 			telefono: string;
 			calle: string;
 			numero: string;
 			departamento: string;
 			piso: string;
+			cpostal: string;
 			localidad: string;
 			provincia: string;
 			pais: string;
 			img: string;
 		},
-		public trabajo: [
-			{
-				lugar: string;
-				telefonol: string;
-				callel: string;
-				numerol: string;
-				localidadl: string;
-			}
-		],
+		public trabajo: {
+			lugar: string;
+			telefonol: string;
+			callel: string;
+			numerol: string;
+			localidadl: string;
+		},
 		public cierre_contacto: string,
 		public usuario: string
 	) {}
