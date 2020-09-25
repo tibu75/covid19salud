@@ -11,7 +11,6 @@ import { MostrarService } from "src/app/services/mostrar/mostrar.service";
 @Component({
 	selector: "app-mostrar",
 	templateUrl: "./mostrar.component.html",
-	styleUrls: ["./mostrar.component.scss"],
 })
 export class MostrarComponent implements OnInit, AfterViewInit {
 	closeResult: string;
@@ -19,6 +18,8 @@ export class MostrarComponent implements OnInit, AfterViewInit {
 	data: any = {};
 	edad: string = "";
 	mostrarEdad: number;
+	mostrarFecha: string;
+	mostrarFechaHisopado: string;
 	public mostrar_hisopado: boolean = false;
 	public mostrar_sintomas: boolean = false;
 	public cargar_datos: boolean = true;
@@ -85,11 +86,13 @@ export class MostrarComponent implements OnInit, AfterViewInit {
 			cierre_contacto: [this.mostrarForm.registro.cierre_contacto],
 			usuario: [this.mostrarForm.registro.usuario],
 		});
-		console.log("esto se cargo");
-		console.log(this.personaForm);
+		//console.log("esto se cargo");
+		//console.log(this.personaForm);
 		this.edad = this.mostrarForm.registro.persona.fechaNacimiento;
-		console.log(this.edad);
-		console.log(this.mostrar_sintomas, this.mostrar_hisopado);
+		this.mostrarFecha = this.mostrarForm.registro.fecha_ini_sint;
+		this.mostrarFechaHisopado = this.mostrarForm.registro.fecha_hisopado;
+		//console.log(this.edad);
+		//console.log(this.mostrar_sintomas, this.mostrar_hisopado);
 		this.calcularEdad();
 		this.cdr.markForCheck();
 	}

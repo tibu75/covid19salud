@@ -53,7 +53,7 @@ export class RegistrosComponent implements OnInit {
 		this.form0800Service
 			.getForms(this.paginaD)
 			.subscribe(({ total, forms }) => {
-				//   console.log(this.form);
+				//   //console.log(this.form);
 				//debugger
 				this.form = forms;
 				this.formtemp = forms;
@@ -70,17 +70,16 @@ export class RegistrosComponent implements OnInit {
 			return (this.form = this.formtemp);
 		}
 		this.busquedaService.buscarDni(dni).subscribe((resp: Forms[]) => {
-			//  console.log(resp);
+			//  //console.log(resp);
 			this.form = resp;
 			this.cdr.markForCheck();
 		});
 	}
 	Mostrar(idform) {
-		console.log(idform);
+		//console.log(idform);
 		this.mostrarForm.registro = idform;
 
-		console.log(this.mostrarForm); /* 
-		this.router.navigate(["/mostrar"]); */
+		this.cdr.markForCheck();
 	}
 
 	paginacion(valor: number) {
@@ -103,7 +102,7 @@ export class RegistrosComponent implements OnInit {
 	}
 
 	exportAsXlsx(): void {
-		// console.log("export", this.xls);
+		// //console.log("export", this.xls);
 		this.excelExports.exportAsExcelFile(this.xls, "Reporte");
 	}
 }

@@ -13,7 +13,6 @@ import * as moment from "moment";
 @Component({
 	selector: "app-registro",
 	templateUrl: "./registro.component.html",
-	styleUrls: ["./registro.component.scss"],
 })
 export class RegistroComponent implements OnInit {
 	fecha_ini_sint = "";
@@ -73,7 +72,7 @@ export class RegistroComponent implements OnInit {
 			const timeDiff = Math.abs(Date.now() - convertAge.getTime());
 			this.mostrarEdad = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
 			this.personaForm.patchValue({ persona: { edad: this.mostrarEdad } });
-			console.log(this.personaForm);
+			//console.log(this.personaForm);
 		}
 	}
 
@@ -159,7 +158,7 @@ export class RegistroComponent implements OnInit {
 			cierre_contacto: ["", [Validators.required, Validators.maxLength(500)]],
 			usuario: ["", Validators.required],
 		});
-		//  console.log(this.personaForm);
+		//  //console.log(this.personaForm);
 	}
 
 	renaper() {
@@ -169,8 +168,8 @@ export class RegistroComponent implements OnInit {
 		}&sexo=${this.personaForm.get("persona.sexo").value}`;
 
 		this._renaperService.getPersona(params).subscribe((data: any) => {
-			// console.log("Datos Renaper");
-			//console.log(data.datos);
+			// //console.log("Datos Renaper");
+			////console.log(data.datos);
 			if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
 				this.buscar_datos = false;
 				this.cargar_datos = true;
@@ -290,7 +289,7 @@ export class RegistroComponent implements OnInit {
 		this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
 
 		let datosPersona = this.personaForm.value;
-		//console.log(datosPersona);
+		////console.log(datosPersona);
 
 		/* if (this.personaForm.valid) { */
 		this.formService.crearForm(datosPersona).subscribe((data) => {
@@ -299,7 +298,7 @@ export class RegistroComponent implements OnInit {
 		});
 		this.router.navigate(["/registros"]);
 		/* } else {
-			console.log(this.personaForm);
+			//console.log(this.personaForm);
 		} */
 		// this.router.navigateByUrl('/registros');
 	}

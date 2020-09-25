@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 
 const basicCheckboxes = {
-  beforeCodeTitle: 'Basic checkboxes',
-  htmlCode: `<mat-checkbox>Check me!</mat-checkbox>`,
-  tsCode: `
+	beforeCodeTitle: "Basic checkboxes",
+	htmlCode: `<mat-checkbox>Check me!</mat-checkbox>`,
+	tsCode: `
 import {Component} from '@angular/core';\n
 /**
 * @title Basic checkboxes
@@ -14,14 +14,14 @@ import {Component} from '@angular/core';\n
   styleUrls: ['checkbox-overview-example.css'],
 })
 export class CheckboxOverviewExample {}`,
-  cssCode: ``,
-  viewCode: ``,
-  isCodeVisible: false,
+	cssCode: ``,
+	viewCode: ``,
+	isCodeVisible: false,
 };
 
 const configurableCheckbox = {
-  beforeCodeTitle: 'Configurable checkbox',
-  htmlCode: `
+	beforeCodeTitle: "Configurable checkbox",
+	htmlCode: `
 <mat-card>
   <mat-card-content>
     <h2 class="example-h2">Checkbox configuration</h2>
@@ -56,7 +56,7 @@ const configurableCheckbox = {
     </section>
   </mat-card-content>
 </mat-card>`,
-  tsCode: `
+	tsCode: `
 import {Component} from '@angular/core';\n
 /**
  * @title Configurable checkbox
@@ -72,8 +72,8 @@ export class CheckboxConfigurableExample {
   align = 'start';
   disabled = false;
 }`,
-  viewCode: ``,
-  cssCode: `
+	viewCode: ``,
+	cssCode: `
 .example-h2 {
   margin: 10px;
 }
@@ -86,13 +86,13 @@ export class CheckboxConfigurableExample {
 .example-margin {
   margin: 0 10px;
 }`,
-  isCodeVisible: false,
+	isCodeVisible: false,
 };
 
 const labelPositions = {
-  beforeCodeTitle: 'Label positions',
-  htmlCode: `<mat-checkbox>Check me!</mat-checkbox>`,
-  tsCode: `
+	beforeCodeTitle: "Label positions",
+	htmlCode: `<mat-checkbox>Check me!</mat-checkbox>`,
+	tsCode: `
 import {Component} from '@angular/core';\n
 @Component({
   selector: 'checkbox-label-positions-example',
@@ -105,18 +105,18 @@ export class CheckboxLabelPositionsExample {\n
     this.labelPosition = this.labelPosition == "before" ? "after" : "before";
   }
 }`,
-  cssCode: ``,
-  viewCode: ``,
-  isCodeVisible: false,
+	cssCode: ``,
+	viewCode: ``,
+	isCodeVisible: false,
 };
 
 const changeEvent = {
-  beforeCodeTitle: 'Change event binding',
-  htmlCode: `
+	beforeCodeTitle: "Change event binding",
+	htmlCode: `
 <mat-checkbox [(ngModel)]="myValue" (change)="changeValueEvent()">Check me!</mat-checkbox>\n
 <div class="separator separator-dashed my-6"></div>\n
 <span>Checked: <mark>{{ myValue }}</mark></span>`,
-  tsCode: `
+	tsCode: `
 import {Component} from '@angular/core';\n
 @Component({
   selector: 'checkbox-change-event-example',
@@ -126,61 +126,61 @@ import {Component} from '@angular/core';\n
 export class CheckboxChangeEventExample {
   myValue: boolean = true;
   changeValueEvent() {
-    console.log("myValue:", this.myValue);
+    //console.log("myValue:", this.myValue);
   }
 }`,
-  cssCode: ``,
-  viewCode: ``,
-  isCodeVisible: false,
+	cssCode: ``,
+	viewCode: ``,
+	isCodeVisible: false,
 };
 @Component({
-  selector: 'app-material-checkbox',
-  templateUrl: './checkbox.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      .example-h2 {
-        margin: 10px;
-      }
-      .example-section {
-        display: flex;
-        align-content: center;
-        align-items: center;
-        height: 60px;
-      }
-      .example-margin {
-        margin: 0 10px;
-      }
-    `,
-  ],
+	selector: "app-material-checkbox",
+	templateUrl: "./checkbox.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	styles: [
+		`
+			.example-h2 {
+				margin: 10px;
+			}
+			.example-section {
+				display: flex;
+				align-content: center;
+				align-items: center;
+				height: 60px;
+			}
+			.example-margin {
+				margin: 0 10px;
+			}
+		`,
+	],
 })
 export class CheckboxComponent implements OnInit {
-  exampleBasicCheckboxes;
-  exampleConfigurableCheckbox;
-  exampleLabelPositions;
-  exampleChangeEvent;
+	exampleBasicCheckboxes;
+	exampleConfigurableCheckbox;
+	exampleLabelPositions;
+	exampleChangeEvent;
 
-  checked = false;
-  indeterminate = false;
-  align = 'start';
-  disabled = false;
-  labelPosition = 'before';
-  myValue = true;
+	checked = false;
+	indeterminate = false;
+	align = "start";
+	disabled = false;
+	labelPosition = "before";
+	myValue = true;
 
-  constructor() {}
+	constructor() {}
 
-  ngOnInit() {
-    this.exampleBasicCheckboxes = basicCheckboxes;
-    this.exampleConfigurableCheckbox = configurableCheckbox;
-    this.exampleLabelPositions = labelPositions;
-    this.exampleChangeEvent = changeEvent;
-  }
+	ngOnInit() {
+		this.exampleBasicCheckboxes = basicCheckboxes;
+		this.exampleConfigurableCheckbox = configurableCheckbox;
+		this.exampleLabelPositions = labelPositions;
+		this.exampleChangeEvent = changeEvent;
+	}
 
-  changeLablesPositions() {
-    this.labelPosition = this.labelPosition === 'before' ? 'after' : 'before';
-  }
+	changeLablesPositions() {
+		this.labelPosition = this.labelPosition === "before" ? "after" : "before";
+	}
 
-  changeValueEvent() {
-    console.log('myValue:', this.myValue);
-  }
+	changeValueEvent() {
+		//console.log('myValue:', this.myValue);
+	}
 }
