@@ -1,3 +1,3 @@
 export class Localidades {
-  constructor(public nombre: string) {}
+  constructor(public _id: string, public nombre: string) {}
 }
