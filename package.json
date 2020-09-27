@@ -1,6 +1,6 @@
 {
-	"name": "0800covid",
-	"version": "1.0",
+	"name": "metronic-angular-demo1",
+	"version": "7.1.0",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
