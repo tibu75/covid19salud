@@ -25,6 +25,18 @@ export class RegistroComponent implements OnInit {
 	sexo = "M";
 	tipo_registro = "Sin Sintomas";
 	realizo_hisopado = "No";
+
+	atencion_domiciliaria = "No";
+	cert_aislamiento = "No";
+	resultado_hisopado = "No";
+	derivacion_107 = "No";
+	mov_propia = "No";
+	obs_atencion_domiciliaria = "";
+	obs_cert_aislamiento = "";
+	obs_resultado_hisopado = "";
+	obs_derivacion_107 = "";
+	obs_mov_propia = "";
+	
 	edad;
 	mostrarEdad;
 	private isLoadingSubject: BehaviorSubject<boolean>;
@@ -34,7 +46,7 @@ export class RegistroComponent implements OnInit {
 	closeResult: string;
 	personaForm: FormGroup;
 	data: any = {};
-	public cargar_datos: boolean = false;
+	public cargar_datos: boolean = true;
 	public buscar_datos: boolean = true;
 	public guardar: boolean = false;
 	sololectura: boolean;
@@ -147,12 +159,17 @@ export class RegistroComponent implements OnInit {
 				numerol: ["", [Validators.required, Validators.maxLength(4)]],
 				localidadl: ["", [Validators.required, Validators.maxLength(25)]],
 			}),
-			atencion_domiciliaria: [false],
-			cert_aislamiento: [false],
-			resultado_hisopado: [false],
-			derivacion_107: [false],
-			mov_propia: [false],
-			realizo_hisopado: ["", Validators.required],
+			atencion_domiciliaria: ["No", Validators.required],
+			obs_atencion_domiciliaria: ["", Validators.required],
+			cert_aislamiento: ["No", Validators.required],
+			obs_cert_aislamiento: ["", Validators.required],
+			resultado_hisopado: ["No", Validators.required],
+			obs_resultado_hisopado: ["", Validators.required],
+			derivacion_107: ["No", Validators.required],
+			obs_derivacion_107: ["", Validators.required],
+			mov_propia: ["No", Validators.required],
+			obs_mov_propia: ["", Validators.required],
+			realizo_hisopado: ["No", Validators.required],
 			lugar_hisopado: ["", Validators.required],
 			fecha_hisopado: ["", Validators.required],
 			cierre_contacto: ["", [Validators.required, Validators.maxLength(500)]],
@@ -289,7 +306,7 @@ export class RegistroComponent implements OnInit {
 		this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
 
 		let datosPersona = this.personaForm.value;
-		////console.log(datosPersona);
+		console.log(datosPersona);
 
 		/* if (this.personaForm.valid) { */
 		this.formService.crearForm(datosPersona).subscribe((data) => {
