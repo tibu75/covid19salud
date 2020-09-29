@@ -46,7 +46,7 @@ export class RegistroComponent implements OnInit {
 	closeResult: string;
 	personaForm: FormGroup;
 	data: any = {};
-	public cargar_datos: boolean = true;
+	public cargar_datos: boolean = false;
 	public buscar_datos: boolean = true;
 	public guardar: boolean = false;
 	sololectura: boolean;

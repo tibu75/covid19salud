@@ -296,7 +296,7 @@
 						<div class="row">
 							<div class="col-xl-12">
 								<div class="form-group">
-									<label>Antecedentes Personales</label>
+									<label>Posee antecedentes Personales?</label>
 
 									<input class="form-control form-control-solid" type="text"
 										formControlName="antencedentes_p" name="antencedentes_p" placeholder=""
@@ -329,7 +329,7 @@
 							</div>
 							<div class="col-3 padding-1">
 								<div class="form-group">
-									<label>Con cuantas personas Convive</label>
+									<label>Con cuántas personas Convive?</label>
 									<input class="form-control form-control-solid" type="text"
 										formControlName="vivienda_personas" name="vivienda_personas"
 										placeholder="Numero de Personas" [class.is-invalid]="conviveNoValido" />
@@ -342,7 +342,7 @@
 						<div class="row" formGroupName="trabajo">
 							<div class="col-xl-3 padding-1">
 								<div class="form-group">
-									<label>Lugar de Trabajo Actual </label>
+									<label>Lugar de Trabajo Actual</label>
 									<input class="form-control form-control-solid" type="text" formControlName="lugar"
 										name="lugar" placeholder="" />
 									<span class="form-text text-muted"></span>
@@ -413,7 +413,7 @@
 				<div *ngIf="realizo_hisopado === 'Si'">
 					<div class="row">
 						<div class="form-group col-9">
-							<label>Lugar de Hisopado </label>
+							<label>Lugar de Hisopado</label>
 							<input class="form-control form-control-solid" type="text" formControlName="lugar_hisopado"
 								name="lugar_hisopado" placeholder="" [class.is-invalid]="lugarhisoNoValido" />
 							<small *ngIf="lugarhisoNoValido" class="text-danger">Debe ingresar una
@@ -432,7 +432,7 @@
 				<div class="my-5 separator separator-dashed"></div>
 				<div class="col-12 form-group">
 					<div class="row">
-						<h3 class="text-dark font-weight-bold">Derivacion Atencion Domiciliaria?</h3>
+						<h3 class="text-dark font-weight-bold">Derivación para Atención Domiciliaria?</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
 								<input type="radio" name="atencion_domiciliaria" value="Si"
@@ -463,7 +463,7 @@
 				<span class="form-text text-muted"></span>
 				<div class="col-12 form-group">
 					<div class="row">
-						<h3 class="text-dark font-weight-bold">Requiere certificado de aislamiento</h3>
+						<h3 class="text-dark font-weight-bold">Requiere Certificado de Aislamiento?</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
 								<input type="radio" name="cert_aislamiento" value="Si"
@@ -494,7 +494,7 @@
 				<span class="form-text text-muted"></span>
 				<div class="col-12 form-group">
 					<div class="row">
-						<h3 class="text-dark font-weight-bold">Solicita resultado de hisopado?</h3>
+						<h3 class="text-dark font-weight-bold">Solicita resultado de Hisopado?</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
 								<input type="radio" name="resultado_hisopado" value="Si"
@@ -525,7 +525,7 @@
 				<span class="form-text text-muted"></span>
 				<div class="col-12 form-group">
 					<div class="row">
-						<h3 class="text-dark font-weight-bold">Derivacion 107?</h3>
+						<h3 class="text-dark font-weight-bold">Derivación 107?</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
 								<input type="radio" name="derivacion_107" value="Si" formControlName="derivacion_107"
