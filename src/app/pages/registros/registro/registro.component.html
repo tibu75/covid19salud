@@ -1,53 +1,41 @@
 <div class="card card-custom">
-  <div class="card-header">
-    <div class="card-title" style="width: 100%">
-      <div class="row" style="width: 100%">
-        <div class="col-8">
-          <h3 class="card-label">
-            Registro 0800 COVID 19 <i class="mr-2"></i>
-            <small class=""> Nueva llamada </small>
-          </h3>
-        </div>
-        <div class="col-4" style="text-align: left">
-          <a
-            routerLink="/registros"
-            class="btn btn-light-primary font-weight-bolder mr-2"
-          >
-            <i class="ki ki-long-arrow-back icon-sm"></i>
-            Volver
-          </a>
-          <div class="btn-group" *ngIf="cargar_datos">
-            <button
-              type="button"
-              (click)="validar()"
-              class="btn btn-primary font-weight-bolder"
-            >
+    <div class="card-header">
+        <div class="card-title" style="width: 100%">
+            <div class="row" style="width: 100%">
+                <div class="col-8">
+                    <h3 class="card-label">
+                        Registro 0800 COVID 19 <i class="mr-2"></i>
+                        <small class=""> Nueva llamada </small>
+                    </h3>
+                </div>
+                <div class="col-4" style="text-align: left">
+                    <a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
+                        <i class="ki ki-long-arrow-back icon-sm"></i> Volver
+                    </a>
+                    <div class="btn-group" *ngIf="cargar_datos">
+                        <button type="button" (click)="validar()" class="btn btn-primary font-weight-bolder">
               <i class="ki ki-check icon-sm"></i>
               Guardar el Formulario
             </button>
-          </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-toolbar"></div>
         </div>
-      </div>
-
-      <div class="card-toolbar"></div>
     </div>
-  </div>
 
-  <div class="card-body">
-    <form class="form" [formGroup]="personaForm" (ngSubmit)="submit()">
-      <!--begin::Form-->
-      <ng-container *ngIf="buscar_datos">
-        <div formGroupName="persona" class="row" style="margin-top: 18px">
-          <div class="col d-flex justify-content-center" style="width: 80%">
-            <div class="row">
-              <div class="col-4" style="min-width: 300px">
-                <h4 class="text">Buscar datos de Persona</h4>
-                <div class="form-group" style="margin-top: 10px">
-                  <label
-                    for="recipient-name"
-                    class="control-label"
-                    style="margin-top: 20px"
-                    >Ingrese el Numero de Documento:</label
+    <div class="card-body">
+        <form class="form" [formGroup]="personaForm" (ngSubmit)="submit()">
+            <!--begin::Form-->
+            <ng-container *ngIf="buscar_datos">
+                <div formGroupName="persona" class="row" style="margin-top: 18px">
+                    <div class="col d-flex justify-content-center" style="width: 80%">
+                        <div class="row">
+                            <div class="col-4" style="min-width: 300px">
+                                <h4 class="text">Buscar datos de Persona</h4>
+                                <div class="form-group" style="margin-top: 10px">
+                                    <label for="recipient-name" class="control-label" style="margin-top: 20px">Ingrese el Numero de Documento:</label
                   >
                   <input
                     type="text"
@@ -74,7 +62,7 @@
                     <i class="ti-check text-active" aria-hidden="true"></i>
                     Masculino
                   </label>
-                  <label>
+                                    <label>
                     <input
                       type="radio"
                       name="sexo"
@@ -85,32 +73,24 @@
                     <i class="ti-check text-active" aria-hidden="true"></i>
                     Femenino
                   </label>
-                </div>
-              </div>
-              <div
-                class="col-4 d-flex justify-content-center"
-                style="min-width: 300px"
-              >
-                <div class="row">
-                  <button
-                    type="button"
-                    (click)="renaper()"
-                    class="btn btn-light-primary font-weight-bolder mr-2 btn-lg"
-                    style="height: 65px; width: 200px"
-                  >
+                                </div>
+                            </div>
+                            <div class="col-4 d-flex justify-content-center" style="min-widthnpm: 300px">
+                                <div class="row">
+                                    <button type="button" (click)="renaper()" class="btn btn-light-primary font-weight-bolder mr-2 btn-lg" style="height: 65px; width: 200px">
                     Buscar Persona
                   </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
+            </ng-container>
 
-      <ng-container *ngIf="isLoading$ | async">
-        <span class="spinner spinner-primary ml-5"></span>
-        <h4 class="text-dark font-weight-bold">
-          <small>
+            <ng-container *ngIf="isLoading$ | async">
+                <span class="spinner spinner-primary ml-5"></span>
+                <h4 class="text-dark font-weight-bold">
+                    <small>
             **Consultando los datos en los servicios de Renaper, por favor
             espere!</small
           >

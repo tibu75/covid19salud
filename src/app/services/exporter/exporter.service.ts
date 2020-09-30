@@ -10,6 +10,7 @@ const EXCEL_EXTENSION = ".xlsx";
   providedIn: "root",
 })
 export class ExporterService {
+  
   constructor() {}
 
   public exportAsExcelFile(json: any[], excelFileName: string): void {
@@ -23,7 +24,7 @@ export class ExporterService {
       bookType: "xlsx",
       type: "array",
     });
-    //const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
