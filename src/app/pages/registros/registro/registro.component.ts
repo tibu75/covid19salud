@@ -36,7 +36,7 @@ export class RegistroComponent implements OnInit {
 	obs_resultado_hisopado = "";
 	obs_derivacion_107 = "";
 	obs_mov_propia = "";
-	
+
 	edad;
 	mostrarEdad;
 	private isLoadingSubject: BehaviorSubject<boolean>;
@@ -244,7 +244,21 @@ export class RegistroComponent implements OnInit {
 	get antecedentesNoValido() {
 		return this.personaForm.get("antencedentes_p").invalid;
 	}
-
+	get atencionNoValido() {
+		return this.personaForm.get("obs_atencion_domiciliaria").invalid;
+	}
+	get certificadoNoValido() {
+		return this.personaForm.get("obs_cert_aislamiento").invalid;
+	}
+	get resultadoNoValido() {
+		return this.personaForm.get("obs_resultado_hisopado").invalid;
+	}
+	get derivacion107NoValido() {
+		return this.personaForm.get("obs_derivacion_107").invalid;
+	}
+	get movilidadNoValido() {
+		return this.personaForm.get("obs_mov_propia").invalid;
+	}
 	validar() {
 		if (
 			this.tipo_registro === "Sin Sintomas" &&
