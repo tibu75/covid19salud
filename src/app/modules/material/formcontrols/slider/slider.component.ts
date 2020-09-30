@@ -1,14 +1,14 @@
 import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+	Component,
+	OnInit,
+	ViewEncapsulation,
+	ChangeDetectionStrategy,
+} from "@angular/core";
 
 const basicSlider = {
-  beforeCodeTitle: 'Basic slider',
-  htmlCode: `<mat-slider></mat-slider>`,
-  tsCode: `
+	beforeCodeTitle: "Basic slider",
+	htmlCode: `<mat-slider></mat-slider>`,
+	tsCode: `
 import {Component} from '@angular/core';\n
 /**
  * @title Basic slider
@@ -20,18 +20,18 @@ import {Component} from '@angular/core';\n
 })
 export class SliderOverviewExample {}
 		`,
-  cssCode: `
+	cssCode: `
 /** No CSS for this example */
 .mat-slider {
   width: 300px;
 }`,
-  viewCode: ``,
-  isCodeVisible: false,
+	viewCode: ``,
+	isCodeVisible: false,
 };
 
 const configurableSlider = {
-  beforeCodeTitle: 'Configurable slider',
-  htmlCode: `
+	beforeCodeTitle: "Configurable slider",
+	htmlCode: `
 <mat-card>
   <mat-card-content>
     <h2 class="example-h2">Slider configuration</h2>
@@ -87,7 +87,7 @@ const configurableSlider = {
     </mat-slider>
   </mat-card-content>
 </mat-card>`,
-  tsCode: `
+	tsCode: `
 import {Component, ViewEncapsulation} from '@angular/core';\n
 /**
 * @title Configurable slider
@@ -118,8 +118,8 @@ export class SliderConfigurableExample {
   }
   private _tickInterval = 1;
 }`,
-  viewCode: ``,
-  cssCode: `
+	viewCode: ``,
+	cssCode: `
 .example-h2 {
   margin: 10px;
 }
@@ -138,17 +138,17 @@ export class SliderConfigurableExample {
 .mat-slider-vertical {
   height: 300px;
 }`,
-  isCodeVisible: false,
+	isCodeVisible: false,
 };
 
 const changeEvent = {
-  beforeCodeTitle: 'Change event binding',
-  htmlCode: `
+	beforeCodeTitle: "Change event binding",
+	htmlCode: `
 <mat-slider (change)="changeSlider()" [(ngModel)]="myValue" min="0" max="100" step="1"></mat-slider>
 <div class="separator separator-dashed my-6" *ngIf="myValue"></div>
 <span *ngIf="myValue">Selected: <mark>{{ myValue }}</mark>%</span>
 `,
-  tsCode: `
+	tsCode: `
 import {Component} from '@angular/core';\n
 @Component({
   selector: 'slider-change-event-example',
@@ -158,68 +158,68 @@ import {Component} from '@angular/core';\n
 export class SliderChangeEventExample {\n
   myValue = 50;
   changeSlider() {
-    console.log('myValue:', this.myValue);
+    //console.log('myValue:', this.myValue);
   }
 }`,
-  cssCode: `
+	cssCode: `
 .mat-slider {
   width: 300px;
 }`,
-  viewCode: ``,
-  isCodeVisible: false,
+	viewCode: ``,
+	isCodeVisible: false,
 };
 
 @Component({
-  selector: 'app-material-slider',
-  templateUrl: './slider.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      .mat-slider {
-        width: 300px;
-      }
-      .example-margin {
-        margin: 15px;
-      }
-    `,
-  ],
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
+	selector: "app-material-slider",
+	templateUrl: "./slider.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	styles: [
+		`
+			.mat-slider {
+				width: 300px;
+			}
+			.example-margin {
+				margin: 15px;
+			}
+		`,
+	],
+	encapsulation: ViewEncapsulation.None,
+	preserveWhitespaces: false,
 })
 export class SliderComponent implements OnInit {
-  exampleBasicSlider;
-  exampleConfigurableSlider;
-  exampleChangeEvent;
+	exampleBasicSlider;
+	exampleConfigurableSlider;
+	exampleChangeEvent;
 
-  autoTicks = false;
-  disabled = false;
-  invert = false;
-  max = 100;
-  min = 0;
-  showTicks = false;
-  step = 1;
-  thumbLabel = false;
-  value = 0;
-  vertical = false;
+	autoTicks = false;
+	disabled = false;
+	invert = false;
+	max = 100;
+	min = 0;
+	showTicks = false;
+	step = 1;
+	thumbLabel = false;
+	value = 0;
+	vertical = false;
 
-  // tslint:disable-next-line:variable-name
-  private _tickInterval = 1;
-  myValue = 50;
+	// tslint:disable-next-line:variable-name
+	private _tickInterval = 1;
+	myValue = 50;
 
-  get tickInterval(): number | 'auto' {
-    return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
-  }
-  set tickInterval(v) {
-    this._tickInterval = Number(v);
-  }
+	get tickInterval(): number | "auto" {
+		return this.showTicks ? (this.autoTicks ? "auto" : this._tickInterval) : 0;
+	}
+	set tickInterval(v) {
+		this._tickInterval = Number(v);
+	}
 
-  ngOnInit() {
-    this.exampleBasicSlider = basicSlider;
-    this.exampleConfigurableSlider = configurableSlider;
-    this.exampleChangeEvent = changeEvent;
-  }
+	ngOnInit() {
+		this.exampleBasicSlider = basicSlider;
+		this.exampleConfigurableSlider = configurableSlider;
+		this.exampleChangeEvent = changeEvent;
+	}
 
-  changeSlider() {
-    console.log('myValue', this.myValue);
-  }
+	changeSlider() {
+		//console.log('myValue', this.myValue);
+	}
 }

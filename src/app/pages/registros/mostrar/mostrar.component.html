@@ -1,0 +1,606 @@
+<div class="card card-custom card-sticky" id="kt_page_sticky_card">
+	<div class="card-header">
+		<div class="card-title" style="width: 100%">
+			<div class="row" style="width: 100%">
+				<div class="col-8">
+					<h3 class="card-label">
+						Registro 0800 COVID 19 <i class="mr-2"></i>
+						<small class=""> Datos ingresados de </small>
+					</h3>
+				</div>
+				<div class="col-4" style="text-align: left">
+					<a
+						routerLink="/registros"
+						class="btn btn-light-primary font-weight-bolder mr-2"
+						click="Volver()"
+					>
+						<i class="ki ki-long-arrow-back icon-sm"></i>
+						Volver
+					</a>
+				</div>
+			</div>
+
+			<div class="card-toolbar"></div>
+		</div>
+	</div>
+
+	<div class="card-body">
+		<form class="form" [formGroup]="personaForm">
+			<!--begin::Form-->
+
+			<!-- Termina el Contenedor de Busqueda -->
+
+			<!-- Comienza la muestra  del formulario con los datos recogidos de Renaper -->
+
+			<ng-container *ngIf="cargar_datos">
+				<div class="form-group" formGroupName="persona">
+					<div class="row" style="margin-top: 10px">
+						<h3 class="text-dark font-weight-bold">
+							Datos de la Persona que LLama:
+						</h3>
+					</div>
+
+					<div class="row">
+						<div class="col-2 padding-1">
+							<div class="rowfoto" style="margin-top: 18px">
+								<img
+									id="foto"
+									class="img-50"
+									[src]="personaForm.get('persona.img').value"
+								/>
+							</div>
+						</div>
+
+						<div class="col-10 padding-1">
+							<div class="row">
+								<div class="col-xl-2 col-documento padding-1">
+									<div class="form-group">
+										<label>Documento</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="documento"
+											name="documento"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-1 col-sexo padding-1">
+									<div class="form-group">
+										<label>Sexo</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="sexo"
+											name="sexo"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-1 col-edad padding-1">
+									<div class="form-group">
+										<label>Edad</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="edad"
+											name="edad"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+								<!-- <div class="col-xl-1 col-edad padding-1">
+									<div class="form-group">
+										<label>Edad</label>
+										<input class="form-control form-control-solid" type="text"
+											formControlName="fechaNacimiento" name="fechaNacimiento" placeholder="" />
+										<span class="form-text text-muted"></span>
+									</div>
+								</div> -->
+
+								<div class="col-xl-3 col-nombre padding-1">
+									<div class="form-group">
+										<label>Nombre/s</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="nombre"
+											name="nombre"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-apellido padding-1">
+									<div class="form-group">
+										<label>Apellido/s</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="apellido"
+											name="apellido"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-telefono padding-1">
+									<div class="form-group">
+										<label>Teléfono</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="telefono"
+											name="telefono"
+											readonly="all"
+										/>
+									</div>
+								</div>
+							</div>
+
+							<h3 class="text-dark font-weight-bold">Datos del Domicilio:</h3>
+							<div class="row">
+								<div class="col-xl-2 col-calle padding-1">
+									<div class="form-group">
+										<label>Calle</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="calle"
+											name="calle"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-numero padding-1">
+									<div class="form-group">
+										<label>Número</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="numero"
+											name="numero"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+								<div class="col-xl-2 col-numero padding-1">
+									<div class="form-group">
+										<label>Piso</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="piso"
+											name="piso"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-1 col-departamento padding-1">
+									<div class="form-group">
+										<label>Dpto</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="departamento"
+											name="departamento"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-3 col-localidad padding-1">
+									<div class="form-group">
+										<label>Localidad</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="localidad"
+											name="localidad"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-2 col-cpostal padding-1">
+									<div class="form-group">
+										<label>CP</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="cpostal"
+											name="cpostal"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-provincia padding-1">
+									<div class="form-group">
+										<label>Provincia</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="provincia"
+											name="provincia"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+
+								<div class="col-xl-2 col-pais padding-1">
+									<div class="form-group">
+										<label>Pais</label>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="pais"
+											name="pais"
+											placeholder=""
+											readonly="all"
+										/>
+										<span class="form-text text-muted"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 form-group">
+						<label for="motivo_consulta">Motivo Consulta</label>
+						<textarea
+							class="form-control form-control-solid"
+							rows="3"
+							formControlName="motivo_consulta"
+							name="motivo_consulta"
+							readonly="all"
+						></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="separator separator-dashed"></div>
+						<div class="my-5">
+							<div class="row">
+								<h3 class="text-dark font-weight-bold">Presenta Sintomas?</h3>
+							</div>
+							<label
+								*ngIf="mostrarForm?.registro.tipo_registro == 'Sin Sintomas'"
+								style="font-weight: bold"
+							>
+								La persona NO Presenta Sintomas
+							</label>
+							<div *ngIf="mostrarForm?.registro.tipo_registro == 'Sintomas'">
+								<label style="font-weight: bold">
+									La persona esta con Sintomas
+								</label>
+
+								<div class="row">
+									<div class="col-3">
+										<div class="form-group">
+											<label for="start">Inicio de Síntomas</label>
+											<label
+												for="start"
+												class="form-control form-control-solid"
+												>{{ mostrarFecha | date: "dd/MM/yyyy" }}</label
+											>
+										</div>
+									</div>
+									<div class="col-xl-9">
+										<div class="form-group">
+											<label>Síntomas Actuales</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="sintomas"
+												name="sintomas"
+												placeholder=""
+												readonly="all"
+											/>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group">
+											<label>Antecedentes Personales</label>
+
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="antencedentes_p"
+												name="antencedentes_p"
+												placeholder=""
+												readonly="all"
+											/>
+										</div>
+									</div>
+									<div class="col-xl-12">
+										<div class="form-group">
+											<label>Tiene alguna Enfermedad?</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="enfermedad_pre"
+												name="enfermedad_pre"
+												placeholder=""
+												readonly="all"
+											/>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-9 padding-1">
+										<div class="form-group">
+											<label>Toma algún Medicamento?</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="toma_medicamentos"
+												name="toma_medicamentos"
+												placeholder=""
+												readonly="all"
+											/>
+										</div>
+									</div>
+									<div class="col-3 padding-1">
+										<div class="form-group">
+											<label>Con cuantas personas Convive</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="vivienda_personas"
+												name="vivienda_personas"
+												readonly="all"
+												placeholder="Numero de Personas"
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" formGroupName="trabajo">
+									<div class="col-xl-3 padding-1">
+										<div class="form-group">
+											<label>Lugar de Trabajo Actual </label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="lugar"
+												name="lugar"
+												readonly="all"
+												placeholder=""
+											/>
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+									<div class="col-xl-2 col-telefono padding-1">
+										<div class="form-group">
+											<label>Teléfono Laboral</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="telefonol"
+												name="telefonol"
+												placeholder=""
+												readonly="all"
+											/>
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+									<div class="col-xl-3 col-calle padding-1">
+										<div class="form-group">
+											<label>Calle</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="callel"
+												name="callel"
+												placeholder=""
+												readonly="all"
+											/>
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+									<div class="col-xl-2 col-numero padding-1">
+										<div class="form-group">
+											<label>Número</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="numerol"
+												name="numerol"
+												placeholder=""
+												readonly="all"
+											/>
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+									<div class="col-xl-2 col-localidad padding-1">
+										<div class="form-group">
+											<label>Localidad</label>
+											<input
+												class="form-control form-control-solid"
+												type="text"
+												formControlName="localidadl"
+												name="localidadl"
+												placeholder=""
+												readonly="all"
+											/>
+											<span class="form-text text-muted"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox-inline">
+								<label
+									*ngIf="!!mostrarForm?.registro.atencion_domiciliaria"
+									class="checkbox"
+								>
+									<input
+										type="checkbox"
+										formControlName="atencion_domiciliaria"
+										name="atencion_domiciliaria"
+										readonly="all"
+										checked
+									/>
+									<span></span>
+									Derivacion Atencion Domiciliaria?
+								</label>
+								<label
+									*ngIf="!!mostrarForm?.registro.cert_aislamiento"
+									class="checkbox"
+								>
+									<input
+										type="checkbox"
+										formControlName="cert_aislamiento"
+										name="cert_aislamiento"
+										readonly="all"
+										checked
+									/>
+									<span></span>
+									Requiere certificado de aislamiento
+								</label>
+								<label
+									*ngIf="!!mostrarForm?.registro.resultado_hisopado"
+									class="checkbox"
+								>
+									<input
+										type="checkbox"
+										formControlName="resultado_hisopado"
+										name="resultado_hisopado"
+										readonly="all"
+										checked
+									/>
+									<span></span>
+									Solicita resultado de hisopado
+								</label>
+								<label
+									*ngIf="!!mostrarForm?.registro.derivacion_107"
+									class="checkbox"
+								>
+									<input
+										type="checkbox"
+										formControlName="derivacion_107"
+										name="derivacion_107"
+										readonly="all"
+										checked
+									/>
+									<span></span>
+									Derivacion 107?
+								</label>
+								<label
+									*ngIf="!!mostrarForm?.registro.mov_propia"
+									class="checkbox"
+								>
+									<input
+										type="checkbox"
+										formControlName="mov_propia"
+										name="mov_propia"
+										readonly="all"
+										checked
+									/>
+									<span></span>
+									Tiene Movilidad?
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<h3 class="text-dark font-weight-bold">
+								Se ha realizado un hisopado?
+							</h3>
+						</div>
+						<label
+							*ngIf="mostrarForm?.registro.realizo_hisopado == 'No'"
+							style="font-weight: bold"
+						>
+							La persona NO se Realizo un Hisopado
+						</label>
+						<div *ngIf="mostrarForm?.registro.realizo_hisopado == 'Si'">
+							<label style="font-weight: bold">
+								La persona se Realizo un Hisopado
+							</label>
+							<div class="row">
+								<div class="form-group col-8">
+									<label>Lugar de Hisopado </label>
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="lugar_hisopado"
+										name="lugar_hisopado"
+										placeholder=""
+										readonly="all"
+									/>
+								</div>
+								<div class="form-group col-3">
+									<label for="start1">Fecha de Hisopado</label>
+									<label for="start" class="form-control form-control-solid">{{
+										mostrarFechaHisopado | date: "dd/MM/yyyy"
+									}}</label>
+								</div>
+							</div>
+						</div>
+						<span class="form-text text-muted"></span>
+					</div>
+
+					<div class="col-xl-12">
+						<div class="form-group">
+							<label for="cierre_contacto">Cierre de Contacto</label>
+							<textarea
+								class="form-control form-control-solid"
+								rows="5"
+								formControlName="cierre_contacto"
+								name="cierre_contacto"
+								readonly="all"
+							>
+							</textarea>
+						</div>
+					</div>
+				</div>
+
+				<!-- 
+				<div class="row">
+
+
+					<div class="btn-group">
+						<button type="button" (click)="submit()" class="btn btn-primary font-weight-bolder">
+							<i class="ki ki-check icon-sm"></i>
+							Guardar el Formulario
+						</button>
+					</div>
+				</div> -->
+			</ng-container>
+		</form>
+	</div>
+</div>
+<!--end::Form-->

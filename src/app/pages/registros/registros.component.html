@@ -1,145 +1,144 @@
-<div class="card card-custom">
+<div class="card card-custom card-sticky" id="kt_page_sticky_card">
+	<div class="card-header">
+		<div class="card-title">
+			<span class="card-icon">
+				<i class="flaticon2-delivery-package text-primary"></i>
+			</span>
+			<h3 class="card-label">Formulario de busqueda avanzada</h3>
+		</div>
+		<div class="card-toolbar">
+			<!--begin::Dropdown que no existe!!!! Fuck Jquery-->
+			<a (click)="exportAsXlsx()" class="btn btn-secondary font-weight-bolder">
+				<span class="svg-icon"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						width="24px"
+						height="24px"
+						viewBox="0 0 24 24"
+						version="1.1"
+					>
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24" />
+							<path
+								d="M21.4451171,17.7910156 C21.4451171,16.9707031 21.6208984,13.7333984 19.0671874,11.1650391 C17.3484374,9.43652344 14.7761718,9.13671875 11.6999999,9 L11.6999999,4.69307548 C11.6999999,4.27886191 11.3642135,3.94307548 10.9499999,3.94307548 C10.7636897,3.94307548 10.584049,4.01242035 10.4460626,4.13760526 L3.30599678,10.6152626 C2.99921905,10.8935795 2.976147,11.3678924 3.2544639,11.6746702 C3.26907199,11.6907721 3.28437331,11.7062312 3.30032452,11.7210037 L10.4403903,18.333467 C10.7442966,18.6149166 11.2188212,18.596712 11.5002708,18.2928057 C11.628669,18.1541628 11.6999999,17.9721616 11.6999999,17.7831961 L11.6999999,13.5 C13.6531249,13.5537109 15.0443703,13.6779456 16.3083984,14.0800781 C18.1284272,14.6590944 19.5349747,16.3018455 20.5280411,19.0083314 L20.5280247,19.0083374 C20.6363903,19.3036749 20.9175496,19.5 21.2321404,19.5 L21.4499999,19.5 C21.4499999,19.0068359 21.4451171,18.2255859 21.4451171,17.7910156 Z"
+								fill="#000000"
+								fill-rule="nonzero"
+								transform="translate(12.254964, 11.721538) scale(-1, 1) translate(-12.254964, -11.721538) "
+							/>
+						</g></svg
+				></span>
+				Exportar
+			</a>
 
-  <div class="card-header">
-    <div class="card-title">
-      <span class="card-icon">
-        <i class="flaticon2-delivery-package text-primary"></i>
-      </span>
-      <h3 class="card-label">Formulario de busqueda avanzada</h3>
-    </div>
-    <div class="card-toolbar">
-      <!--begin::Dropdown que no existe!!!! Fuck Jquery-->
-      <a (click)="exportAsXlsx()" class="btn btn-secondary font-weight-bolder">
-        <span class="svg-icon"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            width="24px"
-            height="24px"
-            viewBox="0 0 24 24"
-            version="1.1"
-          >
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <rect x="0" y="0" width="24" height="24" />
-              <path
-                d="M21.4451171,17.7910156 C21.4451171,16.9707031 21.6208984,13.7333984 19.0671874,11.1650391 C17.3484374,9.43652344 14.7761718,9.13671875 11.6999999,9 L11.6999999,4.69307548 C11.6999999,4.27886191 11.3642135,3.94307548 10.9499999,3.94307548 C10.7636897,3.94307548 10.584049,4.01242035 10.4460626,4.13760526 L3.30599678,10.6152626 C2.99921905,10.8935795 2.976147,11.3678924 3.2544639,11.6746702 C3.26907199,11.6907721 3.28437331,11.7062312 3.30032452,11.7210037 L10.4403903,18.333467 C10.7442966,18.6149166 11.2188212,18.596712 11.5002708,18.2928057 C11.628669,18.1541628 11.6999999,17.9721616 11.6999999,17.7831961 L11.6999999,13.5 C13.6531249,13.5537109 15.0443703,13.6779456 16.3083984,14.0800781 C18.1284272,14.6590944 19.5349747,16.3018455 20.5280411,19.0083314 L20.5280247,19.0083374 C20.6363903,19.3036749 20.9175496,19.5 21.2321404,19.5 L21.4499999,19.5 C21.4499999,19.0068359 21.4451171,18.2255859 21.4451171,17.7910156 Z"
-                fill="#000000"
-                fill-rule="nonzero"
-                transform="translate(12.254964, 11.721538) scale(-1, 1) translate(-12.254964, -11.721538) "
-              />
-            </g></svg
-        ></span>
-        Exportar
-      </a>
-
-      &nbsp;
-      <!--end::Dropdown-->
-      <!--begin::Button-->
-      <a routerLink="/registro" class="btn btn-primary font-weight-bolder">
-        <span class="svg-icon svg-icon-md">
-          <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            width="24px"
-            height="24px"
-            viewBox="0 0 24 24"
-            version="1.1"
-          >
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <rect x="0" y="0" width="24" height="24"></rect>
-              <circle fill="#000000" cx="9" cy="15" r="6"></circle>
-              <path
-                d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                fill="#000000"
-                opacity="0.3"
-              ></path>
-            </g>
-          </svg>
-          <!--end::Svg Icon--> </span
-        >Nuevo Registro</a
-      >
-      <!--end::Button-->
-    </div>
-  </div>
-  <div class="card-body">
-    <!--begin: Search Form-->
-    <form class="mb-15">
-      <div class="row mb-6">
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Reg.Nro:</label>
-          <input
-            type="text"
-            class="form-control datatable-input"
-            placeholder="Ej: 4590"
-            data-col-index="0"
-          />
-        </div>
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Documento:</label>
-          <input
-            type="text"
-            class="form-control datatable-input"
-            placeholder="Ej:3275847"
-            data-col-index="1"
-            (keyup)="buscarDocumento(txtDni.value)"
-            #txtDni
-          />
-        </div>
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Usuario:</label>
-          <input
-            type="text"
-            class="form-control datatable-input"
-            placeholder="Nombre del usuario"
-            data-col-index="4"
-          />
-        </div>
-      </div>
-      <div class="row mb-8">
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Fecha de registro:</label>
-          <div class="input-daterange input-group" id="kt_datepicker">
-            <input
-              type="text"
-              class="form-control datatable-input"
-              name="start"
-              placeholder="Desde"
-              data-col-index="5"
-            />
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="la la-ellipsis-h"></i>
-              </span>
-            </div>
-            <input
-              type="text"
-              class="form-control datatable-input"
-              name="end"
-              placeholder="Hasta"
-              data-col-index="5"
-            />
-          </div>
-        </div>
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Tipo de Registro:</label>
-          <select class="form-control datatable-input" data-col-index="6">
-            <option value="">Seleccionar</option>
-            <option value="1">Sin sintomas</option>
-            <option value="2">Sintomas</option>
-          </select>
-        </div>
-        <div class="col-lg-3 mb-lg-0 mb-6">
-          <label>Localidad:</label>
-          <select class="form-control datatable-input data-col-index=2">
-            <option
-              value="localidad.nombre"
-              *ngFor="let localidad of localidades"
-            >
-              {{ localidad.nombre }}
-            </option>
-          </select>
-        </div>
+			&nbsp;
+			<!--end::Dropdown-->
+			<!--begin::Button-->
+			<a routerLink="/registro" class="btn btn-primary font-weight-bolder">
+				<span class="svg-icon svg-icon-md">
+					<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						width="24px"
+						height="24px"
+						viewBox="0 0 24 24"
+						version="1.1"
+					>
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24"></rect>
+							<circle fill="#000000" cx="9" cy="15" r="6"></circle>
+							<path
+								d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+								fill="#000000"
+								opacity="0.3"
+							></path>
+						</g>
+					</svg>
+					<!--end::Svg Icon--> </span
+				>Nuevo Registro</a
+			>
+			<!--end::Button-->
+		</div>
+	</div>
+	<div class="card-body">
+		<!--begin: Search Form-->
+		<form class="mb-15">
+			<div class="row mb-6">
+				<div class="col-lg-3 mb-lg-0 mb-6">
+					<label>Reg.Nro:</label>
+					<input
+						type="text"
+						class="form-control datatable-input"
+						placeholder="Ej: 4590"
+						data-col-index="0"
+					/>
+				</div>
+				<div class="col-lg-3 mb-lg-0 mb-6">
+					<label>Documento:</label>
+					<input
+						type="text"
+						class="form-control datatable-input"
+						placeholder="Ej:3275847"
+						data-col-index="1"
+						(keyup)="buscarDocumento(txtDni.value)"
+						#txtDni
+					/>
+				</div>
+				<div class="col-lg-3 mb-lg-0 mb-6">
+					<label>Usuario:</label>
+					<input
+						type="text"
+						class="form-control datatable-input"
+						placeholder="Nombre del usuario"
+						data-col-index="4"
+					/>
+				</div>
+			</div>
+			<div class="row mb-8">
+				<div class="col-lg-3 mb-lg-0 mb-6">
+					<label>Fecha de registro:</label>
+					<div class="input-daterange input-group" id="kt_datepicker">
+						<input
+							type="text"
+							class="form-control datatable-input"
+							name="start"
+							placeholder="Desde"
+							data-col-index="5"
+						/>
+						<div class="input-group-append">
+							<span class="input-group-text">
+								<i class="la la-ellipsis-h"></i>
+							</span>
+						</div>
+						<input
+							type="text"
+							class="form-control datatable-input"
+							name="end"
+							placeholder="Hasta"
+							data-col-index="5"
+						/>
+					</div>
+				</div>
+				<div class="col-lg-3 mb-lg-0 mb-6">
+					<label>Tipo de Registro:</label>
+					<select class="form-control datatable-input" data-col-index="6">
+						<option value="">Seleccionar</option>
+						<option value="1">Sin sintomas</option>
+						<option value="2">Sintomas</option>
+					</select>
+				</div>
+				<div class="col-lg-3 mb-lg-0 mb-6">
+					<label>Localidad:</label>
+					<select class="form-control datatable-input data-col-index=2">
+						<option
+							value="localidad.nombre"
+							*ngFor="let localidad of localidades"
+						>
+							{{ localidad.nombre }}
+						</option>
+					</select>
+				</div>
 
 				<!-- <div class="col-lg-3 mb-lg-0 mb-6">
           <label>Type:</label>
@@ -294,7 +293,7 @@
 									><span class="font-weight-bold text-danger">Online</span>
 								</td>
 								<td>
-									<div class="dropdown dropdown-inline">
+									<!-- <div class="dropdown dropdown-inline">
 										<a
 											href="javascript:;"
 											class="btn btn-sm btn-clean btn-icon"
@@ -325,8 +324,41 @@
 													>
 												</li>
 											</ul>
-										</div>
-									</div>
+										</div> 
+									</div>-->
+									<a
+										routerLink="/mostrar"
+										class="btn btn-primary font-weight-bolder"
+										(click)="Mostrar(f)"
+									>
+										<span class="svg-icon svg-icon-md">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												xmlns:xlink="http://www.w3.org/1999/xlink"
+												width="24px"
+												height="24px"
+												viewBox="0 0 24 24"
+												version="1.1"
+											>
+												<g
+													stroke="none"
+													stroke-width="1"
+													fill="none"
+													fill-rule="evenodd"
+												>
+													<rect x="0" y="0" width="24" height="24"></rect>
+													<circle fill="#000000" cx="9" cy="15" r="6"></circle>
+													<path
+														d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+														fill="#000000"
+														opacity="0.3"
+													></path>
+												</g>
+											</svg>
+											<!--end::Svg Icon--> </span
+										>Ver</a
+									>
 									<a
 										href="javascript:;"
 										class="btn btn-sm btn-clean btn-icon"

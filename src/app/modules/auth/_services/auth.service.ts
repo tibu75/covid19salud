@@ -57,7 +57,7 @@ export class AuthService implements OnDestroy {
 		return this.authHttpService.login(documento, password).pipe(
 			map((auth: any) => {
 				const result = this.setAuthFromSessionStorage(auth);
-				// console.log(auth);
+				// //console.log(auth);
 				return result;
 			}),
 			switchMap(() => this.getUserByToken()),
@@ -73,8 +73,11 @@ export class AuthService implements OnDestroy {
 		sessionStorage.removeItem(this.authSessionStorageToken);
 		sessionStorage.removeItem(this.authSessionStorageId);
 		sessionStorage.removeItem(this.authSessionStorageUser);
-		this.ngZone.run(() => {
+		/* this.ngZone.run(() => {
 			this.router.navigateByUrl("/auth/login");
+		}); */
+		this.router.navigate(["/auth/login"], {
+			queryParams: {},
 		});
 	}
 	/* this.router.navigate(["/auth/login"], {
@@ -90,10 +93,10 @@ export class AuthService implements OnDestroy {
 		}
 
 		this.isLoadingSubject.next(true);
-		// console.log("paso2");
+		// //console.log("paso2");
 		return this.authHttpService.getUserByToken(id).pipe(
 			map((user: UserModel) => {
-				// console.log("paso3", user);
+				// //console.log("paso3", user);
 				if (user) {
 					this.currentUserSubject = new BehaviorSubject<UserModel>(user);
 				} else {

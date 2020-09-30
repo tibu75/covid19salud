@@ -15,13 +15,15 @@ export class AuthGuard implements CanActivate {
 		const currentUser = sessionStorage.getItem("token");
 		if (currentUser === null) {
 			// logged in so return true
-			this.authService.logout();
+			this.router.navigate(["/auth/login"], {
+				queryParams: {},
+			});
 			return false;
 		}
 
-		console.log("Bloq for the guard");
+		////console.log("Bloq for the guard");
 		// not logged in so redirect to login page with the return url
-		//console.log("currentUser", currentUser);
+		////console.log("currentUser", currentUser);
 		return true;
 	}
 }

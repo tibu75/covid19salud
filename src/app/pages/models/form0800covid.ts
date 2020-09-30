@@ -4,11 +4,16 @@ export class Forms {
 		public fecha: string,
 		public tipo_registro: string,
 		public motivo_consulta: string,
-		public atencion_domiciliaria: boolean,
-		public cert_aislamiento: boolean,
-		public resultado_hisopado: boolean,
-		public derivacion_107: boolean,
-		public mov_propia: boolean,
+		public atencion_domiciliaria: string,
+		public obs_atencion_domiciliaria: string,
+		public cert_aislamiento: string,
+		public obs_cert_aislamiento: string,
+		public resultado_hisopado: string,
+		public obs_resultado_hisopado: string,
+		public derivacion_107: string,
+		public obs_derivacion_107: string,
+		public mov_propia: string,
+		public obs_mov_propia: string,
 		public criterio_hisopado: string,
 		public realizo_hisopado: string,
 		public fecha_ini_sint: string,
@@ -24,26 +29,26 @@ export class Forms {
 			apellido: string;
 			documento: string;
 			fechaNacimiento: string;
+			edad: string;
 			sexo: string;
 			telefono: string;
 			calle: string;
 			numero: string;
 			departamento: string;
 			piso: string;
+			cpostal: string;
 			localidad: string;
 			provincia: string;
 			pais: string;
 			img: string;
 		},
-		public trabajo: [
-			{
-				lugar: string;
-				telefonol: string;
-				callel: string;
-				numerol: string;
-				localidadl: string;
-			}
-		],
+		public trabajo: {
+			lugar: string;
+			telefonol: string;
+			callel: string;
+			numerol: string;
+			localidadl: string;
+		},
 		public cierre_contacto: string,
 		public usuario: string
 	) {}
