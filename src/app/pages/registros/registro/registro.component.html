@@ -9,12 +9,19 @@
 					</h3>
 				</div>
 				<div class="col-4" style="text-align: left">
-					<a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
+					<a
+						routerLink="/registros"
+						class="btn btn-light-primary font-weight-bolder mr-2"
+					>
 						<i class="ki ki-long-arrow-back icon-sm"></i>
 						Volver
 					</a>
 					<div class="btn-group" *ngIf="cargar_datos">
-						<button type="button" (click)="validar()" class="btn btn-primary font-weight-bolder">
+						<button
+							type="button"
+							(click)="validar()"
+							class="btn btn-primary font-weight-bolder"
+						>
 							<i class="ki ki-check icon-sm"></i>
 							Guardar el Formulario
 						</button>
@@ -36,10 +43,19 @@
 							<div class="col-4" style="min-width: 300px">
 								<h4 class="text">Buscar datos de Persona</h4>
 								<div class="form-group" style="margin-top: 10px">
-									<label for="recipient-name" class="control-label" style="margin-top: 20px">Ingrese
-										el Numero de Documento:</label>
-									<input type="text" formControlName="documento" class="form-control" id="documento"
-										placeholder="Numero de Documento" />
+									<label
+										for="recipient-name"
+										class="control-label"
+										style="margin-top: 20px"
+										>Ingrese el Numero de Documento:</label
+									>
+									<input
+										type="text"
+										formControlName="documento"
+										class="form-control"
+										id="documento"
+										placeholder="Numero de Documento"
+									/>
 								</div>
 							</div>
 
@@ -47,24 +63,41 @@
 								<div class="col-12 justify-content-center">
 									<h4 class="text">Seleccione el Sexo</h4>
 									<label style="margin-right: 20px">
-										<input type="radio" name="sexo" value="M" formControlName="sexo"
-											[(ngModel)]="sexo" checked />
+										<input
+											type="radio"
+											name="sexo"
+											value="M"
+											formControlName="sexo"
+											[(ngModel)]="sexo"
+											checked
+										/>
 										<i class="ti-check text-active" aria-hidden="true"></i>
 										Masculino
 									</label>
 									<label>
-										<input type="radio" name="sexo" formControlName="sexo" [(ngModel)]="sexo"
-											value="F" />
+										<input
+											type="radio"
+											name="sexo"
+											formControlName="sexo"
+											[(ngModel)]="sexo"
+											value="F"
+										/>
 										<i class="ti-check text-active" aria-hidden="true"></i>
 										Femenino
 									</label>
 								</div>
 							</div>
-							<div class="col-4 d-flex justify-content-center" style="min-width: 300px">
+							<div
+								class="col-4 d-flex justify-content-center"
+								style="min-width: 300px"
+							>
 								<div class="row">
-									<button type="button" (click)="renaper()"
+									<button
+										type="button"
+										(click)="renaper()"
 										class="btn btn-light-primary font-weight-bolder mr-2 btn-lg"
-										style="height: 65px; width: 200px">
+										style="height: 65px; width: 200px"
+									>
 										Buscar Persona
 									</button>
 								</div>
@@ -79,7 +112,8 @@
 				<h4 class="text-dark font-weight-bold">
 					<small>
 						**Consultando los datos en los servicios de Renaper, por favor
-						espere!</small>
+						espere!</small
+					>
 				</h4>
 			</ng-container>
 
@@ -98,8 +132,12 @@
 					<div class="row">
 						<div class="col-2 padding-1">
 							<div class="rowfoto" style="margin-top: 18px">
-								<img id="foto" *ngIf="personaForm.get('persona.img').value"
-									[src]="personaForm.get('persona.img').value" class="img-50" />
+								<img
+									id="foto"
+									*ngIf="personaForm.get('persona.img').value"
+									[src]="personaForm.get('persona.img').value"
+									class="img-50"
+								/>
 							</div>
 						</div>
 
@@ -108,9 +146,14 @@
 								<div class="col-xl-2 col-documento padding-1">
 									<div class="form-group">
 										<label>Documento</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="documento" name="documento" placeholder=""
-											readonly="all" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="documento"
+											name="documento"
+											placeholder=""
+											readonly="all"
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -118,8 +161,14 @@
 								<div class="col-xl-1 col-sexo padding-1">
 									<div class="form-group">
 										<label>Sexo</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="sexo" name="sexo" placeholder="" readonly="all" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="sexo"
+											name="sexo"
+											placeholder=""
+											readonly="all"
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -127,8 +176,14 @@
 								<div class="col-xl-1 col-edad padding-1">
 									<div class="form-group">
 										<label>Edad</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="edad" name="edad" placeholder="" readonly="all" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="edad"
+											name="edad"
+											placeholder=""
+											readonly="all"
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -136,8 +191,14 @@
 								<div class="col-xl-3 col-nombre padding-1">
 									<div class="form-group">
 										<label>Nombre/s</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="nombre" name="nombre" placeholder="" readonly="all" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="nombre"
+											name="nombre"
+											placeholder=""
+											readonly="all"
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -145,8 +206,14 @@
 								<div class="col-xl-3 col-apellido padding-1">
 									<div class="form-group">
 										<label>Apellido/s</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="apellido" name="apellido" placeholder="" readonly="all" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="apellido"
+											name="apellido"
+											placeholder=""
+											readonly="all"
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -154,11 +221,17 @@
 								<div class="col-xl-2 col-telefono padding-1">
 									<div class="form-group">
 										<label>Teléfono</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="telefono" name="telefono" [class.is-invalid]="telNoValido"
-											placeholder="10 dígitos" />
-										<small *ngIf="telNoValido" class="text-danger">Debe ingresar un número de
-											contacto!</small>
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="telefono"
+											name="telefono"
+											[class.is-invalid]="telNoValido"
+											placeholder="10 dígitos"
+										/>
+										<small *ngIf="telNoValido" class="text-danger"
+											>Debe ingresar un número de contacto!</small
+										>
 									</div>
 								</div>
 							</div>
@@ -168,8 +241,13 @@
 								<div class="col-xl-2 col-calle padding-1">
 									<div class="form-group">
 										<label>Calle</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="calle" name="calle" placeholder="" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="calle"
+											name="calle"
+											placeholder=""
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -177,16 +255,26 @@
 								<div class="col-xl-2 col-numero padding-1">
 									<div class="form-group">
 										<label>Número</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="numero" name="numero" placeholder="" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="numero"
+											name="numero"
+											placeholder=""
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
 								<div class="col-xl-2 col-numero padding-1">
 									<div class="form-group">
 										<label>Piso</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="piso" name="piso" placeholder="" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="piso"
+											name="piso"
+											placeholder=""
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -194,8 +282,13 @@
 								<div class="col-xl-1 col-departamento padding-1">
 									<div class="form-group">
 										<label>Dpto</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="departamento" name="departamento" placeholder="" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="departamento"
+											name="departamento"
+											placeholder=""
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -205,7 +298,10 @@
 										<label>Localidad</label>
 										<select class="form-control" formControlName="localidad">
 											<option [value]="">Seleccione una localidad</option>
-											<option *ngFor="let localidad of localidades" [value]="localidad.nombre">
+											<option
+												*ngFor="let localidad of localidades"
+												[value]="localidad.nombre"
+											>
 												{{ localidad.nombre }}
 											</option>
 										</select>
@@ -216,8 +312,13 @@
 								<div class="col-2 col-cpostal padding-1">
 									<div class="form-group">
 										<label>CP</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="cpostal" name="cpostal" placeholder="" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="cpostal"
+											name="cpostal"
+											placeholder=""
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -225,8 +326,13 @@
 								<div class="col-xl-2 col-provincia padding-1">
 									<div class="form-group">
 										<label>Provincia</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="provincia" name="provincia" placeholder="" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="provincia"
+											name="provincia"
+											placeholder=""
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -234,8 +340,13 @@
 								<div class="col-xl-2 col-pais padding-1">
 									<div class="form-group">
 										<label>Pais</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="pais" name="pais" placeholder="" />
+										<input
+											class="form-control form-control-solid"
+											type="text"
+											formControlName="pais"
+											name="pais"
+											placeholder=""
+										/>
 										<span class="form-text text-muted"></span>
 									</div>
 								</div>
@@ -246,9 +357,16 @@
 				<div class="row">
 					<div class="col-12 form-group">
 						<label for="motivo_consulta">Motivo Consulta</label>
-						<textarea class="form-control form-control-solid" rows="3" formControlName="motivo_consulta"
-							name="motivo_consulta" [class.is-invalid]="motivoNoValido"></textarea>
-						<small *ngIf="motivoNoValido" class="text-danger">Debe ingresar un número de contacto!</small>
+						<textarea
+							class="form-control form-control-solid"
+							rows="3"
+							formControlName="motivo_consulta"
+							name="motivo_consulta"
+							[class.is-invalid]="motivoNoValido"
+						></textarea>
+						<small *ngIf="motivoNoValido" class="text-danger"
+							>Debe ingresar un número de contacto!</small
+						>
 					</div>
 				</div>
 				<div class="my-5 separator separator-dashed"></div>
@@ -257,14 +375,25 @@
 						<h3 class="text-dark font-weight-bold">Presenta Sintomas?</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
-								<input type="radio" name="tipo_registro" value="Sintomas"
-									formControlName="tipo_registro" [(ngModel)]="tipo_registro" />
+								<input
+									type="radio"
+									name="tipo_registro"
+									value="Sintomas"
+									formControlName="tipo_registro"
+									[(ngModel)]="tipo_registro"
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								SI
 							</label>
 							<label>
-								<input type="radio" name="tipo_registro" formControlName="tipo_registro"
-									value="Sin Sintomas" [(ngModel)]="tipo_registro" checked />
+								<input
+									type="radio"
+									name="tipo_registro"
+									formControlName="tipo_registro"
+									value="Sin Sintomas"
+									[(ngModel)]="tipo_registro"
+									checked
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								NO
 							</label>
@@ -275,21 +404,34 @@
 							<div class="col-3">
 								<div class="form-group">
 									<label for="start">Inicio de Síntomas</label>
-									<input id="start" class="form-control form-control-solid" type="date"
-										formControlName="fecha_ini_sint" name="fecha_ini_sint" max="{{ fechahoy }}"
-										[class.is-invalid]="fechaNoValido" />
-									<small *ngIf="fechaNoValido" class="text-danger">Debe ingresar una
-										fecha!</small>
+									<input
+										id="start"
+										class="form-control form-control-solid"
+										type="date"
+										formControlName="fecha_ini_sint"
+										name="fecha_ini_sint"
+										max="{{ fechahoy }}"
+										[class.is-invalid]="fechaNoValido"
+									/>
+									<small *ngIf="fechaNoValido" class="text-danger"
+										>Debe ingresar una fecha!</small
+									>
 								</div>
 							</div>
 							<div class="col-xl-9">
 								<div class="form-group">
 									<label>Síntomas Actuales</label>
-									<input class="form-control form-control-solid" type="text"
-										formControlName="sintomas" name="sintomas" placeholder=""
-										[class.is-invalid]="sintomaNoValido" />
-									<small *ngIf="sintomaNoValido" class="text-danger">Debe ingresar los
-										sintomas que posee!</small>
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="sintomas"
+										name="sintomas"
+										placeholder=""
+										[class.is-invalid]="sintomaNoValido"
+									/>
+									<small *ngIf="sintomaNoValido" class="text-danger"
+										>Debe ingresar los sintomas que posee!</small
+									>
 								</div>
 							</div>
 						</div>
@@ -298,21 +440,33 @@
 								<div class="form-group">
 									<label>Posee antecedentes Personales?</label>
 
-									<input class="form-control form-control-solid" type="text"
-										formControlName="antencedentes_p" name="antencedentes_p" placeholder=""
-										[class.is-invalid]="antecedentesNoValido" />
-									<small *ngIf="antecedentesNoValido" class="text-danger">Debe ingresar un
-										dato!</small>
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="antencedentes_p"
+										name="antencedentes_p"
+										placeholder=""
+										[class.is-invalid]="antecedentesNoValido"
+									/>
+									<small *ngIf="antecedentesNoValido" class="text-danger"
+										>Debe ingresar un dato!</small
+									>
 								</div>
 							</div>
 							<div class="col-xl-12">
 								<div class="form-group">
 									<label>Tiene alguna Enfermedad?</label>
-									<input class="form-control form-control-solid" type="text"
-										formControlName="enfermedad_pre" name="enfermedad_pre" placeholder=""
-										[class.is-invalid]="enfermedadNoValido" />
-									<small *ngIf="enfermedadNoValido" class="text-danger">Debe ingresar algun
-										dato!</small>
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="enfermedad_pre"
+										name="enfermedad_pre"
+										placeholder=""
+										[class.is-invalid]="enfermedadNoValido"
+									/>
+									<small *ngIf="enfermedadNoValido" class="text-danger"
+										>Debe ingresar algun dato!</small
+									>
 								</div>
 							</div>
 						</div>
@@ -320,21 +474,33 @@
 							<div class="col-9 padding-1">
 								<div class="form-group">
 									<label>Toma algún Medicamento?</label>
-									<input class="form-control form-control-solid" type="text"
-										formControlName="toma_medicamentos" name="toma_medicamentos" placeholder=""
-										[class.is-invalid]="medicamentoNoValido" />
-									<small *ngIf="medicamentoNoValido" class="text-danger">Debe ingresar algun
-										dato!</small>
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="toma_medicamentos"
+										name="toma_medicamentos"
+										placeholder=""
+										[class.is-invalid]="medicamentoNoValido"
+									/>
+									<small *ngIf="medicamentoNoValido" class="text-danger"
+										>Debe ingresar algun dato!</small
+									>
 								</div>
 							</div>
 							<div class="col-3 padding-1">
 								<div class="form-group">
 									<label>Con cuántas personas Convive?</label>
-									<input class="form-control form-control-solid" type="text"
-										formControlName="vivienda_personas" name="vivienda_personas"
-										placeholder="Numero de Personas" [class.is-invalid]="conviveNoValido" />
-									<small *ngIf="conviveNoValido" class="text-danger">Debe ingresar un numero
-										de personas!</small>
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="vivienda_personas"
+										name="vivienda_personas"
+										placeholder="Numero de Personas"
+										[class.is-invalid]="conviveNoValido"
+									/>
+									<small *ngIf="conviveNoValido" class="text-danger"
+										>Debe ingresar un numero de personas!</small
+									>
 								</div>
 							</div>
 						</div>
@@ -343,32 +509,52 @@
 							<div class="col-xl-3 padding-1">
 								<div class="form-group">
 									<label>Lugar de Trabajo Actual</label>
-									<input class="form-control form-control-solid" type="text" formControlName="lugar"
-										name="lugar" placeholder="" />
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="lugar"
+										name="lugar"
+										placeholder=""
+									/>
 									<span class="form-text text-muted"></span>
 								</div>
 							</div>
 							<div class="col-xl-2 col-telefono padding-1">
 								<div class="form-group">
 									<label>Teléfono Laboral</label>
-									<input class="form-control form-control-solid" type="text"
-										formControlName="telefonol" name="telefonol" placeholder="" />
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="telefonol"
+										name="telefonol"
+										placeholder=""
+									/>
 									<span class="form-text text-muted"></span>
 								</div>
 							</div>
 							<div class="col-xl-3 col-calle padding-1">
 								<div class="form-group">
 									<label>Calle</label>
-									<input class="form-control form-control-solid" type="text" formControlName="callel"
-										name="callel" placeholder="" />
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="callel"
+										name="callel"
+										placeholder=""
+									/>
 									<span class="form-text text-muted"></span>
 								</div>
 							</div>
 							<div class="col-xl-2 col-numero padding-1">
 								<div class="form-group">
 									<label>Número</label>
-									<input class="form-control form-control-solid" type="text" formControlName="numerol"
-										name="numerol" placeholder="" />
+									<input
+										class="form-control form-control-solid"
+										type="text"
+										formControlName="numerol"
+										name="numerol"
+										placeholder=""
+									/>
 									<span class="form-text text-muted"></span>
 								</div>
 							</div>
@@ -378,7 +564,10 @@
 									<label>Localidad</label>
 									<select class="form-control" formControlName="localidadl">
 										<option [value]="">Seleccione una localidad</option>
-										<option *ngFor="let localidad of localidades" [value]="localidad.nombre">
+										<option
+											*ngFor="let localidad of localidades"
+											[value]="localidad.nombre"
+										>
 											{{ localidad.nombre }}
 										</option>
 									</select>
@@ -389,21 +578,32 @@
 					</div>
 				</div>
 				<div class="my-5 separator separator-dashed"></div>
-				<div class="col-12 form-group" >
+				<div class="col-12 form-group">
 					<div class="row">
 						<h3 class="text-dark font-weight-bold">
 							Se ha realizado un hisopado?
 						</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
-								<input type="radio" name="realizo_hisopado" value="Si"
-									formControlName="realizo_hisopado" [(ngModel)]="realizo_hisopado" />
+								<input
+									type="radio"
+									name="realizo_hisopado"
+									value="Si"
+									formControlName="realizo_hisopado"
+									[(ngModel)]="realizo_hisopado"
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								SI
 							</label>
 							<label>
-								<input type="radio" name="realizo_hisopado" formControlName="realizo_hisopado"
-									value="No" [(ngModel)]="realizo_hisopado" checked />
+								<input
+									type="radio"
+									name="realizo_hisopado"
+									formControlName="realizo_hisopado"
+									value="No"
+									[(ngModel)]="realizo_hisopado"
+									checked
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								NO
 							</label>
@@ -414,35 +614,63 @@
 					<div class="row">
 						<div class="form-group col-9">
 							<label>Lugar de Hisopado</label>
-							<input class="form-control form-control-solid" type="text" formControlName="lugar_hisopado"
-								name="lugar_hisopado" placeholder="" [class.is-invalid]="lugarhisoNoValido" />
-							<small *ngIf="lugarhisoNoValido" class="text-danger">Debe ingresar una
-								Lugar!</small>
+							<input
+								class="form-control form-control-solid"
+								type="text"
+								formControlName="lugar_hisopado"
+								name="lugar_hisopado"
+								placeholder=""
+								[class.is-invalid]="lugarhisoNoValido"
+							/>
+							<small *ngIf="lugarhisoNoValido" class="text-danger"
+								>Debe ingresar un Lugar de Hisopado!</small
+							>
 						</div>
 						<div class="form-group col-3">
 							<label for="start1">Fecha de Hisopado</label>
-							<input class="form-control form-control-solid" type="date" id="start1"
-								formControlName="fecha_hisopado" name="fecha_hisopado" min=" {{ fechamin }}"
-								max="{{ fechahoy }}" [class.is-invalid]="fechahisoNoValido" />
-							<small *ngIf="fechahisoNoValido" class="text-danger">Debe ingresar una
-								fecha!</small>
+							<input
+								class="form-control form-control-solid"
+								type="date"
+								id="start1"
+								formControlName="fecha_hisopado"
+								name="fecha_hisopado"
+								min=" {{ fechamin }}"
+								max="{{ fechahoy }}"
+								[class.is-invalid]="fechahisoNoValido"
+							/>
+							<small *ngIf="fechahisoNoValido" class="text-danger"
+								>Debe ingresar una fecha!</small
+							>
 						</div>
 					</div>
 				</div>
 				<div class="my-5 separator separator-dashed"></div>
 				<div class="col-12 form-group">
 					<div class="row">
-						<h3 class="text-dark font-weight-bold">Derivación para Atención Domiciliaria?</h3>
+						<h3 class="text-dark font-weight-bold">
+							Derivación para Atención Domiciliaria?
+						</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
-								<input type="radio" name="atencion_domiciliaria" value="Si"
-									formControlName="atencion_domiciliaria" [(ngModel)]="atencion_domiciliaria" />
+								<input
+									type="radio"
+									name="atencion_domiciliaria"
+									value="Si"
+									formControlName="atencion_domiciliaria"
+									[(ngModel)]="atencion_domiciliaria"
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								SI
 							</label>
 							<label>
-								<input type="radio" name="atencion_domiciliaria" formControlName="atencion_domiciliaria"
-									value="No" [(ngModel)]="atencion_domiciliaria" checked />
+								<input
+									type="radio"
+									name="atencion_domiciliaria"
+									formControlName="atencion_domiciliaria"
+									value="No"
+									[(ngModel)]="atencion_domiciliaria"
+									checked
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								NO
 							</label>
@@ -452,28 +680,48 @@
 				<div *ngIf="atencion_domiciliaria === 'Si'">
 					<div class="row">
 						<div class="col-12 form-group">
-							<input class="form-control form-control-solid" type="text"
-								formControlName="obs_atencion_domiciliaria" name="obs_atencion_domiciliaria"
-								placeholder="" [class.is-invalid]="lugarhisoNoValido" />
-							<small *ngIf="lugarhisoNoValido" class="text-danger">Debe ingresar una
-								Lugar!</small>
+							<input
+								class="form-control form-control-solid"
+								type="text"
+								formControlName="obs_atencion_domiciliaria"
+								name="obs_atencion_domiciliaria"
+								placeholder=""
+								[class.is-invalid]="atencionNoValido"
+							/>
+							<small *ngIf="atencionNoValido" class="text-danger"
+								>Debe ingresar si se realiza Derivación para Atención
+								Domiciliaria!</small
+							>
 						</div>
 					</div>
 				</div>
 				<span class="form-text text-muted"></span>
 				<div class="col-12 form-group">
 					<div class="row">
-						<h3 class="text-dark font-weight-bold">Requiere Certificado de Aislamiento?</h3>
+						<h3 class="text-dark font-weight-bold">
+							Requiere Certificado de Aislamiento?
+						</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
-								<input type="radio" name="cert_aislamiento" value="Si"
-									formControlName="cert_aislamiento" [(ngModel)]="cert_aislamiento" />
+								<input
+									type="radio"
+									name="cert_aislamiento"
+									value="Si"
+									formControlName="cert_aislamiento"
+									[(ngModel)]="cert_aislamiento"
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								SI
 							</label>
 							<label>
-								<input type="radio" name="cert_aislamiento" formControlName="cert_aislamiento"
-									value="No" [(ngModel)]="cert_aislamiento" checked />
+								<input
+									type="radio"
+									name="cert_aislamiento"
+									formControlName="cert_aislamiento"
+									value="No"
+									[(ngModel)]="cert_aislamiento"
+									checked
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								NO
 							</label>
@@ -483,28 +731,47 @@
 				<div *ngIf="cert_aislamiento === 'Si'">
 					<div class="row">
 						<div class="form-group col-12">
-							<input class="form-control form-control-solid" type="text"
-								formControlName="obs_cert_aislamiento" name="obs_cert_aislamiento" placeholder=""
-								[class.is-invalid]="lugarhisoNoValido" />
-							<small *ngIf="lugarhisoNoValido" class="text-danger">Debe ingresar una
-								Lugar!</small>
+							<input
+								class="form-control form-control-solid"
+								type="text"
+								formControlName="obs_cert_aislamiento"
+								name="obs_cert_aislamiento"
+								placeholder=""
+								[class.is-invalid]="certificadoNoValido"
+							/>
+							<small *ngIf="certificadoNoValido" class="text-danger"
+								>Debe ingresar si Solicita Certificado!</small
+							>
 						</div>
 					</div>
 				</div>
 				<span class="form-text text-muted"></span>
 				<div class="col-12 form-group">
 					<div class="row">
-						<h3 class="text-dark font-weight-bold">Solicita resultado de Hisopado?</h3>
+						<h3 class="text-dark font-weight-bold">
+							Solicita resultado de Hisopado?
+						</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
-								<input type="radio" name="resultado_hisopado" value="Si"
-									formControlName="resultado_hisopado" [(ngModel)]="resultado_hisopado" />
+								<input
+									type="radio"
+									name="resultado_hisopado"
+									value="Si"
+									formControlName="resultado_hisopado"
+									[(ngModel)]="resultado_hisopado"
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								SI
 							</label>
 							<label>
-								<input type="radio" name="resultado_hisopado" formControlName="resultado_hisopado"
-									value="No" [(ngModel)]="resultado_hisopado" checked />
+								<input
+									type="radio"
+									name="resultado_hisopado"
+									formControlName="resultado_hisopado"
+									value="No"
+									[(ngModel)]="resultado_hisopado"
+									checked
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								NO
 							</label>
@@ -514,11 +781,17 @@
 				<div *ngIf="resultado_hisopado === 'Si'">
 					<div class="row">
 						<div class="form-group col-12">
-							<input class="form-control form-control-solid" type="text"
-								formControlName="obs_resultado_hisopado" name="obs_resultado_hisopado" placeholder=""
-								[class.is-invalid]="lugarhisoNoValido" />
-							<small *ngIf="lugarhisoNoValido" class="text-danger">Debe ingresar una
-								Lugar!</small>
+							<input
+								class="form-control form-control-solid"
+								type="text"
+								formControlName="obs_resultado_hisopado"
+								name="obs_resultado_hisopado"
+								placeholder=""
+								[class.is-invalid]="resultadoNoValido"
+							/>
+							<small *ngIf="resultadoNoValido" class="text-danger"
+								>Debe ingresar si Solicita Resultado de Hisopado!</small
+							>
 						</div>
 					</div>
 				</div>
@@ -528,14 +801,25 @@
 						<h3 class="text-dark font-weight-bold">Derivación 107?</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
-								<input type="radio" name="derivacion_107" value="Si" formControlName="derivacion_107"
-									[(ngModel)]="derivacion_107" />
+								<input
+									type="radio"
+									name="derivacion_107"
+									value="Si"
+									formControlName="derivacion_107"
+									[(ngModel)]="derivacion_107"
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								SI
 							</label>
 							<label>
-								<input type="radio" name="derivacion_107" formControlName="derivacion_107" value="No"
-									[(ngModel)]="derivacion_107" checked />
+								<input
+									type="radio"
+									name="derivacion_107"
+									formControlName="derivacion_107"
+									value="No"
+									[(ngModel)]="derivacion_107"
+									checked
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								NO
 							</label>
@@ -545,11 +829,17 @@
 				<div *ngIf="derivacion_107 === 'Si'">
 					<div class="row">
 						<div class="form-group col-12">
-							<input class="form-control form-control-solid" type="text"
-								formControlName="obs_derivacion_107" name="obs_derivacion_107" placeholder=""
-								[class.is-invalid]="lugarhisoNoValido" />
-							<small *ngIf="lugarhisoNoValido" class="text-danger">Debe ingresar una
-								Lugar!</small>
+							<input
+								class="form-control form-control-solid"
+								type="text"
+								formControlName="obs_derivacion_107"
+								name="obs_derivacion_107"
+								placeholder=""
+								[class.is-invalid]="derivacion107NoValido"
+							/>
+							<small *ngIf="derivacion107NoValido" class="text-danger"
+								>Debe ingresar si se Deriva al 107!</small
+							>
 						</div>
 					</div>
 				</div>
@@ -559,14 +849,25 @@
 						<h3 class="text-dark font-weight-bold">Tiene Movilidad?</h3>
 						<div class="col-2">
 							<label style="margin-right: 20px">
-								<input type="radio" name="mov_propia" value="Si" formControlName="mov_propia"
-									[(ngModel)]="mov_propia" />
+								<input
+									type="radio"
+									name="mov_propia"
+									value="Si"
+									formControlName="mov_propia"
+									[(ngModel)]="mov_propia"
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								SI
 							</label>
 							<label>
-								<input type="radio" name="mov_propia" formControlName="mov_propia" value="No"
-									[(ngModel)]="mov_propia" checked />
+								<input
+									type="radio"
+									name="mov_propia"
+									formControlName="mov_propia"
+									value="No"
+									[(ngModel)]="mov_propia"
+									checked
+								/>
 								<i class="ti-check text-active" aria-hidden="true"></i>
 								NO
 							</label>
@@ -576,10 +877,17 @@
 				<div *ngIf="mov_propia === 'Si'">
 					<div class="row">
 						<div class="form-group col-12">
-							<input class="form-control form-control-solid" type="text" formControlName="obs_mov_propia"
-								name="obs_mov_propia" placeholder="" [class.is-invalid]="lugarhisoNoValido" />
-							<small *ngIf="lugarhisoNoValido" class="text-danger">Debe ingresar una
-								Lugar!</small>
+							<input
+								class="form-control form-control-solid"
+								type="text"
+								formControlName="obs_mov_propia"
+								name="obs_mov_propia"
+								placeholder=""
+								[class.is-invalid]="movilidadNoValido"
+							/>
+							<small *ngIf="movilidadNoValido" class="text-danger"
+								>Debe ingresar si tiene Movilidad!</small
+							>
 						</div>
 					</div>
 				</div>
@@ -587,10 +895,17 @@
 				<div class="row">
 					<div class="col-12 form-group">
 						<h3 for="cierre_contacto">Cierre de Contacto</h3>
-						<textarea class="form-control form-control-solid" rows="3" formControlName="cierre_contacto"
-							name="cierre_contacto" [class.is-invalid]="cierreNoValido" style="width: 100%"></textarea>
-						<small *ngIf="cierreNoValido" class="text-danger">Debe ingresar un cierre con el
-							contacto!</small>
+						<textarea
+							class="form-control form-control-solid"
+							rows="3"
+							formControlName="cierre_contacto"
+							name="cierre_contacto"
+							[class.is-invalid]="cierreNoValido"
+							style="width: 100%"
+						></textarea>
+						<small *ngIf="cierreNoValido" class="text-danger"
+							>Debe ingresar un cierre con el contacto!</small
+						>
 					</div>
 				</div>
 			</ng-container>
