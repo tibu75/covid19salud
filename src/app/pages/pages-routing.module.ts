@@ -32,6 +32,13 @@ const routes: Routes = [
 					),
 			},
 			{
+				path: "llamada",
+				loadChildren: () =>
+					import("../pages/registros/llamada/llamada.module").then(
+						(m) => m.LlamadaModule
+					),
+			},
+			{
 				path: "registros",
 				loadChildren: () =>
 					import("../pages/registros/registros.module").then(

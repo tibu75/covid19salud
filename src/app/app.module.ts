@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxPaginationModule } from "ngx-pagination";
 import { ToastrModule } from "ngx-toastr";
 import { MostrarComponent } from "./pages/registros/mostrar/mostrar.component";
+import { LlamadaComponent } from "./pages/registros/llamada/llamada.component";
 
 function appInitializer(authService: AuthService) {
 	return () => {
@@ -49,7 +50,12 @@ export function getHighlightLanguages() {
 }
 
 @NgModule({
-	declarations: [AppComponent, RegistroComponent, MostrarComponent],
+	declarations: [
+		AppComponent,
+		RegistroComponent,
+		MostrarComponent,
+		LlamadaComponent,
+	],
 	imports: [
 		BrowserModule,
 		ToastrModule.forRoot({
