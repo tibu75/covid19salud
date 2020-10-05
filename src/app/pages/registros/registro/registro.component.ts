@@ -112,7 +112,7 @@ export class RegistroComponent implements OnInit {
       persona: this.fb.group({
         nombre: [datos ? datos.nombres : ""],
         apellido: [datos ? datos.apellido : ""],
-        documento: [datos ? datos.documento : "", Validators.required],
+        documento: [datos ? datos.documento : "",[Validators.required, Validators.maxLength(8)]],
         fechaNacimiento: [
           datos ? datos.fechaNacimiento : "",
           Validators.required,
@@ -142,7 +142,7 @@ export class RegistroComponent implements OnInit {
           datos ? datos.piso : "",
           [Validators.required, Validators.maxLength(2)],
         ],
-        localidad: [datos ? datos.ciudad : ["", Validators.required]],
+        localidad: ["", Validators.required],
         cpostal: [
           datos ? datos.cpostal : "",
           [Validators.required, Validators.maxLength(4)],
@@ -246,65 +246,22 @@ export class RegistroComponent implements OnInit {
       }
     });
   }
-  get telNoValido() {
-    return (
-      this.personaForm.get("persona.telefono").invalid &&
-      this.personaForm.get("persona.telefono").enabled
-    );
+  get campoDocumento() {
+    return this.personaForm.get("persona.documento");
   }
-  get motivoNoValido() {
-    return (
-      this.personaForm.get("llamada.motivo_consulta").invalid &&
-      this.personaForm.get("llamada.motivo_consulta").enabled &&
-      this.personaForm.get("llamada.motivo_consulta").touched
-    );
+  get campoTelefono() {
+    return this.personaForm.get("persona.telefono");
   }
-  get fechaNoValido() {
-    return this.personaForm.get("llamada.fecha_ini_sint").invalid;
+  get campoMotivo() {
+    return this.personaForm.get("llamada.motivo");
   }
-  get fechahisoNoValido() {
-    return this.personaForm.get("llamada.fecha_hisopado").invalid;
+  get campoFecha() {
+    return this.personaForm.get("llamada.fec_sintomas");
   }
-  get conviveNoValido() {
-    return this.personaForm.get("llamada.vivienda_personas").invalid;
+  get campoLocalidad() {
+    return this.personaForm.get("persona.localidad");
   }
-  get lugarhisoNoValido() {
-    return this.personaForm.get("llamada.lugar_hisopado").invalid;
-  }
-  get cierreNoValido() {
-    return (
-      this.personaForm.get("llamada.cierre_contacto").invalid &&
-      this.personaForm.get("llamada.cierre_contacto").enabled &&
-      this.personaForm.get("llamada.cierre_contacto").touched
-    );
-  }
-  get sintomaNoValido() {
-    return this.personaForm.get("llamada.sintomas").invalid;
-  }
-  get medicamentoNoValido() {
-    return this.personaForm.get("llamada.toma_medicamentos").invalid;
-  }
-  get enfermedadNoValido() {
-    return this.personaForm.get("llamada.enfermedad_pre").invalid;
-  }
-  get antecedentesNoValido() {
-    return this.personaForm.get("llamada.antencedentes_p").invalid;
-  }
-  get atencionNoValido() {
-    return this.personaForm.get("llamada.obs_atencion_domiciliaria").invalid;
-  }
-  get certificadoNoValido() {
-    return this.personaForm.get("llamada.obs_cert_aislamiento").invalid;
-  }
-  get resultadoNoValido() {
-    return this.personaForm.get("llamada.obs_resultado_hisopado").invalid;
-  }
-  get derivacion107NoValido() {
-    return this.personaForm.get("llamada.obs_derivacion_107").invalid;
-  }
-  get movilidadNoValido() {
-    return this.personaForm.get("llamada.obs_mov_propia").invalid;
-  }
+ 
 
   guardarForm(event: Event) {
     event.preventDefault();

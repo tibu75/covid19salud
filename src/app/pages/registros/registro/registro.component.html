@@ -16,8 +16,7 @@
 					<a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
 						<i class="ki ki-long-arrow-back icon-sm"></i>Volver</a>
 					<div class="btn-group" *ngIf="cargar_datos">
-						<button type="submit" [disabled]="personaForm.invalid"
-							class="btn btn-primary font-weight-bolder" (click)="guardarForm($event)">
+						<button type="submit" class="btn btn-primary font-weight-bolder" (click)="guardarForm($event)">
 							<i class="ki ki-check icon-sm"></i>
 							Guardar el Formulario
 						</button>
@@ -39,10 +38,13 @@
 											<input type="text" formControlName="documento" class="form-control"
 												id="documento" placeholder="Numero de Documento" />
 										</div>
-										<div *ngIf="personaForm.get('persona.documento').errors && personaForm.get('persona.documento').touched"
+										<div *ngIf="campoDocumento.errors && campoDocumento.touched"
 											class="text-danger">
-											<div *ngIf="personaForm.get('persona.documento').hasError('required')">
+											<div *ngIf="campoDocumento.hasError('required')">
 												El documento es requerido
+											</div>
+											<div *ngIf="campoDocumento.hasError('maxLength')">
+												El documento debe tener un Maximo de 8
 											</div>
 										</div>
 									</div>
@@ -164,16 +166,18 @@
 												<div class="col-xl-2 col-telefono padding-1">
 													<div class="">
 														<label>Teléfono</label>
-														<input class="form-control form-control-solid" type="text"
+														<input class="form-control form-control-solid is-danger" type="text"
 															formControlName="telefono" name="telefono"
 															placeholder="10 dígitos" />
-														<div *ngIf="personaForm.get('persona.telefono').errors && personaForm.get('persona.telefono').touched"
+														<div *ngIf="campoTelefono.errors && campoTelefono.touched"
 															class="text-danger">
-															<small *ngIf="personaForm.get('persona.telefono').hasError('required')">
-																Debe ingresar un
-															número de contacto!
+															<small *ngIf="campoTelefono.hasError('required')">
+																El Telefono es requerido
 															</small>
-														</div>														
+															<small *ngIf="campoTelefono.hasError('pattern')">
+																El teléfono ser de 10 dígitos
+															</small>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -221,15 +225,21 @@
 												<div class="col-xl-3 col-localidad padding-1">
 													<div class="">
 														<label>Localidad</label>
-														<select class="form-control" formControlName="localidad">
+														<select class="form-control is-danger" formControlName="localidad">
 															<option [value]="">
-																Seleccione una localidad
+																
 															</option>
 															<option *ngFor="let localidad of localidades"
 																[value]="localidad.nombre">
 																{{ localidad.nombre }}
 															</option>
 														</select>
+														<div *ngIf="campoLocalidad.errors && campoLocalidad.touched"
+															class="text-danger">
+															<small *ngIf="campoLocalidad.hasError('required')">
+																La Localidad es Requerida
+															</small>
+														</div>
 														<span class="form-text text-muted"></span>
 													</div>
 												</div>
@@ -334,6 +344,12 @@
 											<div class="col-12">
 												<textarea class="form-control form-control-solid" rows="3"
 													formControlName="motivo"></textarea>
+												<div *ngIf="campoMotivo.errors && campoMotivo.touched"
+													class="text-danger">
+													<div *ngIf="campoMotivo.hasError('required')">
+														El Motivo es requerido
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -363,6 +379,11 @@
 											<input class="form-control form-control-solid" type="date" id="start1"
 												formControlName="fec_sintomas" name="fec_sintomas" min=" {{ fechamin }}"
 												max="{{ fechahoy }}" />
+											<div *ngIf="campoFecha.errors && campoFecha.touched" class="text-danger">
+												<div *ngIf="campoFecha.hasError('required')">
+													La Fecha es requerida
+												</div>
+											</div>
 										</div>
 										<div class="col-9">
 											<label>Que síntomas tuvo o tiene</label>
