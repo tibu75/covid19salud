@@ -7,36 +7,37 @@ import { Forms } from "../../pages/models/form0800covid";
 import { Router } from "@angular/router";
 import { AuthService } from "../../modules/auth/_services/auth.service";
 import { Observable } from "rxjs";
+import { FormsLlamada } from "src/app/pages/models/form0800covid2";
 
 const API_USERS_URL = `${environment.apiUrl}/form`;
 
 @Injectable({
-  providedIn: "root",
+	providedIn: "root",
 })
 export class Form0800Service {
-  static getForms(params: any) {
-    throw new Error("Method not implemented.");
-  }
+	static getForms(params: any) {
+		throw new Error("Method not implemented.");
+	}
 
-  form: Forms;
+	form: FormsLlamada;
 
-  constructor(
-    private http: HttpClient,
-    public router: Router,
-    public authService: AuthService
-  ) {}
+	constructor(
+		private http: HttpClient,
+		public router: Router,
+		public authService: AuthService
+	) {}
 
-  getForms(desde: number): Observable<Form0800> {
-    let url = `${API_USERS_URL}/?desde=${desde}`;
-    return this.http.get<Form0800>(url);
-  }
+	getForms(desde: number): Observable<Form0800> {
+		let url = `${API_USERS_URL}/?desde=${desde}`;
+		return this.http.get<Form0800>(url);
+	}
 
-  crearForm(formData: Form0800) {
-    return this.http.post(API_USERS_URL, formData);
-  }
+	crearForm(formData: Form0800) {
+		return this.http.post(API_USERS_URL, formData);
+	}
 
-  getXls(): Observable<Form0800> {
-    let url = `${API_USERS_URL}/xls`;
-    return this.http.get<Form0800>(url);
-  }
+	getXls(): Observable<Form0800> {
+		let url = `${API_USERS_URL}/xls`;
+		return this.http.get<Form0800>(url);
+	}
 }
