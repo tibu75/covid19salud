@@ -1,0 +1,38 @@
+export class Persona{
+constructor(
+    public nombre: string,
+    public apellido: string,
+    public fechaNacimiento: Date,
+    public documento: string,
+    public cuil: string,
+    public sexo: string,
+    public calle: string,
+    public numero: string,
+    public piso: string,
+    public departamento: string,
+    public cpostal: string,
+    public barrio: string,
+    public monoblock: string,
+    public zona: string,
+    public localidad: string,
+    public provincia: string,
+    public pais: string,
+    public img: string,
+    public origenf: string,
+    public datos_contacto: {
+        telefono: string,
+        email: string,
+    },
+    public domicilio_postal: {
+        calle: string,
+        numero: string,
+        piso: string,
+        departamento: string,
+        cpostal: string,
+        barrio: string,
+        localidad: string,
+        provincia: string,
+    },
+    public usuario: string,
+){}
+}

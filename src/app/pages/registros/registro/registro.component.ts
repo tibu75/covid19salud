@@ -6,6 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { RenaperService } from "../../../services/ws/renaper.service";
+import {PersonaService} from "../../../services/persona/persona.service"
 import { Subscription, Observable, BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -15,6 +16,7 @@ import { Localidades } from "../../models/localidades";
 
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
+
 
 @Component({
   selector: "app-registro",
@@ -74,6 +76,7 @@ export class RegistroComponent implements OnInit {
 
   constructor(
     public _renaperService: RenaperService,
+    public _personaService: PersonaService,
     private router: Router,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
@@ -225,8 +228,8 @@ export class RegistroComponent implements OnInit {
       this.personaForm.get("persona.documento").value
     }&sexo=${this.personaForm.get("persona.sexo").value}`;
 
-    this._renaperService.getPersona(params).subscribe((data: any) => {
-      // //console.log("Datos Renaper");
+    this._personaService.getPersona(params).subscribe((data: any) => {
+     // console.log("Datos Renaper", data);
       ////console.log(data.datos);
       if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
         this.buscar_datos = false;
