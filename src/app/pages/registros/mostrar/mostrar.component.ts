@@ -6,7 +6,9 @@ import {
 } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Form0800Service } from "src/app/services/form0800/form0800.service";
 import { MostrarService } from "src/app/services/mostrar/mostrar.service";
+import { Forms } from "../../models/form0800covid";
 
 @Component({
 	selector: "app-mostrar",
@@ -23,21 +25,63 @@ export class MostrarComponent implements OnInit, AfterViewInit {
 	public mostrar_hisopado: boolean = false;
 	public mostrar_sintomas: boolean = false;
 	public cargar_datos: boolean = true;
-
-	sololectura: boolean;
+	public formtemp: Forms[] = [];
+	public form: Forms[] = [];
+	public cargando: boolean = true;
+	public paginaD: number = 0;
+	public totalForm: number = 0;
+	soloLectura: boolean;
+	dni: any = [];
 
 	constructor(
 		private router: Router,
 		private fb: FormBuilder,
 		public mostrarForm: MostrarService,
-		private cdr: ChangeDetectorRef
+		private cdr: ChangeDetectorRef,
+		private form0800Service: Form0800Service
 	) {}
 
 	ngOnInit(): void {
 		this.initForm();
+		this.cargarForms();
 	}
 	ngAfterViewInit(): void {
 		this.initForm();
+	}
+	Mostrar(idform) {
+		//console.log(idform);
+		this.mostrarForm.registro = idform;
+
+		this.cdr.markForCheck();
+	}
+
+	paginacion(valor: number) {
+		this.paginaD += valor;
+		if (this.paginaD < 0) {
+			this.paginaD = 0;
+		} else if (this.paginaD >= this.totalForm) {
+			this.paginaD -= valor;
+		}
+
+		this.cdr.markForCheck();
+		this.cargarForms();
+	}
+
+	cargarForms() {
+		this.cargando = true;
+		this.form0800Service
+			.getForms(this.paginaD)
+			.subscribe(({ total, forms }) => {
+				//   //console.log(this.form);
+				//debugger
+				this.form = forms;
+				this.formtemp = forms;
+				this.totalForm = total;
+				this.cdr.markForCheck();
+
+				this.cargando = false;
+				this.soloLectura = true;
+			});
 	}
 
 	initForm() {
