@@ -1,18 +1,26 @@
 import { Injectable } from "@angular/core";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
-
-const EXCEL_TYPE =
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { Router } from "@angular/router";
+/* const EXCEL_TYPE =
 	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-const EXCEL_EXTENSION = ".xlsx";
+const EXCEL_EXTENSION = ".xlsx"; */
 
+const API_USERS_URL = `${environment.apiUrl}/export`;
 @Injectable({
-	providedIn: "root",
+  providedIn: "root",
 })
 export class ExporterService {
-	constructor() {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-	public exportAsExcelFile(json: any[], excelFileName: string): void {
+  getXlsx() {
+    return this.http.get(API_USERS_URL);
+  }
+}
+
+/* public exportAsExcelFile(json: any[], excelFileName: string): void {
 		const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
 		//console.log("worksheet", worksheet);
 		const workbook: XLSX.WorkBook = {
@@ -35,5 +43,4 @@ export class ExporterService {
 			data,
 			fileName + "_BD_" + new Date().getTime() + EXCEL_EXTENSION
 		);
-	}
-}
+	} */

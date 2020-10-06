@@ -35,8 +35,8 @@ export class Form0800Service {
     return this.http.post(API_USERS_URL, formData);
   }
 
-  getXls(): Observable<Form0800> {
+  /*  getXls(): Observable<Form0800> {
     let url = `${API_USERS_URL}/xls`;
     return this.http.get<Form0800>(url);
-  }
+  } */
 }
