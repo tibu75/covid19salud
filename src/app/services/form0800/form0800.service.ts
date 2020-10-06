@@ -7,6 +7,7 @@ import { Forms } from "../../pages/models/form0800covid";
 import { Router } from "@angular/router";
 import { AuthService } from "../../modules/auth/_services/auth.service";
 import { Observable } from "rxjs";
+import { FormsLlamada } from "src/app/pages/models/form0800covid2";
 
 const API_USERS_URL = `${environment.apiUrl}/form`;
 
@@ -18,7 +19,7 @@ export class Form0800Service {
     throw new Error("Method not implemented.");
   }
 
-  form: Forms;
+  form: FormsLlamada;
 
   constructor(
     private http: HttpClient,
@@ -35,8 +36,8 @@ export class Form0800Service {
     return this.http.post(API_USERS_URL, formData);
   }
 
-  /*  getXls(): Observable<Form0800> {
+  getXls(): Observable<Form0800> {
     let url = `${API_USERS_URL}/xls`;
     return this.http.get<Form0800>(url);
-  } */
+  }
 }
