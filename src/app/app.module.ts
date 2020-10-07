@@ -27,13 +27,15 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { ToastrModule } from "ngx-toastr";
 import { MostrarComponent } from "./pages/registros/mostrar/mostrar.component";
 import { LlamadaComponent } from "./pages/registros/llamada/llamada.component";
+import { IndicadoresComponent } from "./pages/indicadores/indicadores.component";
+import { ExportarComponent } from "./pages/exportar/exportar.component";
 
 function appInitializer(authService: AuthService) {
-	return () => {
-		return new Promise((resolve) => {
-			authService.getUserByToken().subscribe().add(resolve);
-		});
-	};
+  return () => {
+    return new Promise((resolve) => {
+      authService.getUserByToken().subscribe().add(resolve);
+    });
+  };
 }
 
 /**
@@ -41,66 +43,68 @@ function appInitializer(authService: AuthService) {
  * The following will lazy load highlight.js core script (~9.6KB) + the selected languages bundle (each lang. ~1kb)
  */
 export function getHighlightLanguages() {
-	return [
-		{ name: "typescript", func: typescript },
-		{ name: "scss", func: scss },
-		{ name: "xml", func: xml },
-		{ name: "json", func: json },
-	];
+  return [
+    { name: "typescript", func: typescript },
+    { name: "scss", func: scss },
+    { name: "xml", func: xml },
+    { name: "json", func: json },
+  ];
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		RegistroComponent,
-		MostrarComponent,
-		LlamadaComponent,
-	],
-	imports: [
-		BrowserModule,
-		ToastrModule.forRoot({
-			timeOut: 5000,
-			positionClass: "toast-top-center",
-			preventDuplicates: true,
-		}),
-		BrowserAnimationsModule,
-		SplashScreenModule,
-		TranslateModule.forRoot(),
-		HttpClientModule,
-		HighlightModule,
-		ClipboardModule,
-		environment.isMockEnabled
-			? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
-					passThruUnknownUrl: true,
-					dataEncapsulation: false,
-			  })
-			: [],
-		AppRoutingModule,
-		InlineSVGModule.forRoot(),
-		NgbModule,
-		ReactiveFormsModule,
-		FormsModule,
-		NgxPaginationModule,
-	],
-	providers: [
-		{
-			provide: APP_INITIALIZER,
-			useFactory: appInitializer,
-			multi: true,
-			deps: [AuthService],
-		},
-		{
-			provide: HIGHLIGHT_OPTIONS,
-			useValue: {
-				languages: getHighlightLanguages,
-			},
-		},
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: AuthInterceptorService,
-			multi: true,
-		},
-	],
-	bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    RegistroComponent,
+    MostrarComponent,
+    LlamadaComponent,
+    IndicadoresComponent,
+    ExportarComponent,
+  ],
+  imports: [
+    BrowserModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: "toast-top-center",
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule,
+    SplashScreenModule,
+    TranslateModule.forRoot(),
+    HttpClientModule,
+    HighlightModule,
+    ClipboardModule,
+    environment.isMockEnabled
+      ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
+          passThruUnknownUrl: true,
+          dataEncapsulation: false,
+        })
+      : [],
+    AppRoutingModule,
+    InlineSVGModule.forRoot(),
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxPaginationModule,
+  ],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      multi: true,
+      deps: [AuthService],
+    },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        languages: getHighlightLanguages,
+      },
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

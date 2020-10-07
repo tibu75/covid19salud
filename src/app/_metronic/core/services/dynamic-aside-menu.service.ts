@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { DynamicAsideMenuConfig } from '../../configs/dynamic-aside-menu.config';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { DynamicAsideMenuConfig } from "../../configs/dynamic-aside-menu.config";
 
 const emptyMenuConfig = {
-  items: []
+  items: [],
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class DynamicAsideMenuService {
   private menuConfigSubject = new BehaviorSubject<any>(emptyMenuConfig);
@@ -21,6 +21,7 @@ export class DynamicAsideMenuService {
   // Default => from DynamicAsideMenuConfig
   private loadMenu() {
     this.setMenu(DynamicAsideMenuConfig);
+    //console.log(this.setMenu);
   }
 
   private setMenu(menuConfig) {
