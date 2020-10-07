@@ -3,8 +3,8 @@ import { CommonModule } from "@angular/common";
 import { InlineSVGModule } from "ng-inline-svg";
 import { PagesRoutingModule } from "./pages-routing.module";
 import {
-	NgbDropdownModule,
-	NgbProgressbarModule,
+  NgbDropdownModule,
+  NgbProgressbarModule,
 } from "@ng-bootstrap/ng-bootstrap";
 import { TranslationModule } from "../modules/i18n/translation.module";
 import { LayoutComponent } from "./_layout/layout.component";
@@ -24,30 +24,29 @@ import { HeaderMenuDynamicComponent } from "./_layout/components/header/header-m
 import { RegistrosComponent } from "./registros/registros.component";
 
 @NgModule({
-	declarations: [
-		LayoutComponent,
-		ScriptsInitComponent,
-		HeaderMobileComponent,
-		AsideComponent,
-		FooterComponent,
-		HeaderComponent,
-		HeaderMenuComponent,
-		TopbarComponent,
-		LanguageSelectorComponent,
-		AsideDynamicComponent,
-		HeaderMenuDynamicComponent,
-		RegistrosComponent,
-	],
-	imports: [
-		CommonModule,
-		PagesRoutingModule,
-		TranslationModule,
-		InlineSVGModule,
-		ExtrasModule,
-		NgbDropdownModule,
-		NgbProgressbarModule,
-		CoreModule,
-		SubheaderModule,
-	],
+  declarations: [
+    LayoutComponent,
+    ScriptsInitComponent,
+    HeaderMobileComponent,
+    AsideComponent,
+    FooterComponent,
+    HeaderComponent,
+    HeaderMenuComponent,
+    TopbarComponent,
+    LanguageSelectorComponent,
+    AsideDynamicComponent,
+    HeaderMenuDynamicComponent,
+  ],
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    TranslationModule,
+    InlineSVGModule,
+    ExtrasModule,
+    NgbDropdownModule,
+    NgbProgressbarModule,
+    CoreModule,
+    SubheaderModule,
+  ],
 })
 export class LayoutModule {}

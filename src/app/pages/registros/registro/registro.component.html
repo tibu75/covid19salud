@@ -16,8 +16,7 @@
 					<a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
 						<i class="ki ki-long-arrow-back icon-sm"></i>Volver</a>
 					<div class="btn-group" *ngIf="cargar_datos">
-						<button type="submit" class="btn btn-primary font-weight-bolder" novalidate
-							 (click)="guardarForm($event)">
+						<button type="submit" class="btn btn-primary font-weight-bolder" (click)="guardarForm($event)">
 							<i class="ki ki-check icon-sm"></i>
 							Guardar el Formulario
 						</button>
@@ -26,7 +25,7 @@
 			</div>
 			<div class="card-body">
 				<!--begin::Form-->
-				<form [formGroup]="personaForm" novalidate (ngSubmit)="guardarForm($event)">
+				<form [formGroup]="personaForm" (ngSubmit)="guardarForm($event)">
 					<ng-container *ngIf="buscar_datos">
 						<div class="row" formGroupName="persona" style="margin-top: 18px">
 							<div class="col d-flex justify-content-center" style="width: 80%">
@@ -400,25 +399,26 @@
 											</h3>
 											<label style="margin-left: 20px">
 												<input type="radio" formControlName="sintomas" value="Si"
-													[(ngModel)]="sintomas" />
+													[(ngModel)]="sintomas" (change)="activarSintomas()" />
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												Si
 											</label>
 											<label style="margin-left: 20px">
 												<input type="radio" formControlName="sintomas" value="No"
-													[(ngModel)]="sintomas" checked />
-												<i class="ti-check text-active" aria-hidden="true"></i>
+													[(ngModel)]="sintomas" checked (change)="activarSintomas()" />
+												<i class=" ti-check text-active" aria-hidden="true"></i>
 												No
 											</label>
 										</div>
 									</div>
-									<div class="row" *ngIf="this.sintomas === 'Si'">
+									<div class="row" *ngIf="this.sintomas==='Si'">
+
 										<div class="col-3">
 											<label for="start1">Fecha de inicio de Síntomas</label>
 											<input class="form-control form-control-solid" type="date" id="start1"
 												formControlName="fec_sintomas" name="fec_sintomas" min=" {{ fechamin }}"
 												max="{{ fechahoy }}" />
-											<div *ngIf="campoFecha.errors && campoFecha.touched" class="text-danger">
+											<div *ngIf="campoFecha.errors && this.sintomas==='Si'" class="text-danger">
 												<div *ngIf="campoFecha.hasError('required')">
 													La Fecha es requerida
 												</div>
@@ -429,6 +429,11 @@
 											<input class="form-control form-control-solid" type="text"
 												formControlName="sin_actuales" name="sin_actuales" placeholder="" />
 										</div>
+										<div *ngIf="campoSintomas.errors && this.sintomas==='Si'" class="text-danger">
+											<small *ngIf="campoSintomas.hasError('required')">
+												El Telefono es requerido
+											</small>
+										</div>
 									</div>
 									<div class="separator separator-dashed my-10"></div>
 									<div class="col-12 my-5">
@@ -438,13 +443,15 @@
 											</h3>
 											<label style="margin-left: 20px">
 												<input type="radio" name="con_caso_sos" value="Si"
-													formControlName="con_caso_sos" [(ngModel)]="con_caso_sos" />
+													formControlName="con_caso_sos" [(ngModel)]="con_caso_sos"
+													(change)="activarConSos()" />
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												Si
 											</label>
 											<label style="margin-left: 20px">
 												<input type="radio" name="con_caso_sos" formControlName="con_caso_sos"
-													value="No" [(ngModel)]="con_caso_sos" checked />
+													value="No" [(ngModel)]="con_caso_sos" checked
+													(change)="activarConSos()" />
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												No
 											</label>
@@ -456,6 +463,12 @@
 											<input class="form-control form-control-solid" type="text"
 												formControlName="obs_contacto" name="obs_contacto" placeholder="" />
 										</div>
+										<div *ngIf="campoObsContacto.errors && this.con_caso_sos==='Si'"
+											class="text-danger">
+											<small *ngIf="campoObsContacto.hasError('required')">
+												El Telefono es requerido
+											</small>
+										</div>
 									</div>
 									<div class="separator separator-dashed my-10"></div>
 									<div class="col-12 my-5">
@@ -466,6 +479,11 @@
 											<input class="form-control form-control-solid" type="text"
 												formControlName="obra_social" name="obra_social" placeholder="" />
 											<span class="form-text text-muted mb-10"></span>
+										</div>
+										<div *ngIf="campoObraSocial.errors" class="text-danger">
+											<small *ngIf="campoObraSocial.hasError('required')">
+												El Telefono es requerido
+											</small>
 										</div>
 									</div>
 									<div class="separator separator-dashed my-10"></div>
@@ -494,6 +512,12 @@
 											<input class="form-control form-control-solid" type="text"
 												formControlName="obs_enfermedad" name="obs_enfermedad" placeholder="" />
 											<span class="form-text text-muted mb-10"></span>
+										</div>
+										<div *ngIf="campoEnfermedad.errors && this.enf_actual==='Si'"
+											class="text-danger">
+											<small *ngIf="campoEnfermedad.hasError('required')">
+												El Telefono es requerido
+											</small>
 										</div>
 									</div>
 									<div class="col-12" *ngIf="enf_actual === 'Si'">
