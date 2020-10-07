@@ -16,7 +16,8 @@
 					<a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
 						<i class="ki ki-long-arrow-back icon-sm"></i>Volver</a>
 					<div class="btn-group" *ngIf="cargar_datos">
-						<button type="submit" class="btn btn-primary font-weight-bolder" (click)="guardarForm($event)">
+						<button type="submit" class="btn btn-primary font-weight-bolder" novalidate
+							 (click)="guardarForm($event)">
 							<i class="ki ki-check icon-sm"></i>
 							Guardar el Formulario
 						</button>
@@ -25,7 +26,7 @@
 			</div>
 			<div class="card-body">
 				<!--begin::Form-->
-				<form [formGroup]="personaForm" (ngSubmit)="guardarForm($event)">
+				<form [formGroup]="personaForm" novalidate (ngSubmit)="guardarForm($event)">
 					<ng-container *ngIf="buscar_datos">
 						<div class="row" formGroupName="persona" style="margin-top: 18px">
 							<div class="col d-flex justify-content-center" style="width: 80%">
@@ -166,8 +167,8 @@
 												<div class="col-xl-2 col-telefono padding-1">
 													<div class="">
 														<label>Teléfono</label>
-														<input class="form-control form-control-solid is-danger" type="text"
-															formControlName="telefono" name="telefono"
+														<input class="form-control form-control-solid is-danger"
+															type="text" formControlName="telefono" name="telefono"
 															placeholder="10 dígitos" />
 														<div *ngIf="campoTelefono.errors && campoTelefono.touched"
 															class="text-danger">
@@ -191,6 +192,15 @@
 														<label>Calle</label>
 														<input class="form-control form-control-solid" type="text"
 															formControlName="calle" name="calle" placeholder="" />
+														<div *ngIf="campoCalle.errors && campoCalle.touched"
+															class="text-danger">
+															<small *ngIf="campoCalle.hasError('required')">
+																La calle es requerida
+															</small>
+															<small *ngIf="campoCalle.hasError('maxLength')">
+																La calle puede tener 25 dígitos
+															</small>
+														</div>
 														<span class="form-text text-muted"></span>
 													</div>
 												</div>
@@ -200,6 +210,15 @@
 														<label>Número</label>
 														<input class="form-control form-control-solid" type="text"
 															formControlName="numero" name="numero" placeholder="" />
+														<div *ngIf="campoNumero.errors && campoNumero.touched"
+															class="text-danger">
+															<small *ngIf="campoNumero.hasError('required')">
+																El Número es requerido
+															</small>
+															<small *ngIf="campoNumero.hasError('maxLength')">
+																El Número puede tener 4 dígitos
+															</small>
+														</div>
 														<span class="form-text text-muted"></span>
 													</div>
 												</div>
@@ -208,6 +227,15 @@
 														<label>Piso</label>
 														<input class="form-control form-control-solid" type="text"
 															formControlName="piso" name="piso" placeholder="" />
+														<div *ngIf="campoPiso.errors && campoPiso.touched"
+															class="text-danger">
+															<small *ngIf="campoPiso.hasError('required')">
+																El Piso es requerido
+															</small>
+															<small *ngIf="campoPiso.hasError('maxLength')">
+																El Piso puede tener 4 dígitos
+															</small>
+														</div>
 														<span class="form-text text-muted"></span>
 													</div>
 												</div>
@@ -218,6 +246,15 @@
 														<input class="form-control form-control-solid" type="text"
 															formControlName="departamento" name="departamento"
 															placeholder="" />
+														<div *ngIf="campoDepto.errors && campoDepto.touched"
+															class="text-danger">
+															<small *ngIf="campoDepto.hasError('required')">
+																El Depto es requerido
+															</small>
+															<small *ngIf="campoDepto.hasError('maxLength')">
+																El Depto puede tener 1 dígitos
+															</small>
+														</div>
 														<span class="form-text text-muted"></span>
 													</div>
 												</div>
@@ -225,9 +262,10 @@
 												<div class="col-xl-3 col-localidad padding-1">
 													<div class="">
 														<label>Localidad</label>
-														<select class="form-control is-danger" formControlName="localidad">
+														<select class="form-control is-danger"
+															formControlName="localidad">
 															<option [value]="">
-																
+
 															</option>
 															<option *ngFor="let localidad of localidades"
 																[value]="localidad.nombre">
@@ -336,6 +374,7 @@
 								<!-- persona TERMINA  -->
 
 								<!-- llamada COMIENZA  -->
+
 								<div class="col-12" formGroupName="llamada">
 									<div class="separator separator-dashed my-10"></div>
 									<div class="my-5">
@@ -357,7 +396,7 @@
 									<div class="col-12 my-5">
 										<div class="row">
 											<h3 class="text-dark font-weight-bold">
-												Presenta Síntomas?
+												1 - Presenta Síntomas?
 											</h3>
 											<label style="margin-left: 20px">
 												<input type="radio" formControlName="sintomas" value="Si"
@@ -395,7 +434,7 @@
 									<div class="col-12 my-5">
 										<div class="row">
 											<h3 class="text-dark font-weight-bold">
-												Tiene Contacto con Caso Sospechoso o Confirmado?
+												2 - Tiene Contacto con Caso Sospechoso o Confirmado?
 											</h3>
 											<label style="margin-left: 20px">
 												<input type="radio" name="con_caso_sos" value="Si"
@@ -411,14 +450,21 @@
 											</label>
 										</div>
 									</div>
+									<div class="row" *ngIf="con_caso_sos === 'Si'">
+										<div class="col-12">
+											<label>Observaciones</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="obs_contacto" name="obs_contacto" placeholder="" />
+										</div>
+									</div>
 									<div class="separator separator-dashed my-10"></div>
 									<div class="col-12 my-5">
 										<div class="row">
 											<h3 class="text-dark font-weight-bold">
-												Antecedentes Personales
+												Obra Social
 											</h3>
 											<input class="form-control form-control-solid" type="text"
-												formControlName="ant_personales" name="ant_personales" placeholder="" />
+												formControlName="obra_social" name="obra_social" placeholder="" />
 											<span class="form-text text-muted mb-10"></span>
 										</div>
 									</div>
@@ -440,6 +486,14 @@
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												No
 											</label>
+										</div>
+									</div>
+									<div class="col-12" *ngIf="enf_actual === 'Si'">
+										<div class="row">
+											<label>Descripción de la Enfermedad</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="obs_enfermedad" name="obs_enfermedad" placeholder="" />
+											<span class="form-text text-muted mb-10"></span>
 										</div>
 									</div>
 									<div class="col-12" *ngIf="enf_actual === 'Si'">
@@ -604,7 +658,7 @@
 											<label>Centro de Salud que lo contactará o Dispositivo
 												indicado según domicilio</label>
 											<input class="form-control form-control-solid" type="text"
-												formControlName="disp_contacto" name="disp_contacto" placeholder="" />
+												formControlName="dis_contacto" name="dis_contacto" placeholder="" />
 										</div>
 									</div>
 									<div class="separator separator-dashed my-10"></div>
@@ -650,7 +704,7 @@
 									<div class="col-12">
 										<div class="row">
 											<h3 class="text-dark font-weight-bold">
-												Requiere Certificado?
+												Requiere Certificado
 											</h3>
 										</div>
 									</div>
@@ -704,7 +758,7 @@
 											<div class="col-10">
 												<label>Observaciones</label>
 												<input class="form-control form-control-solid" type="text"
-													formControlName="tip_contacto_obs" name="tip_contacto_obs"
+													formControlName="obs_tip_contacto" name="obs_tip_contacto"
 													placeholder="" />
 											</div>
 
@@ -739,7 +793,7 @@
 										</div>
 									</div>
 									<div class="col-12">
-										<div class="row">
+										<div class="row" style="margin-top: 5px;">
 											<label>Otros Cerfiticados</label>
 											<input class="form-control form-control-solid" type="text"
 												formControlName="otro_certificado" name="otro_certificado"
@@ -751,21 +805,21 @@
 										<div class="col-12">
 											<div class="row">
 												<h3 class="text-dark font-weight-bold">
-													Requiere seguimiento Médico Domiciliario?
+													Requiere seguimiento Médico Domiciliario
 												</h3>
 
 												<label style="margin-left: 20px">
 													<input type="radio" name="laboratorio" value="Público"
 														formControlName="laboratorio" [(ngModel)]="laboratorio" />
 													<i class="ti-check text-active" aria-hidden="true"></i>
-													Público
+													Laboratorio Público
 												</label>
 
 												<label style="margin-left: 20px">
 													<input type="radio" name="laboratorio" formControlName="laboratorio"
 														value="Privado" [(ngModel)]="laboratorio" checked />
 													<i class="ti-check text-active" aria-hidden="true"></i>
-													Privado
+													Laboratorio Privado
 												</label>
 											</div>
 										</div>
@@ -793,7 +847,7 @@
 										</div>
 										<div class="row" *ngIf="laboratorio === 'Privado'">
 											<div class="col-12">
-												<label>Envío de Resultado al Whatsapp? </label>
+												<label>Envío de Resultado al Whatsapp 2995337020? </label>
 												<label style="margin-left: 20px">
 													<input type="radio" name="whatsapp" value="Si"
 														formControlName="whatsapp" [(ngModel)]="whatsapp" />

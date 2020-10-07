@@ -6,7 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { RenaperService } from "../../../services/ws/renaper.service";
-import {PersonaService} from "../../../services/persona/persona.service"
+import { PersonaService } from "../../../services/persona/persona.service";
 import { Subscription, Observable, BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -16,7 +16,6 @@ import { Localidades } from "../../models/localidades";
 
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
-
 
 @Component({
   selector: "app-registro",
@@ -115,12 +114,12 @@ export class RegistroComponent implements OnInit {
       persona: this.fb.group({
         nombre: [datos ? datos.nombres : ""],
         apellido: [datos ? datos.apellido : ""],
-        documento: [datos ? datos.documento : "",[Validators.required, Validators.maxLength(8)]],
-        fechaNacimiento: [
-          datos ? datos.fechaNacimiento : "",
-          Validators.required,
+        documento: [
+          datos ? datos.documento : "",
+          [Validators.required, Validators.maxLength(8)],
         ],
-        edad: ["", Validators.required],
+        fechaNacimiento: [datos ? datos.fechaNacimiento : ""],
+        edad: [""],
         sexo: [datos ? datos.sexo : "M"],
         telefono: [
           "",
@@ -131,11 +130,11 @@ export class RegistroComponent implements OnInit {
         ],
         calle: [
           datos ? datos.calle : "",
-          [Validators.required, Validators.maxLength(20)],
+          [Validators.required, Validators.maxLength(25)],
         ],
         numero: [
           datos ? datos.numero : "",
-          [Validators.required, Validators.maxLength(4)],
+          [Validators.required, Validators.max(4)],
         ],
         departamento: [
           datos ? datos.departamento : "",
@@ -145,11 +144,11 @@ export class RegistroComponent implements OnInit {
           datos ? datos.piso : "",
           [Validators.required, Validators.maxLength(2)],
         ],
-        localidad: ["", Validators.required],
         cpostal: [
           datos ? datos.cpostal : "",
           [Validators.required, Validators.maxLength(4)],
         ],
+        localidad: ["", Validators.required],
         provincia: [
           datos ? datos.provincia : "",
           [Validators.required, Validators.maxLength(25)],
@@ -161,59 +160,54 @@ export class RegistroComponent implements OnInit {
         img: [datos ? datos.foto : ""],
       }),
       llamada: this.fb.group({
-        nroForm: ["", Validators.required],
-        fecha: ["", Validators.required],
+        nroForm: [""],
+        fecha: [""],
         motivo: ["", Validators.required],
-        sintomas: ["No", Validators.required],
-        fec_sintomas: ["", Validators.required],
-        sin_actuales: ["", Validators.required],
-        con_caso_sos: ["No", Validators.required],
-        ant_personales: ["", Validators.required],
-        enf_actual: ["No", Validators.required],
-        tratamiento: ["No", Validators.required],
-        convivientes: ["No", Validators.required],
-        cant_convivientes: ["", Validators.required],
-        obs_convivientes: ["", Validators.required],
+        sintomas: ["No"],
+        fec_sintomas: [{ value: "", disabled: true }, Validators.required],
+        sin_actuales: [{ value: "", disabled: true }, Validators.required],
+        con_caso_sos: ["No"],
+        obs_contacto: [{ value: "", disabled: true }, Validators.required],
+        obra_social: ["", Validators.required],
+        enf_actual: ["No"],
+        obs_enfermedad: [{ value: "", disabled: true }, Validators.required],
+        tratamiento: [{ value: "No", disabled: true }, Validators.required],
+        convivientes: ["No"],
+        cant_convivientes: [{ value: "", disabled: true }, Validators.required],
+        obs_convivientes: [{ value: "", disabled: true }, Validators.required],
         sit_social: ["", Validators.required],
-        intervencion: ["No", Validators.required],
-        obs_intervencion: ["", Validators.required],
-        cri_hisopado: ["No", Validators.required],
-        com_hisopado: ["No", Validators.required],
-        mov_propia: ["Si", Validators.required],
-        der_enfermeria: ["No", Validators.required],
-        disp_contacto: ["", Validators.required],
-        sol_hisopado: ["No", Validators.required],
-        lug_hisopado: ["", Validators.required],
-        fec_hisopado: ["", Validators.required],
-        req_extender: ["No", Validators.required],
-        cer_aislamiento: ["", Validators.required],
-        cer_5dias: ["", Validators.required],
-        cer_contacto: ["No", Validators.required],
-        tip_contacto: ["Social", Validators.required],
-        tip_contacto_obs: ["", Validators.required],
-        cas_positivo: ["No", Validators.required],
-        dat_positivo: ["", Validators.required],
-        otro_certificado: ["", Validators.required],
-        seg_domiciliario: ["No", Validators.required],
-        laboratorio: ["Privado", Validators.required],
-        whatsapp: ["No", Validators.required],
+        intervencion: ["No"],
+        obs_intervencion: [{ value: "", disabled: true }, Validators.required],
+        cri_hisopado: ["No"],
+        com_hisopado: ["No"],
+        mov_propia: ["Si"],
+        der_enfermeria: ["No"],
+        dis_contacto: ["", Validators.required],
+        sol_hisopado: ["No"],
+        lug_hisopado: [{ value: "", disabled: true }, Validators.required],
+        fec_hisopado: [{ value: "", disabled: true }, Validators.required],
+        req_extender: [{ value: "", disabled: true }, Validators.required],
+        cer_5dias: ["No"],
+        cer_contacto: ["No"],
+        tip_contacto: [{ value: "Social", disabled: true }],
+        obs_tip_contacto: [{ value: "", disabled: true }, Validators.required],
+        cas_positivo: [{ value: "No", disabled: true }, Validators.required],
+        dat_positivo: [{ value: "", disabled: true }, Validators.required],
+        otro_certificado: [""],
+        seg_domiciliario: ["No"],
+        laboratorio: ["Privado"],
+        whatsapp: ["No"],
         det_requerimiento: ["", Validators.required],
-        fec_salud: ["", Validators.required],
-        usuario: ["", Validators.required],
+        fec_salud: [{ value: "", disabled: true }, Validators.required],
         cierre_contacto: ["", Validators.required],
+        usuario: [""],
       }),
       trabajo: this.fb.group({
-        lugar: ["", [Validators.required, Validators.maxLength(50)]],
-        telefono: [
-          "",
-          [
-            Validators.required,
-            Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
-          ],
-        ],
-        calle: ["", [Validators.required, Validators.maxLength(25)]],
-        numero: ["", [Validators.required, Validators.maxLength(4)]],
-        localidad: ["", [Validators.required, Validators.maxLength(25)]],
+        lugar: ["" /* [Validators.maxLength(50)] */],
+        telefono: ["" /* [Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")] */],
+        calle: ["" /* [Validators.maxLength(25)] */],
+        numero: ["" /* [Validators.maxLength(4)] */],
+        localidad: ["" /* [Validators.maxLength(25)] */],
       }),
     });
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
@@ -229,7 +223,7 @@ export class RegistroComponent implements OnInit {
     }&sexo=${this.personaForm.get("persona.sexo").value}`;
 
     this._personaService.getPersona(params).subscribe((data: any) => {
-     // console.log("Datos Renaper", data);
+      // console.log("Datos Renaper", data);
       ////console.log(data.datos);
       if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
         this.buscar_datos = false;
@@ -261,10 +255,21 @@ export class RegistroComponent implements OnInit {
   get campoFecha() {
     return this.personaForm.get("llamada.fec_sintomas");
   }
+  get campoCalle() {
+    return this.personaForm.get("persona.calle");
+  }
+  get campoNumero() {
+    return this.personaForm.get("persona.numero");
+  }
+  get campoPiso() {
+    return this.personaForm.get("persona.piso");
+  }
+  get campoDepto() {
+    return this.personaForm.get("persona.departamento");
+  }
   get campoLocalidad() {
     return this.personaForm.get("persona.localidad");
   }
- 
 
   guardarForm(event: Event) {
     event.preventDefault();

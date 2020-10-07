@@ -96,6 +96,18 @@
         align-content: space-between;
     }
  }
+ .img-50 {
+    object-position: top;
+    object-fit: cover;
+    width: 120px;
+    height: 145px;
+}
+.img-100 {
+    object-position: top;
+    object-fit: cover;
+    height: 400px;
+    align-content: space-between;
+}
 
 @media screen and (max-width: 1366px) {
   body {

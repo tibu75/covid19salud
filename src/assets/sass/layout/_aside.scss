@@ -4,7 +4,6 @@
 
 .aside {
 	width: get($aside-config, base, width);
-
 	// Aside Menu
 	.aside-menu {
 		@include perfect-scrollbar-ver-offset(4px);
