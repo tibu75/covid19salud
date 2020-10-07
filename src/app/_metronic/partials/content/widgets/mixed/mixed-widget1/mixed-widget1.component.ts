@@ -36,6 +36,7 @@ export class MixedWidget1Component implements OnInit {
     this.ShowButtons();
   }
 
+
   ShowButtons() {
     this.mostrar = false;
     if (this.userService.role === "ADMIN_ROLE") {
@@ -52,6 +53,7 @@ export class MixedWidget1Component implements OnInit {
 
   /* getChartOptions() {
     const strokeColor = "#97EEE9";
+
     return {
       series: [
         {

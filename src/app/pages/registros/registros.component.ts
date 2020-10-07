@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, NgModule } from "@angular/core";
 import { Form0800Service } from "../../services/form0800/form0800.service";
 import { Forms } from "../models/form0800covid";
 import { Localidades } from "../models/localidades";
@@ -17,7 +17,9 @@ export class RegistrosComponent implements OnInit {
   public cargando: boolean = true;
   public formtemp: Forms[] = [];
   public form: Forms[] = [];
+
   //public xls: Forms[] = [];
+
   public localidades: Localidades[] = [];
   public paginaD: number = 0;
   public totalForm: number = 0;
@@ -38,7 +40,9 @@ export class RegistrosComponent implements OnInit {
   ngOnInit(): void {
     this.cargarForms();
     this.cargarLocalidades();
+
     //this.cargarXls();
+
   }
 
   cargarLocalidades() {
@@ -94,11 +98,14 @@ export class RegistrosComponent implements OnInit {
     this.cargarForms();
   }
 
+
   /* cargarXls() {
+
     this.form0800Service.getXls().subscribe((Xls: any) => {
       this.xls = Xls.Xls;
       this.cdr.markForCheck();
     });
+
   } */
 
   exportAsXlsx(): void {
@@ -106,5 +113,6 @@ export class RegistrosComponent implements OnInit {
     this.excelExports.getXlsx().subscribe((resp: any) => {
       console.log(resp);
     });
+
   }
 }

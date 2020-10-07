@@ -1,12 +1,13 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, NgModule } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
   FormControl,
   Validators,
 } from "@angular/forms";
+
 import { RenaperService } from "../../../services/ws/renaper.service";
-import {PersonaService} from "../../../services/persona/persona.service"
+import { PersonaService } from "../../../services/persona/persona.service";
 import { Subscription, Observable, BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -16,7 +17,7 @@ import { Localidades } from "../../models/localidades";
 
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
-
+import { FormsLlamada } from "../../models/form0800covid2";
 
 @Component({
   selector: "app-registro",
@@ -40,7 +41,6 @@ export class RegistroComponent implements OnInit {
   laboratorio = "Privado";
   whatsapp = "No";
 
-  fecha_ini_sint = "";
   antencedentes_p = "No";
   toma_medicamentos = "";
   vivienda_personas = "";
@@ -115,12 +115,12 @@ export class RegistroComponent implements OnInit {
       persona: this.fb.group({
         nombre: [datos ? datos.nombres : ""],
         apellido: [datos ? datos.apellido : ""],
-        documento: [datos ? datos.documento : "",[Validators.required, Validators.maxLength(8)]],
-        fechaNacimiento: [
-          datos ? datos.fechaNacimiento : "",
-          Validators.required,
+        documento: [
+          datos ? datos.documento : "",
+          [Validators.required, Validators.maxLength(8)],
         ],
-        edad: ["", Validators.required],
+        fechaNacimiento: [datos ? datos.fechaNacimiento : ""],
+        edad: [""],
         sexo: [datos ? datos.sexo : "M"],
         telefono: [
           "",
@@ -131,11 +131,11 @@ export class RegistroComponent implements OnInit {
         ],
         calle: [
           datos ? datos.calle : "",
-          [Validators.required, Validators.maxLength(20)],
+          [Validators.required, Validators.maxLength(25)],
         ],
         numero: [
           datos ? datos.numero : "",
-          [Validators.required, Validators.maxLength(4)],
+          [Validators.required, Validators.max(4)],
         ],
         departamento: [
           datos ? datos.departamento : "",
@@ -145,11 +145,11 @@ export class RegistroComponent implements OnInit {
           datos ? datos.piso : "",
           [Validators.required, Validators.maxLength(2)],
         ],
-        localidad: ["", Validators.required],
         cpostal: [
           datos ? datos.cpostal : "",
           [Validators.required, Validators.maxLength(4)],
         ],
+        localidad: ["", Validators.required],
         provincia: [
           datos ? datos.provincia : "",
           [Validators.required, Validators.maxLength(25)],
@@ -161,59 +161,54 @@ export class RegistroComponent implements OnInit {
         img: [datos ? datos.foto : ""],
       }),
       llamada: this.fb.group({
-        nroForm: ["", Validators.required],
-        fecha: ["", Validators.required],
+        nroForm: [""],
+        fecha: [""],
         motivo: ["", Validators.required],
-        sintomas: ["No", Validators.required],
-        fec_sintomas: ["", Validators.required],
-        sin_actuales: ["", Validators.required],
-        con_caso_sos: ["No", Validators.required],
-        ant_personales: ["", Validators.required],
-        enf_actual: ["No", Validators.required],
-        tratamiento: ["No", Validators.required],
-        convivientes: ["No", Validators.required],
+        sintomas: ["No"],
+        fec_sintomas: [{ value: "", disabled: true }, Validators.required],
+        sin_actuales: [{ value: "", disabled: true }, Validators.required],
+        con_caso_sos: ["No"],
+        obs_contacto: [{ value: "", disabled: true }, Validators.required],
+        obra_social: ["", Validators.required],
+        enf_actual: ["No"],
+        obs_enfermedad: [{ value: "", disabled: true }, Validators.required],
+        tratamiento: [{ value: "No", disabled: true }, Validators.required],
+        convivientes: ["No"],
         cant_convivientes: ["", Validators.required],
         obs_convivientes: ["", Validators.required],
         sit_social: ["", Validators.required],
-        intervencion: ["No", Validators.required],
+        intervencion: ["No"],
         obs_intervencion: ["", Validators.required],
-        cri_hisopado: ["No", Validators.required],
-        com_hisopado: ["No", Validators.required],
-        mov_propia: ["Si", Validators.required],
-        der_enfermeria: ["No", Validators.required],
-        disp_contacto: ["", Validators.required],
-        sol_hisopado: ["No", Validators.required],
+        cri_hisopado: ["No"],
+        com_hisopado: ["No"],
+        mov_propia: ["Si"],
+        der_enfermeria: ["No"],
+        dis_contacto: ["", Validators.required],
+        sol_hisopado: ["No"],
         lug_hisopado: ["", Validators.required],
         fec_hisopado: ["", Validators.required],
-        req_extender: ["No", Validators.required],
-        cer_aislamiento: ["", Validators.required],
-        cer_5dias: ["", Validators.required],
-        cer_contacto: ["No", Validators.required],
-        tip_contacto: ["Social", Validators.required],
-        tip_contacto_obs: ["", Validators.required],
+        req_extender: ["", Validators.required],
+        cer_5dias: ["No"],
+        cer_contacto: ["No"],
+        tip_contacto: ["Social"],
+        obs_tip_contacto: ["", Validators.required],
         cas_positivo: ["No", Validators.required],
         dat_positivo: ["", Validators.required],
-        otro_certificado: ["", Validators.required],
-        seg_domiciliario: ["No", Validators.required],
-        laboratorio: ["Privado", Validators.required],
-        whatsapp: ["No", Validators.required],
+        otro_certificado: [""],
+        seg_domiciliario: ["No"],
+        laboratorio: ["Privado"],
+        whatsapp: ["No"],
         det_requerimiento: ["", Validators.required],
         fec_salud: ["", Validators.required],
-        usuario: ["", Validators.required],
         cierre_contacto: ["", Validators.required],
+        usuario: [""],
       }),
       trabajo: this.fb.group({
-        lugar: ["", [Validators.required, Validators.maxLength(50)]],
-        telefono: [
-          "",
-          [
-            Validators.required,
-            Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
-          ],
-        ],
-        calle: ["", [Validators.required, Validators.maxLength(25)]],
-        numero: ["", [Validators.required, Validators.maxLength(4)]],
-        localidad: ["", [Validators.required, Validators.maxLength(25)]],
+        lugar: ["", [Validators.maxLength(50)]],
+        telefono: ["", [Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+        calle: ["", [Validators.maxLength(25)]],
+        numero: ["", [Validators.maxLength(4)]],
+        localidad: ["", [Validators.maxLength(25)]],
       }),
     });
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
@@ -229,7 +224,7 @@ export class RegistroComponent implements OnInit {
     }&sexo=${this.personaForm.get("persona.sexo").value}`;
 
     this._personaService.getPersona(params).subscribe((data: any) => {
-     // console.log("Datos Renaper", data);
+      // console.log("Datos Renaper", data);
       ////console.log(data.datos);
       if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
         this.buscar_datos = false;
@@ -255,16 +250,174 @@ export class RegistroComponent implements OnInit {
   get campoTelefono() {
     return this.personaForm.get("persona.telefono");
   }
-  get campoMotivo() {
-    return this.personaForm.get("llamada.motivo");
+  get campoCalle() {
+    return this.personaForm.get("persona.calle");
   }
-  get campoFecha() {
-    return this.personaForm.get("llamada.fec_sintomas");
+  get campoNumero() {
+    return this.personaForm.get("persona.numero");
+  }
+  get campoPiso() {
+    return this.personaForm.get("persona.piso");
+  }
+  get campoDepto() {
+    return this.personaForm.get("persona.departamento");
   }
   get campoLocalidad() {
     return this.personaForm.get("persona.localidad");
   }
- 
+  get campoMotivo() {
+    return this.personaForm.get("llamada.motivo");
+  }
+  get campoCierre() {
+    return this.personaForm.get("llamada.cierre_contacto");
+  }
+  get campoFecha() {
+    return this.personaForm.get("llamada.fec_sintomas");
+  }
+  get campoSintomas() {
+    return this.personaForm.get("llamada.sin_actuales");
+  }
+  get campoContacto() {
+    return this.personaForm.get("llamada.con_caso_sos");
+  }
+  get campoObsContacto() {
+    return this.personaForm.get("llamada.obs_contacto");
+  }
+  get campoObraSocial() {
+    return this.personaForm.get("llamada.obra_social");
+  }
+  get campoEnfermedad() {
+    return this.personaForm.get("llamada.enf_actual");
+  }
+  get campoObsEnfermedad() {
+    return this.personaForm.get("llamada.obs_enfermedad");
+  }
+  get campoTratamiento() {
+    return this.personaForm.get("llamada.tratamiento");
+  }
+  get campoConvivientes() {
+    return this.personaForm.get("llamada.convivientes");
+  }
+  get campoCantConvivientes() {
+    return this.personaForm.get("llamada.cant_convivientes");
+  }
+  get campoObsCantConvivientes() {
+    return this.personaForm.get("llamada.obs_convivientes");
+  }
+  get campoSituacion() {
+    return this.personaForm.get("llamada.sit_social");
+  }
+  get campoIntervencion() {
+    return this.personaForm.get("llamada.intervencion");
+  }
+  get campoObsIntervencion() {
+    return this.personaForm.get("llamada.obs_intervencion");
+  }
+  get campoHisopado() {
+    return this.personaForm.get("llamada.cri_hisopado");
+  }
+  get campoComHisopado() {
+    return this.personaForm.get("llamada.com_hisopado");
+  }
+  get campoMovilidad() {
+    return this.personaForm.get("llamada.mov_propia");
+  }
+  get campoEnfermeria() {
+    return this.personaForm.get("llamada.der_enfermeria");
+  }
+  get campoDisContacto() {
+    return this.personaForm.get("llamada.dis_contacto");
+  }
+  get campoSolHisopado() {
+    return this.personaForm.get("llamada.sol_hisopado");
+  }
+  get campoLugHisopa() {
+    return this.personaForm.get("llamada.lug_hisopado");
+  }
+  get campoFecHisopado() {
+    return this.personaForm.get("llamada.fec_hisopado");
+  }
+  get campoReqExtender() {
+    return this.personaForm.get("llamada.req_extender");
+  }
+  get campoCer5Dias() {
+    return this.personaForm.get("llamada.cer_5dias");
+  }
+  get campoCerContacto() {
+    return this.personaForm.get("llamada.cer_contacto");
+  }
+  get campoTiContacto() {
+    return this.personaForm.get("llamada.tip_contacto");
+  }
+  get campoObsTipoContacto() {
+    return this.personaForm.get("llamada.obs_tip_contacto");
+  }
+  get campoCasPositivo() {
+    return this.personaForm.get("llamada.cas_positivo");
+  }
+  get campoDatPositivo() {
+    return this.personaForm.get("llamada.dat_positivo");
+  }
+  get campoOtroCert() {
+    return this.personaForm.get("llamada.otro_certificado");
+  }
+  get campoSegDom() {
+    return this.personaForm.get("llamada.seg_domiciliario");
+  }
+  get campoLaboratorio() {
+    return this.personaForm.get("llamada.laboratorio");
+  }
+  get campoWhatsapp() {
+    return this.personaForm.get("llamada.whatsapp");
+  }
+  get campoDetRequerimiento() {
+    return this.personaForm.get("llamada.det_requerimiento");
+  }
+  get campoFecSalud() {
+    return this.personaForm.get("llamada.fec_salud");
+  }
+
+  activarSintomas() {
+    if (this.sintomas === "Si") {
+      this.campoFecha.enable();
+    } else {
+      this.campoFecha.disable();
+      this.campoFecha.reset();
+    }
+    if (this.sintomas === "Si") {
+      this.campoSintomas.enable();
+    } else {
+      this.campoSintomas.disable();
+      this.campoSintomas.reset();
+    }
+  }
+  activarConSos() {
+    if (this.con_caso_sos === "Si") {
+      this.campoObsContacto.enable();
+    } else {
+      this.campoObsContacto.disable();
+      this.campoObsContacto.reset();
+    }
+  }
+
+  submit() {
+    // Acá están todos los datos del formulario para guardar en la BD
+    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
+
+    let datosPersona = this.personaForm.value;
+    ////console.log(datosPersona);
+
+    /* if (this.personaForm.valid) { */
+    this.formService.crearForm(datosPersona).subscribe((data) => {
+      /* 
+				let pepe = data; // Eliminar esta línea si anda todo bien */
+    });
+    this.router.navigate(["/registros"]);
+    /* } else {
+			//console.log(this.personaForm);
+		} */
+    // this.router.navigateByUrl('/registros');
+  }
 
   guardarForm(event: Event) {
     event.preventDefault();

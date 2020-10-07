@@ -9,8 +9,10 @@ export class FormsLlamada {
 				fec_sintomas: string;
 				sin_actuales: string;
 				con_caso_sos: string;
-				ant_personales: string;
+				obs_contacto: string;
+				obra_social: string;
 				enf_actual: string;
+				obs_enfermedad: string;
 				tratamiento: string;
 				convivientes: string;
 				cant_convivientes: string;
@@ -19,10 +21,11 @@ export class FormsLlamada {
 				intervencion: string;
 				obs_intervencion: string;
 				cri_hisopado: string;
+				com_hisopado: string;
 				mov_propia: string;
 				der_enfermeria: string;
 				dis_contacto: string;
-				realizo_hisopado: string;
+				sol_hisopado: string;
 				lug_hisopado: string;
 				fec_hisopado: string;
 				req_extender: string;
@@ -30,11 +33,17 @@ export class FormsLlamada {
 				cer_5dias: string;
 				cer_contacto: string;
 				tip_contacto: string;
+				obs_tip_contacto: string;
 				cas_positivo: string;
+				dat_positivo: string;
 				otro_certificado: string;
 				seg_domiciliario: string;
-				usuario: string;
+				laboratorio: string;
+				whatsapp: string;
+				det_requerimiento: string;
+				fec_salud: string;
 				cierre_contacto: string;
+				usuario: string;
 			}
 		],
 		public persona: {
