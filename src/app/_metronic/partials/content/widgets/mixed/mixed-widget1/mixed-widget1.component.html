@@ -9,7 +9,7 @@
         class="dropdown dropdown-inline"
         title="Quick actions"
       >
-        <a
+        <!-- <a
           ngbDropdownToggle
           class="btn btn-transparent-white btn-sm font-weight-bolder dropdown-toggle px-5 dropdown-toggle btn btn-transparent"
         >
@@ -20,14 +20,14 @@
           class="dropdown-menu dropdown-menu-sm dropdown-menu-right"
         >
           <app-dropdown-menu2></app-dropdown-menu2>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
   <!-- Body -->
   <div class="card-body p-0 position-relative overflow-hidden">
     <!--begin::Chart-->
-    <div
+    <!--  <div
       id="kt_mixed_widget_1_chart"
       class="card-rounded-bottom bg-danger"
       [style.height]="'200px'"
@@ -47,7 +47,7 @@
         [markers]="chartOptions.markers"
         [plotOptions]="chartOptions.plotOptions"
       ></apx-chart>
-    </div>
+    </div> -->
     <!--end::Chart-->
     <!--begin::Stats-->
     <div class="card-spacer mt-n0">
@@ -55,26 +55,68 @@
       <div class="row m-0">
         <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7">
           <span
-            [inlineSVG]="'./assets/media/svg/icons/Media/Equalizer.svg'"
+            [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'"
             class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"
           ></span>
-          <a href="/registros" class="text-warning font-weight-bold font-size-h6">
+          <a
+            routerLink="/registros"
+            class="text-warning font-weight-bold font-size-h6"
+          >
             Registo de Llamdas
           </a>
         </div>
-        <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'"
-            class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
-          ></span>
-          <a href='/registro' routerLinkActive="active" class="text-primary font-weight-bold font-size-h6 mt-2">
-            Nueva Llamada
-          </a>
-        </div>
+        <ng-container *ngIf="mostrar">
+          <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Media/indicadores2.svg'"
+              class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
+            ></span>
+            <a
+              routerLink="/indicadores"
+              routerLinkActive="active"
+              class="text-primary font-weight-bold font-size-h6 mt-2"
+            >
+              Indicadores
+            </a>
+          </div>
+        </ng-container>
       </div>
+      <div class="row m-1">
+        <ng-container *ngIf="mostrar">
+          <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7">
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Communication/Archive.svg'"
+              class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
+            ></span>
+            <a
+              routerLink="/exportar"
+              routerLinkActive="active"
+              class="text-primary font-weight-bold font-size-h6 mt-2"
+            >
+              Exportar
+            </a>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="mostrar && mostrarUs">
+          <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Media/usuario.svg'"
+              class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
+            ></span>
+            <a
+              routerLink="/usuarios"
+              routerLinkActive="active"
+              class="text-primary font-weight-bold font-size-h6 mt-2"
+            >
+              Usuarios
+            </a>
+          </div>
+        </ng-container>
+      </div>
+
       <!--end::Row-->
       <!--begin::Row-->
-<!--       <div class="row m-0">
+      <!--       <div class="row m-0">
         <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
           <span
             [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'"

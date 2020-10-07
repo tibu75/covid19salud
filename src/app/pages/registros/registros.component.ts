@@ -17,7 +17,9 @@ export class RegistrosComponent implements OnInit {
   public cargando: boolean = true;
   public formtemp: Forms[] = [];
   public form: Forms[] = [];
-  public xls: Forms[] = [];
+
+  //public xls: Forms[] = [];
+
   public localidades: Localidades[] = [];
   public paginaD: number = 0;
   public totalForm: number = 0;
@@ -38,7 +40,9 @@ export class RegistrosComponent implements OnInit {
   ngOnInit(): void {
     this.cargarForms();
     this.cargarLocalidades();
-    this.cargarXls();
+
+    //this.cargarXls();
+
   }
 
   cargarLocalidades() {
@@ -94,15 +98,21 @@ export class RegistrosComponent implements OnInit {
     this.cargarForms();
   }
 
-  cargarXls() {
+
+  /* cargarXls() {
+
     this.form0800Service.getXls().subscribe((Xls: any) => {
       this.xls = Xls.Xls;
       this.cdr.markForCheck();
     });
-  }
+
+  } */
 
   exportAsXlsx(): void {
     // //console.log("export", this.xls);
-    this.excelExports.exportAsExcelFile(this.xls, "Reporte");
+    this.excelExports.getXlsx().subscribe((resp: any) => {
+      console.log(resp);
+    });
+
   }
 }

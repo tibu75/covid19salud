@@ -9,10 +9,12 @@ export const environment = {
   TOKEN: "token",
   ID: "ID",
   USER: "USER",
+  MENU: "MENU",
   isMockEnabled: false,
   apiUrl: "http://181.209.23.177:8017",
+  //"http://181.209.23.177:8017",
+  //"http://localhost:8017",
 };
-
 
 /*
  * For easier debugging in development mode, you can import the following file
@@ -21,4 +23,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error'; "http://181.209.23.177:8017", // Included with Angular CLI.
