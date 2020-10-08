@@ -7,7 +7,12 @@ import {
   PersonaService,
   RegistrosService
 } from "./settings.service.index";
-import { Form0800Service, ExporterService } from "./settings.service.index";
+import { LoginGuardGuard } from "./guards/login-guard.guard";
+import {
+  Form0800Service,
+  ExporterService,
+  Reg0800Service,
+} from "./settings.service.index";
 //Web Services
 import { RenaperService, RRHHService } from "./settings.service.index";
 
@@ -23,6 +28,7 @@ import { RenaperService, RRHHService } from "./settings.service.index";
     RRHHService,
     RegistrosService,
     Form0800Service,
+    Reg0800Service,
     ExporterService,
   ],
 })

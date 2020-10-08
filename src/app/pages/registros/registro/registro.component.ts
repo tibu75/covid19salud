@@ -17,6 +17,8 @@ import { Localidades } from "../../models/localidades";
 
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
+import { FormsLlamada } from "../../models/form0800covid2";
+import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 
 @Component({
   selector: "app-registro",
@@ -77,6 +79,7 @@ export class RegistroComponent implements OnInit {
   constructor(
     public _renaperService: RenaperService,
     public _personaService: PersonaService,
+    public _registroService: Reg0800Service,
     private router: Router,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
@@ -238,26 +241,37 @@ export class RegistroComponent implements OnInit {
       this.personaForm.get("persona.documento").value
     }&sexo=${this.personaForm.get("persona.sexo").value}`;
 
-    this._personaService.getPersona(params).subscribe((data: any) => {
-      // console.log("Datos Renaper", data);
-      ////console.log(data.datos);
-      if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
-        this.buscar_datos = false;
-        this.cargar_datos = true;
-        this.isLoadingSubject.next(false);
-        this.cdr.markForCheck();
-        data.datos.documento = this.personaForm.get("persona.documento").value;
-        data.datos.sexo = this.personaForm.get("persona.sexo").value;
-        this.initForm(data.datos);
-        this.edad = this.personaForm.get("persona.fechaNacimiento").value;
-        this.calcularEdad();
-      } else {
-        this.toast.error(
-          "Persona No encontrada, por favor Verifique los datos ingresados."
-        );
-        this.isLoadingSubject.next(false);
-      }
-    });
+    this._registroService
+      .getOneRegistro(this.personaForm.get("persona.documento").value)
+      .subscribe((data: any) => {
+        if (data.ok === false) {
+          this._personaService.getPersona(params).subscribe((data: any) => {
+            if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
+              this.buscar_datos = false;
+              this.cargar_datos = true;
+              this.isLoadingSubject.next(false);
+              this.cdr.markForCheck();
+              data.datos.documento = this.personaForm.get(
+                "persona.documento"
+              ).value;
+              data.datos.sexo = this.personaForm.get("persona.sexo").value;
+              this.initForm(data.datos);
+              this.edad = this.personaForm.get("persona.fechaNacimiento").value;
+              this.calcularEdad();
+            } else {
+              this.toast.error(
+                "Persona No encontrada, por favor Verifique los datos ingresados."
+              );
+              this.isLoadingSubject.next(false);
+            }
+          });
+        } else {
+          this.toast.error(
+            "La persona ya estiste en la Base de datos por favor vuelva a la grilla de registros."
+          );
+          this.isLoadingSubject.next(false);
+        }
+      });
   }
   get campoDocumento() {
     return this.personaForm.get("persona.documento");
@@ -436,7 +450,7 @@ export class RegistroComponent implements OnInit {
     ////console.log(datosPersona);
 
     /* if (this.personaForm.valid) { */
-    this.formService.crearForm(datosPersona).subscribe((data) => {
+    this._registroService.createRegistro(datosPersona).subscribe((data) => {
       /* 
 				let pepe = data; // Eliminar esta línea si anda todo bien */
     });
