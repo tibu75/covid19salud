@@ -36,6 +36,7 @@ import { RegistrosComponent } from "./registros/registros.component";
     LanguageSelectorComponent,
     AsideDynamicComponent,
     HeaderMenuDynamicComponent,
+    RegistrosComponent,
   ],
   imports: [
     CommonModule,
