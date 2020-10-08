@@ -17,7 +17,6 @@ import { Localidades } from "../../models/localidades";
 
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
-import { FormsLlamada } from "../../models/form0800covid2";
 
 @Component({
   selector: "app-registro",
@@ -73,6 +72,7 @@ export class RegistroComponent implements OnInit {
   public sololectura: boolean;
   private unsubscribe: Subscription[] = [];
   public localidades: Localidades[] = [];
+  public errorMessage: string;
 
   constructor(
     public _renaperService: RenaperService,
@@ -82,7 +82,7 @@ export class RegistroComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private toast: ToastrService,
     private formService: Form0800Service,
-    private localidadesService: LocalidadesService
+    private localidadesService: LocalidadesService,
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
@@ -110,6 +110,8 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  
+
   initForm(datos?) {
     this.personaForm = this.fb.group({
       persona: this.fb.group({
@@ -135,7 +137,7 @@ export class RegistroComponent implements OnInit {
         ],
         numero: [
           datos ? datos.numero : "",
-          [Validators.required, Validators.max(4)],
+          [Validators.required, Validators.maxLength(4)],
         ],
         departamento: [
           datos ? datos.departamento : "",
@@ -149,7 +151,7 @@ export class RegistroComponent implements OnInit {
           datos ? datos.cpostal : "",
           [Validators.required, Validators.maxLength(4)],
         ],
-        localidad: ["", Validators.required],
+        localidad: ["", [Validators.required]],
         provincia: [
           datos ? datos.provincia : "",
           [Validators.required, Validators.maxLength(25)],
@@ -163,44 +165,56 @@ export class RegistroComponent implements OnInit {
       llamada: this.fb.group({
         nroForm: [""],
         fecha: [""],
-        motivo: ["", Validators.required],
+        motivo: ["", [Validators.required]],
         sintomas: ["No"],
-        fec_sintomas: [{ value: "", disabled: true }, Validators.required],
-        sin_actuales: [{ value: "", disabled: true }, Validators.required],
+        fec_sintomas: [{ value: "", disabled: true }, [Validators.required]],
+        sin_actuales: [{ value: "", disabled: true }, [Validators.required]],
         con_caso_sos: ["No"],
-        obs_contacto: [{ value: "", disabled: true }, Validators.required],
-        obra_social: ["", Validators.required],
+        obs_contacto: [{ value: "", disabled: true }, [Validators.required]],
+        obra_social: ["", [Validators.required]],
         enf_actual: ["No"],
-        obs_enfermedad: [{ value: "", disabled: true }, Validators.required],
-        tratamiento: [{ value: "No", disabled: true }, Validators.required],
+        obs_enfermedad: [{ value: "", disabled: true }, [Validators.required]],
+        tratamiento: [{ value: "No", disabled: true }, [Validators.required]],
         convivientes: ["No"],
-        cant_convivientes: ["", Validators.required],
-        obs_convivientes: ["", Validators.required],
-        sit_social: ["", Validators.required],
+        cant_convivientes: [
+          { value: "", disabled: true },
+          [Validators.required],
+        ],
+        obs_convivientes: [
+          { value: "", disabled: true },
+          [Validators.required],
+        ],
+        sit_social: ["", [Validators.required]],
         intervencion: ["No"],
-        obs_intervencion: ["", Validators.required],
+        obs_intervencion: [
+          { value: "", disabled: true },
+          [Validators.required],
+        ],
         cri_hisopado: ["No"],
         com_hisopado: ["No"],
         mov_propia: ["Si"],
         der_enfermeria: ["No"],
-        dis_contacto: ["", Validators.required],
+        dis_contacto: ["", [Validators.required]],
         sol_hisopado: ["No"],
-        lug_hisopado: ["", Validators.required],
-        fec_hisopado: ["", Validators.required],
-        req_extender: ["", Validators.required],
+        lug_hisopado: [{ value: "", disabled: true }, [Validators.required]],
+        fec_hisopado: [{ value: "", disabled: true }, [Validators.required]],
+        req_extender: [{ value: "", disabled: true }, [Validators.required]],
         cer_5dias: ["No"],
         cer_contacto: ["No"],
         tip_contacto: ["Social"],
-        obs_tip_contacto: ["", Validators.required],
-        cas_positivo: ["No", Validators.required],
-        dat_positivo: ["", Validators.required],
-        otro_certificado: [""],
+        obs_tip_contacto: [
+          { value: "", disabled: true },
+          [Validators.required],
+        ],
+        cas_positivo: ["No"],
+        dat_positivo: [{ value: "", disabled: true }, [Validators.required]],
+        otro_certificado: ["", [Validators.required]],
         seg_domiciliario: ["No"],
         laboratorio: ["Privado"],
         whatsapp: ["No"],
-        det_requerimiento: ["", Validators.required],
-        fec_salud: ["", Validators.required],
-        cierre_contacto: ["", Validators.required],
+        det_requerimiento: ["", [Validators.required]],
+        fec_salud: [{ value: "", disabled: true }, [Validators.required]],
+        cierre_contacto: ["", [Validators.required]],
         usuario: [""],
       }),
       trabajo: this.fb.group({
@@ -213,6 +227,7 @@ export class RegistroComponent implements OnInit {
     });
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       console.log(value);
+
     });
     //  //console.log(this.personaForm);
   }
@@ -376,7 +391,6 @@ export class RegistroComponent implements OnInit {
   get campoFecSalud() {
     return this.personaForm.get("llamada.fec_salud");
   }
-
   activarSintomas() {
     if (this.sintomas === "Si") {
       this.campoFecha.enable();
@@ -397,6 +411,20 @@ export class RegistroComponent implements OnInit {
     } else {
       this.campoObsContacto.disable();
       this.campoObsContacto.reset();
+    }
+  }
+  activarEnfermedad() {
+    if (this.enf_actual === "Si") {
+      this.campoEnfermedad.enable();
+    } else {
+      this.campoEnfermedad.disable();
+      this.campoEnfermedad.reset();
+    }
+    if (this.enf_actual === "Si") {
+      this.campoTratamiento.enable();
+    } else {
+      this.campoTratamiento.disable();
+      this.campoTratamiento.reset();
     }
   }
 
@@ -422,7 +450,11 @@ export class RegistroComponent implements OnInit {
   guardarForm(event: Event) {
     event.preventDefault();
     // Acá están todos los datos del formulario para guardar en la BD
-    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
+    this.personaForm.patchValue({
+      llamada: { usuario: sessionStorage.getItem("ID") },
+    });
+    this.personaForm.patchValue({ llamada: { fecha: "01/09/2020" } });
+    this.personaForm.patchValue({ llamada: { nroForm: "1" } });
 
     let datosPersona = this.personaForm.value;
     console.log("Datos de la Persona: ", datosPersona);
