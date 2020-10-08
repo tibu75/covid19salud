@@ -11,7 +11,11 @@ import {
   RegistrosService,
 } from "./settings.service.index";
 import { LoginGuardGuard } from "./guards/login-guard.guard";
-import { Form0800Service, ExporterService } from "./settings.service.index";
+import {
+  Form0800Service,
+  ExporterService,
+  Reg0800Service,
+} from "./settings.service.index";
 //Web Services
 import { RenaperService, RRHHService } from "./settings.service.index";
 import { SectoresService, AccesosService } from "./settings.service.index";
@@ -34,6 +38,7 @@ import { SectoresService, AccesosService } from "./settings.service.index";
     SectoresService,
     RegistrosService,
     Form0800Service,
+    Reg0800Service,
     ExporterService,
   ],
 })
