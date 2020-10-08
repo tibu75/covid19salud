@@ -34,7 +34,7 @@
       &nbsp;
       <!--end::Dropdown-->
       <!--begin::Button-->
-      <a routerLink="/registro" class="btn btn-primary font-weight-bolder">
+      <a routerLink="/registro" routerLinkActive="router-link-active"  class="btn btn-primary font-weight-bolder">
         <span class="svg-icon svg-icon-md">
           <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
           <svg
@@ -265,7 +265,7 @@
             <tbody>
               <tr role="row" class="odd" *ngFor="let f of form">
                 <td class="sorting_1 dtr-control">{{ f.nroForm }}</td>
-                <td>{{ f.fecha | date: "dd/MM/yyyy" }}</td>
+                <td>{{ f.fecha }}</td> <!-- | date: "dd/MM/yyyy" --> 
                 <td>{{ f.persona?.apellido }}</td>
                 <td>{{ f.persona?.nombre }}</td>
                 <td>

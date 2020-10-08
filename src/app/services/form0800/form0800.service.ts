@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, repeat } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
 import { Form0800 } from "../../interfaces/form0800Interface";
-import { Forms } from "../../pages/models/form0800covid";
 import { Router } from "@angular/router";
 import { AuthService } from "../../modules/auth/_services/auth.service";
 import { Observable } from "rxjs";

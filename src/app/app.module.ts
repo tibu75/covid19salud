@@ -59,7 +59,6 @@ export function getHighlightLanguages() {
     RegistroComponent,
     MostrarComponent,
     LlamadaComponent,
-
     IndicadoresComponent,
     ExportarComponent,
 
