@@ -1,12 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, NgModule } from "@angular/core";
 import { Form0800Service } from "../../services/form0800/form0800.service";
-import { Forms } from "../models/form0800covid";
+import { FormsLlamada } from "../models/form0800covid2";
 import { Localidades } from "../models/localidades";
 import { LocalidadesService } from "../../services/localidades/localidades.service";
 import { ExporterService } from "../../services/exporter/exporter.service";
 import { BusquedasService } from "src/app/services/busqueda/busquedas.service";
 import { MostrarService } from "src/app/services/mostrar/mostrar.service";
 import { Router } from "@angular/router";
+
+import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 
 @Component({
   selector: "app-registros",
@@ -15,8 +17,8 @@ import { Router } from "@angular/router";
 })
 export class RegistrosComponent implements OnInit {
   public cargando: boolean = true;
-  public formtemp: Forms[] = [];
-  public form: Forms[] = [];
+  public formtemp: FormsLlamada[] = [];
+  public form: FormsLlamada[] = [];
   //public xls: Forms[] = [];
   public localidades: Localidades[] = [];
   public paginaD: number = 0;
@@ -27,6 +29,7 @@ export class RegistrosComponent implements OnInit {
 
   constructor(
     private form0800Service: Form0800Service,
+    private reg0800Service: Reg0800Service,
     private localidadesService: LocalidadesService,
     private busquedaService: BusquedasService,
     private cdr: ChangeDetectorRef,
@@ -50,13 +53,13 @@ export class RegistrosComponent implements OnInit {
 
   cargarForms() {
     this.cargando = true;
-    this.form0800Service
-      .getForms(this.paginaD)
-      .subscribe(({ total, forms }) => {
-        //   //console.log(this.form);
+    this.reg0800Service
+      .getRegistros(this.paginaD)
+      .subscribe(({ total, registros }) => {
+        console.log(registros);
         //debugger
-        this.form = forms;
-        this.formtemp = forms;
+        this.form = registros;
+        this.formtemp = registros;
         this.totalForm = total;
         this.cdr.markForCheck();
 
@@ -69,7 +72,7 @@ export class RegistrosComponent implements OnInit {
     if (dni.length === 0) {
       return (this.form = this.formtemp);
     }
-    this.busquedaService.buscarDni(dni).subscribe((resp: Forms[]) => {
+    this.busquedaService.buscarDni(dni).subscribe((resp: FormsLlamada[]) => {
       //  //console.log(resp);
       this.form = resp;
       this.cdr.markForCheck();
