@@ -17,7 +17,6 @@ import { Localidades } from "../../models/localidades";
 
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
-import { FormsLlamada } from "../../models/form0800covid2";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 
 @Component({
@@ -166,7 +165,7 @@ export class RegistroComponent implements OnInit {
         img: [datos ? datos.foto : ""],
       }),
       llamada: this.fb.group({
-        nroForm: [""],
+        nroForm: [null],
         fecha: [""],
         motivo: ["", [Validators.required]],
         sintomas: ["No"],
@@ -227,6 +226,9 @@ export class RegistroComponent implements OnInit {
         numero: ["", [Validators.maxLength(4)]],
         localidad: ["", [Validators.maxLength(25)]],
       }),
+      usuario: [null],
+      fecha: [""],
+      nroForm: [null],
     });
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       console.log(value);
@@ -541,14 +543,13 @@ export class RegistroComponent implements OnInit {
     this.personaForm.patchValue({
       llamada: { usuario: sessionStorage.getItem("ID") },
     });
-    this.personaForm.patchValue({ llamada: { fecha: "01/09/2020" } });
-    this.personaForm.patchValue({ llamada: { nroForm: "1" } });
+    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID")});
 
     let datosPersona = this.personaForm.value;
     console.log("Datos de la Persona: ", datosPersona);
 
     if (this.personaForm.valid) {
-      this.formService.crearForm(datosPersona).subscribe((data) => {
+      this._registroService.createRegistro(datosPersona).subscribe((data) => {
         /* 
 				let pepe = data; // Eliminar esta línea si anda todo bien */
       });
