@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Reg0800 } from "../../interfaces/reg0800Interfaces";
+import { Observable } from "rxjs";
+
 const API_USERS_URL = `${environment.apiUrl}/llamada`;
 
 @Injectable({
@@ -14,7 +16,7 @@ export class Reg0800Service {
     return this.http.post(API_USERS_URL, formData);
   }
 
-  getRegistros(desde: number) {
+  getRegistros(desde: number): Observable<Reg0800> {
     let url = `${API_USERS_URL}/?desde=${desde}`;
     return this.http.get<Reg0800>(url);
   }
