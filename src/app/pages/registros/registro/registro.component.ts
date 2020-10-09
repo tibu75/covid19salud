@@ -405,6 +405,9 @@ export class RegistroComponent implements OnInit {
   get campoFecSalud() {
     return this.personaForm.get("llamada.fec_salud");
   }
+
+  
+
   activarSintomas() {
     if (this.sintomas === "Si") {
       this.campoFecha.enable();
@@ -429,18 +432,89 @@ export class RegistroComponent implements OnInit {
   }
   activarEnfermedad() {
     if (this.enf_actual === "Si") {
-      this.campoEnfermedad.enable();
+      this.campoObsEnfermedad.enable();
     } else {
-      this.campoEnfermedad.disable();
-      this.campoEnfermedad.reset();
+      this.campoObsEnfermedad.disable();
+      this.campoObsEnfermedad.reset();
     }
     if (this.enf_actual === "Si") {
       this.campoTratamiento.enable();
     } else {
       this.campoTratamiento.disable();
-      this.campoTratamiento.reset();
+      this.campoTratamiento.reset('No');
     }
   }
+  activarConviviente() {
+    if (this.convivientes === "Si") {
+      this.campoCantConvivientes.enable();
+    } else {
+      this.campoCantConvivientes.disable();
+      this.campoCantConvivientes.reset();
+    }
+    if (this.convivientes === "Si") {
+      this.campoObsCantConvivientes.enable();
+    } else {
+      this.campoObsCantConvivientes.disable();
+      this.campoObsCantConvivientes.reset();
+    }
+  }
+
+  activarIntervencion() {
+    if (this.intervencion === "Si") {
+      this.campoObsIntervencion.enable();
+    } else {
+      this.campoObsIntervencion.disable();
+      this.campoObsIntervencion.reset();
+    }    
+  }
+
+  activarSolHisopado() {
+    if (this.sol_hisopado === "Si") {
+      this.campoLugHisopa.enable();
+    } else {
+      this.campoLugHisopa.disable();
+      this.campoLugHisopa.reset();
+    } 
+    if (this.sol_hisopado === "Si") {
+      this.campoFecHisopado.enable();
+    } else {
+      this.campoFecHisopado.disable();
+      this.campoFecHisopado.reset();
+    }  
+    if (this.sol_hisopado === "Si") {
+      this.campoReqExtender.enable();
+    } else {
+      this.campoReqExtender.disable();
+      this.campoReqExtender.reset();
+    }     
+  }
+
+  activarCerAislamiento() {
+    if (this.cer_contacto === "Si") {
+      this.campoObsTipoContacto.enable();
+    } else {
+      this.campoObsTipoContacto.disable();
+      this.campoObsTipoContacto.reset();
+    }
+  }
+  activarCasoPositivo() {
+    if (this.cas_positivo === "Si") {
+      this.campoDatPositivo.enable();
+    } else {
+      this.campoDatPositivo.disable();
+      this.campoDatPositivo.reset();
+    }
+  }
+  activarSegMedico() {
+    debugger;
+    if (this.laboratorio === "Publico") {
+      this.campoFecSalud.enable();
+    } else {
+      this.campoFecSalud.disable();
+      this.campoFecSalud.reset("");
+    }
+  }
+
 
   submit() {
     // Acá están todos los datos del formulario para guardar en la BD

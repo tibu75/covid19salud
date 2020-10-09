@@ -507,7 +507,7 @@
 											<label style="margin-left: 20px">
 												<input type="radio" name="enf_actual" value="Si"
 													formControlName="enf_actual" [(ngModel)]="enf_actual"
-													(change)="activarEnfermedad()" />
+													(change)="activarEnfermedad()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												Si
 											</label>
@@ -525,9 +525,9 @@
 											<label>Descripción de la Enfermedad</label>
 											<input class="form-control form-control-solid" type="text"
 												formControlName="obs_enfermedad" name="obs_enfermedad" placeholder="" />
-											<div *ngIf="campoEnfermedad.errors && campoEnfermedad.touched"
+											<div *ngIf="campoObsEnfermedad.errors && campoObsEnfermedad.touched"
 												class="text-danger">
-												<small *ngIf="campoEnfermedad.hasError('required')">
+												<small *ngIf="campoObsEnfermedad.hasError('required')">
 													La Descripción de Enfermedad es requerida
 												</small>
 											</div>
@@ -559,13 +559,13 @@
 											</h3>
 											<label style="margin-left: 20px">
 												<input type="radio" name="convivientes" value="Si"
-													formControlName="convivientes" [(ngModel)]="convivientes" />
+													formControlName="convivientes" [(ngModel)]="convivientes" (change)="activarConviviente()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												Si
 											</label>
 											<label style="margin-left: 20px; margin-right: 20px">
 												<input type="radio" name="convivientes" formControlName="convivientes"
-													value="No" [(ngModel)]="convivientes" checked />
+													value="No" [(ngModel)]="convivientes" checked (change)="activarConviviente()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												No
 											</label>
@@ -622,13 +622,13 @@
 											</h3>
 											<label style="margin-left: 20px">
 												<input type="radio" name="intervencion" value="Si"
-													formControlName="intervencion" [(ngModel)]="intervencion" />
+													formControlName="intervencion" [(ngModel)]="intervencion" (change)="activarIntervencion()" />
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												Si
 											</label>
 											<label style="margin-left: 20px">
 												<input type="radio" name="intervencion" formControlName="intervencion"
-													value="No" [(ngModel)]="intervencion" checked />
+													value="No" [(ngModel)]="intervencion" checked (change)="activarIntervencion()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												No
 											</label>
@@ -738,13 +738,13 @@
 											</h3>
 											<label style="margin-left: 20px">
 												<input type="radio" name="sol_hisopado" value="Si"
-													formControlName="sol_hisopado" [(ngModel)]="sol_hisopado" />
+													formControlName="sol_hisopado" [(ngModel)]="sol_hisopado" (change)="activarSolHisopado()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												Si
 											</label>
 											<label style="margin-left: 20px">
 												<input type="radio" name="sol_hisopado" formControlName="sol_hisopado"
-													value="No" [(ngModel)]="sol_hisopado" checked />
+													value="No" [(ngModel)]="sol_hisopado" checked (change)="activarSolHisopado()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												No
 											</label>
@@ -818,14 +818,14 @@
 											<label>Certificado Aislamiento por Contacto Estrecho?</label>
 											<label style="margin-left: 20px">
 												<input type="radio" name="cer_contacto" value="Si"
-													formControlName="cer_contacto" [(ngModel)]="cer_contacto" />
+													formControlName="cer_contacto" [(ngModel)]="cer_contacto" (change)="activarCerAislamiento()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												Si
 											</label>
 
 											<label style="margin-left: 20px">
 												<input type="radio" name="cer_contacto" formControlName="cer_contacto"
-													value="No" [(ngModel)]="cer_contacto" checked />
+													value="No" [(ngModel)]="cer_contacto" checked (change)="activarCerAislamiento()"/>
 												<i class="ti-check text-active" aria-hidden="true"></i>
 												No
 											</label>
@@ -865,7 +865,7 @@
 													popsitivo?</label>
 												<label style="margin-left: 20px">
 													<input type="radio" name="cas_positivo" value="Si"
-														formControlName="cas_positivo" [(ngModel)]="cas_positivo" />
+														formControlName="cas_positivo" [(ngModel)]="cas_positivo" (change)="activarCasoPositivo()"/>
 													<i class="ti-check text-active" aria-hidden="true"></i>
 													Si
 												</label>
@@ -873,7 +873,7 @@
 												<label style="margin-left: 20px">
 													<input type="radio" name="cas_positivo"
 														formControlName="cas_positivo" value="No"
-														[(ngModel)]="cas_positivo" checked />
+														[(ngModel)]="cas_positivo" checked (change)="activarCasoPositivo()" />
 													<i class="ti-check text-active" aria-hidden="true"></i>
 													No
 												</label>
@@ -919,15 +919,15 @@
 												</h3>
 
 												<label style="margin-left: 20px">
-													<input type="radio" name="laboratorio" value="Público"
-														formControlName="laboratorio" [(ngModel)]="laboratorio" />
+													<input type="radio" name="laboratorio" value="Publico"
+														formControlName="laboratorio" [(ngModel)]="laboratorio" (change)="activarSegMedico()"/>
 													<i class="ti-check text-active" aria-hidden="true"></i>
 													Laboratorio Público
 												</label>
 
 												<label style="margin-left: 20px">
 													<input type="radio" name="laboratorio" formControlName="laboratorio"
-														value="Privado" [(ngModel)]="laboratorio" checked />
+														value="Privado" [(ngModel)]="laboratorio" checked (change)="activarSegMedico()"/>
 													<i class="ti-check text-active" aria-hidden="true"></i>
 													Laboratorio Privado
 												</label>
@@ -935,13 +935,13 @@
 										</div>
 									</div>
 									<div class="col-12">
-										<div class="row" *ngIf="laboratorio === 'Público'">
+										<div class="row" *ngIf="laboratorio === 'Publico'">
 											<div class="col-12">
 												<label>Indique fecha de último contacto de Salud</label>
 											</div>
 											<div class="col-4">
 												<input class="form-control form-control-solid" type="date" id="start1"
-													formControlName="fec_sintomas" name="fec_sintomas"
+													formControlName="fec_salud" name="fec_salud"
 													min=" {{ fechamin }}" max="{{ fechahoy }}" />
 												<div *ngIf="campoFecSalud.errors && campoFecSalud.touched"
 													class="text-danger">
@@ -951,21 +951,6 @@
 												</div>
 											</div>
 
-											<div class="col-12" style="margin-top: 10px">
-												<label>Detalle del requerimiento</label>
-												<input class="form-control form-control-solid" type="text"
-													formControlName="det_requerimiento" name="det_requerimiento"
-													placeholder="" />
-												<div *ngIf="campoDetRequerimiento.errors && campoDetRequerimiento.touched"
-													class="text-danger">
-													<small *ngIf="campoDetRequerimiento.hasError('required')">
-														El Detalle es requerido
-													</small>
-												</div>
-											</div>
-											<div class="col-12" style="margin-top: 10px">
-												<label>Ratifique Teléfono y Domicilio actual</label>
-											</div>
 										</div>
 										<div class="row" *ngIf="laboratorio === 'Privado'">
 											<div class="col-12">
@@ -983,21 +968,22 @@
 													No
 												</label>
 											</div>
-											<div class="col-12">
-												<label>Detalle del requerimiento</label>
-												<input class="form-control form-control-solid" type="text"
-													formControlName="det_requerimiento" name="det_requerimiento"
-													placeholder="" />
-												<div *ngIf="campoDetRequerimiento.errors && campoDetRequerimiento.touched"
-													class="text-danger">
-													<small *ngIf="campoDetRequerimiento.hasError('required')">
-														El Detalle es requerido
-													</small>
-												</div>
+										</div>
+										
+										<div class="col-12" style="margin-top: 10px">
+											<label>Detalle del requerimiento</label>
+											<input class="form-control form-control-solid" type="text"
+												formControlName="det_requerimiento" name="det_requerimiento"
+												placeholder="" />
+											<div *ngIf="campoDetRequerimiento.errors && campoDetRequerimiento.touched"
+												class="text-danger">
+												<small *ngIf="campoDetRequerimiento.hasError('required')">
+													El Detalle es requerido
+												</small>
 											</div>
-											<div class="col-12" style="margin-top: 10px">
-												<label>Ratifique Teléfono y Domicilio actual</label>
-											</div>
+										</div>
+										<div class="col-12" style="margin-top: 10px">
+											<label>Ratifique Teléfono y Domicilio actual</label>
 										</div>
 									</div>
 									<div class="separator separator-dashed my-10"></div>
