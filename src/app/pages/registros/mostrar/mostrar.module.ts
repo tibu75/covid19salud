@@ -19,5 +19,6 @@ import { RegllamadaComponent } from "./regllamada/regllamada.component";
   ],
 
   entryComponents: [RegllamadaComponent],
+
 })
 export class MostrarModule {}

@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Forms } from "../../pages/models/form0800covid";
+import { FormsLlamada } from "../../pages/models/form0800covid2";
 
 @Injectable({
-	providedIn: "root",
+  providedIn: "root",
 })
 export class MostrarService {
-	registro: Forms;
+  registro: FormsLlamada;
 
-	public hizo_hisopado: boolean = true;
-	public con_sintomas: boolean = true;
-	public cargar_datos: boolean = true;
+  public hizo_hisopado: boolean = true;
+  public con_sintomas: boolean = true;
+  public cargar_datos: boolean = true;
 
-	constructor() {}
+  constructor() {}
 }

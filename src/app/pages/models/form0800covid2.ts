@@ -66,12 +66,15 @@ export class FormsLlamada {
       pais: string;
       img: string;
     },
-    public trabajo: {
-      lugar: string;
-      telefono: string;
-      calle: string;
-      numero: string;
-      localidad: string;
-    }
+    public trabajo: [
+      {
+        lugar: string;
+        telefono: string;
+        calle: string;
+        numero: string;
+        localidad: string;
+      }
+    ],
+    public _id?: string
   ) {}
 }

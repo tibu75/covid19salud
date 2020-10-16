@@ -406,6 +406,7 @@ export class RegistroComponent implements OnInit {
     return this.personaForm.get("llamada.fec_salud");
   }
 
+
   get valido() {
     return this.personaForm.valid;
   }
