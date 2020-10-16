@@ -4,15 +4,16 @@ import { RouterModule } from "@angular/router";
 import { RegistrosComponent } from "./registros.component";
 
 @NgModule({
-	declarations: [],
-	imports: [
-		CommonModule,
-		RouterModule.forChild([
-			{
-				path: "",
-				component: RegistrosComponent,
-			},
-		]),
-	],
+  declarations: [],
+  imports: [
+    CommonModule,
+
+    RouterModule.forChild([
+      {
+        path: "",
+        component: RegistrosComponent,
+      },
+    ]),
+  ],
 })
 export class RegistrosModule {}

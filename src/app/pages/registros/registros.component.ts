@@ -24,6 +24,7 @@ export class RegistrosComponent implements OnInit {
   public paginaD: number = 0;
   public totalForm: number = 0;
   soloLectura: boolean;
+  Showllamadas: boolean;
   data: any = [];
   dni: any = [];
 
@@ -56,7 +57,7 @@ export class RegistrosComponent implements OnInit {
     this.reg0800Service
       .getRegistros(this.paginaD)
       .subscribe(({ total, registros }) => {
-        console.log(registros);
+        //   console.log(registros);
         //debugger
         this.form = registros;
         this.formtemp = registros;
@@ -66,6 +67,7 @@ export class RegistrosComponent implements OnInit {
         this.cargando = false;
         this.soloLectura = true;
       });
+    this.cdr.markForCheck();
   }
 
   buscarDocumento(dni: string) {

@@ -13,8 +13,8 @@ export class DynamicAsideMenuService {
   private menuConfigSubject = new BehaviorSubject<any>(emptyMenuConfig);
   menuConfig$: Observable<any>;
   constructor() {
-    this.menuConfig$ = this.menuConfigSubject.asObservable();
     this.loadMenu();
+    this.menuConfig$ = this.menuConfigSubject.asObservable();
   }
 
   // Here you able to load your menu from server/data-base/localStorage
@@ -26,6 +26,7 @@ export class DynamicAsideMenuService {
 
   private setMenu(menuConfig) {
     this.menuConfigSubject.next(menuConfig);
+    // console.log(menuConfig);
   }
 
   private getMenu(): any {
