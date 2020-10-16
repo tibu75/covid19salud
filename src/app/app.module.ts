@@ -30,7 +30,8 @@ import { LlamadaComponent } from "./pages/registros/llamada/llamada.component";
 
 import { IndicadoresComponent } from "./pages/indicadores/indicadores.component";
 import { ExportarComponent } from "./pages/exportar/exportar.component";
-
+import { RegllamadaComponent } from "./pages/registros/mostrar/regllamada/regllamada.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -61,7 +62,7 @@ export function getHighlightLanguages() {
     LlamadaComponent,
     IndicadoresComponent,
     ExportarComponent,
-
+    RegllamadaComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +89,7 @@ export function getHighlightLanguages() {
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-
+    MatDialogModule,
   ],
   providers: [
     {

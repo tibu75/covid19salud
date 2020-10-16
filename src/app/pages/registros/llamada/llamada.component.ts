@@ -112,8 +112,6 @@ export class LlamadaComponent implements OnInit {
    }
  }
 
- 
-
  initForm(datos?) {
    this.llamadaForm = this.fb.group({
 	   nroForm: [null],
@@ -216,7 +214,6 @@ export class LlamadaComponent implements OnInit {
 	 });
  }
 
- 
  get campoMotivo() {
    return this.llamadaForm.get("motivo");
  }
@@ -328,8 +325,6 @@ export class LlamadaComponent implements OnInit {
  get campoFecSalud() {
    return this.llamadaForm.get("fec_salud");
  }
-
- 
 
  activarSintomas() {
    if (this.sintomas === "Si") {
