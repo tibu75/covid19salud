@@ -90,8 +90,6 @@ export class LlamadaComponent implements OnInit {
     //  console.log("Id form", this.idForm);
   }
 
-
-
   cargarLocalidades() {
     this.localidadesService.getLocalidades().subscribe((data: any) => {
       this.localidades = data;
@@ -148,7 +146,6 @@ export class LlamadaComponent implements OnInit {
     });
     //  //console.log(this.llamadaForm);
   }
-
 
   get campoMotivo() {
     return this.llamadaForm.get("motivo");
@@ -321,170 +318,6 @@ export class LlamadaComponent implements OnInit {
       this.campoObsIntervencion.reset();
     }
   }
-
-
- get campoMotivo() {
-   return this.llamadaForm.get("motivo");
- }
- get campoCierre() {
-   return this.llamadaForm.get("cierre_contacto");
- }
- get campoFecha() {
-   return this.llamadaForm.get("fec_sintomas");
- }
- get campoSintomas() {
-   return this.llamadaForm.get("sin_actuales");
- }
- get campoContacto() {
-   return this.llamadaForm.get("con_caso_sos");
- }
- get campoObsContacto() {
-   return this.llamadaForm.get("obs_contacto");
- }
- get campoObraSocial() {
-   return this.llamadaForm.get("obra_social");
- }
- get campoEnfermedad() {
-   return this.llamadaForm.get("enf_actual");
- }
- get campoObsEnfermedad() {
-   return this.llamadaForm.get("obs_enfermedad");
- }
- get campoTratamiento() {
-   return this.llamadaForm.get("tratamiento");
- }
- get campoConvivientes() {
-   return this.llamadaForm.get("convivientes");
- }
- get campoCantConvivientes() {
-   return this.llamadaForm.get("cant_convivientes");
- }
- get campoObsCantConvivientes() {
-   return this.llamadaForm.get("obs_convivientes");
- }
- get campoSituacion() {
-   return this.llamadaForm.get("sit_social");
- }
- get campoIntervencion() {
-   return this.llamadaForm.get("intervencion");
- }
- get campoObsIntervencion() {
-   return this.llamadaForm.get("obs_intervencion");
- }
- get campoHisopado() {
-   return this.llamadaForm.get("cri_hisopado");
- }
- get campoComHisopado() {
-   return this.llamadaForm.get("com_hisopado");
- }
- get campoMovilidad() {
-   return this.llamadaForm.get("mov_propia");
- }
- get campoEnfermeria() {
-   return this.llamadaForm.get("der_enfermeria");
- }
- get campoDisContacto() {
-   return this.llamadaForm.get("dis_contacto");
- }
- get campoSolHisopado() {
-   return this.llamadaForm.get("sol_hisopado");
- }
- get campoLugHisopa() {
-   return this.llamadaForm.get("lug_hisopado");
- }
- get campoFecHisopado() {
-   return this.llamadaForm.get("fec_hisopado");
- }
- get campoReqExtender() {
-   return this.llamadaForm.get("req_extender");
- }
- get campoCer5Dias() {
-   return this.llamadaForm.get("cer_5dias");
- }
- get campoCerContacto() {
-   return this.llamadaForm.get("cer_contacto");
- }
- get campoTiContacto() {
-   return this.llamadaForm.get("tip_contacto");
- }
- get campoObsTipoContacto() {
-   return this.llamadaForm.get("obs_tip_contacto");
- }
- get campoCasPositivo() {
-   return this.llamadaForm.get("cas_positivo");
- }
- get campoDatPositivo() {
-   return this.llamadaForm.get("dat_positivo");
- }
- get campoOtroCert() {
-   return this.llamadaForm.get("otro_certificado");
- }
- get campoSegDom() {
-   return this.llamadaForm.get("seg_domiciliario");
- }
- get campoLaboratorio() {
-   return this.llamadaForm.get("laboratorio");
- }
- get campoWhatsapp() {
-   return this.llamadaForm.get("whatsapp");
- }
- get campoDetRequerimiento() {
-   return this.llamadaForm.get("det_requerimiento");
- }
- get campoFecSalud() {
-   return this.llamadaForm.get("fec_salud");
- }
-
- activarSintomas() {
-   if (this.sintomas === "Si") {
-	 this.campoFecha.enable();
-   } else {
-	 this.campoFecha.disable();
-	 this.campoFecha.reset();
-   }
-   if (this.sintomas === "Si") {
-	 this.campoSintomas.enable();
-   } else {
-	 this.campoSintomas.disable();
-	 this.campoSintomas.reset();
-   }
- }
- activarConSos() {
-   if (this.con_caso_sos === "Si") {
-	 this.campoObsContacto.enable();
-   } else {
-	 this.campoObsContacto.disable();
-	 this.campoObsContacto.reset();
-   }
- }
- activarEnfermedad() {
-   if (this.enf_actual === "Si") {
-	 this.campoObsEnfermedad.enable();
-   } else {
-	 this.campoObsEnfermedad.disable();
-	 this.campoObsEnfermedad.reset();
-   }
-   if (this.enf_actual === "Si") {
-	 this.campoTratamiento.enable();
-   } else {
-	 this.campoTratamiento.disable();
-	 this.campoTratamiento.reset('No');
-   }
- }
- activarConviviente() {
-   if (this.convivientes === "Si") {
-	 this.campoCantConvivientes.enable();
-   } else {
-	 this.campoCantConvivientes.disable();
-	 this.campoCantConvivientes.reset();
-   }
-   if (this.convivientes === "Si") {
-	 this.campoObsCantConvivientes.enable();
-   } else {
-	 this.campoObsCantConvivientes.disable();
-	 this.campoObsCantConvivientes.reset();
-   }
- }
 
   activarSolHisopado() {
     if (this.sol_hisopado === "Si") {
