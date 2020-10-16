@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { MostrarComponent } from "./mostrar.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RegllamadaComponent } from "./regllamada/regllamada.component";
 @NgModule({
   declarations: [],
   imports: [
@@ -16,5 +17,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
       },
     ]),
   ],
+
+  entryComponents: [RegllamadaComponent],
+
 })
 export class MostrarModule {}

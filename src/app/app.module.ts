@@ -29,8 +29,9 @@ import { MostrarComponent } from "./pages/registros/mostrar/mostrar.component";
 import { LlamadaComponent } from "./pages/registros/llamada/llamada.component";
 import { IndicadoresComponent } from "./pages/indicadores/indicadores.component";
 import { ExportarComponent } from "./pages/exportar/exportar.component";
+import { RegllamadaComponent } from "./pages/registros/mostrar/regllamada/regllamada.component";
+import { MatDialogModule } from "@angular/material/dialog";
 import { RegistrosComponent } from "./pages/registros/registros.component";
-
 function appInitializer(authService: AuthService) {
   return () => {
     return new Promise((resolve) => {
@@ -61,7 +62,8 @@ export function getHighlightLanguages() {
     LlamadaComponent,
     IndicadoresComponent,
     ExportarComponent,
-  ],
+    RegllamadaComponent,
+ ],
   imports: [
     BrowserModule,
     ToastrModule.forRoot({
@@ -87,6 +89,8 @@ export function getHighlightLanguages() {
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
+    MatDialogModule,
+
   ],
   providers: [
     {

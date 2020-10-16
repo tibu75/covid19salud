@@ -1,30 +1,14 @@
-import { Component, OnInit, ChangeDetectorRef, NgModule } from "@angular/core";
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from "@angular/forms";
-
-import { RenaperService } from "../../../services/ws/renaper.service";
-import { PersonaService } from "../../../services/persona/persona.service";
-import { Subscription, Observable, BehaviorSubject } from "rxjs";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { LocalidadesService } from "./../../../services/localidades/localidades.service";
-import { Form0800Service } from "./../../../services/form0800/form0800.service";
-import { Localidades } from "../../models/localidades";
-
+import { Component, OnInit, Inject } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as moment from "moment";
-import { debounce, debounceTime } from "rxjs/operators";
-import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 
 @Component({
-  selector: "app-registro",
-  templateUrl: "./registro.component.html",
+  selector: "app-regllamada",
+  templateUrl: "./regllamada.component.html",
+  styleUrls: ["./regllamada.component.scss"],
 })
-export class RegistroComponent implements OnInit {
-  //Formulario
+export class RegllamadaComponent implements OnInit {
   personaForm: FormGroup;
   sintomas = "No";
   con_caso_sos = "No";
@@ -61,8 +45,6 @@ export class RegistroComponent implements OnInit {
 
   edad;
   mostrarEdad;
-  private isLoadingSubject: BehaviorSubject<boolean>;
-  public isLoading$: Observable<boolean>;
   public fechahoy: string = moment().format("YYYY-MM-DD");
   public fechamin: string = "2020-03-01";
   closeResult: string;
@@ -71,44 +53,18 @@ export class RegistroComponent implements OnInit {
   public buscar_datos: boolean = true;
   public guardar: boolean = false;
   public sololectura: boolean;
-  private unsubscribe: Subscription[] = [];
-  public localidades: Localidades[] = [];
   public errorMessage: string;
 
   constructor(
-    public _renaperService: RenaperService,
-    public _personaService: PersonaService,
-    public _registroService: Reg0800Service,
-    private router: Router,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef,
-    private toast: ToastrService,
-    private localidadesService: LocalidadesService
-  ) {
-    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
-    this.isLoading$ = this.isLoadingSubject.asObservable();
-    this.initForm();
-  }
+    public dialogRef: MatDialogRef<RegllamadaComponent>,
+    @Inject(MAT_DIALOG_DATA) public datos: FormGroup
+  ) {}
 
-  ngOnInit(): void {
-    this.cargarLocalidades();
-  }
+  ngOnInit(): void {}
 
-  cargarLocalidades() {
-    this.localidadesService.getLocalidades().subscribe((data: any) => {
-      this.localidades = data;
-      this.cdr.markForCheck();
-    });
-  }
-
-  calcularEdad() {
-    if (this.edad) {
-      const convertAge = new Date(this.edad);
-      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
-      this.mostrarEdad = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
-      this.personaForm.patchValue({ persona: { edad: this.mostrarEdad } });
-      //console.log(this.personaForm);
-    }
+  onClickNo(): void {
+    this.dialogRef.close();
   }
 
   initForm(datos?) {
@@ -233,46 +189,6 @@ export class RegistroComponent implements OnInit {
     //  //console.log(this.personaForm);
   }
 
-  renaper() {
-    this.isLoadingSubject.next(true);
-    let params = `documento=${
-      this.personaForm.get("persona.documento").value
-    }&sexo=${this.personaForm.get("persona.sexo").value}`;
-
-    this._registroService
-      .getOneRegistro(this.personaForm.get("persona.documento").value)
-      .subscribe((data: any) => {
-        if (data.ok === false) {
-          this._personaService.getPersona(params).subscribe((data: any) => {
-            if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
-              this.buscar_datos = false;
-              this.cargar_datos = true;
-              this.isLoadingSubject.next(false);
-              this.cdr.markForCheck();
-              data.datos.documento = this.personaForm.get(
-                "persona.documento"
-              ).value;
-              data.datos.sexo = this.personaForm.get("persona.sexo").value;
-              this.initForm(data.datos);
-              this.edad = this.personaForm.get("persona.fechaNacimiento").value;
-              this.calcularEdad();
-
-              console.log(this.nombre);
-            } else {
-              this.toast.error(
-                "Persona No encontrada, por favor Verifique los datos ingresados."
-              );
-              this.isLoadingSubject.next(false);
-            }
-          });
-        } else {
-          this.toast.error(
-            "La persona ya estiste en la Base de datos por favor vuelva a la grilla de registros."
-          );
-          this.isLoadingSubject.next(false);
-        }
-      });
-  }
   get campoDocumento() {
     return this.personaForm.get("persona.documento");
   }
@@ -406,7 +322,6 @@ export class RegistroComponent implements OnInit {
     return this.personaForm.get("llamada.fec_salud");
   }
 
-
   get valido() {
     return this.personaForm.valid;
   }
@@ -414,20 +329,6 @@ export class RegistroComponent implements OnInit {
     return this.personaForm.invalid;
   }
 
-  activarSintomas() {
-    if (this.sintomas === "Si") {
-      this.campoFecha.enable();
-    } else {
-      this.campoFecha.disable();
-      this.campoFecha.reset();
-    }
-    if (this.sintomas === "Si") {
-      this.campoSintomas.enable();
-    } else {
-      this.campoSintomas.disable();
-      this.campoSintomas.reset();
-    }
-  }
   activarConSos() {
     if (this.con_caso_sos === "Si") {
       this.campoObsContacto.enable();
@@ -519,48 +420,5 @@ export class RegistroComponent implements OnInit {
       this.campoFecSalud.disable();
       this.campoFecSalud.reset("");
     }
-  }
-
-  submit() {
-    // Acá están todos los datos del formulario para guardar en la BD
-    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
-
-    let datosPersona = this.personaForm.value;
-    ////console.log(datosPersona);
-
-    /* if (this.personaForm.valid) { */
-    this._registroService.createRegistro(datosPersona).subscribe((data) => {
-      /* 
-				let pepe = data; // Eliminar esta línea si anda todo bien */
-    });
-    this.router.navigate(["/registros"]);
-    /* } else {
-			//console.log(this.personaForm);
-		} */
-    // this.router.navigateByUrl('/registros');
-  }
-
-  guardarForm(event: Event) {
-    event.preventDefault();
-    // Acá están todos los datos del formulario para guardar en la BD
-    this.personaForm.patchValue({
-      llamada: { usuario: sessionStorage.getItem("ID") },
-    });
-    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
-
-    let datosPersona = this.personaForm.value;
-    console.log("Datos de la Persona: ", datosPersona);
-
-    if (this.personaForm.valid) {
-      this._registroService.createRegistro(datosPersona).subscribe((data) => {
-        /* 
-				let pepe = data; // Eliminar esta línea si anda todo bien */
-      });
-      this.router.navigate(["/registros"]);
-    } else {
-      this.personaForm.markAllAsTouched();
-      //console.log(this.personaForm);
-    }
-    // this.router.navigateByUrl('/registros');
   }
 }
