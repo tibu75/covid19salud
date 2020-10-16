@@ -4,17 +4,17 @@ import { RouterModule } from "@angular/router";
 import { MostrarComponent } from "./mostrar.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 @NgModule({
-	declarations: [],
-	imports: [
-		CommonModule,
-		ReactiveFormsModule,
-		FormsModule,
-		RouterModule.forChild([
-			{
-				path: "",
-				component: MostrarComponent,
-			},
-		]),
-	],
+  declarations: [],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule.forChild([
+      {
+        path: "",
+        component: MostrarComponent,
+      },
+    ]),
+  ],
 })
 export class MostrarModule {}

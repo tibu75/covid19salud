@@ -1,13 +1,16 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { LayoutService, DynamicAsideMenuService } from '../../../../_metronic/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
+import { Router, NavigationEnd } from "@angular/router";
+import { Subscription } from "rxjs";
+import { filter } from "rxjs/operators";
+import {
+  LayoutService,
+  DynamicAsideMenuService,
+} from "../../../../_metronic/core";
 
 @Component({
-  selector: 'app-aside-dynamic',
-  templateUrl: './aside-dynamic.component.html',
-  styleUrls: ['./aside-dynamic.component.scss']
+  selector: "app-aside-dynamic",
+  templateUrl: "./aside-dynamic.component.html",
+  styleUrls: ["./aside-dynamic.component.scss"],
 })
 export class AsideDynamicComponent implements OnInit, OnDestroy {
   menuConfig: any;
@@ -29,34 +32,36 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
     private layout: LayoutService,
     private router: Router,
     private menu: DynamicAsideMenuService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     // load view settings
     this.disableAsideSelfDisplay =
-      this.layout.getProp('aside.self.display') === false;
-    this.brandSkin = this.layout.getProp('brand.self.theme');
+      this.layout.getProp("aside.self.display") === false;
+    this.brandSkin = this.layout.getProp("brand.self.theme");
     this.headerLogo = this.getLogo();
-    this.ulCSSClasses = this.layout.getProp('aside_menu_nav');
-    this.asideMenuCSSClasses = this.layout.getStringCSSClasses('aside_menu');
-    this.asideMenuHTMLAttributes = this.layout.getHTMLAttributes('aside_menu');
-    this.brandClasses = this.layout.getProp('brand');
+    this.ulCSSClasses = this.layout.getProp("aside_menu_nav");
+    this.asideMenuCSSClasses = this.layout.getStringCSSClasses("aside_menu");
+    this.asideMenuHTMLAttributes = this.layout.getHTMLAttributes("aside_menu");
+    this.brandClasses = this.layout.getProp("brand");
     this.asideSelfMinimizeToggle = this.layout.getProp(
-      'aside.self.minimize.toggle'
+      "aside.self.minimize.toggle"
     );
-    this.asideMenuScroll = this.layout.getProp('aside.menu.scroll') ? 1 : 0;
+    this.asideMenuScroll = this.layout.getProp("aside.menu.scroll") ? 1 : 0;
     // router subscription
     this.currentUrl = this.router.url.split(/[?#]/)[0];
-    const routerSubscr = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.currentUrl = event.url;
-      this.cdr.detectChanges();
-    });
+    const routerSubscr = this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentUrl = event.url;
+        this.cdr.detectChanges();
+        this.cdr.checkNoChanges();
+      });
     this.subscriptions.push(routerSubscr);
 
     // menu load
-    const menuSubscr = this.menu.menuConfig$.subscribe(res => {
+    const menuSubscr = this.menu.menuConfig$.subscribe((res) => {
       this.menuConfig = res;
       this.cdr.detectChanges();
     });
@@ -64,10 +69,10 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
   }
 
   private getLogo() {
-    if (this.brandSkin === 'light') {
-      return './assets/media/logos/logo-dark.png';
+    if (this.brandSkin === "light") {
+      return "./assets/media/logos/logo-dark.png";
     } else {
-      return './assets/media/logos/logo-light.png';
+      return "./assets/media/logos/logo-light.png";
     }
   }
 
@@ -88,6 +93,6 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sb => sb.unsubscribe());
+    this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
 }

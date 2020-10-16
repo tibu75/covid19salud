@@ -83,8 +83,7 @@ export class RegistroComponent implements OnInit {
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private toast: ToastrService,
-    private formService: Form0800Service,
-    private localidadesService: LocalidadesService,
+    private localidadesService: LocalidadesService
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
@@ -111,8 +110,6 @@ export class RegistroComponent implements OnInit {
       //console.log(this.personaForm);
     }
   }
-
-  
 
   initForm(datos?) {
     this.personaForm = this.fb.group({
@@ -232,7 +229,6 @@ export class RegistroComponent implements OnInit {
     });
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       console.log(value);
-
     });
     //  //console.log(this.personaForm);
   }
@@ -408,8 +404,6 @@ export class RegistroComponent implements OnInit {
     return this.personaForm.get("llamada.fec_salud");
   }
 
-  
-
   activarSintomas() {
     if (this.sintomas === "Si") {
       this.campoFecha.enable();
@@ -443,7 +437,7 @@ export class RegistroComponent implements OnInit {
       this.campoTratamiento.enable();
     } else {
       this.campoTratamiento.disable();
-      this.campoTratamiento.reset('No');
+      this.campoTratamiento.reset("No");
     }
   }
   activarConviviente() {
@@ -467,7 +461,7 @@ export class RegistroComponent implements OnInit {
     } else {
       this.campoObsIntervencion.disable();
       this.campoObsIntervencion.reset();
-    }    
+    }
   }
 
   activarSolHisopado() {
@@ -476,19 +470,19 @@ export class RegistroComponent implements OnInit {
     } else {
       this.campoLugHisopa.disable();
       this.campoLugHisopa.reset();
-    } 
+    }
     if (this.sol_hisopado === "Si") {
       this.campoFecHisopado.enable();
     } else {
       this.campoFecHisopado.disable();
       this.campoFecHisopado.reset();
-    }  
+    }
     if (this.sol_hisopado === "Si") {
       this.campoReqExtender.enable();
     } else {
       this.campoReqExtender.disable();
       this.campoReqExtender.reset();
-    }     
+    }
   }
 
   activarCerAislamiento() {
@@ -517,7 +511,6 @@ export class RegistroComponent implements OnInit {
     }
   }
 
-
   submit() {
     // Acá están todos los datos del formulario para guardar en la BD
     this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
@@ -543,7 +536,7 @@ export class RegistroComponent implements OnInit {
     this.personaForm.patchValue({
       llamada: { usuario: sessionStorage.getItem("ID") },
     });
-    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID")});
+    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
 
     let datosPersona = this.personaForm.value;
     console.log("Datos de la Persona: ", datosPersona);

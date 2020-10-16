@@ -27,10 +27,9 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { ToastrModule } from "ngx-toastr";
 import { MostrarComponent } from "./pages/registros/mostrar/mostrar.component";
 import { LlamadaComponent } from "./pages/registros/llamada/llamada.component";
-
 import { IndicadoresComponent } from "./pages/indicadores/indicadores.component";
 import { ExportarComponent } from "./pages/exportar/exportar.component";
-
+import { RegistrosComponent } from "./pages/registros/registros.component";
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -57,11 +56,11 @@ export function getHighlightLanguages() {
   declarations: [
     AppComponent,
     RegistroComponent,
+    RegistrosComponent,
     MostrarComponent,
     LlamadaComponent,
     IndicadoresComponent,
     ExportarComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -88,7 +87,6 @@ export function getHighlightLanguages() {
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-
   ],
   providers: [
     {

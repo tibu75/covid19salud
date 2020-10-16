@@ -159,11 +159,6 @@
                 <th rowspan="1" colspan="1">Apellido</th>
                 <th rowspan="1" colspan="1">Nombre</th>
                 <th rowspan="1" colspan="1">Localidad</th>
-                <th rowspan="1" colspan="1" style="display: none">Ship Date</th>
-                <th rowspan="1" colspan="1" style="display: none">Status</th>
-                <th rowspan="1" colspan="1" style="display: none">
-                  Tipo de Registro
-                </th>
                 <th rowspan="1" colspan="1">Ver Registro</th>
               </tr>
             </tfoot>
@@ -173,18 +168,7 @@
                 <td>{{ f.fecha | date: "dd/MM/yyyy"}}</td> <!-- | date: "dd/MM/yyyy" --> 
                 <td>{{ f.persona?.apellido }}</td>
                 <td>{{ f.persona?.nombre }}</td>
-                <td>{{ f.persona?.localidad }}
-                  <!-- <span
-                    *ngIf="f?.tipo_registro == 'Sintomas'"
-                    class="label label-lg font-weight-bold label-light-danger label-inline"
-                  >
-                    {{ f.persona?.localidad }}</span
-                  >
-                  <span
-                    *ngIf="f?.tipo_registro == 'Sin Sintomas'"
-                    class="label label-lg font-weight-bold label-light-primary label-inline"
-                    >{{ f.persona?.localidad }}</span
-                  > -->
+                <td>{{ f.persona?.localidad }}            
                 </td>
                 <td style="display: none">10/15/2017</td>
                 <td style="display: none">
@@ -198,39 +182,7 @@
                   ><span class="font-weight-bold text-danger">Online</span>
                 </td>
                 <td>
-                  <!-- <div class="dropdown dropdown-inline">
-										<a
-											href="javascript:;"
-											class="btn btn-sm btn-clean btn-icon"
-											data-toggle="dropdown"
-										>
-											<i class="la la-cog"></i>
-										</a>
-										<div
-											class="dropdown-menu dropdown-menu-sm dropdown-menu-right"
-										>
-											<ul class="nav nav-hoverable flex-column">
-												<li class="nav-item">
-													<a class="nav-link" href="#"
-														><i class="nav-icon la la-edit"></i
-														><span class="nav-text">Edit Details</span></a
-													>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" href="#"
-														><i class="nav-icon la la-leaf"></i
-														><span class="nav-text">Update Status</span></a
-													>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" href="#"
-														><i class="nav-icon la la-print"></i
-														><span class="nav-text">Print</span></a
-													>
-												</li>
-											</ul>
-										</div> 
-									</div>-->
+                 
                   <a
                     routerLink="/mostrar"
                     class="btn btn-primary font-weight-bolder"
@@ -323,3 +275,8 @@
     <!--end: Datatable-->
   </div>
 </div>
+<ng-container *ngIf='Showllamadas'>
+<app-mostrar [llamada]= 'form'></app-mostrar>
+</ng-container>
+
+
