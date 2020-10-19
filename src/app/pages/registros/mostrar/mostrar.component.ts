@@ -9,11 +9,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MostrarService } from "src/app/services/mostrar/mostrar.service";
 import { Forms } from "../../models/form0800covid";
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { RegllamadaComponent } from "./regllamada/regllamada.component";
 import { FormsLlamada } from "../../models/form0800covid2";
 
@@ -48,10 +44,10 @@ export class MostrarComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog
   ) {}
 
-  MostrarRegistro(): void {
+  MostrarRegistro(idform): void {
     let dialogref = this.dialog.open(RegllamadaComponent, {
       width: "90%",
-      data: { menssage: "Probando" },
+      data: idform,
     });
     dialogref.afterClosed().subscribe((res) => {
       console.log(res);
@@ -99,7 +95,7 @@ export class MostrarComponent implements OnInit, AfterViewInit {
       }),
     });
     //console.log("esto se cargo");
-    //console.log(this.personaForm);
+    console.log(this.mostrarForm);
 
     //console.log(this.edad);
     //console.log(this.mostrar_sintomas, this.mostrar_hisopado);

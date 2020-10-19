@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, OnInit, Inject, Input } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as moment from "moment";
@@ -9,23 +9,21 @@ import * as moment from "moment";
   styleUrls: ["./regllamada.component.scss"],
 })
 export class RegllamadaComponent implements OnInit {
-  personaForm: FormGroup;
-  sintomas = "No";
-  con_caso_sos = "No";
-  enf_actual = "No";
-  convivientes = "No";
-  intervencion = "No";
-  cri_hisopado = "No";
-  mov_propia = "Si";
-  der_enfermeria = "No";
-  sol_hisopado = "No";
-  cer_5dias = "No";
-  cer_contacto = "No";
-  cas_positivo = "No";
-  laboratorio = "Privado";
-  whatsapp = "No";
+  @Input() personaForm: FormGroup;
+  enf_actual = this.datos.enf_actual;
+  convivientes = this.datos.convivientes;
+  intervencion = this.datos.intervencion;
+  cri_hisopado = this.datos.cri_hisopado;
+  mov_propia = this.datos.mov_propia;
+  der_enfermeria = this.datos.der_enfermeria;
+  sol_hisopado = this.datos.sol_hisopado;
+  cer_5dias = this.datos.cer_5dias;
+  cer_contacto = this.datos.cer_contacto;
+  cas_positivo = this.datos.cas_positivo;
+  laboratorio = this.datos.laboratorio;
+  whatsapp = this.datos.whatsapp;
 
-  antencedentes_p = "No";
+  antencedentes_p = this.datos.antencedentes_p;
   toma_medicamentos = "";
   vivienda_personas = "";
   nombre = "";
@@ -58,135 +56,15 @@ export class RegllamadaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegllamadaComponent>,
-    @Inject(MAT_DIALOG_DATA) public datos: FormGroup
+    @Inject(MAT_DIALOG_DATA) public datos: any
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.datos);
+  }
 
   onClickNo(): void {
     this.dialogRef.close();
-  }
-
-  initForm(datos?) {
-    this.personaForm = this.fb.group({
-      persona: this.fb.group({
-        nombre: [datos ? datos.nombres : ""],
-        apellido: [datos ? datos.apellido : ""],
-        documento: [
-          datos ? datos.documento : "",
-          [Validators.required, Validators.maxLength(8)],
-        ],
-        fechaNacimiento: [datos ? datos.fechaNacimiento : ""],
-        edad: [""],
-        sexo: [datos ? datos.sexo : "M"],
-        telefono: [
-          "",
-          [
-            Validators.required,
-            Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
-          ],
-        ],
-        calle: [
-          datos ? datos.calle : "",
-          [Validators.required, Validators.maxLength(25)],
-        ],
-        numero: [
-          datos ? datos.numero : "",
-          [Validators.required, Validators.maxLength(4)],
-        ],
-        departamento: [
-          datos ? datos.departamento : "",
-          [Validators.required, Validators.maxLength(5)],
-        ],
-        piso: [
-          datos ? datos.piso : "",
-          [Validators.required, Validators.maxLength(2)],
-        ],
-        cpostal: [
-          datos ? datos.cpostal : "",
-          [Validators.required, Validators.maxLength(4)],
-        ],
-        localidad: ["", [Validators.required]],
-        provincia: [
-          datos ? datos.provincia : "",
-          [Validators.required, Validators.maxLength(25)],
-        ],
-        pais: [
-          datos ? datos.pais : "",
-          [Validators.required, Validators.maxLength(25)],
-        ],
-        img: [datos ? datos.foto : ""],
-      }),
-      llamada: this.fb.group({
-        nroForm: [null],
-        fecha: [""],
-        motivo: ["", [Validators.required]],
-        sintomas: ["No"],
-        fec_sintomas: [{ value: "", disabled: true }, [Validators.required]],
-        sin_actuales: [{ value: "", disabled: true }, [Validators.required]],
-        con_caso_sos: ["No"],
-        obs_contacto: [{ value: "", disabled: true }, [Validators.required]],
-        obra_social: ["", [Validators.required]],
-        enf_actual: ["No"],
-        obs_enfermedad: [{ value: "", disabled: true }, [Validators.required]],
-        tratamiento: [{ value: "No", disabled: true }, [Validators.required]],
-        convivientes: ["No"],
-        cant_convivientes: [
-          { value: "", disabled: true },
-          [Validators.required],
-        ],
-        obs_convivientes: [
-          { value: "", disabled: true },
-          [Validators.required],
-        ],
-        sit_social: ["", [Validators.required]],
-        intervencion: ["No"],
-        obs_intervencion: [
-          { value: "", disabled: true },
-          [Validators.required],
-        ],
-        cri_hisopado: ["No"],
-        com_hisopado: ["No"],
-        mov_propia: ["Si"],
-        der_enfermeria: ["No"],
-        dis_contacto: ["", [Validators.required]],
-        sol_hisopado: ["No"],
-        lug_hisopado: [{ value: "", disabled: true }, [Validators.required]],
-        fec_hisopado: [{ value: "", disabled: true }, [Validators.required]],
-        req_extender: [{ value: "", disabled: true }, [Validators.required]],
-        cer_5dias: ["No"],
-        cer_contacto: ["No"],
-        tip_contacto: ["Social"],
-        obs_tip_contacto: [
-          { value: "", disabled: true },
-          [Validators.required],
-        ],
-        cas_positivo: ["No"],
-        dat_positivo: [{ value: "", disabled: true }, [Validators.required]],
-        otro_certificado: ["", [Validators.required]],
-        seg_domiciliario: ["No"],
-        laboratorio: ["Privado"],
-        whatsapp: ["No"],
-        det_requerimiento: ["", [Validators.required]],
-        fec_salud: [{ value: "", disabled: true }, [Validators.required]],
-        cierre_contacto: ["", [Validators.required]],
-        usuario: [""],
-      }),
-      trabajo: this.fb.group({
-        lugar: ["", [Validators.maxLength(50)]],
-        telefono: ["", [Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-        calle: ["", [Validators.maxLength(25)]],
-        numero: ["", [Validators.maxLength(4)]],
-        localidad: ["", [Validators.maxLength(25)]],
-      }),
-      usuario: [null],
-      fecha: [""],
-      nroForm: [null],
-    });
-    this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
-      console.log(value);
-    });
-    //  //console.log(this.personaForm);
   }
 
   get campoDocumento() {
@@ -328,9 +206,22 @@ export class RegllamadaComponent implements OnInit {
   get novalido() {
     return this.personaForm.invalid;
   }
-
+  activarSintomas() {
+    if (this.datos.sintomas === "Si") {
+      this.campoFecha.enable();
+    } else {
+      this.campoFecha.disable();
+      this.campoFecha.reset();
+    }
+    if (this.datos.sintomas === "Si") {
+      this.campoSintomas.enable();
+    } else {
+      this.campoSintomas.disable();
+      this.campoSintomas.reset();
+    }
+  }
   activarConSos() {
-    if (this.con_caso_sos === "Si") {
+    if (this.datos.con_caso_sos === "Si") {
       this.campoObsContacto.enable();
     } else {
       this.campoObsContacto.disable();
