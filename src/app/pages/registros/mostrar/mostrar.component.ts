@@ -8,7 +8,6 @@ import {
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MostrarService } from "src/app/services/mostrar/mostrar.service";
-import { Forms } from "../../models/form0800covid";
 import { MatDialog } from "@angular/material/dialog";
 import { RegllamadaComponent } from "./regllamada/regllamada.component";
 import { FormsLlamada } from "../../models/form0800covid2";
@@ -28,7 +27,7 @@ export class MostrarComponent implements OnInit, AfterViewInit {
   public mostrar_hisopado: boolean = false;
   public mostrar_sintomas: boolean = false;
   public cargar_datos: boolean = true;
-  public formtemp: Forms[] = [];
+  public formtemp: FormsLlamada[] = [];
   public form: any = [];
   public cargando: boolean = true;
   public paginaD: number = 0;

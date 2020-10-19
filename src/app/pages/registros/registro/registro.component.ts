@@ -38,6 +38,7 @@ export class RegistroComponent implements OnInit {
   cer_5dias = "No";
   cer_contacto = "No";
   cas_positivo = "No";
+  req_seguimiento = "No";
   laboratorio = "Privado";
   whatsapp = "No";
 
@@ -132,19 +133,19 @@ export class RegistroComponent implements OnInit {
         ],
         calle: [
           datos ? datos.calle : "",
-          [Validators.required, Validators.maxLength(25)],
+          [Validators.required, Validators.maxLength(40)],
         ],
         numero: [
-          datos ? datos.numero : "",
+          datos ? datos.numero : "-",
           [Validators.required, Validators.maxLength(4)],
         ],
         departamento: [
-          datos ? datos.departamento : "",
+          datos ? datos.departamento : "-",
           [Validators.required, Validators.maxLength(5)],
         ],
         piso: [
-          datos ? datos.piso : "",
-          [Validators.required, Validators.maxLength(2)],
+          datos ? datos.piso : "-",
+          [Validators.required, Validators.maxLength(5)],
         ],
         cpostal: [
           datos ? datos.cpostal : "",
@@ -209,9 +210,13 @@ export class RegistroComponent implements OnInit {
         dat_positivo: [{ value: "", disabled: true }, [Validators.required]],
         otro_certificado: ["", [Validators.required]],
         seg_domiciliario: ["No"],
-        laboratorio: ["Privado"],
-        whatsapp: ["No"],
-        det_requerimiento: ["", [Validators.required]],
+        req_seguimiento: ["No"],
+        laboratorio: [{ value: "Privado", disabled: true }],
+        whatsapp: [{ value: "No", disabled: true }],
+        det_requerimiento: [
+          { value: "", disabled: true },
+          [Validators.required],
+        ],
         fec_salud: [{ value: "", disabled: true }, [Validators.required]],
         cierre_contacto: ["", [Validators.required]],
         usuario: [""],
@@ -406,7 +411,6 @@ export class RegistroComponent implements OnInit {
     return this.personaForm.get("llamada.fec_salud");
   }
 
-
   get valido() {
     return this.personaForm.valid;
   }
@@ -512,12 +516,43 @@ export class RegistroComponent implements OnInit {
     }
   }
   activarSegMedico() {
-    debugger;
     if (this.laboratorio === "Publico") {
       this.campoFecSalud.enable();
     } else {
       this.campoFecSalud.disable();
       this.campoFecSalud.reset("");
+    }
+    if (this.laboratorio === "Privado") {
+      this.campoWhatsapp.enable();
+    } else {
+      this.campoWhatsapp.disable();
+      this.campoWhatsapp.reset("");
+    }
+  }
+  activarSector() {
+    if (this.req_seguimiento === "Si") {
+      this.campoLaboratorio.enable();
+    } else {
+      this.campoLaboratorio.disable();
+      this.campoLaboratorio.reset("");
+    }
+    if (this.req_seguimiento === "Si") {
+      this.campoDetRequerimiento.enable();
+    } else {
+      this.campoDetRequerimiento.disable();
+      this.campoDetRequerimiento.reset("");
+    }
+    if (this.laboratorio === "Privado") {
+      this.campoWhatsapp.enable();
+    } else {
+      this.campoWhatsapp.disable();
+      this.campoWhatsapp.reset("No");
+    }
+    if (this.laboratorio === "Privado") {
+      this.campoDetRequerimiento.enable();
+    } else {
+      this.campoDetRequerimiento.disable();
+      this.campoDetRequerimiento.reset("");
     }
   }
 

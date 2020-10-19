@@ -31,7 +31,6 @@ export class FormsLlamada {
         lug_hisopado: string;
         fec_hisopado: string;
         req_extender: string;
-        cer_aislamiento: string;
         cer_5dias: string;
         cer_contacto: string;
         tip_contacto: string;
@@ -40,6 +39,7 @@ export class FormsLlamada {
         dat_positivo: string;
         otro_certificado: string;
         seg_domiciliario: string;
+        req_seguimiento: string;
         laboratorio: string;
         whatsapp: string;
         det_requerimiento: string;

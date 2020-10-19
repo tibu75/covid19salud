@@ -1,4 +1,11 @@
-import { Component, OnInit, Inject, Input } from "@angular/core";
+import { AfterViewInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Inject,
+  Input,
+  ChangeDetectorRef,
+} from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as moment from "moment";
@@ -8,8 +15,10 @@ import * as moment from "moment";
   templateUrl: "./regllamada.component.html",
   styleUrls: ["./regllamada.component.scss"],
 })
-export class RegllamadaComponent implements OnInit {
-  @Input() personaForm: FormGroup;
+export class RegllamadaComponent implements OnInit, AfterViewInit {
+  personaForm: FormGroup;
+  sintomas = this.datos.sintomas;
+  con_caso_sos = this.datos.con_caso_sos;
   enf_actual = this.datos.enf_actual;
   convivientes = this.datos.convivientes;
   intervencion = this.datos.intervencion;
@@ -22,24 +31,23 @@ export class RegllamadaComponent implements OnInit {
   cas_positivo = this.datos.cas_positivo;
   laboratorio = this.datos.laboratorio;
   whatsapp = this.datos.whatsapp;
-
   antencedentes_p = this.datos.antencedentes_p;
-  toma_medicamentos = "";
-  vivienda_personas = "";
-  nombre = "";
-  sexo = "M";
-  tipo_registro = "Sin Sintomas";
-  realizo_hisopado = "No";
+  toma_medicamentos = this.datos.toma_medicamentos;
+  vivienda_personas = this.datos.vivienda_personas;
+  nombre = this.datos.nombre;
+  sexo = this.datos.sexo;
+  tipo_registro = this.datos.tipo_registro;
+  realizo_hisopado = this.datos.realizo_hisopado;
 
-  atencion_domiciliaria = "No";
-  cert_aislamiento = "No";
-  resultado_hisopado = "No";
-  derivacion_107 = "No";
-  obs_atencion_domiciliaria = "";
-  obs_cert_aislamiento = "";
-  obs_resultado_hisopado = "";
-  obs_derivacion_107 = "";
-  obs_mov_propia = "";
+  atencion_domiciliaria = this.datos.atencion_domiciliaria;
+  cert_aislamiento = this.datos.cert_aislamiento;
+  resultado_hisopado = this.datos.resultado_hisopado;
+  derivacion_107 = this.datos.derivacion_107;
+  obs_atencion_domiciliaria = this.datos.obs_atencion_domiciliaria;
+  obs_cert_aislamiento = this.datos.obs_cert_aislamiento;
+  obs_resultado_hisopado = this.datos.obs_resultado_hisopado;
+  obs_derivacion_107 = this.datos.obs_derivacion_107;
+  obs_mov_propia = this.datos.obs_mov_propia;
 
   edad;
   mostrarEdad;
@@ -56,11 +64,73 @@ export class RegllamadaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegllamadaComponent>,
-    @Inject(MAT_DIALOG_DATA) public datos: any
+    @Inject(MAT_DIALOG_DATA) public datos: any,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    console.log(this.datos);
+    this.initForm();
+    this.cdr.markForCheck();
+  }
+
+  ngAfterViewInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
+    this.personaForm = this.fb.group({
+      llamada: this.fb.group({
+        nroForm: [this.datos.nroForm],
+        fecha: [this.datos.fecha],
+        motivo: [this.datos.motivo],
+        sintomas: [this.datos.sintomas],
+        fec_sintomas: [this.datos.fec_sintomas],
+        sin_actuales: [this.datos.sin_actuales],
+        con_caso_sos: [this.datos.con_caso_sos],
+        obs_contacto: [this.datos.obs_contacto],
+        obra_social: [this.datos.obra_social],
+        enf_actual: [this.datos.enf_actual],
+        obs_enfermedad: [this.datos.obs_enfermedad],
+        tratamiento: [this.datos.tratamiento],
+        convivientes: [this.datos.convivientes],
+        cant_convivientes: [this.datos.cant_convivientes],
+        obs_convivientes: [this.datos.obs_convivientes],
+        sit_social: [this.datos.sit_social],
+        intervencion: [this.datos.intervencion],
+        obs_intervencion: [this.datos.obs_intervencion],
+        cri_hisopado: [this.datos.cri_hisopado],
+        com_hisopado: [this.datos.com_hisopado],
+        mov_propia: [this.datos.mov_propia],
+        der_enfermeria: [this.datos.der_enfermeria],
+        dis_contacto: [this.datos.dis_contacto],
+        sol_hisopado: [this.datos.sol_hisopado],
+        lug_hisopado: [this.datos.lug_hisopado],
+        fec_hisopado: [this.datos.fec_hisopado],
+        req_extender: [this.datos.req_extender],
+        cer_aislamiento: [this.datos.cer_aislamiento],
+        cer_5dias: [this.datos.cer_5dias],
+        cer_contacto: [this.datos.cer_contacto],
+        tip_contacto: [this.datos.tip_contacto],
+        obs_tip_contacto: [this.datos.obs_tip_contacto],
+        cas_positivo: [this.datos.cas_positivo],
+        dat_positivo: [this.datos.dat_positivo],
+        otro_certificado: [this.datos.otro_certificado],
+        seg_domiciliario: [this.datos.seg_domiciliario],
+        laboratorio: [this.datos.laboratorio],
+        whatsapp: [this.datos.whatsapp],
+        det_requerimiento: [this.datos.det_requerimiento],
+        fec_salud: [this.datos.fec_salud],
+        cierre_contacto: [this.datos.cierre_contacto],
+        usuario: [this.datos.usuario],
+      }),
+    });
+    //console.log("esto se cargo");
+    console.log(this.personaForm);
+
+    //console.log(this.edad);
+    //console.log(this.mostrar_sintomas, this.mostrar_hisopado);
+
+    this.cdr.markForCheck();
   }
 
   onClickNo(): void {
