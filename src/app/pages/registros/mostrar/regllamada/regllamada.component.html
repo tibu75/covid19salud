@@ -412,34 +412,51 @@
             <div class="my-5">
                 <div class="col-12">
                     <div class="row">
-                        <h5 class="text-dark font-weight-bold">
+                        <h3 class="text-dark font-weight-bold">
                             Requiere seguimiento Médico Domiciliario
-                        </h5>
-
+                        </h3>
                         <label style="margin-left: 20px">
-                            <input type="radio" name="laboratorio" value="Publico" formControlName="laboratorio"
-                                [(ngModel)]="laboratorio" (change)="activarSegMedico()" />
+                            <input type="radio" formControlName="req_seguimiento" value="Si"
+                                [(ngModel)]="req_seguimiento" (change)="activarSector()" />
                             <i class="ti-check text-active" aria-hidden="true"></i>
-                            Laboratorio Público
+                            Si
                         </label>
-
                         <label style="margin-left: 20px">
-                            <input type="radio" name="laboratorio" formControlName="laboratorio" value="Privado"
-                                [(ngModel)]="laboratorio" checked (change)="activarSegMedico()" />
-                            <i class="ti-check text-active" aria-hidden="true"></i>
-                            Laboratorio Privado
+                            <input type="radio" formControlName="req_seguimiento" value="No"
+                                [(ngModel)]="req_seguimiento" checked (change)="activarSector()" />
+                            <i class=" ti-check text-active" aria-hidden="true"></i>
+                            No
                         </label>
+                        <div *ngIf="req_seguimiento === 'Si'">
+                            <label style="margin-left: 20px">
+                                <input type="radio" name="laboratorio" value="Publico" formControlName="laboratorio"
+                                    [(ngModel)]="laboratorio" (change)="activarSegMedico()" />
+                                <i class="ti-check text-active" aria-hidden="true"></i>
+                                Laboratorio Público
+                            </label>
+
+                            <label style="margin-left: 20px">
+                                <input type="radio" name="laboratorio" formControlName="laboratorio" value="Privado"
+                                    [(ngModel)]="laboratorio" checked (change)="activarSegMedico()" />
+                                <i class="ti-check text-active" aria-hidden="true"></i>
+                                Laboratorio Privado
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12" *ngIf="req_seguimiento === 'Si'">
                 <div class="row" *ngIf="laboratorio === 'Publico'">
                     <div class="col-12">
                         <label>Indique fecha de último contacto de Salud</label>
                     </div>
                     <div class="col-4">
                         <input class="form-control form-control-solid" type="date" id="start1" formControlName="fec_salud" name="fec_salud" min=" {{ fechamin }}" max="{{ fechahoy }}" />
-
+                        <div *ngIf="campoFecSalud.errors && campoFecSalud.touched" class="text-danger">
+                            <small *ngIf="campoFecSalud.hasError('required')">
+                                La Fecha es requerida
+                            </small>
+                        </div>
                     </div>
 
                 </div>
@@ -464,7 +481,11 @@
                 <div class="col-12" style="margin-top: 10px">
                     <label>Detalle del requerimiento</label>
                     <input class="form-control form-control-solid" type="text" formControlName="det_requerimiento" name="det_requerimiento" placeholder="" />
-
+                    <div *ngIf="campoDetRequerimiento.errors && campoDetRequerimiento.touched" class="text-danger">
+                        <small *ngIf="campoDetRequerimiento.hasError('required')">
+                            El Detalle es requerido
+                        </small>
+                    </div>
                 </div>
                 <div class="col-12" style="margin-top: 10px">
                     <label>Ratifique Teléfono y Domicilio actual</label>

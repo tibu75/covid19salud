@@ -29,6 +29,7 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
   cer_5dias = this.datos.cer_5dias;
   cer_contacto = this.datos.cer_contacto;
   cas_positivo = this.datos.cas_positivo;
+  req_seguimiento = this.datos.req_seguimiento;
   laboratorio = this.datos.laboratorio;
   whatsapp = this.datos.whatsapp;
   antencedentes_p = this.datos.antencedentes_p;
@@ -116,6 +117,7 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
         dat_positivo: [this.datos.dat_positivo],
         otro_certificado: [this.datos.otro_certificado],
         seg_domiciliario: [this.datos.seg_domiciliario],
+        req_seguimiento: [this.datos.req_seguimiento],
         laboratorio: [this.datos.laboratorio],
         whatsapp: [this.datos.whatsapp],
         det_requerimiento: [this.datos.det_requerimiento],
@@ -374,12 +376,43 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
     }
   }
   activarSegMedico() {
-    debugger;
     if (this.laboratorio === "Publico") {
       this.campoFecSalud.enable();
     } else {
       this.campoFecSalud.disable();
       this.campoFecSalud.reset("");
+    }
+    if (this.laboratorio === "Privado") {
+      this.campoWhatsapp.enable();
+    } else {
+      this.campoWhatsapp.disable();
+      this.campoWhatsapp.reset("");
+    }
+  }
+  activarSector() {
+    if (this.req_seguimiento === "Si") {
+      this.campoLaboratorio.enable();
+    } else {
+      this.campoLaboratorio.disable();
+      this.campoLaboratorio.reset("");
+    }
+    if (this.req_seguimiento === "Si") {
+      this.campoDetRequerimiento.enable();
+    } else {
+      this.campoDetRequerimiento.disable();
+      this.campoDetRequerimiento.reset("");
+    }
+    if (this.laboratorio === "Privado") {
+      this.campoWhatsapp.enable();
+    } else {
+      this.campoWhatsapp.disable();
+      this.campoWhatsapp.reset("No");
+    }
+    if (this.laboratorio === "Privado") {
+      this.campoDetRequerimiento.enable();
+    } else {
+      this.campoDetRequerimiento.disable();
+      this.campoDetRequerimiento.reset("");
     }
   }
 }
