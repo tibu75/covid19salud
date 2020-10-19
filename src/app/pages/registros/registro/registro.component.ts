@@ -518,15 +518,17 @@ export class RegistroComponent implements OnInit {
   activarSegMedico() {
     if (this.laboratorio === "Publico") {
       this.campoFecSalud.enable();
+      this.campoDetRequerimiento.reset("");
     } else {
       this.campoFecSalud.disable();
       this.campoFecSalud.reset("");
     }
     if (this.laboratorio === "Privado") {
       this.campoWhatsapp.enable();
+      this.campoDetRequerimiento.reset("");
     } else {
       this.campoWhatsapp.disable();
-      this.campoWhatsapp.reset("");
+      this.campoWhatsapp.reset("No");
     }
   }
   activarSector() {
@@ -534,7 +536,7 @@ export class RegistroComponent implements OnInit {
       this.campoLaboratorio.enable();
     } else {
       this.campoLaboratorio.disable();
-      this.campoLaboratorio.reset("");
+      this.campoLaboratorio.reset("Privado");
     }
     if (this.req_seguimiento === "Si") {
       this.campoDetRequerimiento.enable();
