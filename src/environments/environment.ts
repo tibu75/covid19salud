@@ -11,8 +11,9 @@ export const environment = {
   USER: "USER",
   MENU: "MENU",
   isMockEnabled: false,
-  //"http://localhost:8017",
-  apiUrl: "http://181.209.23.177:8017",
+
+  apiUrl: "http://localhost:8017",
+  //"http://181.209.23.177:8017",
 };
 
 /*

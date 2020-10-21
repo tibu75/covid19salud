@@ -105,11 +105,4 @@ export class RegistrosComponent implements OnInit {
       this.cdr.markForCheck();
     });
   } */
-
-  exportAsXlsx(): void {
-    // //console.log("export", this.xls);
-    this.excelExports.getXlsx().subscribe((resp: any) => {
-      console.log(resp);
-    });
-  }
 }

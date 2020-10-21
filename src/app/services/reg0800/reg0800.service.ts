@@ -3,7 +3,6 @@ import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Reg0800 } from "../../interfaces/reg0800Interfaces";
 import { Observable } from "rxjs";
-import id from "src/assets/plugins/formvalidation/src/js/validators/id";
 
 const API_USERS_URL = `${environment.apiUrl}/llamada`;
 
@@ -30,5 +29,10 @@ export class Reg0800Service {
   newCall(formData: Reg0800, id: any) {
     let url = `${API_USERS_URL}/${id}`;
     return this.http.put(url, formData);
+  }
+
+  queryXls(query: any) {
+    let url = `${API_USERS_URL}/query`;
+    return this.http.post(url, query);
   }
 }
