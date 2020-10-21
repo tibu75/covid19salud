@@ -1,5 +1,10 @@
 import { Component, ViewChild } from "@angular/core";
-import { ApexTitleSubtitle, ChartComponent } from "ng-apexcharts";
+import {
+  ApexFill,
+  ApexLegend,
+  ApexTitleSubtitle,
+  ChartComponent,
+} from "ng-apexcharts";
 
 import {
   ApexNonAxisChartSeries,
@@ -11,7 +16,9 @@ export type ChartOptions = {
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
+  legend: ApexLegend;
   title: ApexTitleSubtitle;
+  fill: ApexFill;
 };
 @Component({
   selector: "app-pie",
@@ -44,6 +51,23 @@ export class PieComponent {
         type: "pie",
       },
       labels: ["Con Sintomas", "Sin Sintomas"],
+      legend: {
+        position: "right",
+        offsetY: 40,
+
+        markers: {
+          width: 12,
+          height: 12,
+          strokeWidth: 0,
+          strokeColor: "#fff",
+          fillColors: ["#E91E63", "#1de9b6", "#9C27B0"],
+          radius: 12,
+          customHTML: undefined,
+          onClick: undefined,
+          offsetX: 0,
+          offsetY: 0,
+        },
+      },
       responsive: [
         {
           breakpoint: 480,
@@ -57,6 +81,10 @@ export class PieComponent {
           },
         },
       ],
+      fill: {
+        opacity: 1,
+        colors: ["#E91E63", "#1de9b6", "#9C27B0"],
+      },
     };
   }
 }

@@ -10,6 +10,7 @@ import {
   ApexLegend,
   ApexFill,
   ApexTitleSubtitle,
+  ApexMarkers,
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -22,6 +23,7 @@ export type ChartOptions = {
   legend: ApexLegend;
   fill: ApexFill;
   title: ApexTitleSubtitle;
+  markers: ApexMarkers;
 };
 
 @Component({
@@ -45,9 +47,10 @@ export class ColumnsComponent {
           data: [13, 23, 20, 12],
         },
       ],
+
       chart: {
         type: "bar",
-        height: 400,
+        height: 350,
         stacked: true,
         toolbar: {
           show: true,
@@ -94,9 +97,22 @@ export class ColumnsComponent {
       legend: {
         position: "right",
         offsetY: 40,
+        markers: {
+          width: 12,
+          height: 12,
+          strokeWidth: 0,
+          strokeColor: "#fff",
+          fillColors: ["#E91E63", "#1de9b6", "#9C27B0"],
+          radius: 12,
+          customHTML: undefined,
+          onClick: undefined,
+          offsetX: 0,
+          offsetY: 0,
+        },
       },
       fill: {
         opacity: 1,
+        colors: ["#E91E63", "#1de9b6", "#9C27B0"],
       },
     };
   }
