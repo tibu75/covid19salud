@@ -32,6 +32,8 @@ import { ExportarComponent } from "./pages/exportar/exportar.component";
 import { RegllamadaComponent } from "./pages/registros/mostrar/regllamada/regllamada.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { RegistrosComponent } from "./pages/registros/registros.component";
+import { IndicadoresModule } from "./pages/indicadores/indicadores.module";
+import { NgApexchartsModule } from "ng-apexcharts";
 function appInitializer(authService: AuthService) {
   return () => {
     return new Promise((resolve) => {
@@ -63,7 +65,7 @@ export function getHighlightLanguages() {
     IndicadoresComponent,
     ExportarComponent,
     RegllamadaComponent,
- ],
+  ],
   imports: [
     BrowserModule,
     ToastrModule.forRoot({
@@ -90,7 +92,8 @@ export function getHighlightLanguages() {
     FormsModule,
     NgxPaginationModule,
     MatDialogModule,
-
+    IndicadoresModule,
+    NgApexchartsModule,
   ],
   providers: [
     {
