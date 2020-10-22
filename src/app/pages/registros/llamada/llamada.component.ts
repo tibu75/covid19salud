@@ -39,8 +39,8 @@ export class LlamadaComponent implements OnInit {
   cas_positivo = this._MostrarService.registro.llamada[this.reg].cas_positivo;
   req_seguimiento = this._MostrarService.registro.llamada[this.reg]
     .req_seguimiento;
-  laboratorio = this._MostrarService.registro.llamada[this.reg].laboratorio;
-  whatsapp = this._MostrarService.registro.llamada[this.reg].whatsapp;
+  laboratorio = "Privado";
+  whatsapp = "No";
 
   private isLoadingSubject: BehaviorSubject<boolean>;
   public isLoading$: Observable<boolean>;
