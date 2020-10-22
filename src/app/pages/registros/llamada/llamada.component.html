@@ -319,7 +319,8 @@
                                                 No
                                             </label>
                                             <div class="row" style="margin-left: 20px" *ngIf="cri_hisopado === 'Si'">
-                                                <label class="form-control form-control-solid">Entonces debe Hisoparse,
+                                                <label class="form-control form-control-solid">Entonces No debe
+                                                    Hisoparse,
                                                     se considera Positivo</label>
                                             </div>
                                             <div class="row" style="margin-left: 20px" *ngIf="cri_hisopado === 'Sin'">
@@ -549,7 +550,7 @@
                                                     <label style="margin-left: 20px">
                                                         <input type="radio" name="laboratorio" value="Publico"
                                                             formControlName="laboratorio" [(ngModel)]="laboratorio"
-                                                            (change)="activarSegMedico()" />
+                                                            (change)="activarSector()" />
                                                         <i class="ti-check text-active" aria-hidden="true"></i>
                                                         Laboratorio Público
                                                     </label>
@@ -558,7 +559,7 @@
                                                         <input type="radio" name="laboratorio"
                                                             formControlName="laboratorio" value="Privado"
                                                             [(ngModel)]="laboratorio" checked
-                                                            (change)="activarSegMedico()" />
+                                                            (change)="activarSector()" />
                                                         <i class="ti-check text-active" aria-hidden="true"></i>
                                                         Laboratorio Privado
                                                     </label>

@@ -489,49 +489,35 @@ export class LlamadaComponent implements OnInit {
       this.campoDatPositivo.reset();
     }
   }
-  activarSegMedico() {
-    if (this.laboratorio === "Publico") {
-      this.campoFecSalud.enable();
+  activarSector() {
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Privado") {
+      this.campoLaboratorio.enable();
+      this.campoWhatsapp.enable();
+      this.campoWhatsapp.reset("No");
+      this.whatsapp = "No";
+      this.campoDetRequerimiento.enable();
       this.campoDetRequerimiento.reset("");
-    } else {
+      this.campoFecSalud.reset("");
       this.campoFecSalud.disable();
+    }
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Publico") {
+      this.campoLaboratorio.enable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.enable();
+      this.campoDetRequerimiento.reset("");
+      this.campoFecSalud.enable();
       this.campoFecSalud.reset("");
     }
-    if (this.laboratorio === "Privado") {
-      this.campoWhatsapp.enable();
-      this.campoDetRequerimiento.reset("");
-    } else {
-      this.campoWhatsapp.disable();
-      this.campoWhatsapp.reset("No");
-    }
-  }
-  activarSector() {
-    if (this.req_seguimiento === "Si") {
-      this.campoLaboratorio.enable();
-    } else {
-      this.campoLaboratorio.disable();
+    if (this.req_seguimiento === "No") {
       this.campoLaboratorio.reset("Privado");
-    }
-    if (this.req_seguimiento === "Si") {
-      this.campoDetRequerimiento.enable();
-    } else {
-      this.campoDetRequerimiento.disable();
-      this.campoDetRequerimiento.reset("");
-    }
-    if (this.laboratorio === "Privado") {
-      this.campoWhatsapp.enable();
-    } else {
+      this.campoLaboratorio.disable();
       this.campoWhatsapp.disable();
-      this.campoWhatsapp.reset("No");
-    }
-    if (this.laboratorio === "Privado") {
-      this.campoDetRequerimiento.enable();
-    } else {
-      this.campoDetRequerimiento.disable();
       this.campoDetRequerimiento.reset("");
+      this.campoDetRequerimiento.disable();
+      this.campoFecSalud.reset("");
+      this.campoFecSalud.disable();
     }
   }
-
   get valido() {
     return this.llamadaForm.valid;
   }
