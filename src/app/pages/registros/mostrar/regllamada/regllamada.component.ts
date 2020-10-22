@@ -17,6 +17,7 @@ import * as moment from "moment";
 })
 export class RegllamadaComponent implements OnInit, AfterViewInit {
   personaForm: FormGroup;
+  tipollamada = this.datos.tipo_llamada;
   sintomas = this.datos.sintomas;
   con_caso_sos = this.datos.con_caso_sos;
   enf_actual = this.datos.enf_actual;
@@ -83,6 +84,7 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
       llamada: this.fb.group({
         nroForm: [this.datos.nroForm],
         fecha: [this.datos.fecha],
+        tipo_llamada: [this.datos.tipo_llamada],
         motivo: [this.datos.motivo],
         sintomas: [this.datos.sintomas],
         fec_sintomas: [this.datos.fec_sintomas],
