@@ -68,14 +68,14 @@ export class LlamadaComponent implements OnInit {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
     this.initForm();
-    console.log(this.llamadaForm);
-    console.log(this._MostrarService.registro.llamada[this.reg]);
+    this.activarInicio();
+    this.cdr.markForCheck();
   }
 
   ngOnInit(): void {
     this.cargarLocalidades();
     this.idForm = this._MostrarService.registro._id;
-
+    this.cdr.markForCheck();
     //  console.log("Id form", this.idForm);
   }
 
@@ -487,6 +487,27 @@ export class LlamadaComponent implements OnInit {
     } else {
       this.campoDatPositivo.disable();
       this.campoDatPositivo.reset();
+    }
+  }
+  activarInicio() {
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Privado") {
+      this.campoLaboratorio.enable();
+      this.campoWhatsapp.enable();
+      this.whatsapp = "No";
+      this.campoDetRequerimiento.enable();
+      this.campoFecSalud.disable();
+    }
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Publico") {
+      this.campoLaboratorio.enable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.enable();
+      this.campoFecSalud.enable();
+    }
+    if (this.req_seguimiento === "No") {
+      this.campoLaboratorio.disable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.disable();
+      this.campoFecSalud.disable();
     }
   }
   activarSector() {
