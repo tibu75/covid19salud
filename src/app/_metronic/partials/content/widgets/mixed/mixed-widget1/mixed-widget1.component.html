@@ -1,15 +1,10 @@
 <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-  <!-- Header -->
-  <div class="card-header border-0 bg-danger py-5">
-    <h3 class="card-title font-weight-bolder text-white">Acceso Rapido</h3>
-    <div class="card-toolbar">
-      <div
-        ngbDropdown
-        placement="bottom-right"
-        class="dropdown dropdown-inline"
-        title="Quick actions"
-      >
-        <!-- <a
+    <!-- Header -->
+    <div class="card-header border-0 bg-danger py-5">
+        <h3 class="card-title font-weight-bolder text-white">Acceso Rapido</h3>
+        <div class="card-toolbar">
+            <div ngbDropdown placement="bottom-right" class="dropdown dropdown-inline" title="Quick actions">
+                <!-- <a
           ngbDropdownToggle
           class="btn btn-transparent-white btn-sm font-weight-bolder dropdown-toggle px-5 dropdown-toggle btn btn-transparent"
         >
@@ -21,13 +16,13 @@
         >
           <app-dropdown-menu2></app-dropdown-menu2>
         </div> -->
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- Body -->
-  <div class="card-body p-0 position-relative overflow-hidden">
-    <!--begin::Chart-->
-    <!--  <div
+    <!-- Body -->
+    <div class="card-body p-0 position-relative overflow-hidden">
+        <!--begin::Chart-->
+        <!--  <div
       id="kt_mixed_widget_1_chart"
       class="card-rounded-bottom bg-danger"
       [style.height]="'200px'"
@@ -48,75 +43,48 @@
         [plotOptions]="chartOptions.plotOptions"
       ></apx-chart>
     </div> -->
-    <!--end::Chart-->
-    <!--begin::Stats-->
-    <div class="card-spacer mt-n0">
-      <!--begin::Row-->
-      <div class="row m-0">
-        <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7">
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'"
-            class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"
-          ></span>
-          <a
-            routerLink="/registros"
-            class="text-warning font-weight-bold font-size-h6"
-          >
+        <!--end::Chart-->
+        <!--begin::Stats-->
+        <div class="card-spacer mt-n0">
+            <!--begin::Row-->
+            <div class="row m-0">
+                <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7">
+                    <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"></span>
+                    <a routerLink="/registros" class="text-warning font-weight-bold font-size-h6">
             Registo de Llamdas
           </a>
-        </div>
-        <ng-container *ngIf="mostrar">
-          <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
-            <span
-              [inlineSVG]="'./assets/media/svg/icons/Media/indicadores2.svg'"
-              class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
-            ></span>
-            <a
-              routerLink="/indicadores"
-              routerLinkActive="active"
-              class="text-primary font-weight-bold font-size-h6 mt-2"
-            >
+                </div>
+                <ng-container *ngIf="mostrar">
+                    <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+                        <span [inlineSVG]="'./assets/media/svg/icons/Media/Equalizer.svg'" class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"></span>
+                        <a routerLink="/indicadores" routerLinkActive="active" class="text-primary font-weight-bold font-size-h6 mt-2">
               Indicadores
             </a>
-          </div>
-        </ng-container>
-      </div>
-      <div class="row m-1">
-        <ng-container *ngIf="mostrar">
-          <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7">
-            <span
-              [inlineSVG]="'./assets/media/svg/icons/Communication/Archive.svg'"
-              class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
-            ></span>
-            <a
-              routerLink="/exportar"
-              routerLinkActive="active"
-              class="text-primary font-weight-bold font-size-h6 mt-2"
-            >
+                    </div>
+                </ng-container>
+            </div>
+            <div class="row m-1">
+                <ng-container *ngIf="mostrar">
+                    <div class="col bg-light-success px-6 py-8 rounded-xl mr-7 mb-7">
+                        <span [inlineSVG]="'./assets/media/svg/icons/Communication/Archive.svg'" class="svg-icon svg-icon-3x svg-icon-success d-block my-2"></span>
+                        <a routerLink="/exportar" routerLinkActive="active" class="text-success font-weight-bold font-size-h6 mt-2">
               Exportar
             </a>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="mostrar && mostrarUs">
-          <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
-            <span
-              [inlineSVG]="'./assets/media/svg/icons/Media/usuario.svg'"
-              class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
-            ></span>
-            <a
-              routerLink="/usuarios"
-              routerLinkActive="active"
-              class="text-primary font-weight-bold font-size-h6 mt-2"
-            >
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="mostrar && mostrarUs">
+                    <div class="col bg-light-danger px-6 py-8 rounded-xl mb-7">
+                        <span [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'" class="svg-icon svg-icon-3x svg-icon-danger d-block my-2"></span>
+                        <a routerLink="/usuarios" routerLinkActive="active" class="text-danger font-weight-bold font-size-h6 mt-2">
               Usuarios
             </a>
-          </div>
-        </ng-container>
-      </div>
+                    </div>
+                </ng-container>
+            </div>
 
-      <!--end::Row-->
-      <!--begin::Row-->
-      <!--       <div class="row m-0">
+            <!--end::Row-->
+            <!--begin::Row-->
+            <!--       <div class="row m-0">
         <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
           <span
             [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'"
@@ -138,8 +106,8 @@
           </a>
         </div>
       </div> -->
-      <!--end::Row-->
+            <!--end::Row-->
+        </div>
+        <!--end::Stats-->
     </div>
-    <!--end::Stats-->
-  </div>
 </div>

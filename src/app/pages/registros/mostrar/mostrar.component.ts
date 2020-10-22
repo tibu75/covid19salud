@@ -67,8 +67,17 @@ export class MostrarComponent implements OnInit, AfterViewInit {
     this.initForm();
   }
 
+  Entrada() {
+    this.mostrarForm.tipo_llamada = "Entrada";
+    this.mostrarForm.ultimoReg = this.mostrarForm.registro.llamada.length - 1;
+  }
+  Salida() {
+    this.mostrarForm.tipo_llamada = "Salida";
+    this.mostrarForm.ultimoReg = this.mostrarForm.registro.llamada.length - 1;
+  }
+
   Mostrar(idform) {
-    //console.log(idform);
+    console.log(idform);
     this.mostrarForm.registro = idform;
 
     this.cdr.markForCheck();

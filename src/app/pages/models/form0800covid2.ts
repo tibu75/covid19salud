@@ -6,6 +6,7 @@ export class FormsLlamada {
       {
         nroForm: string;
         fecha: string;
+        tipo_llamada: string;
         motivo: string;
         sintomas: string;
         fec_sintomas: string;
