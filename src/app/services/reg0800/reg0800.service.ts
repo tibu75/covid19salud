@@ -20,6 +20,10 @@ export class Reg0800Service {
     let url = `${API_USERS_URL}/?desde=${desde}`;
     return this.http.get<Reg0800>(url);
   }
+  getRegistrosTodos(hasta: number): Observable<Reg0800> {
+    let url = `${API_USERS_URL}/?hasta=${hasta}`;
+    return this.http.get<Reg0800>(url);
+  }
 
   getOneRegistro(doc: string) {
     let Url = `${API_USERS_URL}/doc`;

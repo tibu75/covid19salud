@@ -24,7 +24,7 @@
                     </span>
                 </div>
                 <div class="col-3">
-                    <!--container--><a class="text-info font-weight-bold font-size-h1" style="text-align: right;">1583
+                    <!--container--><a class="text-info font-weight-bold font-size-h1" style="text-align: right;">{{this.cantRegistros}}
                     </a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     </span>
                 </div>
                 <div class="col-3">
-                    <!--container--><a class="text-danger font-weight-bold font-size-h1" style="text-align: right;">1050
+                    <!--container--><a class="text-danger font-weight-bold font-size-h1" style="text-align: right;">{{this.f.conSintomas}}
                     </a>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     </span>
                 </div>
                 <div class="col-3">
-                    <!--container--><a class="text-success font-weight-bold font-size-h1" style="text-align: right;">533
+                    <!--container--><a class="text-success font-weight-bold font-size-h1" style="text-align: right;">{{this.f.sinSintomas}}
                     </a>
                 </div>
             </div>
@@ -101,6 +101,6 @@
         <app-columns></app-columns>
     </div>
     <div class="col-6">
-        <app-pie></app-pie>
+        <app-pie [conSintomas]='this.f.conSintomas' [sinSintomas]='this.f.sinSintomas'></app-pie>
     </div>
 </div>

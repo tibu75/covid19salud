@@ -1,4 +1,10 @@
-import { Component, ViewChild } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 import {
   ApexFill,
   ApexLegend,
@@ -11,7 +17,16 @@ import {
   ApexResponsive,
   ApexChart,
 } from "ng-apexcharts";
-export type ChartOptions = {
+import { FormsLlamada } from "src/app/pages/models/form0800covid2";
+import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
+import { Form0800Service } from "../../../../services/form0800/form0800.service";
+
+@Component({
+  selector: "app-pie",
+  templateUrl: "./pie.component.html",
+  styleUrls: ["./pie.component.scss"],
+})
+export class PieComponent implements OnInit {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
@@ -19,39 +34,86 @@ export type ChartOptions = {
   legend: ApexLegend;
   title: ApexTitleSubtitle;
   fill: ApexFill;
-};
-@Component({
-  selector: "app-pie",
-  templateUrl: "./pie.component.html",
-  styleUrls: ["./pie.component.scss"],
-})
-export class PieComponent {
-  @ViewChild("chart") chart: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
+  public cargando: boolean = true;
+  public formtemp: FormsLlamada[] = [];
+  public form: FormsLlamada[] = [];
+  public totalForm: number = 0;
+  public cantRegistros: number = 0;
+  soloLectura: boolean;
+  data: any = [];
+  dni: any = [];
+  @Input() conSintomas: number;
+  @Input() sinSintomas: number;
 
-  constructor() {
-    this.chartOptions = {
-      title: {
-        text: "REGISTRO TOTAL DE LLAMADAS",
-        align: "center",
-        margin: 10,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-          fontSize: "14px",
-          fontWeight: "bold",
-          fontFamily: undefined,
-          color: "#263238",
-        },
+  constructor(
+    public reg0800Service: Reg0800Service,
+    private cdr: ChangeDetectorRef,
+    public f: Form0800Service
+  ) {
+    console.log(this.f.conSintomas, this.f.sinSintomas);
+  }
+  ngOnInit(): void {
+    /* this.cargarForms(); */
+    this.iniChartOptions();
+    this.cdr.markForCheck();
+  }
+  /*   cargarForms() {
+    this.cargando = true;
+    this.reg0800Service
+      .getRegistrosTodos(1000)
+      .subscribe(({ total, registros }) => {
+        console.log(registros);
+        console.log("Total de Personas: ", total);
+        this.form = registros;
+        this.BuscarRegSintomas();
+        this.totalForm = total;
+        this.cdr.markForCheck();
+
+        this.cargando = false;
+        this.soloLectura = true;
+      });
+    this.cdr.markForCheck();
+  }
+
+  BuscarRegSintomas() {
+    this.form.forEach((x) => {
+      x.llamada.forEach((y) => {
+        if (y.sintomas === "No") {
+          this.sinSintomas = this.sinSintomas + 1;
+        }
+        this.cantRegistros = this.cantRegistros + 1;
+      });
+    });
+    this.f.conSintomas = this.cantRegistros - this.sinSintomas;
+    this.f.sinSintomas = this.sinSintomas;
+    console.log("Registros totales: ", this.cantRegistros);
+    console.log("Registros con sintomas: ", this.f.conSintomas);
+    console.log("Registros sin sintomas: ", this.f.sinSintomas);
+    this.iniChartOptions();
+  } */
+
+  private iniChartOptions(): void {
+    (this.title = {
+      text: "REGISTRO TOTAL DE LLAMADAS",
+      align: "center",
+      margin: 10,
+      offsetX: 0,
+      offsetY: 0,
+      floating: false,
+      style: {
+        fontSize: "14px",
+        fontWeight: "bold",
+        fontFamily: undefined,
+        color: "#263238",
       },
-      series: [1050, 533],
-      chart: {
+    }),
+      (this.series = []),
+      (this.chart = {
         width: 520,
         type: "pie",
-      },
-      labels: ["Con Sintomas", "Sin Sintomas"],
-      legend: {
+      }),
+      (this.labels = ["Con Sintomas", "Sin Sintomas"]),
+      (this.legend = {
         position: "right",
         offsetY: 40,
 
@@ -67,8 +129,8 @@ export class PieComponent {
           offsetX: 0,
           offsetY: 0,
         },
-      },
-      responsive: [
+      }),
+      (this.responsive = [
         {
           breakpoint: 480,
           options: {
@@ -80,11 +142,10 @@ export class PieComponent {
             },
           },
         },
-      ],
-      fill: {
+      ]),
+      (this.fill = {
         opacity: 1,
         colors: ["#E91E63", "#1de9b6", "#9C27B0"],
-      },
-    };
+      });
   }
 }
