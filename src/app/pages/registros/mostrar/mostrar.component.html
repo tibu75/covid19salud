@@ -193,47 +193,48 @@
                             <table class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 6%;" aria-sort="ascending" aria-label="Record ID: activate to sort column descending">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 6%;text-align: center;" aria-sort="ascending" aria-label="Record ID: activate to sort column descending">
                                             Reg.Nro
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 10%;" aria-label="Order ID: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 10%;text-align: center;" aria-label="Order ID: activate to sort column ascending">
                                             Fecha
                                         </th>
 
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;" aria-label="Company Agent: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;text-align: center;" aria-label="Company Agent: activate to sort column ascending">
                                             Motivo de llamada
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;" aria-label="Company Agent: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;text-align: center;" aria-label="Company Agent: activate to sort column ascending">
                                             Cierre del Contacto
                                         </th>
-                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 14%;" aria-label="Tareas">
+                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 14%;text-align: center;" aria-label="Tareas">
                                             Seguimiento
                                         </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="1" colspan="1">Reg.Nro</th>
-                                        <th rowspan="1" colspan="1">Fecha</th>
-                                        <th rowspan="1" colspan="1">Motivo de llamada</th>
-                                        <th rowspan="1" colspan="1">Cierre del Contacto</th>
-                                        <th rowspan="1" colspan="1" style="display: none">
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Reg.Nro</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Fecha</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Motivo de llamada</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Cierre del Contacto</th>
+                                        <th rowspan="1" colspan="1" style="display: none; text-align: center;">
                                             Tipo de Registro
                                         </th>
-                                        <th rowspan="1" colspan="1">Seguimito</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Seguimito</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     <tr role="row" class="odd" *ngFor="let f of form">
-                                        <td class="sorting_1 dtr-control">{{ f?.nroForm }}</td>
-                                        <td>{{ f?.fecha | date: "dd/MM/yyyy" }}</td>
+                                        <td class="sorting_1 dtr-control" style="text-align: center;">{{ f?.nroForm }}
+                                        </td>
+                                        <td style="text-align: center;">{{ f?.fecha | date: "dd/MM/yyyy" }}</td>
                                         <td>{{ f?.motivo }}</td>
                                         <td>{{ f?.cierre_contacto }}</td>
 
                                         <td style="display: none">
                                             <span class="label label-danger label-dot mr-2"></span><span class="font-weight-bold text-danger">Online</span>
                                         </td>
-                                        <td>
+                                        <td style="text-align: center;">
                                             <div *ngIf="this.f.tipo_llamada ==='Entrada'">
 
                                                 <button mat-raised-button class="btn btn-primary font-weight-bolder" style="width: 110px;height: 40px;" (click)="MostrarRegistro(f)">
