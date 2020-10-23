@@ -18,6 +18,7 @@ import { Localidades } from "../../models/localidades";
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
+import date from "../../../../../dist/assets/plugins/formvalidation/src/js/validators/date";
 
 @Component({
   selector: "app-registro",
@@ -239,7 +240,6 @@ export class RegistroComponent implements OnInit {
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       console.log(value);
     });
-    //  //console.log(this.personaForm);
   }
 
   renaper() {
