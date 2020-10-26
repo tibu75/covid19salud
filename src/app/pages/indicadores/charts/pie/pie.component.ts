@@ -122,7 +122,7 @@ export class PieComponent implements OnInit {
           height: 12,
           strokeWidth: 0,
           strokeColor: "#fff",
-          fillColors: ["#E91E63", "#1de9b6", "#9C27B0"],
+          fillColors: ["#f64e60", "#1bc5bd", "#9C27B0"],
           radius: 12,
           customHTML: undefined,
           onClick: undefined,
@@ -145,7 +145,10 @@ export class PieComponent implements OnInit {
       ]),
       (this.fill = {
         opacity: 1,
-        colors: ["#E91E63", "#1de9b6", "#9C27B0"],
-      });
+
+        colors: ["#f64e60", "#1bc5bd", "#9C27B0"],
+      },
+    };
+
   }
 }
