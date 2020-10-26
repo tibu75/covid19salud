@@ -19,6 +19,8 @@ export class Form0800Service {
   }
 
   form: FormsLlamada;
+  sinSintomas: number;
+  conSintomas: number;
 
   constructor(
     private http: HttpClient,

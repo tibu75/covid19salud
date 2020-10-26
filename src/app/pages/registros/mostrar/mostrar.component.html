@@ -9,9 +9,9 @@
                     </h3>
                 </div>
                 <div class="card-toolbar">
-                    <a routerLink="/registros" class="btn btn-light-primary font-weight-bolder mr-2">
+                    <a routerLink="/registros" class="btn btn-light-primary font-weight-bolder">
                         <i class="ki ki-long-arrow-back icon-sm"></i>Volver</a>
-                    <a routerLink="/llamada" routerLinkActive="router-link-active" class="btn btn-primary font-weight-bolder">
+                    <button routerLink="/llamada" routerLinkActive="router-link-active" class="btn btn-primary font-weight-bolder" style="margin-left: 10px;" (click)="Entrada()">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -25,8 +25,25 @@
                                 </g>
                             </svg>
                             <!--end::Svg Icon-->
-                        </span> Nuevo Registro
-                    </a>
+                        </span> Nuevo Llamada Entrante
+                    </button>
+
+                    <button routerLink="/llamada" routerLinkActive="router-link-active" class="btn btn-success font-weight-bolder" style="margin-left: 10px;" (click)="Salida()">
+                        <span class="svg-icon svg-icon-md">
+                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"></rect>
+                                    <circle fill="#000000" cx="9" cy="15" r="6"></circle>
+                                    <path
+                                        d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                        fill="#000000" opacity="0.3"></path>
+                                </g>
+                            </svg>
+                            <!--end::Svg Icon-->
+                        </span> Llamada Saliente Seguimiento
+                    </button>
                 </div>
             </div>
 
@@ -59,7 +76,7 @@
                                         <div class="col-xl-2 col-documento padding-1">
                                             <div class="form-group">
                                                 <label>Documento</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="documento" name="documento" placeholder="" readonly="all" />
+                                                <input class="form-control form-control-solid" type="text" formControlName="documento" name="documento" placeholder="" readonly="all" style="text-align: center;" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
@@ -67,31 +84,14 @@
                                         <div class="col-xl-1 col-sexo padding-1">
                                             <div class="form-group">
                                                 <label>Sexo</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="sexo" name="sexo" placeholder="" readonly="all" />
+                                                <input class="form-control form-control-solid" type="text" formControlName="sexo" name="sexo" placeholder="" readonly="all" style="text-align: center;" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
-
-                                        <div class="col-xl-1 col-edad padding-1">
-                                            <div class="form-group">
-                                                <label>Edad</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-xl-1 col-edad padding-1">
-									<div class="form-group">
-										<label>Edad</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="fechaNacimiento" name="fechaNacimiento" placeholder="" />
-										<span class="form-text text-muted"></span>
-									</div>
-								</div> -->
-
                                         <div class="col-xl-3 col-nombre padding-1">
                                             <div class="form-group">
                                                 <label>Nombre/s</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="nombre" name="nombre" placeholder="" readonly="all" />
+                                                <input class="form-control form-control-solid" type="text" formControlName="nombre" name="nombre" placeholder="" readonly="all" style="text-align: center;" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
@@ -99,22 +99,35 @@
                                         <div class="col-xl-3 col-apellido padding-1">
                                             <div class="form-group">
                                                 <label>Apellido/s</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="apellido" name="apellido" placeholder="" readonly="all" />
+                                                <input class="form-control form-control-solid" type="text" formControlName="apellido" name="apellido" placeholder="" readonly="all" style="text-align: center;" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
-
+                                        <div class="col-xl-3 col-fechanacimient padding-1">
+                                            <div class="form-group">
+                                                <label>Fec. Nacimiento</label>
+                                                <output class="form-control form-control-solid" type="text" style="text-align: center;">{{this.personaForm.get("persona.fechaNacimiento").value | date: "dd/MM/yyyy"}}</output>
+                                                <span class="form-text text-muted"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-1 col-edad padding-1">
+                                            <div class="form-group">
+                                                <label>Edad</label>
+                                                <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad" placeholder="" readonly="all" style="text-align: center;" />
+                                                <span class="form-text text-muted"></span>
+                                            </div>
+                                        </div>
                                         <div class="col-xl-2 col-telefono padding-1">
                                             <div class="form-group">
                                                 <label>Teléfono</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="telefono" name="telefono" readonly="all" />
+                                                <input class="form-control form-control-solid" type="text" formControlName="telefono" name="telefono" readonly="all" style="text-align: center;" />
                                             </div>
                                         </div>
                                     </div>
 
                                     <h3 class="text-dark font-weight-bold">Datos del Domicilio:</h3>
                                     <div class="row">
-                                        <div class="col-xl-2 col-calle padding-1">
+                                        <div class="col-xl-4 col-calle padding-1">
                                             <div class="form-group">
                                                 <label>Calle</label>
                                                 <input class="form-control form-control-solid" type="text" formControlName="calle" name="calle" placeholder="" readonly="all" />
@@ -129,7 +142,7 @@
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
-                                        <div class="col-xl-2 col-numero padding-1">
+                                        <div class="col-xl-1 col-numero padding-1">
                                             <div class="form-group">
                                                 <label>Piso</label>
                                                 <input class="form-control form-control-solid" type="text" formControlName="piso" name="piso" placeholder="" readonly="all" />
@@ -176,63 +189,86 @@
                             <table class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 10%;" aria-sort="ascending" aria-label="Record ID: activate to sort column descending">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 6%;text-align: center;" aria-sort="ascending" aria-label="Record ID: activate to sort column descending">
                                             Reg.Nro
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 10%;" aria-label="Order ID: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 10%;text-align: center;" aria-label="Order ID: activate to sort column ascending">
                                             Fecha
                                         </th>
 
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;" aria-label="Company Agent: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;text-align: center;" aria-label="Company Agent: activate to sort column ascending">
                                             Motivo de llamada
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;" aria-label="Company Agent: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;text-align: center;" aria-label="Company Agent: activate to sort column ascending">
                                             Cierre del Contacto
                                         </th>
-                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 10%;" aria-label="Tareas">
+                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 14%;text-align: center;" aria-label="Tareas">
                                             Seguimiento
                                         </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="1" colspan="1">Reg.Nro</th>
-                                        <th rowspan="1" colspan="1">Fecha</th>
-                                        <th rowspan="1" colspan="1">Motivo de llamada</th>
-                                        <th rowspan="1" colspan="1">Cierre del Contacto</th>
-                                        <th rowspan="1" colspan="1" style="display: none">
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Reg.Nro</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Fecha</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Motivo de llamada</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Cierre del Contacto</th>
+                                        <th rowspan="1" colspan="1" style="display: none; text-align: center;">
                                             Tipo de Registro
                                         </th>
-                                        <th rowspan="1" colspan="1">Seguimito</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Seguimito</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     <tr role="row" class="odd" *ngFor="let f of form">
-                                        <td class="sorting_1 dtr-control">{{ f?.nroForm }}</td>
-                                        <td>{{ f?.fecha | date: "dd/MM/yyyy" }}</td>
+                                        <td class="sorting_1 dtr-control" style="text-align: center;">{{ f?.nroForm }}
+                                        </td>
+                                        <td style="text-align: center;">{{ f?.fecha | date: "dd/MM/yyyy" }}</td>
                                         <td>{{ f?.motivo }}</td>
                                         <td>{{ f?.cierre_contacto }}</td>
 
                                         <td style="display: none">
                                             <span class="label label-danger label-dot mr-2"></span><span class="font-weight-bold text-danger">Online</span>
                                         </td>
-                                        <td>
-                                            <button mat-raised-button class="btn btn-primary font-weight-bolder" (click)="MostrarRegistro(f)">
-                                                <span class="svg-icon svg-icon-md">
-                                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="12px"
-                                                        height="12px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none"
-                                                            fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="12" height="24"></rect>
-                                                            <circle fill="#000000" cx="9" cy="15" r="6"></circle>
-                                                            <path
-                                                                d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                                                                fill="#000000" opacity="0.3"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <!--end::Svg Icon--> </span>Ver</button>
+                                        <td style="text-align: center;">
+                                            <div *ngIf="this.f.tipo_llamada ==='Entrada'">
+
+                                                <button mat-raised-button class="btn btn-primary font-weight-bolder" style="width: 110px;height: 40px;" (click)="MostrarRegistro(f)">
+                                                    <span class="svg-icon svg-icon-md">
+                                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="12px"
+                                                            height="12px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none"
+                                                                fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="12" height="24"></rect>
+                                                                <circle fill="#000000" cx="9" cy="15" r="6"></circle>
+                                                                <path
+                                                                    d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                                                    fill="#000000" opacity="0.3"></path>
+                                                            </g>
+                                                        </svg>
+                                                        <!--end::Svg Icon--> </span>Entrada</button>
+                                            </div>
+                                            <div *ngIf="this.f.tipo_llamada ==='Salida'">
+
+                                                <button mat-raised-button class="btn btn-success font-weight-bolder" style="width: 110px;height: 40px;" (click)="MostrarRegistro(f)">
+                                                    <span class="svg-icon svg-icon-md">
+                                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="12px"
+                                                            height="12px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none"
+                                                                fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="12" height="24"></rect>
+                                                                <circle fill="#000000" cx="9" cy="15" r="6"></circle>
+                                                                <path
+                                                                    d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                                                    fill="#000000" opacity="0.3"></path>
+                                                            </g>
+                                                        </svg>
+                                                        <!--end::Svg Icon--> </span>Salida</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

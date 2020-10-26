@@ -22,40 +22,25 @@ import * as moment from "moment";
 })
 export class LlamadaComponent implements OnInit {
   //Formulario
+  reg = this._MostrarService.ultimoReg;
   llamadaForm: FormGroup;
-  sintomas = "No";
-  con_caso_sos = "No";
-  enf_actual = "No";
-  convivientes = "No";
-  intervencion = "No";
-  cri_hisopado = "No";
-  mov_propia = "Si";
-  der_enfermeria = "No";
-  sol_hisopado = "No";
-  cer_5dias = "No";
-  cer_contacto = "No";
-  cas_positivo = "No";
-  req_seguimiento = "No";
+  sintomas = this._MostrarService.registro.llamada[this.reg].sintomas;
+  con_caso_sos = this._MostrarService.registro.llamada[this.reg].con_caso_sos;
+  enf_actual = this._MostrarService.registro.llamada[this.reg].enf_actual;
+  convivientes = this._MostrarService.registro.llamada[this.reg].convivientes;
+  intervencion = this._MostrarService.registro.llamada[this.reg].intervencion;
+  cri_hisopado = this._MostrarService.registro.llamada[this.reg].cri_hisopado;
+  mov_propia = this._MostrarService.registro.llamada[this.reg].mov_propia;
+  der_enfermeria = this._MostrarService.registro.llamada[this.reg]
+    .der_enfermeria;
+  sol_hisopado = this._MostrarService.registro.llamada[this.reg].sol_hisopado;
+  cer_5dias = this._MostrarService.registro.llamada[this.reg].cer_5dias;
+  cer_contacto = this._MostrarService.registro.llamada[this.reg].cer_contacto;
+  cas_positivo = this._MostrarService.registro.llamada[this.reg].cas_positivo;
+  req_seguimiento = this._MostrarService.registro.llamada[this.reg]
+    .req_seguimiento;
   laboratorio = "Privado";
   whatsapp = "No";
-
-  antencedentes_p = "No";
-  toma_medicamentos = "";
-  vivienda_personas = "";
-
-  sexo = "M";
-  tipo_registro = "Sin Sintomas";
-  realizo_hisopado = "No";
-
-  atencion_domiciliaria = "No";
-  cert_aislamiento = "No";
-  resultado_hisopado = "No";
-  derivacion_107 = "No";
-  obs_atencion_domiciliaria = "";
-  obs_cert_aislamiento = "";
-  obs_resultado_hisopado = "";
-  obs_derivacion_107 = "";
-  obs_mov_propia = "";
 
   private isLoadingSubject: BehaviorSubject<boolean>;
   public isLoading$: Observable<boolean>;
@@ -83,11 +68,14 @@ export class LlamadaComponent implements OnInit {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
     this.initForm();
+    this.activarInicio();
+    this.cdr.markForCheck();
   }
 
   ngOnInit(): void {
     this.cargarLocalidades();
     this.idForm = this._MostrarService.registro._id;
+    this.cdr.markForCheck();
     //  console.log("Id form", this.idForm);
   }
 
@@ -102,46 +90,189 @@ export class LlamadaComponent implements OnInit {
     this.llamadaForm = this.fb.group({
       nroForm: [null],
       fecha: [""],
+      tipo_llamada: [this._MostrarService.tipo_llamada],
       motivo: ["", [Validators.required]],
-      sintomas: ["No"],
-      fec_sintomas: [{ value: "", disabled: true }, [Validators.required]],
-      sin_actuales: [{ value: "", disabled: true }, [Validators.required]],
-      con_caso_sos: ["No"],
-      obs_contacto: [{ value: "", disabled: true }, [Validators.required]],
-      obra_social: ["", [Validators.required]],
-      enf_actual: ["No"],
-      obs_enfermedad: [{ value: "", disabled: true }, [Validators.required]],
-      tratamiento: [{ value: "No", disabled: true }, [Validators.required]],
-      convivientes: ["No"],
-      cant_convivientes: [{ value: "", disabled: true }, [Validators.required]],
-      obs_convivientes: [{ value: "", disabled: true }, [Validators.required]],
-      sit_social: ["", [Validators.required]],
-      intervencion: ["No"],
-      obs_intervencion: [{ value: "", disabled: true }, [Validators.required]],
-      cri_hisopado: ["No"],
-      com_hisopado: ["No"],
-      mov_propia: ["Si"],
-      der_enfermeria: ["No"],
-      dis_contacto: ["", [Validators.required]],
-      sol_hisopado: ["No"],
-      lug_hisopado: [{ value: "", disabled: true }, [Validators.required]],
-      fec_hisopado: [{ value: "", disabled: true }, [Validators.required]],
-      req_extender: [{ value: "", disabled: true }, [Validators.required]],
-      cer_5dias: ["No"],
-      cer_contacto: ["No"],
-      tip_contacto: ["Social"],
-      obs_tip_contacto: [{ value: "", disabled: true }, [Validators.required]],
-      cas_positivo: ["No"],
-      dat_positivo: [{ value: "", disabled: true }, [Validators.required]],
-      otro_certificado: ["", [Validators.required]],
-      seg_domiciliario: ["No"],
-      req_seguimiento: ["No"],
-      laboratorio: [{ value: "Privado", disabled: true }],
-      whatsapp: [{ value: "No", disabled: true }],
-      det_requerimiento: [{ value: "", disabled: true }, [Validators.required]],
-      fec_salud: [{ value: "", disabled: true }, [Validators.required]],
-      cierre_contacto: ["", [Validators.required]],
-      usuario: [""],
+      sintomas: [this._MostrarService.registro.llamada[this.reg].sintomas],
+      fec_sintomas: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].fec_sintomas,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      sin_actuales: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].sin_actuales,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      con_caso_sos: [
+        this._MostrarService.registro.llamada[this.reg].con_caso_sos,
+      ],
+      obs_contacto: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].obs_contacto,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      obra_social: [
+        this._MostrarService.registro.llamada[this.reg].obra_social,
+        [Validators.required],
+      ],
+      enf_actual: [this._MostrarService.registro.llamada[this.reg].enf_actual],
+      obs_enfermedad: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].obs_enfermedad,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      tratamiento: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].tratamiento,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      convivientes: [
+        this._MostrarService.registro.llamada[this.reg].convivientes,
+      ],
+      cant_convivientes: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg]
+            .cant_convivientes,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      obs_convivientes: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg]
+            .obs_convivientes,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      sit_social: [
+        this._MostrarService.registro.llamada[this.reg].sit_social,
+        [Validators.required],
+      ],
+      intervencion: [
+        this._MostrarService.registro.llamada[this.reg].intervencion,
+      ],
+      obs_intervencion: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg]
+            .obs_intervencion,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      cri_hisopado: [
+        this._MostrarService.registro.llamada[this.reg].cri_hisopado,
+      ],
+      com_hisopado: [
+        this._MostrarService.registro.llamada[this.reg].com_hisopado,
+      ],
+      mov_propia: [this._MostrarService.registro.llamada[this.reg].mov_propia],
+      der_enfermeria: [
+        this._MostrarService.registro.llamada[this.reg].der_enfermeria,
+      ],
+      dis_contacto: [
+        this._MostrarService.registro.llamada[this.reg].dis_contacto,
+      ],
+      sol_hisopado: [
+        this._MostrarService.registro.llamada[this.reg].sol_hisopado,
+      ],
+      lug_hisopado: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].lug_hisopado,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      fec_hisopado: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].fec_hisopado,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      req_extender: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].req_extender,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      cer_5dias: [this._MostrarService.registro.llamada[this.reg].cer_5dias],
+      cer_contacto: [
+        this._MostrarService.registro.llamada[this.reg].cer_contacto,
+      ],
+      tip_contacto: [
+        this._MostrarService.registro.llamada[this.reg].tip_contacto,
+      ],
+      obs_tip_contacto: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg]
+            .obs_tip_contacto,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      cas_positivo: [
+        this._MostrarService.registro.llamada[this.reg].cas_positivo,
+      ],
+      dat_positivo: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].dat_positivo,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      otro_certificado: [
+        this._MostrarService.registro.llamada[this.reg].otro_certificado,
+      ],
+      seg_domiciliario: [
+        this._MostrarService.registro.llamada[this.reg].seg_domiciliario,
+      ],
+      req_seguimiento: [
+        this._MostrarService.registro.llamada[this.reg].req_seguimiento,
+      ],
+      laboratorio: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].laboratorio,
+          disabled: true,
+        },
+      ],
+      whatsapp: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].whatsapp,
+          disabled: true,
+        },
+      ],
+      det_requerimiento: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg]
+            .det_requerimiento,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      fec_salud: [
+        {
+          value: this._MostrarService.registro.llamada[this.reg].fec_salud,
+          disabled: true,
+        },
+        [Validators.required],
+      ],
+      cierre_contacto: [
+        this._MostrarService.registro.llamada[this.reg].cierre_contacto,
+        [Validators.required],
+      ],
+      usuario: [this._MostrarService.registro.llamada[this.reg].usuario],
     });
     this.llamadaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       //  console.log(value);
@@ -358,49 +489,56 @@ export class LlamadaComponent implements OnInit {
       this.campoDatPositivo.reset();
     }
   }
-  activarSegMedico() {
-    if (this.laboratorio === "Publico") {
-      this.campoFecSalud.enable();
-      this.campoDetRequerimiento.reset("");
-    } else {
-      this.campoFecSalud.disable();
-      this.campoFecSalud.reset("");
-    }
-    if (this.laboratorio === "Privado") {
+  activarInicio() {
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Privado") {
+      this.campoLaboratorio.enable();
       this.campoWhatsapp.enable();
-      this.campoDetRequerimiento.reset("");
-    } else {
+      this.whatsapp = "No";
+      this.campoDetRequerimiento.enable();
+      this.campoFecSalud.disable();
+    }
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Publico") {
+      this.campoLaboratorio.enable();
       this.campoWhatsapp.disable();
-      this.campoWhatsapp.reset("No");
+      this.campoDetRequerimiento.enable();
+      this.campoFecSalud.enable();
+    }
+    if (this.req_seguimiento === "No") {
+      this.campoLaboratorio.disable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.disable();
+      this.campoFecSalud.disable();
     }
   }
   activarSector() {
-    if (this.req_seguimiento === "Si") {
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Privado") {
       this.campoLaboratorio.enable();
-    } else {
-      this.campoLaboratorio.disable();
-      this.campoLaboratorio.reset("Privado");
-    }
-    if (this.req_seguimiento === "Si") {
-      this.campoDetRequerimiento.enable();
-    } else {
-      this.campoDetRequerimiento.disable();
-      this.campoDetRequerimiento.reset("");
-    }
-    if (this.laboratorio === "Privado") {
       this.campoWhatsapp.enable();
-    } else {
-      this.campoWhatsapp.disable();
       this.campoWhatsapp.reset("No");
-    }
-    if (this.laboratorio === "Privado") {
+      this.whatsapp = "No";
       this.campoDetRequerimiento.enable();
-    } else {
-      this.campoDetRequerimiento.disable();
       this.campoDetRequerimiento.reset("");
+      this.campoFecSalud.reset("");
+      this.campoFecSalud.disable();
+    }
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Publico") {
+      this.campoLaboratorio.enable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.enable();
+      this.campoDetRequerimiento.reset("");
+      this.campoFecSalud.enable();
+      this.campoFecSalud.reset("");
+    }
+    if (this.req_seguimiento === "No") {
+      this.campoLaboratorio.reset("Privado");
+      this.campoLaboratorio.disable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.reset("");
+      this.campoDetRequerimiento.disable();
+      this.campoFecSalud.reset("");
+      this.campoFecSalud.disable();
     }
   }
-
   get valido() {
     return this.llamadaForm.valid;
   }

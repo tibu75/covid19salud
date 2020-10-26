@@ -16,8 +16,7 @@
                 <div class="card-toolbar">
                     <!--begin::Dropdown-->
                     <div class="dropdown dropdown-inline mr-2">
-                        <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle"
-                            (click)="exportarXls()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" (click)="exportarXls()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -44,8 +43,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active"
-                        class="btn btn-primary font-weight-bolder">
+                    <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" class="btn btn-primary font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -71,19 +69,13 @@
                         <div class="col-lg-5 mb-lg-0 mb-6">
                             <label>Fecha de carga: Desde > Hasta </label>
                             <div class="input-daterange input-group" id="kt_datepicker">
-                                <input type="date" placeholder="Desde: 2020/10/01"
-                                    class="form-control form-control-solid" id="start1" formControlName="fechaDesde"
-                                    name="fechaDesde" min=" {{ fechamin }}" max="{{ fechaHasta }}" placeholder="Desde"
-                                    data-col-index="5" />
+                                <input type="date" placeholder="Desde: 2020/10/01" class="form-control form-control-solid" id="start1" formControlName="fechaDesde" name="fechaDesde" min=" {{ fechamin }}" max="{{ fechaHasta }}" placeholder="Desde" data-col-index="5" />
                                 <div class="input-group-append">
                                     <span class="input-group-text">
                                         <i class="la la-ellipsis-h"></i>
                                     </span>
                                 </div>
-                                <input type="date" placeholder="Hasta:2020/10/31"
-                                    class="form-control form-control-solid" id="start2" formControlName="fechaHasta"
-                                    name="fechaHasta" min=" {{ fechamin }}" max="{{ fechaHasta }}" placeholder="Hasta"
-                                    data-col-index="5" />
+                                <input type="date" placeholder="Hasta:2020/10/31" class="form-control form-control-solid" id="start2" formControlName="fechaHasta" name="fechaHasta" min=" {{ fechamin }}" max="{{ fechaHasta }}" placeholder="Hasta" data-col-index="5" />
                             </div>
                         </div>
 
@@ -99,15 +91,13 @@
                         </div>
                         <div class="col-lg-3 mb-lg-0 mb-6">
                             <label>Usuario:</label>
-                            <input type="text" formControlName="usuario" name="usuario"
-                                class="form-control datatable-input" placeholder="DNI: 21234567" data-col-index="0" />
+                            <input type="text" formControlName="usuario" name="usuario" class="form-control datatable-input" placeholder="DNI: 21234567" data-col-index="0" />
                         </div>
                     </div>
 
                     <div class="row mt-8">
                         <div class="col-lg-12">
-                            <button type="button" (click)="filtrar()" class="btn btn-primary btn-primary--icon"
-                                id="kt_search">
+                            <button type="button" (click)="filtrar()" class="btn btn-primary btn-primary--icon" id="kt_search">
                                 <span>
                                     <i class="la la-search"></i>
                                     <span>Buscar</span>
@@ -127,43 +117,27 @@
                 <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-bordered table-hover table-checkable dataTable dtr-inline"
-                                id="kt_datatable" role="grid" aria-describedby="kt_datatable_info"
-                                style="width: 1229px">
+                            <table class="table table-bordered table-hover table-checkable dataTable dtr-inline" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1"
-                                            colspan="1" style="width: 71px" aria-sort="ascending"
-                                            aria-label="Record ID: activate to sort column descending">
-                                            Reg.Nro: </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
-                                            colspan="1" style="width: 69px"
-                                            aria-label="Order ID: activate to sort column ascending">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 2%;text-align: center;" aria-sort="ascending">
+                                            Reg. Nro: </th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 8%;text-align: center;">
                                             Fecha de Carga
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
-                                            colspan="1" style="width: 126px"
-                                            aria-label="Country: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 20%;text-align: center;">
                                             Localidad
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
-                                            colspan="1" style="width: 165px"
-                                            aria-label="Ship City: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 7%; text-align: center;">
                                             Documento
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
-                                            colspan="1" style="width: 121px"
-                                            aria-label="Company Agent: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 20%;text-align: center;">
                                             Apellido
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
-                                            colspan="1" style="width: 71px"
-                                            aria-label="Ship Date: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 20%;text-align: center;">
                                             Nombres
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
-                                            colspan="1" style="width: 66px"
-                                            aria-label="Status: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 5%;text-align: center;">
                                             Total Llamadas
                                         </th>
 
@@ -171,18 +145,18 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="1" colspan="1">Reg.Nro: </th>
-                                        <th rowspan="1" colspan="1">Fecha de Carga</th>
-                                        <th rowspan="1" colspan="1">Localidad</th>
-                                        <th rowspan="1" colspan="1">Documento</th>
-                                        <th rowspan="1" colspan="1">Apellido</th>
-                                        <th rowspan="1" colspan="1">Nombres</th>
-                                        <th rowspan="1" colspan="1">Total Llamadas</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Reg. Nro: </th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Fecha de Carga</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Localidad</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Documento</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Apellido</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Nombres</th>
+                                        <th rowspan="1" colspan="1" style="text-align: center;">Total Llamadas</th>
 
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr role="row" class="odd" *ngFor="let f of form">
+                                    <tr role="row" class="odd" style="text-align: center;" *ngFor="let f of form">
                                         <td class="sorting_1 dtr-control">{{f.nroForm}}</td>
                                         <td>{{f.fecha |date: "dd/MM/yyyy"}}</td>
                                         <td>{{f.persona?.localidad}}</td>
@@ -191,8 +165,7 @@
                                         <td>{{f.persona.nombre}}</td>
                                         <td>
 
-                                            <span
-                                                class="label label-lg font-weight-bold label-light-info label-inline">{{f.llamada.length}}</span>
+                                            <span class="label label-lg font-weight-bold label-light-info label-inline">{{f.llamada.length}}</span>
                                         </td>
 
 

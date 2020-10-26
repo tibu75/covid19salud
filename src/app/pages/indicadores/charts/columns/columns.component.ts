@@ -1,4 +1,5 @@
-import { Component, ViewChild } from "@angular/core";
+import { ChangeDetectorRef } from "@angular/core";
+import { Component, ViewChild, OnInit } from "@angular/core";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -13,7 +14,12 @@ import {
   ApexMarkers,
 } from "ng-apexcharts";
 
-export type ChartOptions = {
+@Component({
+  selector: "app-columns",
+  templateUrl: "./columns.component.html",
+  styleUrls: ["./columns.component.scss"],
+})
+export class ColumnsComponent implements OnInit {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
@@ -24,31 +30,25 @@ export type ChartOptions = {
   fill: ApexFill;
   title: ApexTitleSubtitle;
   markers: ApexMarkers;
-};
+  constructor(private cdr: ChangeDetectorRef) {}
 
-@Component({
-  selector: "app-columns",
-  templateUrl: "./columns.component.html",
-  styleUrls: ["./columns.component.scss"],
-})
-export class ColumnsComponent {
-  @ViewChild("chart") chart: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
+  ngOnInit() {
+    this.iniChartOptions();
+    this.cdr.markForCheck();
+  }
 
-  constructor() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "Con Sintomas",
-          data: [44, 55, 41, 60],
-        },
-        {
-          name: "Sin Sintomas",
-          data: [13, 23, 20, 12],
-        },
-      ],
-
-      chart: {
+  private iniChartOptions(): void {
+    (this.series = [
+      {
+        name: "Con Sintomas",
+        data: [],
+      },
+      {
+        name: "Sin Sintomas",
+        data: [],
+      },
+    ]),
+      (this.chart = {
         type: "bar",
         height: 350,
         stacked: true,
@@ -58,8 +58,8 @@ export class ColumnsComponent {
         zoom: {
           enabled: true,
         },
-      },
-      title: {
+      }),
+      (this.title = {
         text: "REGISTROS DE LLAMADAS POR DIA",
         align: "center",
         margin: 10,
@@ -72,8 +72,8 @@ export class ColumnsComponent {
           fontFamily: undefined,
           color: "#263238",
         },
-      },
-      responsive: [
+      }),
+      (this.responsive = [
         {
           breakpoint: 480,
           options: {
@@ -84,17 +84,17 @@ export class ColumnsComponent {
             },
           },
         },
-      ],
-      plotOptions: {
+      ]),
+      (this.plotOptions = {
         bar: {
           horizontal: false,
         },
-      },
-      xaxis: {
+      }),
+      (this.xaxis = {
         type: "category",
-        categories: ["20/OCT", "21/OCT", "22/OCT", "23/OCT"],
-      },
-      legend: {
+        categories: ["22/OCT", "23/OCT"],
+      }),
+      (this.legend = {
         position: "right",
         offsetY: 40,
         markers: {
@@ -109,11 +109,12 @@ export class ColumnsComponent {
           offsetX: 0,
           offsetY: 0,
         },
-      },
-      fill: {
+      }),
+      (this.fill = {
         opacity: 1,
         colors: ["#f64e60", "#1bc5bd", "#9C27B0"],
       },
     };
+
   }
 }

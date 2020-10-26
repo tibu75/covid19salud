@@ -18,6 +18,7 @@ import { Localidades } from "../../models/localidades";
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
+import date from "../../../../../dist/assets/plugins/formvalidation/src/js/validators/date";
 
 @Component({
   selector: "app-registro",
@@ -89,10 +90,13 @@ export class RegistroComponent implements OnInit {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
     this.initForm();
+    this.activarInicio();
+    this.cdr.markForCheck();
   }
 
   ngOnInit(): void {
     this.cargarLocalidades();
+    this.cdr.markForCheck();
   }
 
   cargarLocalidades() {
@@ -133,7 +137,7 @@ export class RegistroComponent implements OnInit {
         ],
         calle: [
           datos ? datos.calle : "",
-          [Validators.required, Validators.maxLength(40)],
+          [Validators.required, Validators.maxLength(50)],
         ],
         numero: [
           datos ? datos.numero : "-",
@@ -154,17 +158,18 @@ export class RegistroComponent implements OnInit {
         localidad: ["", [Validators.required]],
         provincia: [
           datos ? datos.provincia : "",
-          [Validators.required, Validators.maxLength(25)],
+          [Validators.required, Validators.maxLength(30)],
         ],
         pais: [
           datos ? datos.pais : "",
-          [Validators.required, Validators.maxLength(25)],
+          [Validators.required, Validators.maxLength(30)],
         ],
         img: [datos ? datos.foto : ""],
       }),
       llamada: this.fb.group({
         nroForm: [null],
         fecha: [""],
+        tipo_llamada: ["Entrada"],
         motivo: ["", [Validators.required]],
         sintomas: ["No"],
         fec_sintomas: [{ value: "", disabled: true }, [Validators.required]],
@@ -193,8 +198,8 @@ export class RegistroComponent implements OnInit {
         cri_hisopado: ["No"],
         com_hisopado: ["No"],
         mov_propia: ["Si"],
-        der_enfermeria: ["No"],
-        dis_contacto: ["", [Validators.required]],
+        der_enfermeria: [""],
+        dis_contacto: [""],
         sol_hisopado: ["No"],
         lug_hisopado: [{ value: "", disabled: true }, [Validators.required]],
         fec_hisopado: [{ value: "", disabled: true }, [Validators.required]],
@@ -208,7 +213,7 @@ export class RegistroComponent implements OnInit {
         ],
         cas_positivo: ["No"],
         dat_positivo: [{ value: "", disabled: true }, [Validators.required]],
-        otro_certificado: ["", [Validators.required]],
+        otro_certificado: [""],
         seg_domiciliario: ["No"],
         req_seguimiento: ["No"],
         laboratorio: [{ value: "Privado", disabled: true }],
@@ -224,9 +229,9 @@ export class RegistroComponent implements OnInit {
       trabajo: this.fb.group({
         lugar: ["", [Validators.maxLength(50)]],
         telefono: ["", [Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-        calle: ["", [Validators.maxLength(25)]],
+        calle: ["", [Validators.maxLength(50)]],
         numero: ["", [Validators.maxLength(4)]],
-        localidad: ["", [Validators.maxLength(25)]],
+        localidad: ["", [Validators.maxLength(30)]],
       }),
       usuario: [null],
       fecha: [""],
@@ -235,7 +240,6 @@ export class RegistroComponent implements OnInit {
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       console.log(value);
     });
-    //  //console.log(this.personaForm);
   }
 
   renaper() {
@@ -515,46 +519,56 @@ export class RegistroComponent implements OnInit {
       this.campoDatPositivo.reset();
     }
   }
-  activarSegMedico() {
-    if (this.laboratorio === "Publico") {
-      this.campoFecSalud.enable();
-      this.campoDetRequerimiento.reset("");
-    } else {
-      this.campoFecSalud.disable();
-      this.campoFecSalud.reset("");
-    }
-    if (this.laboratorio === "Privado") {
+
+  activarInicio() {
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Privado") {
+      this.campoLaboratorio.enable();
       this.campoWhatsapp.enable();
-      this.campoDetRequerimiento.reset("");
-    } else {
+      this.whatsapp = "No";
+      this.campoDetRequerimiento.enable();
+      this.campoFecSalud.disable();
+    }
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Publico") {
+      this.campoLaboratorio.enable();
       this.campoWhatsapp.disable();
-      this.campoWhatsapp.reset("No");
+      this.campoDetRequerimiento.enable();
+      this.campoFecSalud.enable();
+    }
+    if (this.req_seguimiento === "No") {
+      this.campoLaboratorio.disable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.disable();
+      this.campoFecSalud.disable();
     }
   }
+
   activarSector() {
-    if (this.req_seguimiento === "Si") {
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Privado") {
       this.campoLaboratorio.enable();
-    } else {
-      this.campoLaboratorio.disable();
-      this.campoLaboratorio.reset("Privado");
-    }
-    if (this.req_seguimiento === "Si") {
-      this.campoDetRequerimiento.enable();
-    } else {
-      this.campoDetRequerimiento.disable();
-      this.campoDetRequerimiento.reset("");
-    }
-    if (this.laboratorio === "Privado") {
       this.campoWhatsapp.enable();
-    } else {
-      this.campoWhatsapp.disable();
       this.campoWhatsapp.reset("No");
-    }
-    if (this.laboratorio === "Privado") {
+      this.whatsapp = "No";
       this.campoDetRequerimiento.enable();
-    } else {
-      this.campoDetRequerimiento.disable();
       this.campoDetRequerimiento.reset("");
+      this.campoFecSalud.reset("");
+      this.campoFecSalud.disable();
+    }
+    if (this.req_seguimiento === "Si" && this.laboratorio === "Publico") {
+      this.campoLaboratorio.enable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.enable();
+      this.campoDetRequerimiento.reset("");
+      this.campoFecSalud.enable();
+      this.campoFecSalud.reset("");
+    }
+    if (this.req_seguimiento === "No") {
+      this.campoLaboratorio.reset("Privado");
+      this.campoLaboratorio.disable();
+      this.campoWhatsapp.disable();
+      this.campoDetRequerimiento.reset("");
+      this.campoDetRequerimiento.disable();
+      this.campoFecSalud.reset("");
+      this.campoFecSalud.disable();
     }
   }
 
