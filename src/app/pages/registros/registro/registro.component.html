@@ -122,7 +122,7 @@
                                                 <div class="col-xl-2 col-documento padding-1">
                                                     <div class="">
                                                         <label>Documento</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="documento" name="documento" placeholder="" readonly="all" style="text-align: center;" />
+                                                        <input class="form-control form-control-solid" type="text" formControlName="documento" name="documento" placeholder="" readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
@@ -130,14 +130,23 @@
                                                 <div class="col-xl-1 col-sexo padding-1">
                                                     <div class="">
                                                         <label>Sexo</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="sexo" name="sexo" placeholder="" readonly="all" style="text-align: center;" />
+                                                        <input class="form-control form-control-solid" type="text" formControlName="sexo" name="sexo" placeholder="" readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-xl-1 col-edad padding-1">
+                                                    <div class="">
+                                                        <label>Edad</label>
+                                                        <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad" placeholder="" readonly="all" />
+                                                        <span class="form-text text-muted"></span>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-xl-3 col-nombre padding-1">
                                                     <div class="">
                                                         <label>Nombre/s</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="nombre" name="nombre" placeholder="" readonly="all" style="text-align: center;" />
+                                                        <input class="form-control form-control-solid" type="text" formControlName="nombre" name="nombre" placeholder="" readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
@@ -145,30 +154,15 @@
                                                 <div class="col-xl-3 col-apellido padding-1">
                                                     <div class="">
                                                         <label>Apellido/s</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="apellido" name="apellido" placeholder="" readonly="all" style="text-align: center;" />
-                                                        <span class="form-text text-muted"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-3 col-sexo padding-1">
-                                                    <div class="">
-                                                        <label>Fec. Nacimiento</label>
-                                                        <output class="form-control form-control-solid" type="text" style="text-align: center;">{{this.personaForm.get("persona.fechaNacimiento").value | date: "dd/MM/yyyy"}}</output>
-                                                        <span class="form-text text-muted"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-1 col-edad padding-1" style="margin-top: 10px;">
-                                                    <div class="">
-                                                        <label>Edad</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad" placeholder="" readonly="all" style="text-align: center;" />
+                                                        <input class="form-control form-control-solid" type="text" formControlName="apellido" name="apellido" placeholder="" readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
 
-
-                                                <div class="col-xl-2 col-telefono padding-1" style="margin-top: 10px;">
+                                                <div class="col-xl-2 col-telefono padding-1">
                                                     <div class="">
                                                         <label>Teléfono</label>
-                                                        <input class="form-control form-control-solid is-danger" type="text" formControlName="telefono" name="telefono" placeholder="10 dígitos" autocomplete="nope" style="text-align: center;" />
+                                                        <input class="form-control form-control-solid is-danger" type="text" formControlName="telefono" name="telefono" placeholder="10 dígitos" autocomplete="nope" />
 
                                                         <div *ngIf="campoTelefono.errors && campoTelefono.touched" class="text-danger">
                                                             <small *ngIf="campoTelefono.hasError('required')">

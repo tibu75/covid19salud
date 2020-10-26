@@ -5,9 +5,16 @@ import { IndicadoresComponent } from "./indicadores.component";
 import { ColumnsComponent } from "./charts/columns/columns.component";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { PieComponent } from "./charts/pie/pie.component";
+import { PiechartComponent } from "./charts/piechart/piechart.component";
+import { ColchartComponent } from "./charts/colchart/colchart.component";
 
 @NgModule({
-  declarations: [ColumnsComponent, PieComponent],
+  declarations: [
+    ColumnsComponent,
+    PieComponent,
+    PiechartComponent,
+    ColchartComponent,
+  ],
   imports: [
     CommonModule,
     NgApexchartsModule,
@@ -18,6 +25,11 @@ import { PieComponent } from "./charts/pie/pie.component";
       },
     ]),
   ],
-  exports: [ColumnsComponent, PieComponent],
+  exports: [
+    ColumnsComponent,
+    PieComponent,
+    PiechartComponent,
+    ColchartComponent,
+  ],
 })
 export class IndicadoresModule {}

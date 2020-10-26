@@ -18,7 +18,6 @@ import { Localidades } from "../../models/localidades";
 import * as moment from "moment";
 import { debounce, debounceTime } from "rxjs/operators";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
-import date from "../../../../../dist/assets/plugins/formvalidation/src/js/validators/date";
 
 @Component({
   selector: "app-registro",
@@ -97,6 +96,14 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.cargarLocalidades();
     this.cdr.markForCheck();
+    this.toast.warning(
+      "Usted esta por modificar una Base de Datos de Provincia. Tenga precaución con los datos consultados.",
+      "AVISO IMPORTANTE",
+      {
+        timeOut: 7000,
+        positionClass: "toast-top-center",
+      }
+    );
   }
 
   cargarLocalidades() {
@@ -240,6 +247,7 @@ export class RegistroComponent implements OnInit {
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
       console.log(value);
     });
+    //  //console.log(this.personaForm);
   }
 
   renaper() {
