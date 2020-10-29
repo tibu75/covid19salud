@@ -1,42 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700");
 // Global vendors
 @import "~bootstrap/dist/css/bootstrap.css";
 // => Material
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-
 @import "~highlight.js/styles/googlecode.css";
 @import "~perfect-scrollbar/css/perfect-scrollbar.css";
-
 // Global fonts
 @import "~socicon/css/socicon.css";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "./assets/plugins/flaticon/flaticon.css";
 @import "./assets/plugins/flaticon2/flaticon.css";
 @import "./assets/plugins/keenthemes-icons/font/ki.css";
-
 // Metronic styles (replace these path when using RTL css below)
 @import "./assets/sass/style.angular.scss";
-
 // For RTL, check this documentation https://keenthemes.com/metronic/?page=docs&section=angular-rtl
 // @import "./assets/sass/style.angular.rtl.css";
-
 // Default Layout themes
 @import "./assets/sass/themes/layout/header/base/light.scss";
 @import "./assets/sass/themes/layout/header/menu/light.scss";
 @import "./assets/sass/themes/layout/brand/dark.scss";
 @import "./assets/sass/themes/layout/aside/dark.scss";
-
 // Header themes
 // .header-base-light {
 //     @import "./assets/sass/themes/layout/header/base/light.scss";
 // }
-
 // .header-base-dark {
 //     @import "./assets/sass/themes/layout/header/base/dark.scss";
 // }
-
 // Header Menu themes
 // .header-menu-light {
 //     @import "./assets/sass/themes/layout/header/menu/light.scss";
@@ -44,44 +37,41 @@
 // .header-menu-dark {
 //     @import "./assets/sass/themes/layout/header/menu/dark.scss";
 // }
-
 // Brand themes
 .brand-dark {
-  @import "./assets/sass/themes/layout/brand/dark.scss";
+    @import "./assets/sass/themes/layout/brand/dark.scss";
 }
 
 .brand-light {
-  @import "./assets/sass/themes/layout/brand/light.scss";
+    @import "./assets/sass/themes/layout/brand/light.scss";
 }
 
 // Aside themes
 // .aside-dark {
 //   @import "./assets/sass/themes/layout/aside/dark.scss";
 // }
-
 // .aside-light {
 //   @import "./assets/sass/themes/layout/aside/light.scss";
 // }
-
 // hide bootstrap dropdown arrow globally
 .dropdown-toggle::after {
-  display: none !important;
+    display: none !important;
 }
 
 .cursor-pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 1920px){
+@media screen and (max-width: 1920px) {
     body {
-        font-size : 18px;
+        font-size: 18px;
     }
     h4 {
-        font-size : 18px;
+        font-size: 18px;
     }
     .btn.btn-info {
         height: fit-content;
-        font-size : 18px;
+        font-size: 18px;
     }
     .img-50 {
         object-position: top;
@@ -95,13 +85,15 @@
         height: 400px;
         align-content: space-between;
     }
- }
- .img-50 {
+}
+
+.img-50 {
     object-position: top;
     object-fit: cover;
     width: 120px;
     height: 145px;
 }
+
 .img-100 {
     object-position: top;
     object-fit: cover;
@@ -110,9 +102,10 @@
 }
 
 @media screen and (max-width: 1366px) {
-  body {
-      font-size: 12px;
-  }/* 
+    body {
+        font-size: 12px;
+    }
+    /* 
   h1 {
       font-size: 12px;
   }
@@ -122,103 +115,100 @@
   h4 {
       font-size: 14px;
   } */
-  .page-wrapper {
-      margin-left: 200px;
-  }
-  .left-sidebar {
-      position: absolute;
-      width: 200px;
-  }
-  .navbar-header {
-      width: 200px;
-  }
-  .sidebar-nav ul li a {
-      font-size: 12px;
-  }
-  .sidebar-nav a.active {
-      font-size: 12px;
-  }
-  .padding-1 {
-      padding-right: 5px;
-      padding-left: 5px;
-  }
-  .btn.btn-info {
-      height: fit-content;
-      font-size: 12px;
-  }
-  .btn {
-      display: inline-block;
-      font-weight: 400;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      border: 1px solid transparent;
-      padding: .5rem .75rem;
-      font-size: 12px;
-      line-height: 1.25;
-      border-radius: .25rem;
-      transition: all .15s ease-in-out;
-  }
-  .form-control {
-      font-size: 12px;
-  }
-  .img-50 {
-      object-position: top;
-      object-fit: cover;
-      width: 120px;
-      height: 145px;
-      margin-top: 10px;
-  }
-  .img-100 {
-      object-position: top;
-      object-fit: cover;
-      height: 250px;
-      align-content: space-between;
-  }
-
-  .col-documento{
-      min-width: 90px;
-  }
-  .col-sexo{
-    min-width: 45px;
-}
-.col-edad{
-    min-width: 45px;
-}
-.col-nombre{
-    min-width: 200px;
-}
-.col-apellido{
-    min-width: 200px;
-}
-.col-telefono{
-    min-width: 90px;
-}
-
-.col-calle{
-    min-width: 280px;
-}
-.col-numero{
-  max-width: 85px;
-}
-.col-departamento{
-    min-width: 45px;
-  }
-.col-localidad{
-  min-width: 140px;
-}
-.col-cpostal{
-  max-width: 85px;
-}
-.col-provincia{
-  min-width: 120px;
-}
-.col-pais{
-  min-width: 80px;
-}
-
+    .page-wrapper {
+        margin-left: 200px;
+    }
+    .left-sidebar {
+        position: absolute;
+        width: 200px;
+    }
+    .navbar-header {
+        width: 200px;
+    }
+    .sidebar-nav ul li a {
+        font-size: 12px;
+    }
+    .sidebar-nav a.active {
+        font-size: 12px;
+    }
+    .padding-1 {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .btn.btn-info {
+        height: fit-content;
+        font-size: 12px;
+    }
+    .btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .5rem .75rem;
+        font-size: 12px;
+        line-height: 1.25;
+        border-radius: .25rem;
+        transition: all .15s ease-in-out;
+    }
+    .form-control {
+        font-size: 12px;
+    }
+    .img-50 {
+        object-position: top;
+        object-fit: cover;
+        width: 120px;
+        height: 145px;
+        margin-top: 10px;
+    }
+    .img-100 {
+        object-position: top;
+        object-fit: cover;
+        height: 250px;
+        align-content: space-between;
+    }
+    .col-documento {
+        min-width: 90px;
+    }
+    .col-sexo {
+        min-width: 45px;
+    }
+    .col-edad {
+        min-width: 45px;
+    }
+    .col-nombre {
+        min-width: 200px;
+    }
+    .col-apellido {
+        min-width: 200px;
+    }
+    .col-telefono {
+        min-width: 90px;
+    }
+    .col-calle {
+        min-width: 280px;
+    }
+    .col-numero {
+        max-width: 85px;
+    }
+    .col-departamento {
+        min-width: 45px;
+    }
+    .col-localidad {
+        min-width: 140px;
+    }
+    .col-cpostal {
+        max-width: 85px;
+    }
+    .col-provincia {
+        min-width: 120px;
+    }
+    .col-pais {
+        min-width: 80px;
+    }
 }

@@ -96,6 +96,14 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.cargarLocalidades();
     this.cdr.markForCheck();
+    this.toast.warning(
+      "Usted esta por modificar una Base de Datos de Provincia. Tenga precaución con los datos consultados.",
+      "AVISO IMPORTANTE",
+      {
+        timeOut: 7000,
+        positionClass: "toast-top-center",
+      }
+    );
   }
 
   cargarLocalidades() {

@@ -1,11 +1,12 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../../../../_metronic/core';
+import { Location } from "@angular/common";
+import { ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { LayoutService } from "../../../../_metronic/core";
 
 @Component({
-  selector: 'app-aside',
-  templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.scss'],
+  selector: "app-aside",
+  templateUrl: "./aside.component.html",
+  styleUrls: ["./aside.component.scss"],
 })
 export class AsideComponent implements OnInit {
   disableAsideSelfDisplay: boolean;
@@ -19,29 +20,35 @@ export class AsideComponent implements OnInit {
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
 
-  constructor(private layout: LayoutService, private loc: Location) { }
+  constructor(
+    private layout: LayoutService,
+    private loc: Location,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.disableAsideSelfDisplay =
-      this.layout.getProp('aside.self.display') === false;
-    this.brandSkin = this.layout.getProp('brand.self.theme');
+      this.layout.getProp("aside.self.display") === false;
+    this.brandSkin = this.layout.getProp("brand.self.theme");
     this.headerLogo = this.getLogo();
-    this.ulCSSClasses = this.layout.getProp('aside_menu_nav');
-    this.asideMenuCSSClasses = this.layout.getStringCSSClasses('aside_menu');
-    this.asideMenuHTMLAttributes = this.layout.getHTMLAttributes('aside_menu');
-    this.brandClasses = this.layout.getProp('brand');
+    this.ulCSSClasses = this.layout.getProp("aside_menu_nav");
+    this.asideMenuCSSClasses = this.layout.getStringCSSClasses("aside_menu");
+    this.asideMenuHTMLAttributes = this.layout.getHTMLAttributes("aside_menu");
+    this.brandClasses = this.layout.getProp("brand");
     this.asideSelfMinimizeToggle = this.layout.getProp(
-      'aside.self.minimize.toggle'
+      "aside.self.minimize.toggle"
     );
-    this.asideMenuScroll = this.layout.getProp('aside.menu.scroll') ? 1 : 0;
+    this.asideMenuScroll = this.layout.getProp("aside.menu.scroll") ? 1 : 0;
     this.location = this.loc;
+    this.cdr.detectChanges();
+    this.cdr.checkNoChanges();
   }
 
   private getLogo() {
-    if (this.brandSkin === 'light') {
-      return './assets/media/logos/logo-dark.png';
+    if (this.brandSkin === "light") {
+      return "./assets/media/logos/logo-dark.png";
     } else {
-      return './assets/media/logos/logo-light.png';
+      return "./assets/media/logos/logo-light.png";
     }
   }
 }
