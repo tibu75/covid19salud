@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { debounceTime } from "rxjs/operators";
+import { debounceTime, groupBy, map } from 'rxjs/operators';
 import { ExporterService } from "src/app/services/settings.service.index";
 import { Reg0800Service } from "../../services/reg0800/reg0800.service";
 import { LocalidadesService } from "../../services/localidades/localidades.service";
@@ -8,6 +8,9 @@ import { Localidades } from "../models/localidades";
 import { FormsLlamada } from "../models/form0800covid2";
 import { ToastrService } from "ngx-toastr";
 import * as moment from "moment";
+import { FiltroService } from '../../services/filtro/filtro.service';
+
+
 
 @Component({
   selector: "app-exportar",
@@ -25,17 +28,21 @@ export class ExportarComponent implements OnInit {
   public paginaD: number;
   public totalForm: number;
   data: any = {};
+  exportar : any = {};
+  resFiltro: any  = [];
   public cargando: boolean;
 
   constructor(
     private excelExports: ExporterService,
     private reg0800: Reg0800Service,
+    private filtro: FiltroService,
     private localidadesService: LocalidadesService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private toast: ToastrService
   ) {
     this.initForm();
+    
   }
 
   ngOnInit(): void {
@@ -76,15 +83,28 @@ export class ExportarComponent implements OnInit {
     this.cargarForms();
   }
 
-  filtrar() {
+  filtrar(){
     let consulta = this.queryForm.value;
-    (this.cargando = true),
-      this.reg0800.queryXls(consulta).subscribe((data: any) => {
-        // console.log(data.data);
-        this.form = data.data;
-        this.cdr.markForCheck();
-      });
+    let fd = this.queryForm.value.fechaDesde;
+    let fh = this.queryForm.value.fechaHasta;
+    this.resFiltro = this.filtro.filtrar(consulta, fd, fh);
+    console.log ("resultado", this.resFiltro);
+    
+    
+    this.reg0800.queryXls(consulta).subscribe((data:any) => {
+      this.form = data;
+      this.cdr.markForCheck(); });
+          //console.log ("export",this.exportar);
+    this.exportar = this.resFiltro;
   }
+  
+  
+
+
+
+
+
+
   reset() {
     this.queryForm.reset();
     this.cdr.markForCheck();
@@ -92,7 +112,7 @@ export class ExportarComponent implements OnInit {
   }
 
   exportarXls() {
-    let xls = this.form;
+    let xls = this.exportar;
     this.excelExports.exportAsExcelFile(xls, "Informe");
   }
 

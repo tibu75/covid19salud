@@ -12,9 +12,11 @@ import {
   Form0800Service,
   ExporterService,
   Reg0800Service,
+  FiltroService,
 } from "./settings.service.index";
 //Web Services
 import { RenaperService, RRHHService } from "./settings.service.index";
+
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,7 @@ import { RenaperService, RRHHService } from "./settings.service.index";
     Form0800Service,
     Reg0800Service,
     ExporterService,
+    FiltroService,
   ],
 })
 export class ServiceModule {}

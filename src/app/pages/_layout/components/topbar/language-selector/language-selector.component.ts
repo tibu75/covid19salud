@@ -18,7 +18,7 @@ interface LanguageFlag {
 export class LanguageSelectorComponent implements OnInit {
   language: LanguageFlag;
   languages: LanguageFlag[] = [
-    {
+  /*   {
       lang: 'en',
       name: 'English',
       flag: './assets/media/svg/flags/226-united-states.svg',
@@ -27,13 +27,13 @@ export class LanguageSelectorComponent implements OnInit {
       lang: 'ch',
       name: 'Mandarin',
       flag: './assets/media/svg/flags/015-china.svg',
-    },
+    }, */
     {
       lang: 'es',
       name: 'Spanish',
       flag: './assets/media/svg/flags/128-spain.svg',
     },
-    {
+   /*  {
       lang: 'jp',
       name: 'Japanese',
       flag: './assets/media/svg/flags/063-japan.svg',
@@ -47,7 +47,7 @@ export class LanguageSelectorComponent implements OnInit {
       lang: 'fr',
       name: 'French',
       flag: './assets/media/svg/flags/195-france.svg',
-    },
+    }, */
   ];
   constructor(
     private translationService: TranslationService,

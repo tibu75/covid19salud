@@ -1,3 +1,4 @@
+export { FiltroService } from './filtro/filtro.service';
 export { Reg0800Service } from "./reg0800/reg0800.service";
 export { ExporterService } from "./exporter/exporter.service";
 export { Form0800Service } from "./form0800/form0800.service";

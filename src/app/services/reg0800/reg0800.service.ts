@@ -3,6 +3,9 @@ import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Reg0800 } from "../../interfaces/reg0800Interfaces";
 import { Observable } from "rxjs";
+import { FormsLlamada } from 'src/app/pages/models/form0800covid2';
+import { map } from 'rxjs/operators';
+
 
 const API_USERS_URL = `${environment.apiUrl}/llamada`;
 
@@ -31,8 +34,8 @@ export class Reg0800Service {
     return this.http.put(url, formData);
   }
 
-  queryXls(query: any) {
+  queryXls(query: any): Observable <FormsLlamada[]> {
     let url = `${API_USERS_URL}/query`;
-    return this.http.post(url, query);
+    return this.http.post<FormsLlamada[]>(url, query).pipe(map((resp:any) =>  resp.data))   ;
   }
 }
