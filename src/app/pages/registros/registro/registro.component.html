@@ -40,14 +40,18 @@
                                     <div class="col-4" style="min-width: 300px">
                                         <h3 class="text">Buscar datos de Persona</h3>
                                         <div class="" style="margin-top: 10px">
-                                            <label for="recipient-name" class="form-control-label" style="margin-top: 20px">Ingrese el Numero de Documento:
+                                            <label for="recipient-name" class="form-control-label"
+                                                style="margin-top: 20px">Ingrese el Numero de Documento:
                                                 <span class="text-danger">*
                                                 </span>
                                             </label>
-                                            <input type="text" formControlName="documento" class="form-control form-control-solid" id="documento" placeholder="Numero de Documento" />
+                                            <input type="text" formControlName="documento"
+                                                class="form-control form-control-solid" id="documento"
+                                                placeholder="Numero de Documento" />
                                         </div>
 
-                                        <div *ngIf="campoDocumento.errors && campoDocumento.touched" class="text-danger">
+                                        <div *ngIf="campoDocumento.errors && campoDocumento.touched"
+                                            class="text-danger">
                                             <div *ngIf="campoDocumento.hasError('required')">
                                                 El documento es requerido
                                             </div>
@@ -74,7 +78,9 @@
                                     </div>
                                     <div class="col-4 d-flex justify-content-center" style="min-width: 300px">
                                         <div class="row">
-                                            <button type="button" (click)="renaper()" class="btn btn-light-primary font-weight-bolder mr-2 btn-lg" style="height: 65px; width: 200px">
+                                            <button type="button" (click)="renaper()"
+                                                class="btn btn-light-primary font-weight-bolder mr-2 btn-lg"
+                                                style="height: 65px; width: 200px">
                                                 Buscar Persona
                                             </button>
                                         </div>
@@ -110,7 +116,8 @@
                                     <div class="row">
                                         <div class="col-2 padding-1">
                                             <div class="rowfoto" style="margin-top: 18px">
-                                                <img id="foto" *ngIf="personaForm.get('persona.img').value" [src]="personaForm.get('persona.img').value" class="img-50" />
+                                                <img id="foto" *ngIf="personaForm.get('persona.img').value"
+                                                    [src]="personaForm.get('persona.img').value" class="img-50" />
                                             </div>
                                         </div>
 
@@ -122,7 +129,9 @@
                                                 <div class="col-xl-2 col-documento padding-1">
                                                     <div class="">
                                                         <label>Documento</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="documento" name="documento" placeholder="" readonly="all" />
+                                                        <input class="form-control form-control-solid" type="text"
+                                                            formControlName="documento" name="documento" placeholder=""
+                                                            readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
@@ -130,7 +139,9 @@
                                                 <div class="col-xl-1 col-sexo padding-1">
                                                     <div class="">
                                                         <label>Sexo</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="sexo" name="sexo" placeholder="" readonly="all" />
+                                                        <input class="form-control form-control-solid" type="text"
+                                                            formControlName="sexo" name="sexo" placeholder=""
+                                                            readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
@@ -138,7 +149,9 @@
                                                 <div class="col-xl-1 col-edad padding-1">
                                                     <div class="">
                                                         <label>Edad</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad" placeholder="" readonly="all" />
+                                                        <input class="form-control form-control-solid" type="text"
+                                                            formControlName="edad" name="edad" placeholder=""
+                                                            readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
@@ -146,7 +159,9 @@
                                                 <div class="col-xl-3 col-nombre padding-1">
                                                     <div class="">
                                                         <label>Nombre/s</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="nombre" name="nombre" placeholder="" readonly="all" />
+                                                        <input class="form-control form-control-solid" type="text"
+                                                            formControlName="nombre" name="nombre" placeholder=""
+                                                            readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
@@ -154,7 +169,9 @@
                                                 <div class="col-xl-3 col-apellido padding-1">
                                                     <div class="">
                                                         <label>Apellido/s</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="apellido" name="apellido" placeholder="" readonly="all" />
+                                                        <input class="form-control form-control-solid" type="text"
+                                                            formControlName="apellido" name="apellido" placeholder=""
+                                                            readonly="all" />
                                                         <span class="form-text text-muted"></span>
                                                     </div>
                                                 </div>
@@ -162,9 +179,12 @@
                                                 <div class="col-xl-2 col-telefono padding-1">
                                                     <div class="">
                                                         <label>Teléfono</label>
-                                                        <input class="form-control form-control-solid is-danger" type="text" formControlName="telefono" name="telefono" placeholder="10 dígitos" autocomplete="nope" />
+                                                        <input class="form-control form-control-solid is-danger"
+                                                            type="text" formControlName="telefono" name="telefono"
+                                                            placeholder="10 dígitos" autocomplete="nope" />
 
-                                                        <div *ngIf="campoTelefono.errors && campoTelefono.touched" class="text-danger">
+                                                        <div *ngIf="campoTelefono.errors && campoTelefono.touched"
+                                                            class="text-danger">
                                                             <small *ngIf="campoTelefono.hasError('required')">
                                                                 El Telefono es requerido
                                                             </small>
@@ -186,8 +206,11 @@
                                             <div class="col-xl-4 col-calle padding-1">
                                                 <div class="">
                                                     <label>Calle</label>
-                                                    <input class="form-control form-control-solid" type="text" formControlName="calle" name="calle" placeholder="" autocomplete="nope" />
-                                                    <div *ngIf="campoCalle.errors && campoCalle.touched" class="text-danger">
+                                                    <input class="form-control form-control-solid" type="text"
+                                                        formControlName="calle" name="calle" placeholder=""
+                                                        autocomplete="nope" />
+                                                    <div *ngIf="campoCalle.errors && campoCalle.touched"
+                                                        class="text-danger">
                                                         <small *ngIf="campoCalle.hasError('required')">
                                                             La calle es requerida
                                                         </small>
@@ -202,8 +225,10 @@
                                             <div class="col-xl-1 col-numero padding-1">
                                                 <div class="">
                                                     <label>Nro</label>
-                                                    <input class="form-control form-control-solid" type="text" formControlName="numero" name="numero" placeholder="" />
-                                                    <div *ngIf="campoNumero.errors && campoNumero.touched" class="text-danger">
+                                                    <input class="form-control form-control-solid" type="text"
+                                                        formControlName="numero" name="numero" placeholder="" />
+                                                    <div *ngIf="campoNumero.errors && campoNumero.touched"
+                                                        class="text-danger">
                                                         <small *ngIf="campoNumero.hasError('required')">
                                                             El Número es requerido
                                                         </small>
@@ -217,8 +242,10 @@
                                             <div class="col-xl-1 col-piso padding-1">
                                                 <div class="">
                                                     <label>Piso</label>
-                                                    <input class="form-control form-control-solid" type="text" formControlName="piso" name="piso" placeholder="" />
-                                                    <div *ngIf="campoPiso.errors && campoPiso.touched" class="text-danger">
+                                                    <input class="form-control form-control-solid" type="text"
+                                                        formControlName="piso" name="piso" placeholder="" />
+                                                    <div *ngIf="campoPiso.errors && campoPiso.touched"
+                                                        class="text-danger">
                                                         <small *ngIf="campoPiso.hasError('required')">
                                                             El Piso es requerido
                                                         </small>
@@ -233,8 +260,11 @@
                                             <div class="col-xl-1 col-departamento padding-1">
                                                 <div class="">
                                                     <label>Dpto</label>
-                                                    <input class="form-control form-control-solid" type="text" formControlName="departamento" name="departamento" placeholder="" />
-                                                    <div *ngIf="campoDepto.errors && campoDepto.touched" class="text-danger">
+                                                    <input class="form-control form-control-solid" type="text"
+                                                        formControlName="departamento" name="departamento"
+                                                        placeholder="" />
+                                                    <div *ngIf="campoDepto.errors && campoDepto.touched"
+                                                        class="text-danger">
                                                         <small *ngIf="campoDepto.hasError('required')">
                                                             El Depto es requerido
                                                         </small>
@@ -250,15 +280,14 @@
                                                 <div class="">
                                                     <label>Localidad</label>
                                                     <select class="form-control is-danger" formControlName="localidad">
-                                                        <option [value]="">
-
-                                                        </option>
+                                                        <option value="">Seleccione una localidad</option>
                                                         <option *ngFor="let localidad of localidades"
                                                             [value]="localidad.nombre">
                                                             {{ localidad.nombre }}
                                                         </option>
                                                     </select>
-                                                    <div *ngIf="campoLocalidad.errors && campoLocalidad.touched" class="text-danger">
+                                                    <div *ngIf="campoLocalidad.errors && campoLocalidad.touched"
+                                                        class="text-danger">
                                                         <small *ngIf="campoLocalidad.hasError('required')">
                                                             La Localidad es Requerida
                                                         </small>
@@ -270,7 +299,8 @@
                                             <div class="col-2 col-cpostal padding-1">
                                                 <div class="">
                                                     <label>CP</label>
-                                                    <input class="form-control form-control-solid" type="text" formControlName="cpostal" name="cpostal" placeholder="" />
+                                                    <input class="form-control form-control-solid" type="text"
+                                                        formControlName="cpostal" name="cpostal" placeholder="" />
                                                     <span class="form-text text-muted"></span>
                                                 </div>
                                             </div>
@@ -278,7 +308,9 @@
                                             <div class="col-xl-2 col-provincia padding-1">
                                                 <div class="">
                                                     <label>Provincia</label>
-                                                    <input class="form-control form-control-solid" type="text" formControlName="provincia" name="provincia" placeholder="" autocomplete="nope" />
+                                                    <input class="form-control form-control-solid" type="text"
+                                                        formControlName="provincia" name="provincia" placeholder=""
+                                                        autocomplete="nope" />
                                                     <span class="form-text text-muted"></span>
                                                 </div>
                                             </div>
@@ -286,7 +318,9 @@
                                             <div class="col-xl-2 col-pais padding-1">
                                                 <div class="">
                                                     <label>Pais</label>
-                                                    <input class="form-control form-control-solid" type="text" formControlName="pais" name="pais" placeholder="" autocomplete="nope" />
+                                                    <input class="form-control form-control-solid" type="text"
+                                                        formControlName="pais" name="pais" placeholder=""
+                                                        autocomplete="nope" />
                                                     <span class="form-text text-muted"></span>
                                                 </div>
                                             </div>
@@ -308,28 +342,32 @@
                                         <div class="col-xl-3">
                                             <div class="">
                                                 <label>Lugar de Trabajo Actual</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="lugar" name="lugar" placeholder="" />
+                                                <input class="form-control form-control-solid" type="text"
+                                                    formControlName="lugar" name="lugar" placeholder="" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
                                         <div class="col-xl-2 col-telefono padding-1">
                                             <div class="">
                                                 <label>Teléfono Laboral</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="telefono" name="telefono" placeholder="" />
+                                                <input class="form-control form-control-solid" type="text"
+                                                    formControlName="telefono" name="telefono" placeholder="" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-calle padding-1">
                                             <div class="">
                                                 <label>Calle</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="calle" name="calle" placeholder="" />
+                                                <input class="form-control form-control-solid" type="text"
+                                                    formControlName="calle" name="calle" placeholder="" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
                                         <div class="col-xl-2 col-numero padding-1">
                                             <div class="">
                                                 <label>Número</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="numero" name="numero" placeholder="" />
+                                                <input class="form-control form-control-solid" type="text"
+                                                    formControlName="numero" name="numero" placeholder="" />
                                                 <span class="form-text text-muted"></span>
                                             </div>
                                         </div>
@@ -338,7 +376,7 @@
                                             <div class="">
                                                 <label>Localidad</label>
                                                 <select class="form-control" formControlName="localidad">
-                                                    <option [value]="">Seleccione una localidad</option>
+                                                    <option value="">Seleccione una localidad</option>
                                                     <option *ngFor="let localidad of localidades"
                                                         [value]="localidad.nombre">
                                                         {{ localidad.nombre }}
@@ -359,8 +397,10 @@
                                         <h5 class="text-dark font-weight-bold">Motivo Consulta</h5>
                                         <div class="row">
                                             <div class="col-12">
-                                                <textarea class="form-control form-control-solid" rows="3" formControlName="motivo"></textarea>
-                                                <div *ngIf="campoMotivo.errors && campoMotivo.touched" class="text-danger">
+                                                <textarea class="form-control form-control-solid" rows="3"
+                                                    formControlName="motivo"></textarea>
+                                                <div *ngIf="campoMotivo.errors && campoMotivo.touched"
+                                                    class="text-danger">
                                                     <div *ngIf="campoMotivo.hasError('required')">
                                                         El Motivo es requerido
                                                     </div>
@@ -392,7 +432,9 @@
 
                                         <div class="col-3">
                                             <label for="start1">Fecha de inicio de Síntomas</label>
-                                            <input class="form-control form-control-solid" type="date" id="start1" formControlName="fec_sintomas" name="fec_sintomas" min=" {{ fechamin }}" max="{{ fechahoy }}" />
+                                            <input class="form-control form-control-solid" type="date" id="start1"
+                                                formControlName="fec_sintomas" name="fec_sintomas" min=" {{ fechamin }}"
+                                                max="{{ fechahoy }}" />
                                             <div *ngIf="campoFecha.errors && campoFecha.touched" class="text-danger">
                                                 <div *ngIf="campoFecha.hasError('required')">
                                                     La Fecha es requerida
@@ -401,8 +443,10 @@
                                         </div>
                                         <div class="col-9">
                                             <label>Que síntomas tuvo o tiene</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="sin_actuales" name="sin_actuales" placeholder="" />
-                                            <div *ngIf="campoSintomas.errors && campoSintomas.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="sin_actuales" name="sin_actuales" placeholder="" />
+                                            <div *ngIf="campoSintomas.errors && campoSintomas.touched"
+                                                class="text-danger">
                                                 <div *ngIf="campoSintomas.hasError('required')">
                                                     Los Síntomas son requeridos
                                                 </div>
@@ -435,8 +479,10 @@
                                     <div class="row" *ngIf="con_caso_sos === 'Si'">
                                         <div class="col-12">
                                             <label>Observaciones</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="obs_contacto" name="obs_contacto" placeholder="" />
-                                            <div *ngIf="campoObsContacto.errors && campoObsContacto.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="obs_contacto" name="obs_contacto" placeholder="" />
+                                            <div *ngIf="campoObsContacto.errors && campoObsContacto.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoObsContacto.hasError('required')">
                                                     Las Observaciones son requeridas
                                                 </small>
@@ -449,8 +495,10 @@
                                             <h5 class="text-dark font-weight-bold">
                                                 3 - Obra Social
                                             </h5>
-                                            <input class="form-control form-control-solid" type="text" formControlName="obra_social" name="obra_social" placeholder="" />
-                                            <div *ngIf="campoObraSocial.errors && campoObraSocial.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="obra_social" name="obra_social" placeholder="" />
+                                            <div *ngIf="campoObraSocial.errors && campoObraSocial.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoObraSocial.hasError('required')">
                                                     La Obra Social es requerida
                                                 </small>
@@ -483,8 +531,10 @@
                                     <div class="col-12" *ngIf="enf_actual === 'Si'">
                                         <div class="row">
                                             <label>Descripción de la Enfermedad</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="obs_enfermedad" name="obs_enfermedad" placeholder="" />
-                                            <div *ngIf="campoObsEnfermedad.errors && campoObsEnfermedad.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="obs_enfermedad" name="obs_enfermedad" placeholder="" />
+                                            <div *ngIf="campoObsEnfermedad.errors && campoObsEnfermedad.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoObsEnfermedad.hasError('required')">
                                                     La Descripción de Enfermedad es requerida
                                                 </small>
@@ -534,8 +584,11 @@
                                     <div class="row" *ngIf="convivientes === 'Si'">
                                         <div class="col-3">
                                             <label>Cantidad de Convivientes</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="cant_convivientes" name="cant_convivientes" placeholder="" />
-                                            <div *ngIf="campoCantConvivientes.errors && campoCantConvivientes.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="cant_convivientes" name="cant_convivientes"
+                                                placeholder="" />
+                                            <div *ngIf="campoCantConvivientes.errors && campoCantConvivientes.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoCantConvivientes.hasError('required')">
                                                     La cantidad es requerida
                                                 </small>
@@ -543,8 +596,11 @@
                                         </div>
                                         <div class="col-9">
                                             <label>Verifique Edades y si tienen Factores de Riesgo</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="obs_convivientes" name="obs_convivientes" placeholder="" />
-                                            <div *ngIf="campoObsCantConvivientes.errors && campoObsCantConvivientes.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="obs_convivientes" name="obs_convivientes"
+                                                placeholder="" />
+                                            <div *ngIf="campoObsCantConvivientes.errors && campoObsCantConvivientes.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoObsCantConvivientes.hasError('required')">
                                                     Debe establecer Edades y Factores de Riesgo
                                                 </small>
@@ -557,8 +613,10 @@
                                             <h5 class="text-dark font-weight-bold">
                                                 6 - Situación Social
                                             </h5>
-                                            <input class="form-control form-control-solid" type="text" formControlName="sit_social" name="sit_social" placeholder="" />
-                                            <div *ngIf="campoSituacion.errors && campoSituacion.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="sit_social" name="sit_social" placeholder="" />
+                                            <div *ngIf="campoSituacion.errors && campoSituacion.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoSituacion.hasError('required')">
                                                     La situacion Social es requerida
                                                 </small>
@@ -591,8 +649,11 @@
                                     <div class="row" *ngIf="intervencion === 'Si'">
                                         <div class="col-12">
                                             <label>Registro de Indicaciones</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="obs_intervencion" name="obs_intervencion" placeholder="" />
-                                            <div *ngIf="campoObsIntervencion.errors && campoObsIntervencion.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="obs_intervencion" name="obs_intervencion"
+                                                placeholder="" />
+                                            <div *ngIf="campoObsIntervencion.errors && campoObsIntervencion.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoObsIntervencion.hasError('required')">
                                                     Las indicaciones son requeridas
                                                 </small>
@@ -662,14 +723,16 @@
                                                 No puede
                                             </label>
                                             <div class="row" *ngIf="mov_propia === 'No'">
-                                                <label style="margin-left: 20px" class="form-control form-control-solid">Derivar a Enfermería para
+                                                <label style="margin-left: 20px"
+                                                    class="form-control form-control-solid">Derivar a Enfermería para
                                                     gestión de Traslado</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label>Centro de Salud que lo contactará o Dispositivo
                                                 indicado según domicilio</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="dis_contacto" name="dis_contacto" placeholder="" />
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="dis_contacto" name="dis_contacto" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="separator separator-dashed my-10"></div>
@@ -697,8 +760,10 @@
                                     <div class="row" *ngIf="sol_hisopado === 'Si'">
                                         <div class="col-9">
                                             <label>Lugar de Hisopado</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="lug_hisopado" name="lug_hisopado" placeholder="" />
-                                            <div *ngIf="campoLugHisopa.errors && campoLugHisopa.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="lug_hisopado" name="lug_hisopado" placeholder="" />
+                                            <div *ngIf="campoLugHisopa.errors && campoLugHisopa.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoLugHisopa.hasError('required')">
                                                     El lugar del Hisopado es requerido
                                                 </small>
@@ -706,8 +771,11 @@
                                         </div>
                                         <div class="col-3">
                                             <label for="start1">Fecha de Hisopado</label>
-                                            <input class="form-control form-control-solid" type="date" id="start1" formControlName="fec_hisopado" name="fec_hisopado" min=" {{ fechamin }}" max="{{ fechahoy }}" />
-                                            <div *ngIf="campoFecHisopado.errors && campoFecHisopado.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="date" id="start1"
+                                                formControlName="fec_hisopado" name="fec_hisopado" min=" {{ fechamin }}"
+                                                max="{{ fechahoy }}" />
+                                            <div *ngIf="campoFecHisopado.errors && campoFecHisopado.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoFecHisopado.hasError('required')">
                                                     La Fecha es requerida
                                                 </small>
@@ -715,8 +783,10 @@
                                         </div>
                                         <div class="col-10" style="margin-top: 10px;">
                                             <label>Requiere extender el Certificado de Aislamiento</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="req_extender" name="req_extender" placeholder="" />
-                                            <div *ngIf="campoReqExtender.errors && campoReqExtender.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="req_extender" name="req_extender" placeholder="" />
+                                            <div *ngIf="campoReqExtender.errors && campoReqExtender.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoReqExtender.hasError('required')">
                                                     El requerimiento de Certificado es requerido
                                                 </small>
@@ -773,12 +843,14 @@
                                         <div class="row" *ngIf="cer_contacto === 'Si'">
                                             <div class="col-2">
                                                 <label>Tipo de Contacto</label>
-                                                <select class="form-control form-control-solid" formControlName="tip_contacto">
+                                                <select class="form-control form-control-solid"
+                                                    formControlName="tip_contacto">
                                                     <option value="Social">Social</option>
                                                     <option value="Laboral">Laboral</option>
                                                     <option value="Conviviente">Conviviente</option>
                                                 </select>
-                                                <div *ngIf="campoTiContacto.errors && campoTiContacto.touched" class="text-danger">
+                                                <div *ngIf="campoTiContacto.errors && campoTiContacto.touched"
+                                                    class="text-danger">
                                                     <small *ngIf="campoTiContacto.hasError('required')">
                                                         El Tipo es requerido
                                                     </small>
@@ -786,8 +858,11 @@
                                             </div>
                                             <div class="col-10">
                                                 <label>Observaciones</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="obs_tip_contacto" name="obs_tip_contacto" placeholder="" />
-                                                <div *ngIf="campoObsTipoContacto.errors && campoObsTipoContacto.touched" class="text-danger">
+                                                <input class="form-control form-control-solid" type="text"
+                                                    formControlName="obs_tip_contacto" name="obs_tip_contacto"
+                                                    placeholder="" />
+                                                <div *ngIf="campoObsTipoContacto.errors && campoObsTipoContacto.touched"
+                                                    class="text-danger">
                                                     <small *ngIf="campoObsTipoContacto.hasError('required')">
                                                         Las Observaciones son requeridas
                                                     </small>
@@ -818,8 +893,11 @@
                                                 <div class="row" *ngIf="cas_positivo === 'Si'">
                                                     <div class="col-12">
                                                         <label>Datos del caso positivo</label>
-                                                        <input class="form-control form-control-solid" type="text" formControlName="dat_positivo" name="dat_positivo" placeholder="" />
-                                                        <div *ngIf="campoDatPositivo.errors && campoDatPositivo.touched" class="text-danger">
+                                                        <input class="form-control form-control-solid" type="text"
+                                                            formControlName="dat_positivo" name="dat_positivo"
+                                                            placeholder="" />
+                                                        <div *ngIf="campoDatPositivo.errors && campoDatPositivo.touched"
+                                                            class="text-danger">
                                                             <small *ngIf="campoDatPositivo.hasError('required')">
                                                                 Los Datos son requeridos
                                                             </small>
@@ -832,7 +910,9 @@
                                     <div class="col-12">
                                         <div class="row" style="margin-top: 8px;">
                                             <label>Otros Cerfiticados</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="otro_certificado" name="otro_certificado" placeholder="" />
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="otro_certificado" name="otro_certificado"
+                                                placeholder="" />
 
                                         </div>
                                     </div>
@@ -883,8 +963,11 @@
                                                 <label>Indique fecha de último contacto de Salud</label>
                                             </div>
                                             <div class="col-4">
-                                                <input class="form-control form-control-solid" type="date" id="start1" formControlName="fec_salud" name="fec_salud" min=" {{ fechamin }}" max="{{ fechahoy }}" />
-                                                <div *ngIf="campoFecSalud.errors && campoFecSalud.touched" class="text-danger">
+                                                <input class="form-control form-control-solid" type="date" id="start1"
+                                                    formControlName="fec_salud" name="fec_salud" min=" {{ fechamin }}"
+                                                    max="{{ fechahoy }}" />
+                                                <div *ngIf="campoFecSalud.errors && campoFecSalud.touched"
+                                                    class="text-danger">
                                                     <small *ngIf="campoFecSalud.hasError('required')">
                                                         La Fecha es requerida
                                                     </small>
@@ -912,8 +995,11 @@
 
                                         <div class="col-12" style="margin-top: 10px">
                                             <label>Detalle del requerimiento</label>
-                                            <input class="form-control form-control-solid" type="text" formControlName="det_requerimiento" name="det_requerimiento" placeholder="" />
-                                            <div *ngIf="campoDetRequerimiento.errors && campoDetRequerimiento.touched" class="text-danger">
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="det_requerimiento" name="det_requerimiento"
+                                                placeholder="" />
+                                            <div *ngIf="campoDetRequerimiento.errors && campoDetRequerimiento.touched"
+                                                class="text-danger">
                                                 <small *ngIf="campoDetRequerimiento.hasError('required')">
                                                     El Detalle es requerido
                                                 </small>
@@ -930,8 +1016,10 @@
                                         </h5>
                                         <div class="row">
                                             <div class="col-12">
-                                                <textarea class="form-control form-control-solid" rows="3" formControlName="cierre_contacto"></textarea>
-                                                <div *ngIf="campoCierre.errors && campoCierre.touched" class="text-danger">
+                                                <textarea class="form-control form-control-solid" rows="3"
+                                                    formControlName="cierre_contacto"></textarea>
+                                                <div *ngIf="campoCierre.errors && campoCierre.touched"
+                                                    class="text-danger">
                                                     <small *ngIf="campoCierre.hasError('required')">
                                                         12 - El Cierre con el Contacto es requerido
                                                     </small>

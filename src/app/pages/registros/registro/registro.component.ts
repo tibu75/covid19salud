@@ -284,7 +284,7 @@ export class RegistroComponent implements OnInit {
           });
         } else {
           this.toast.error(
-            "La persona ya estiste en la Base de datos por favor vuelva a la grilla de registros."
+            "La persona ya existe en la Base de datos!!, por favor vuelva a la grilla de registros."
           );
           this.isLoadingSubject.next(false);
         }
