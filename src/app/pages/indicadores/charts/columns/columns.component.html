@@ -1,5 +1,8 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans">
-<div class="chart-wrapper">
-    <canvas id="columnChart">
-    </canvas>
+<div>
+    <div>
+        <div style="display: block; margin-top: 10px;">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="chartColors" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+      </canvas>
+        </div>
+    </div>
 </div>

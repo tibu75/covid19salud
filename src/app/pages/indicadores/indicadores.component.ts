@@ -1,15 +1,15 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  AfterViewInit,
-} from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from "@angular/core";
 import { Localidades } from "../models/localidades";
 import { LocalidadesService } from "../../services/localidades/localidades.service";
 import { MostrarService } from "src/app/services/mostrar/mostrar.service";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 import { FormsLlamada } from "../models/form0800covid2";
 import { Form0800Service } from "../../services/form0800/form0800.service";
+import * as moment from "moment";
+import { SocketService } from "src/app/services/socket/socket.service";
+import filter from "../../../assets/plugins/formvalidation/src/js/core/filter";
+import lessThan from "../../../assets/plugins/formvalidation/src/js/validators/lessThan";
+import stringLength from "../../../assets/plugins/formvalidation/src/js/validators/stringLength";
 
 @Component({
   selector: "app-indicadores",
@@ -21,81 +21,232 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
   public paginaD: number = 0;
   public totalForm: number = 0;
   public cargando: boolean = true;
+  public cargado: boolean = false;
   public formtemp: FormsLlamada[] = [];
-  public form: FormsLlamada[] = [];
+  public form: any[] = [];
   public cantRegistros: number = 0;
   soloLectura: boolean;
   data: any = [];
   dni: any = [];
-  conSintomas = 0;
-  sinSintomas = 0;
+  public conSintomas: number = 0;
+  public sinSintomas: number = 0;
+  public sintomas: boolean = false;
+
+  public persona: any[];
+  public labelsLoc: string[];
+  public labelsFec: string[];
+  public datosLoc: number[];
+  public datosFec: number[];
 
   constructor(
     public reg0800Service: Reg0800Service,
     private localidadesService: LocalidadesService,
     private cdr: ChangeDetectorRef,
-    public f: Form0800Service
-  ) {}
-
-  ngOnInit(): void {}
-  ngAfterViewInit(): void {
-    this.cargarForms();
+    public f: Form0800Service,
+    private wsService: SocketService
+  ) {
     this.cargarLocalidades();
+  }
+
+  ngOnInit(): void {
+    // Conexion al Socket
+    this.wsService.listen("dataUpdate").subscribe((data) => {
+      console.log("Inicia el Formulario: ", data);
+      this.cargarForms();
+      this.cdr.markForCheck();
+    });
+  }
+  ngAfterViewInit(): void {
+    this.wsService.listen("dataUpdate").subscribe((data) => {
+      console.log("Inicia el Formulario: ", data);
+      this.cargarForms();
+      this.cdr.markForCheck();
+    });
   }
   cargarLocalidades() {
     this.localidadesService.getLocalidades().subscribe((data: any) => {
       this.localidades = data;
+      console.log("Localidades: ", this.localidades);
       this.cdr.markForCheck();
     });
   }
 
   cargarForms() {
     this.cargando = true;
-    this.reg0800Service
-      .getRegistrosTodos(1000)
-      .subscribe(({ total, registros }) => {
-        console.log(registros);
-        console.log("Total de Personas: ", total);
-        this.form = registros;
-        this.BuscarRegSintomas(); /* 
-        this.BuscarRegSintomasFecha(); */
-        this.totalForm = total;
-        this.cdr.markForCheck();
+    this.reg0800Service.getRegistrosTodos(1000).subscribe(({ total, registros }) => {
+      console.log("cargarForms: Registros ", registros);
+      console.log("Total de Personas: ", total);
+      this.form = registros;
+      this.filtrar();
+      this.filtrarUlt7();
+      this.BuscarRegSintomas();
+      this.totalForm = total;
+      this.cdr.markForCheck();
 
-        this.cargando = false;
-        this.soloLectura = true;
+      this.cargando = false;
+      this.soloLectura = true;
+    });
+    this.cdr.markForCheck();
+  }
+
+  filtrar() {
+    let datosLocTemp: number[] = [];
+    let labelsLocTemp: string[] = [];
+    const time = "T03:00:00.000Z";
+    let fd = "2020-10-22" + time;
+    let fh = moment().format("YYYY-MM-DD") + time;
+    console.log(fd, " ", fh);
+    this.persona = this.form.map((item) => {
+      const documento = { documento: item.persona.documento };
+      const edad = { edad: item.persona.edad };
+      const localidad = { localidad: item.persona.localidad };
+      const per = Object.assign(documento, edad, localidad);
+      return per;
+    });
+
+    const llamada = this.form.reduce(
+      (obj, value, i) => ({
+        ...obj,
+        [i]: value.llamada.reduce(
+          (obj, item, i) => ({
+            ...obj,
+            [i]: item,
+          }),
+          0
+        ),
+      }),
+      0
+    );
+    const call = [Object.values(llamada)];
+
+    const exportConsulta = (obj1: any, obj2: any) => {
+      let acc = 0;
+      let consulta = [];
+      obj1.forEach((i) => {
+        obj2.forEach((y) => {
+          const llamadas2 = [Object.values(y[acc])];
+          llamadas2.forEach((x) => {
+            x.forEach((z) => {
+              let val = Object.assign({}, i, z);
+              consulta.push(val);
+              //console.log("consulta", val);
+            });
+            acc++;
+          });
+        });
       });
+      return consulta;
+    };
+    const obj = exportConsulta(this.persona, call);
+    const resultado = obj.filter((elm) => {
+      const fil = elm.fecha >= fd && elm.fecha <= fh;
+      return fil;
+    });
+    this.localidades.forEach((labelLoc) => {
+      let acuLoc = 0;
+      resultado.forEach((busLoc) => {
+        if (busLoc.localidad === labelLoc.nombre) {
+          acuLoc = acuLoc + 1;
+        }
+      });
+      if (acuLoc > 0) {
+        console.log("La ciudad " + labelLoc.nombre + " tiene:", acuLoc);
+        labelsLocTemp.push(labelLoc.nombre);
+        datosLocTemp.push(acuLoc);
+      }
+    });
+    this.labelsLoc = labelsLocTemp;
+    this.datosLoc = datosLocTemp;
+    console.log("Los datos a pasar son : ", this.datosLoc);
+    console.log("filtro Paso", resultado);
+    this.cdr.markForCheck();
+  }
+  filtrarUlt7() {
+    let datosFecTemp: number[] = [];
+    let labelsFecTemp: string[] = [];
+    const time = "T03:00:00.000Z";
+    const acu = 1;
+    let fd = moment(Date.now() - 6 * 24 * 3600 * 1000).format("YYYY-MM-DD") + time;
+    let fh = moment().format("YYYY-MM-DD") + time;
+    let f7: any[] = [];
+    for (let dia = 6; dia >= 0; dia--) {
+      f7.push(moment(Date.now() - dia * 24 * 3600 * 1000).format("YYYY-MM-DD") + time);
+    }
+    const llamada = this.form.reduce(
+      (obj, value, i) => ({
+        ...obj,
+        [i]: value.llamada.reduce(
+          (obj, item, i) => ({
+            ...obj,
+            [i]: item,
+          }),
+          0
+        ),
+      }),
+      0
+    );
+    const call = [Object.values(llamada)];
+
+    const exportConsulta = (obj1: any, obj2: any) => {
+      let acc = 0;
+      let consulta = [];
+      obj1.forEach((i) => {
+        obj2.forEach((y) => {
+          const llamadas2 = [Object.values(y[acc])];
+          llamadas2.forEach((x) => {
+            x.forEach((z) => {
+              let val = Object.assign({}, i, z);
+              consulta.push(val);
+              //console.log("consulta", val);
+            });
+            acc++;
+          });
+        });
+      });
+      return consulta;
+    };
+    const obj = exportConsulta(this.persona, call);
+    console.log("Objeto: ", obj);
+    const resultado = obj.filter((elm) => {
+      const fil = elm.fecha >= fd && elm.fecha <= fh;
+      return fil;
+    });
+    console.log("RESULTADO: ", resultado);
+    f7.forEach((porFec) => {
+      const totalFechas = resultado.filter((busFec) => busFec.fecha === porFec).length;
+      datosFecTemp.push(totalFechas);
+    });
+    f7.forEach((porFec) => {
+      let temp = porFec.substring(5);
+      temp = temp.split("T", 1);
+      labelsFecTemp.push(...temp);
+    });
+
+    this.datosFec = datosFecTemp;
+    this.labelsFec = labelsFecTemp;
     this.cdr.markForCheck();
   }
 
   BuscarRegSintomas() {
+    let acum = 0;
+    this.conSintomas = 0;
+    this.sinSintomas = 0;
+    this.cantRegistros = 0;
     this.form.forEach((x) => {
+      this.sintomas = false;
       x.llamada.forEach((y) => {
-        if (y.sintomas === "No") {
-          this.sinSintomas = this.sinSintomas + 1;
+        if (y.sintomas === "Si") {
+          this.sintomas = true;
         }
-        this.cantRegistros = this.cantRegistros + 1;
+        acum++;
       });
+      if (this.sintomas) {
+        this.conSintomas++;
+      } else {
+        this.sinSintomas++;
+      }
     });
-    this.f.conSintomas = this.cantRegistros - this.sinSintomas;
-    this.f.sinSintomas = this.sinSintomas;
-    console.log("Registros totales: ", this.cantRegistros);
-    console.log("Registros con sintomas: ", this.f.conSintomas);
-    console.log("Registros sin sintomas: ", this.f.sinSintomas);
-  }
-
-  BuscarRegSintomasFecha() {
-    this.form.forEach((x) => {
-      x.llamada.forEach((y) => {
-        if (y.sintomas === "No" && y.fecha === "2020-10-22") {
-        }
-        this.cantRegistros = this.cantRegistros + 1;
-      });
-    });
-    this.f.conSintomas = this.cantRegistros - this.sinSintomas;
-    this.f.sinSintomas = this.sinSintomas;
-    console.log("Registros totales: ", this.cantRegistros);
-    console.log("Registros con sintomas: ", this.f.conSintomas);
-    console.log("Registros sin sintomas: ", this.f.sinSintomas);
+    this.cantRegistros = acum;
+    this.cargado = true;
   }
 }
