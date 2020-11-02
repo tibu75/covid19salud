@@ -1,4 +1,8 @@
-<div class="chart-wrapper">
-    <canvas id="colChart">
-    </canvas>
+<div >
+    <div>
+        <div style="display: block">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="chartColors" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+      </canvas>
+        </div>
+    </div>
 </div>

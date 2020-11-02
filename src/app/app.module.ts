@@ -33,7 +33,7 @@ import { RegllamadaComponent } from "./pages/registros/mostrar/regllamada/reglla
 import { MatDialogModule } from "@angular/material/dialog";
 import { RegistrosComponent } from "./pages/registros/registros.component";
 import { IndicadoresModule } from "./pages/indicadores/indicadores.module";
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 function appInitializer(authService: AuthService) {
   return () => {
     return new Promise((resolve) => {
@@ -93,7 +93,7 @@ export function getHighlightLanguages() {
     NgxPaginationModule,
     MatDialogModule,
     IndicadoresModule,
-    NgApexchartsModule,
+    NgxChartsModule
   ],
   providers: [
     {

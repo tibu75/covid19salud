@@ -4,20 +4,16 @@ import { RouterModule } from "@angular/router";
 import { IndicadoresComponent } from "./indicadores.component";
 import { ColumnsComponent } from "./charts/columns/columns.component";
 import { NgApexchartsModule } from "ng-apexcharts";
-import { PieComponent } from "./charts/pie/pie.component";
 import { PiechartComponent } from "./charts/piechart/piechart.component";
 import { ColchartComponent } from "./charts/colchart/colchart.component";
+import { ChartsModule } from "ng2-charts";
 
 @NgModule({
-  declarations: [
-    ColumnsComponent,
-    PieComponent,
-    PiechartComponent,
-    ColchartComponent,
-  ],
+  declarations: [ColumnsComponent, PiechartComponent, ColchartComponent],
   imports: [
     CommonModule,
     NgApexchartsModule,
+    ChartsModule,
     RouterModule.forChild([
       {
         path: "",
@@ -25,11 +21,6 @@ import { ColchartComponent } from "./charts/colchart/colchart.component";
       },
     ]),
   ],
-  exports: [
-    ColumnsComponent,
-    PieComponent,
-    PiechartComponent,
-    ColchartComponent,
-  ],
+  exports: [ColumnsComponent, PiechartComponent, ColchartComponent],
 })
 export class IndicadoresModule {}
