@@ -1,8 +1,8 @@
-<div>
-    <div>
-        <div class="chart">
-            <canvas baseChart  [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="chartColors" [legend]="pieChartLegend">
-      </canvas>
-        </div>
-    </div>
+<div id="chart">
+  <apx-chart
+    [series]="series"
+    [chart]="chart"
+    [labels]="labels"
+    [responsive]="responsive"
+  ></apx-chart>
 </div>

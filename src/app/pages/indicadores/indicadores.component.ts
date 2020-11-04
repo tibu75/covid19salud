@@ -50,23 +50,19 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Conexion al Socket
-    this.wsService.listen("dataUpdate").subscribe((data) => {
-      console.log("Inicia el Formulario: ", data);
-      this.cargarForms();
-      this.cdr.markForCheck();
-    });
+
+    this.cargarForms();
+
   }
   ngAfterViewInit(): void {
     this.wsService.listen("dataUpdate").subscribe((data) => {
-      console.log("Inicia el Formulario: ", data);
+      console.log("Inicia Indicadores AfterInit: ", data);
       this.cargarForms();
-      this.cdr.markForCheck();
     });
   }
   cargarLocalidades() {
     this.localidadesService.getLocalidades().subscribe((data: any) => {
       this.localidades = data;
-      console.log("Localidades: ", this.localidades);
       this.cdr.markForCheck();
     });
   }
@@ -95,7 +91,6 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     const time = "T03:00:00.000Z";
     let fd = "2020-10-22" + time;
     let fh = moment().format("YYYY-MM-DD") + time;
-    console.log(fd, " ", fh);
     this.persona = this.form.map((item) => {
       const documento = { documento: item.persona.documento };
       const edad = { edad: item.persona.edad };
@@ -150,15 +145,12 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
         }
       });
       if (acuLoc > 0) {
-        console.log("La ciudad " + labelLoc.nombre + " tiene:", acuLoc);
         labelsLocTemp.push(labelLoc.nombre);
         datosLocTemp.push(acuLoc);
       }
     });
     this.labelsLoc = labelsLocTemp;
     this.datosLoc = datosLocTemp;
-    console.log("Los datos a pasar son : ", this.datosLoc);
-    console.log("filtro Paso", resultado);
     this.cdr.markForCheck();
   }
   filtrarUlt7() {
@@ -171,7 +163,7 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     let f7: any[] = [];
     for (let dia = 6; dia >= 0; dia--) {
       f7.push(moment(Date.now() - dia * 24 * 3600 * 1000).format("YYYY-MM-DD") + time);
-    }
+    };
     const llamada = this.form.reduce(
       (obj, value, i) => ({
         ...obj,
@@ -206,7 +198,6 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
       return consulta;
     };
     const obj = exportConsulta(this.persona, call);
-    console.log("Objeto: ", obj);
     const resultado = obj.filter((elm) => {
       const fil = elm.fecha >= fd && elm.fecha <= fh;
       return fil;
@@ -224,6 +215,8 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
 
     this.datosFec = datosFecTemp;
     this.labelsFec = labelsFecTemp;
+    console.log("Los datos a pasar son Por Fecha : ", this.labelsFec, this.datosFec);
+    console.log("filtro Paso Por Fecha", resultado);
     this.cdr.markForCheck();
   }
 
@@ -246,7 +239,10 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
         this.sinSintomas++;
       }
     });
-    this.cantRegistros = acum;
+    this.cantRegistros = acum;/* 
+    console.log("Registros totales: ", this.cantRegistros);
+    console.log("Registros con sintomas: ", this.conSintomas);
+    console.log("Registros sin sintomas: ", this.sinSintomas); */
     this.cargado = true;
   }
 }
