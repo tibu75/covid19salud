@@ -9,7 +9,7 @@ export class SocketService {
   socket: any;
 
   constructor() {
-    this.socket = io("http://localhost:3000");
+    this.socket = io("http://181.209.23.177:3000");
   }
 
   listen(Eventname: string) {

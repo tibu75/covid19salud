@@ -1,78 +1,151 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
-import * as pluginDataLabels from "chartjs-plugin-datalabels";
-import { Label } from "ng2-charts";
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from "@angular/core";
 import { SocketService } from "src/app/services/socket/socket.service";
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ChartComponent,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexYAxis,
+  ApexTitleSubtitle,
+  ApexXAxis,
+  ApexFill
+} from "ng-apexcharts";
+
 @Component({
   selector: "app-colchart",
   templateUrl: "./colchart.component.html",
   styleUrls: ["./colchart.component.scss"],
 })
-export class ColchartComponent implements OnInit {
+export class ColchartComponent implements OnInit, AfterViewInit {
+
+  public series: ApexAxisChartSeries;
+  public chart: ApexChart;
+  public dataLabels: ApexDataLabels;
+  public plotOptions: ApexPlotOptions;
+  public yaxis: ApexYAxis;
+  public xaxis: ApexXAxis;
+  public fill: ApexFill;
+  public title: ApexTitleSubtitle;
   @Input() labelsFec: any;
   @Input() dataFec: any;
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: "end",
-        align: "end",
-      },
-    },
-  };
-  public barChartLabels: Label[] = [];
-  public barChartType: ChartType = "bar";
-  public barChartLegend = false;
-  public barChartPlugins = [pluginDataLabels];
+  constructor(private srv: SocketService) { }
 
-  public barChartData: ChartDataSets[] = [];
-  public chartColors: any[] = [
-    {
-      backgroundColor: [
-        "#90caf9",
-        "#64b5f6",
-        "#42a5f5",
-        "#2196f3",
-        "#1e88e5",
-        "#90caf9",
-        "#64b5f6",
-        "#42a5f5",
-        "#2196f3",
-        "#1e88e5",
-        "#90caf9",
-        "#64b5f6",
-        "#42a5f5",
-        "#2196f3",
-        "#1e88e5",
-        "#90caf9",
-        "#64b5f6",
-        "#42a5f5",
-        "#2196f3",
-        "#1e88e5",
-      ],
-    },
-  ];
-
-  constructor(private srv: SocketService) {}
-
-  ngAfterViewInit(): void {
-    this.update();
-  }
 
   ngOnInit(): void {
-    console.log("Datos ingresados al ngOnInit Columns: ", this.dataFec);
-
     this.srv.listen("dataUpdate").subscribe((res: any) => {
       console.log(res);
       this.update();
     });
   }
+  ngAfterViewInit(): void {
+    console.log("NGAFTERINIT ColCharts: ", this.dataFec);
+    this.update();
+  }
 
   public update(): void {
     // Only Change 3 values
+
+    this.series = [
+      {
+        name: "Datos Diarios",
+        data: []
+      }
+    ]
+    this.chart = {
+      height: 350,
+      type: "bar"
+    };
+    this.plotOptions = {
+      bar: {
+        dataLabels: {
+          position: "top" // top, center, bottom
+        }
+      }
+    };
+    this.dataLabels = {
+      enabled: true,
+      formatter: function (val) {
+        return val;
+      },
+      offsetY: -20,
+      style: {
+        fontSize: "12px",
+        colors: ["#304758"]
+      }
+    },
+      this.xaxis = {
+        categories: [
+
+        ],
+        position: "bottom",
+        labels: {
+          offsetY: 0
+        },
+        axisBorder: {
+          show: true
+        },
+        axisTicks: {
+          show: true
+        },
+        crosshairs: {
+          fill: {
+            type: "gradient",
+            gradient: {
+              colorFrom: "#D8E3F0",
+              colorTo: "#BED1E6",
+              stops: [0, 100],
+              opacityFrom: 0.4,
+              opacityTo: 0.5
+            }
+          }
+        },
+        tooltip: {
+          enabled: true,
+          offsetY: -35
+        }
+      };
+    this.fill = {
+      type: "gradient",
+      gradient: {
+        shade: "light",
+        type: "horizontal",
+        shadeIntensity: 0.25,
+        gradientToColors: undefined,
+        inverseColors: true,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [50, 0, 100, 100]
+      }
+    };
+    this.yaxis = {
+      axisBorder: {
+        show: true
+      },
+      axisTicks: {
+        show: true
+      },
+      labels: {
+        show: true,
+        formatter: function (val) {
+          return val + "";
+        }
+      }
+    };
+    this.title = {
+      text: "",
+      floating: true,
+      offsetY: 320,
+      align: "center",
+      style: {
+        color: "#444"
+      }
+    };
+    this.series[0].data = this.dataFec;
+    this.xaxis.categories = this.labelsFec;
+  };
+  /* 
     this.barChartData[0].data = this.dataFec;
-    this.barChartLabels = this.labelsFec;
-  }
+    this.barChartLabels = this.labelsFec; */
 }
+

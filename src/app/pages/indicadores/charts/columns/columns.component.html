@@ -1,8 +1,12 @@
-<div>
-    <div>
-        <div style="display: block; margin-top: 10px;">
-            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="chartColors" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-      </canvas>
-        </div>
-    </div>
+<div id="chart">
+  <apx-chart
+    [series]="series"
+    [chart]="chart"
+    [dataLabels]="dataLabels"
+    [plotOptions]="plotOptions"
+    [yaxis]="yaxis"
+    [xaxis]="xaxis"
+    [fill]="fill"
+    [title]="title"
+  ></apx-chart>
 </div>
