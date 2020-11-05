@@ -41,7 +41,7 @@ export class MostrarComponent implements OnInit, AfterViewInit {
     public mostrarForm: MostrarService,
     private cdr: ChangeDetectorRef,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   MostrarRegistro(idform): void {
     let dialogref = this.dialog.open(RegllamadaComponent, {
@@ -100,6 +100,13 @@ export class MostrarComponent implements OnInit, AfterViewInit {
         localidad: [this.mostrarForm.registro.persona.localidad],
         provincia: [this.mostrarForm.registro.persona.provincia],
         img: [this.mostrarForm.registro.persona.img],
+      }),
+      trabajo: this.fb.group({
+        lugar: [this.mostrarForm.registro.trabajo[0].localidad],
+        telefono: [this.mostrarForm.registro.trabajo[0].telefono],
+        calle: [this.mostrarForm.registro.trabajo[0].calle],
+        numero: [this.mostrarForm.registro.trabajo[0].numero],
+        localidad: [this.mostrarForm.registro.trabajo[0].localidad],
       }),
     });
     //console.log("esto se cargo");
