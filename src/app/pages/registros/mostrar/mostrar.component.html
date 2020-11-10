@@ -11,7 +11,8 @@
                 <div class="card-toolbar">
                     <a routerLink="/registros" class="btn btn-light-primary font-weight-bolder">
                         <i class="ki ki-long-arrow-back icon-sm"></i>Volver</a>
-                    <button routerLink="/llamada" routerLinkActive="router-link-active" class="btn btn-primary font-weight-bolder" style="margin-left: 10px;" (click)="Entrada()">
+                    <button routerLink="/llamada" routerLinkActive="router-link-active"
+                        class="btn btn-primary font-weight-bolder" style="margin-left: 10px;" (click)="Entrada()">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -28,7 +29,8 @@
                         </span> Nuevo Llamada Entrante
                     </button>
 
-                    <button routerLink="/llamada" routerLinkActive="router-link-active" class="btn btn-success font-weight-bolder" style="margin-left: 10px;" (click)="Salida()">
+                    <button routerLink="/llamada" routerLinkActive="router-link-active"
+                        class="btn btn-success font-weight-bolder" style="margin-left: 10px;" (click)="Salida()">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -55,158 +57,233 @@
 
                     <!-- Comienza la muestra  del formulario con los datos recogidos de Renaper -->
 
-                    <ng-container *ngIf="cargar_datos">
-                        <div class="form-group" formGroupName="persona">
-                            <div class="row" style="margin-top: 10px">
-                                <h3 class="text-dark font-weight-bold">
-                                    Datos de la Persona que LLama:
-                                </h3>
+
+                    <div class="form-group" formGroupName="persona">
+                        <div class="row" style="margin-top: 10px">
+                            <h3 class="text-dark font-weight-bold">
+                                Datos de la Persona que LLama:
+                            </h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2 padding-1">
+                                <div class="rowfoto" style="margin-top: 18px">
+                                    <img id="foto" class="img-50" [src]="personaForm.get('persona.img').value" />
+                                </div>
                             </div>
 
+                            <div class="col-10 padding-1">
+                                <div class="row">
+                                    <div class="col-xl-2 col-xs-2 col-sm-2 col-documento padding-1">
+                                        <div class="form-group">
+                                            <label>Documento</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="documento" name="documento" placeholder=""
+                                                readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
 
-                            <div class="row">
-                                <div class="col-2 padding-1">
-                                    <div class="rowfoto" style="margin-top: 18px">
-                                        <img id="foto" class="img-50" [src]="personaForm.get('persona.img').value" />
+                                    <div class="col-xl-1 col-xs-1 col-sm-1 col-sexo padding-1">
+                                        <div class="form-group">
+                                            <label>Sexo</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="sexo" name="sexo" placeholder="" readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-1 col-xs-1 col-sm-1 col-edad padding-1">
+                                        <div class="form-group">
+                                            <label>Edad</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="edad" name="edad" placeholder="" readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-xl-1 col-xs-1 col-sm-1 col-edad padding-1">
+                                    <div class="form-group">
+                                        <label>Edad</label>
+                                        <input class="form-control form-control-solid" type="text"
+                                            formControlName="fechaNacimiento" name="fechaNacimiento" placeholder="" />
+                                        <span class="form-text text-muted"></span>
+                                    </div>
+                                </div> -->
+
+                                    <div class="col-xl-3 col-xs-3 col-sm-3 col-nombre padding-1">
+                                        <div class="form-group">
+                                            <label>Nombre/s</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="nombre" name="nombre" placeholder="" readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-xs-3 col-sm-3 col-apellido padding-1">
+                                        <div class="form-group">
+                                            <label>Apellido/s</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="apellido" name="apellido" placeholder=""
+                                                readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-2 col-xs-2 col-sm-2 col-telefono padding-1">
+                                        <div class="form-group">
+                                            <label>Teléfono</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="telefono" name="telefono" readonly="all" />
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-10 padding-1">
-                                    <div class="row">
-                                        <div class="col-xl-2 col-documento padding-1">
-                                            <div class="form-group">
-                                                <label>Documento</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="documento" name="documento" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-1 col-sexo padding-1">
-                                            <div class="form-group">
-                                                <label>Sexo</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="sexo" name="sexo" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-1 col-edad padding-1">
-                                            <div class="form-group">
-                                                <label>Edad</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="edad" name="edad" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="col-xl-1 col-edad padding-1">
-									<div class="form-group">
-										<label>Edad</label>
-										<input class="form-control form-control-solid" type="text"
-											formControlName="fechaNacimiento" name="fechaNacimiento" placeholder="" />
-										<span class="form-text text-muted"></span>
-									</div>
-								</div> -->
-
-                                        <div class="col-xl-3 col-nombre padding-1">
-                                            <div class="form-group">
-                                                <label>Nombre/s</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="nombre" name="nombre" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-3 col-apellido padding-1">
-                                            <div class="form-group">
-                                                <label>Apellido/s</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="apellido" name="apellido" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-2 col-telefono padding-1">
-                                            <div class="form-group">
-                                                <label>Teléfono</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="telefono" name="telefono" readonly="all" />
-                                            </div>
+                                <h5 class="text-dark font-weight-bold">Datos del Domicilio:</h5>
+                                <div class="row">
+                                    <div class="col-xl-3 col-xs-3 col-sm-3 col-calle padding-1">
+                                        <div class="form-group">
+                                            <label>Calle</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="calle" name="calle" placeholder="" readonly="all" />
+                                            <span class="form-text text-muted"></span>
                                         </div>
                                     </div>
 
-                                    <h3 class="text-dark font-weight-bold">Datos del Domicilio:</h3>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-calle padding-1">
-                                            <div class="form-group">
-                                                <label>Calle</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="calle" name="calle" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
+                                    <div class="col-xl-2 col-xs-2 col-sm-2 col-numero padding-1">
+                                        <div class="form-group">
+                                            <label>Número</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="numero" name="numero" placeholder="" readonly="all" />
+                                            <span class="form-text text-muted"></span>
                                         </div>
-
-                                        <div class="col-xl-2 col-numero padding-1">
-                                            <div class="form-group">
-                                                <label>Número</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="numero" name="numero" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-1 col-numero padding-1">
-                                            <div class="form-group">
-                                                <label>Piso</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="piso" name="piso" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-1 col-departamento padding-1">
-                                            <div class="form-group">
-                                                <label>Dpto</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="departamento" name="departamento" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-localidad padding-1">
-                                            <div class="form-group">
-                                                <label>Localidad</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="localidad" name="localidad" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-2 col-provincia padding-1">
-                                            <div class="form-group">
-                                                <label>Provincia</label>
-                                                <input class="form-control form-control-solid" type="text" formControlName="provincia" name="provincia" placeholder="" readonly="all" />
-                                                <span class="form-text text-muted"></span>
-                                            </div>
-                                        </div>
-
-
                                     </div>
+                                    <div class="col-xl-1 col-xs-1 col-sm-1 col-numero padding-1">
+                                        <div class="form-group">
+                                            <label>Piso</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="piso" name="piso" placeholder="" readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-1 col-xs-1 col-sm-1 col-departamento padding-1">
+                                        <div class="form-group">
+                                            <label>Dpto</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="departamento" name="departamento" placeholder=""
+                                                readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-xs-3 col-sm-3 col-localidad padding-1">
+                                        <div class="form-group">
+                                            <label>Localidad</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="localidad" name="localidad" placeholder=""
+                                                readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-xs-2 col-sm-2 col-provincia padding-1">
+                                        <div class="form-group">
+                                            <label>Provincia</label>
+                                            <input class="form-control form-control-solid" type="text"
+                                                formControlName="provincia" name="provincia" placeholder=""
+                                                readonly="all" />
+                                            <span class="form-text text-muted"></span>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
-                    </ng-container>
+
+                    </div>
+
+                    <div class="col-12" formGroupName="trabajo">
+                        <h5 class="text-dark font-weight-bold mb-5">
+                            Datos Laborales
+                        </h5>
+                        <div class="row">
+                            <div class="col-xl-3 col-xs-3 col-sm-3">
+                                <div class="">
+                                    <label>Lugar de Trabajo Actual</label>
+                                    <input class="form-control form-control-solid" type="text" formControlName="lugar"
+                                        name="lugar" placeholder="" />
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-xs-2 col-sm-2 col-telefono padding-1">
+                                <div class="">
+                                    <label>Teléfono Laboral</label>
+                                    <input class="form-control form-control-solid" type="text"
+                                        formControlName="telefono" name="telefono" placeholder="" />
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-xs-3 col-sm-3 col-calle padding-1">
+                                <div class="">
+                                    <label>Calle</label>
+                                    <input class="form-control form-control-solid" type="text" formControlName="calle"
+                                        name="calle" placeholder="" />
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-xs-2 col-sm-2 col-numero padding-1">
+                                <div class="">
+                                    <label>Número</label>
+                                    <input class="form-control form-control-solid" type="text" formControlName="numero"
+                                        name="numero" placeholder="" />
+                                    <span class="form-text text-muted"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-2 col-xs-2 col-sm-2 col-localidad padding-1">
+                                <div class="">
+                                    <label>Localidad</label>
+                                    <input class="form-control form-control-solid" type="text"
+                                        formControlName="localidad" name="localidad" placeholder="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
 
-                <h3 class="text-dark font-weight-bold">Seguimiento</h3>
+                <div class="separator separator-dashed my-5"></div>
+                <h3 class="text-dark font-weight-bold my-5">Seguimiento</h3>
 
                 <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-12">
-                            <table class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info">
+                            <table
+                                class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed"
+                                id="kt_datatable" role="grid" aria-describedby="kt_datatable_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 6%;text-align: center;" aria-sort="ascending" aria-label="Record ID: activate to sort column descending">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1"
+                                            colspan="1" style="width: 6%;text-align: center;" aria-sort="ascending"
+                                            aria-label="Record ID: activate to sort column descending">
                                             Reg.Nro
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 10%;text-align: center;" aria-label="Order ID: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
+                                            colspan="1" style="width: 10%;text-align: center;"
+                                            aria-label="Order ID: activate to sort column ascending">
                                             Fecha
                                         </th>
 
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;text-align: center;" aria-label="Company Agent: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
+                                            colspan="1" style="width: 35%;text-align: center;"
+                                            aria-label="Company Agent: activate to sort column ascending">
                                             Motivo de llamada
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 35%;text-align: center;" aria-label="Company Agent: activate to sort column ascending">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1"
+                                            colspan="1" style="width: 35%;text-align: center;"
+                                            aria-label="Company Agent: activate to sort column ascending">
                                             Cierre del Contacto
                                         </th>
-                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 14%;text-align: center;" aria-label="Tareas">
+                                        <th class="sorting_disabled" rowspan="1" colspan="1"
+                                            style="width: 14%;text-align: center;" aria-label="Tareas">
                                             Seguimiento
                                         </th>
                                     </tr>
@@ -232,12 +309,14 @@
                                         <td>{{ f?.cierre_contacto }}</td>
 
                                         <td style="display: none">
-                                            <span class="label label-danger label-dot mr-2"></span><span class="font-weight-bold text-danger">Online</span>
+                                            <span class="label label-danger label-dot mr-2"></span><span
+                                                class="font-weight-bold text-danger">Online</span>
                                         </td>
                                         <td style="text-align: center;">
                                             <div *ngIf="this.f.tipo_llamada ==='Entrada'">
 
-                                                <button mat-raised-button class="btn btn-primary font-weight-bolder" style="width: 110px;height: 40px;" (click)="MostrarRegistro(f)">
+                                                <button mat-raised-button class="btn btn-primary font-weight-bolder"
+                                                    style="width: 110px;height: 40px;" (click)="MostrarRegistro(f)">
                                                     <span class="svg-icon svg-icon-md">
                                                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -256,7 +335,8 @@
                                             </div>
                                             <div *ngIf="this.f.tipo_llamada ==='Salida'">
 
-                                                <button mat-raised-button class="btn btn-success font-weight-bolder" style="width: 110px;height: 40px;" (click)="MostrarRegistro(f)">
+                                                <button mat-raised-button class="btn btn-success font-weight-bolder"
+                                                    style="width: 110px;height: 40px;" (click)="MostrarRegistro(f)">
                                                     <span class="svg-icon svg-icon-md">
                                                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -283,34 +363,34 @@
                         </div>
                     </div>
                     <!-- <div class="row">
-				<div class="col-sm-12 col-md-5">
-					<div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">
-						Pagina 1 de 10 | {{ totalForm }} Registros en total.
-					</div>
-				</div>
-				<div class="col-sm-12 col-md-7 dataTables_pager">
-					<div class="dataTables_length" id="PaginaH">
-						<label>Paginar
-							<select name="PaginaH" aria-controls="kt_datatable"
-								class="custom-select custom-select-sm form-control form-control-sm">
-								<option value="10">10</option>
-								<option value="15">15</option>
-								<option value="20">20</option>
-							</select></label>
-					</div>
-					<div class="dataTables_paginate paging_simple_numbers" id="kt_datatable_paginate">
-						<ul class="pagination">
-							<button (click)="paginacion(-10)" class="btn btn-secondary">
-								Anteriores
-							</button>
-							&nbsp;
-							<button (click)="paginacion(10)" class="btn btn-secondary">
-								Siguientes
-							</button>
-						</ul>
-					</div>
-				</div>
-			</div> -->
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">
+                        Pagina 1 de 10 | {{ totalForm }} Registros en total.
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-7 dataTables_pager">
+                    <div class="dataTables_length" id="PaginaH">
+                        <label>Paginar
+                            <select name="PaginaH" aria-controls="kt_datatable"
+                                class="custom-select custom-select-sm form-control form-control-sm">
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select></label>
+                    </div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="kt_datatable_paginate">
+                        <ul class="pagination">
+                            <button (click)="paginacion(-10)" class="btn btn-secondary">
+                                Anteriores
+                            </button>
+                            &nbsp;
+                            <button (click)="paginacion(10)" class="btn btn-secondary">
+                                Siguientes
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
                 </div>
             </div>
         </div>
