@@ -20,41 +20,62 @@ export class PiechartComponent implements OnInit {
   public chart: ApexChart;
   public responsive: ApexResponsive[];
   public labels: any;
-
+  chartOptions: any = {};
   constructor(private srv: SocketService) { }
 
-  ngAfterViewInit(): void {
-    this.update();
-  }
 
   ngOnInit(): void {
     this.srv.listen("dataUpdate").subscribe((res: any) => {
       console.log(res);
-      this.update();
+      this.chartOptions = this.update();
     });
   }
-  update(): void {
-    this.series = [];
-    this.chart = {
-      type: "pie"
-    };
-    this.labels = ["Con Sintomas", "Sin Sintomas"];
-    this.responsive = [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: "bottom"
+  ngAfterViewInit(): void {
+    this.chartOptions = this.update();
+  }
+
+  update() {
+    let options;
+    options = {
+      series: [],
+      chart: {
+        height: 490,
+        type: "pie"
+      },
+      labels: ["Con Sintomas", "Sin Sintomas"],
+      legend: {
+        position: "bottom"
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              height: 340,
+              width: 300,
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        },
+        {
+          breakpoint: 1366,
+          options: {
+            chart: {
+              height: 460,
+            },
+            legend: {
+              position: "bottom"
+            }
           }
         }
-      }
-    ];
-    this.series = [];
-    this.series.push(this.conSintomas);
-    this.series.push(this.sinSintomas);
-
+      ]
+    };
+    options.series = [];
+    options.series.push(this.conSintomas);
+    options.series.push(this.sinSintomas);
+    console.log("Estas son las options Pie: ", options);
+    return options
   }
 }

@@ -1,16 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from "@angular/core";
 import { SocketService } from "src/app/services/socket/socket.service";
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexPlotOptions,
-  ApexYAxis,
-  ApexTitleSubtitle,
-  ApexXAxis,
-  ApexFill
-} from "ng-apexcharts";
 
 @Component({
   selector: "app-columns",
@@ -18,17 +7,10 @@ import {
   styleUrls: ["./columns.component.scss"],
 })
 export class ColumnsComponent implements OnInit, AfterViewInit {
-  public series: ApexAxisChartSeries;
-  public chart: ApexChart;
-  public dataLabels: ApexDataLabels;
-  public plotOptions: ApexPlotOptions;
-  public yaxis: ApexYAxis;
-  public xaxis: ApexXAxis;
-  public fill: ApexFill;
-  public title: ApexTitleSubtitle;
+
   @Input() labelsLoc: any[];
   @Input() dataLoc: any[];
-
+  chartOptions: any = {};
   constructor(private srv: SocketService) {
     console.log("Datos ingresados al CONSTRUCTOR Columns: ", this.dataLoc);
     /* if (this.data === undefined) {
@@ -37,7 +19,7 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     console.log("AfterInit Localidades");
-    this.update();
+    this.chartOptions = this.update();
   }
 
   ngOnInit(): void {
@@ -45,7 +27,7 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
 
     this.srv.listen("dataUpdate").subscribe((res: any) => {
       console.log(res);
-      this.update();
+      this.chartOptions = this.update();
     });
   }
 
@@ -58,38 +40,71 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
     console.log(event, active);
   }
 
-  update(): void {
+  update() {
     // Only Change 3 values public update(): void {
     // Only Change 3 values
-
-    this.series = [
-      {
-        name: "Datos Diarios",
-        data: []
-      }
-    ]
-    this.chart = {
-      type: "bar"
-    };
-    this.plotOptions = {
-      bar: {
-        dataLabels: {
-          position: "top" // top, center, bottom
+    let opciones;
+    opciones = {
+      series: [
+        {
+          name: "Datos Diarios",
+          data: []
         }
-      }
-    };
-    this.dataLabels = {
-      enabled: true,
-      formatter: function (val) {
-        return val;
+      ],
+      chart: {
+        height: 680,
+        type: "bar"
       },
-      offsetY: -20,
-      style: {
-        fontSize: "14px",
-        colors: ["#304758"]
-      }
-    },
-      this.xaxis = {
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          dataLabels: {
+            position: "top" // top, center, bottom
+          }
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              height: 500,
+              width: 300,
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        },
+        {
+          breakpoint: 1366,
+          options: {
+            chart: {
+              height: 500,
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ],
+      dataLabels: {
+        enabled: true,
+        formatter: function (val) {
+          return val;
+        },
+        offsetY: 0,
+        style: {
+          fontSize: "12px",
+          colors: ["#304758"]
+        }
+      },
+      stroke: {
+        show: true,
+        width: 1,
+        colors: ['#fff']
+      },
+      xaxis: {
         categories: [
 
         ],
@@ -119,45 +134,46 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
           enabled: true,
           offsetY: -35
         }
-      };
-    this.fill = {
-      type: "gradient",
-      gradient: {
-        shade: "light",
-        type: "horizontal",
-        shadeIntensity: 0.25,
-        gradientToColors: undefined,
-        inverseColors: true,
-        opacityFrom: 1,
-        opacityTo: 1,
-        stops: [50, 0, 100, 100]
-      }
-    };
-    this.yaxis = {
-      axisBorder: {
-        show: true
       },
-      axisTicks: {
-        show: true
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "light",
+          type: "horizontal",
+          shadeIntensity: 0.25,
+          gradientToColors: undefined,
+          inverseColors: true,
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [50, 0, 100, 100]
+        }
       },
-      labels: {
-        show: true,
-        formatter: function (val) {
-          return val + "";
+      yaxis: {
+        axisBorder: {
+          show: true
+        },
+        axisTicks: {
+          show: true
+        },
+        labels: {
+          show: true,
+          formatter: function (val) {
+            return val + "";
+          }
+        }
+      },
+      title: {
+        text: "",
+        floating: true,
+        offsetY: 320,
+        align: "center",
+        style: {
+          color: "#444"
         }
       }
-    };
-    this.title = {
-      text: "",
-      floating: true,
-      offsetY: 320,
-      align: "center",
-      style: {
-        color: "#444"
-      }
-    };
-    this.series[0].data = this.dataLoc;
-    this.xaxis.categories = this.labelsLoc;
-
+    }
+    opciones.series[0].data = this.dataLoc;
+    opciones.xaxis.categories = this.labelsLoc;
+    return opciones;
   }
 }

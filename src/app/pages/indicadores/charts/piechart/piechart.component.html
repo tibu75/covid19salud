@@ -1,8 +1,5 @@
 <div id="chart">
-  <apx-chart
-    [series]="series"
-    [chart]="chart"
-    [labels]="labels"
-    [responsive]="responsive"
-  ></apx-chart>
+  <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+    [responsive]="chartOptions.responsive" [legend]="chartOptions.legend">
+  </apx-chart>
 </div>
