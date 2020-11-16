@@ -162,7 +162,7 @@ export class ExportarComponent implements OnInit {
         const lc = elm.localidad === loc;
         return lc;
       });
-      // console.log("filtro", resultado);
+      console.log("filtro", resultado);
 
       this.exportar = resultado;
       this.form = data;
