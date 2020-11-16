@@ -43,6 +43,7 @@ export class ExportarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.reset();
     this.cargarForms();
     this.cargarLocalidades();
   }
@@ -61,9 +62,9 @@ export class ExportarComponent implements OnInit {
         //debugger
         this.form = registros;
         this.formtemp = registros;
+        this.exportar = registros;
         this.totalForm = total;
         this.cdr.markForCheck();
-
         this.cargando = false;
       });
   }
@@ -83,7 +84,10 @@ export class ExportarComponent implements OnInit {
   async filtrar() {
     const time = "T03:00:00.000Z";
     let consulta = this.queryForm.value;
+    let loc = this.queryForm.value.localidad;
+    // console.log("loc", loc);
     let fd = this.queryForm.value.fechaDesde + time;
+
     let fh = this.queryForm.value.fechaHasta + time;
     this.reg0800.queryXls(consulta).subscribe((data: any) => {
       const persona = data.map((item) => {
@@ -142,9 +146,21 @@ export class ExportarComponent implements OnInit {
         return consulta;
       };
       const obj = exportConsulta(persona, call);
+      //console.log("obj", obj);
       const resultado = obj.filter((elm) => {
-        const fil = elm.fecha >= fd && elm.fecha <= fh;
-        return fil;
+        if (loc != null && fd != "nullT03:00:00.000Z") {
+          const fec_loc =
+            elm.fechaDesde >= fd &&
+            elm.fechaHasta <= fh &&
+            elm.localidad === loc;
+          return fec_loc;
+        }
+        if (fd != "nullT03:00:00.000Z" && fh != "nullT03:00:00.000Z") {
+          const fec = elm.fechaDesde >= fd && elm.fechaHasta <= fh;
+          return fec;
+        }
+        const lc = elm.localidad === loc;
+        return lc;
       });
       console.log("filtro", resultado);
 
@@ -158,6 +174,7 @@ export class ExportarComponent implements OnInit {
     this.queryForm.reset();
     this.cdr.markForCheck();
     this.cargarForms();
+    this.cargarLocalidades();
   }
 
   exportarXls() {
