@@ -34,6 +34,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { RegistrosComponent } from "./pages/registros/registros.component";
 import { IndicadoresModule } from "./pages/indicadores/indicadores.module";
 import { NgApexchartsModule } from "ng-apexcharts";
+
 function appInitializer(authService: AuthService) {
   return () => {
     return new Promise((resolve) => {
