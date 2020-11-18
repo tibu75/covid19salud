@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector, Inject } from "@angular/core";
 import {
   HttpRequest,
   HttpHandler,
@@ -6,17 +6,23 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from "@angular/common/http";
-import { ToastrService } from "ngx-toastr";
+
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private router: Router, private toast: ToastrService) {}
-
+  constructor(
+    private router: Router,
+    @Inject(Injector) private injector: Injector
+  ) {}
+  private get toastr(): ToastrService {
+    return this.injector.get(ToastrService);
+  }
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -41,9 +47,8 @@ export class AuthInterceptorService implements HttpInterceptor {
             if (err.status !== 401) {
               return;
             }
-            this.toast.warning(
-              "Su sesión ha expirado, debe volver a iniciar sesión",
-              "AVISO IMPORTANTE"
+            this.toastr.error(
+              "La sesión ha expirado.! Inicie sesión nuevamente"
             );
             this.router.navigate(["/auth/login"]);
           }
