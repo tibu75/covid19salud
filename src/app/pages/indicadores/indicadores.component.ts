@@ -68,7 +68,7 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
 
   cargarForms() {
     this.cargando = true;
-    this.reg0800Service.getRegistrosTodos(10000).subscribe(({ total, registros }) => {
+    this.reg0800Service.getRegistrosTodos(5000).subscribe(({ total, registros }) => {
       console.log("cargarForms: Registros ", registros);
       console.log("Total de Personas: ", total);
       this.form = registros;
