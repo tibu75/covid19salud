@@ -52,7 +52,6 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     // Conexion al Socket
 
     this.cargarForms();
-
   }
   ngAfterViewInit(): void {
     this.wsService.listen("dataUpdate").subscribe((data) => {
@@ -69,7 +68,7 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
 
   cargarForms() {
     this.cargando = true;
-    this.reg0800Service.getRegistrosTodos(1000).subscribe(({ total, registros }) => {
+    this.reg0800Service.getRegistrosTodos(5000).subscribe(({ total, registros }) => {
       console.log("cargarForms: Registros ", registros);
       console.log("Total de Personas: ", total);
       this.form = registros;
@@ -163,7 +162,7 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     let f7: any[] = [];
     for (let dia = 6; dia >= 0; dia--) {
       f7.push(moment(Date.now() - dia * 24 * 3600 * 1000).format("YYYY-MM-DD") + time);
-    };
+    }
     const llamada = this.form.reduce(
       (obj, value, i) => ({
         ...obj,
@@ -239,7 +238,7 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
         this.sinSintomas++;
       }
     });
-    this.cantRegistros = acum;/* 
+    this.cantRegistros = acum; /* 
     console.log("Registros totales: ", this.cantRegistros);
     console.log("Registros con sintomas: ", this.conSintomas);
     console.log("Registros sin sintomas: ", this.sinSintomas); */
