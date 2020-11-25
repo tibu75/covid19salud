@@ -87,8 +87,8 @@ export class ExportarComponent implements OnInit {
     let loc = this.queryForm.value.localidad;
     // console.log("loc", loc);
     let fd = this.queryForm.value.fechaDesde + time;
-
     let fh = this.queryForm.value.fechaHasta + time;
+
     this.reg0800.queryXls(consulta).subscribe((data: any) => {
       const persona = data.map((item) => {
         const nombre = { nombre: item.persona.nombre };
@@ -146,23 +146,21 @@ export class ExportarComponent implements OnInit {
         return consulta;
       };
       const obj = exportConsulta(persona, call);
-      //console.log("obj", obj);
+      // console.log("obj", obj);
       const resultado = obj.filter((elm) => {
-        if (loc != null && fd != "nullT03:00:00.000Z") {
+        if (loc != null && fd !== "nullT03:00:00.000Z") {
           const fec_loc =
-            elm.fechaDesde >= fd &&
-            elm.fechaHasta <= fh &&
-            elm.localidad === loc;
+            elm.fecha >= fd && elm.fecha <= fh && elm.localidad === loc;
           return fec_loc;
         }
-        if (fd != "nullT03:00:00.000Z" && fh != "nullT03:00:00.000Z") {
-          const fec = elm.fechaDesde >= fd && elm.fechaHasta <= fh;
+        if (fd !== "nullT03:00:00.000Z" && fh !== "nullT03:00:00.000Z") {
+          const fec = elm.fecha >= fd && elm.fecha <= fh;
           return fec;
         }
         const lc = elm.localidad === loc;
         return lc;
       });
-      console.log("filtro", resultado);
+      //console.log("filtro", resultado);
 
       this.exportar = resultado;
       this.form = data;
@@ -190,7 +188,7 @@ export class ExportarComponent implements OnInit {
       usuario: [""],
     })),
       this.queryForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
-        console.log(value);
+        //        console.log(value);
       });
   }
 }
