@@ -34,6 +34,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { RegistrosComponent } from "./pages/registros/registros.component";
 import { IndicadoresModule } from "./pages/indicadores/indicadores.module";
 import { NgApexchartsModule } from "ng-apexcharts";
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -95,6 +96,7 @@ export function getHighlightLanguages() {
     MatDialogModule,
     IndicadoresModule,
     NgApexchartsModule,
+    GooglePlaceModule,
   ],
   providers: [
     {
