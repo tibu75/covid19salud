@@ -42,6 +42,7 @@
 		"ng-inline-svg": "^10.1.0",
 		"ng2-charts": "^2.4.2",
 		"ngx-clipboard": "^13.0.1",
+		"ngx-google-places-autocomplete": "^2.0.5",
 		"ngx-highlightjs": "3.0.3",
 		"ngx-pagination": "^5.0.0",
 		"ngx-perfect-scrollbar": "^9.0.0",
