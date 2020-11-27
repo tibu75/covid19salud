@@ -2,8 +2,8 @@
     <div class="card-header">
         <div class="card-title">
             <span class="card-icon">
-        <i class="flaticon2-delivery-package text-primary"></i>
-      </span>
+                <i class="flaticon2-delivery-package text-primary"></i>
+            </span>
             <h3 class="card-label">Grilla de Registros </h3>
         </div>
         <div class="card-toolbar">
@@ -14,18 +14,18 @@
             <!--begin::Button-->
             <a routerLink="/registro" routerLinkActive="router-link-active" class="btn btn-primary font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
-          <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-            viewBox="0 0 24 24" version="1.1">
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <rect x="0" y="0" width="24" height="24"></rect>
-              <circle fill="#000000" cx="9" cy="15" r="6"></circle>
-              <path
-                d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                fill="#000000" opacity="0.3"></path>
-            </g>
-          </svg>
-          <!--end::Svg Icon--> </span>Nuevo Registro</a>
+                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                        height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"></rect>
+                            <circle fill="#000000" cx="9" cy="15" r="6"></circle>
+                            <path
+                                d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                fill="#000000" opacity="0.3"></path>
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon--> </span>Nuevo Registro</a>
             <!--end::Button-->
         </div>
     </div>
@@ -35,22 +35,23 @@
             <div class="row mb-6">
                 <div class="col-lg-3 mb-lg-0 mb-6">
                     <label>Documento:</label>
-                    <input type="text" class="form-control datatable-input" placeholder="Ej:3275847" data-col-index="1" (keyup)="buscarDocumento(txtDni.value)" #txtDni />
+                    <input type="text" class="form-control datatable-input" placeholder="Ej:3275847" data-col-index="1"
+                        (keyup)="buscarDocumento(txtDni.value)" #txtDni />
                 </div>
             </div>
             <div class="row mt-8">
                 <div class="col-lg-12">
                     <button class="btn btn-primary btn-primary--icon" id="kt_search">
-            <span>
-              <i class="la la-search"></i>
-              <span>Buscar</span>
-            </span></button>&nbsp;&nbsp;
+                        <span>
+                            <i class="la la-search"></i>
+                            <span>Buscar</span>
+                        </span></button>&nbsp;&nbsp;
                     <button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
-            <span>
-              <i class="la la-close"></i>
-              <span>Reiniciar</span>
-            </span>
-          </button>
+                        <span>
+                            <i class="la la-close"></i>
+                            <span>Reiniciar</span>
+                        </span>
+                    </button>
                 </div>
             </div>
         </form>
@@ -59,25 +60,37 @@
         <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row">
                 <div class="col-12">
-                    <table class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info">
+                    <table class="table table-bordered table-hover table-checkable dataTable dtr-inline collapsed"
+                        id="kt_datatable" role="grid" aria-describedby="kt_datatable_info">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 10%;text-align: center;" aria-sort="ascending" aria-label="Record ID: activate to sort column descending">
+                                <th class="sorting_asc" tabindex="0" aria-controls="kt_datatable" rowspan="1"
+                                    colspan="1" style="width: 10%;text-align: center;" aria-sort="ascending"
+                                    aria-label="Record ID: activate to sort column descending">
                                     Reg.Nro
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 20%;text-align: center;" aria-label="Order ID: activate to sort column ascending">
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+                                    style="width: 20%;text-align: center;"
+                                    aria-label="Order ID: activate to sort column ascending">
                                     Fecha de Registro
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 20%;text-align: center;" aria-label="Country: activate to sort column ascending">
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+                                    style="width: 20%;text-align: center;"
+                                    aria-label="Country: activate to sort column ascending">
                                     Apellido
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 20%;text-align: center;" aria-label="Ship City: activate to sort column ascending">
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+                                    style="width: 20%;text-align: center;"
+                                    aria-label="Ship City: activate to sort column ascending">
                                     Nombre
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 20%;text-align: center;" aria-label="Company Agent: activate to sort column ascending">
+                                <th class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1"
+                                    style="width: 20%;text-align: center;"
+                                    aria-label="Company Agent: activate to sort column ascending">
                                     Localidad
                                 </th>
-                                <th class="width: 2%;text-align: center;" rowspan="1" colspan="1" style="width: 10%;text-align: center;" aria-label="Actions">
+                                <th class="width: 2%;text-align: center;" rowspan="1" colspan="1"
+                                    style="width: 10%;text-align: center;" aria-label="Actions">
                                     Ver Registro
                                 </th>
                             </tr>
@@ -103,27 +116,31 @@
                                 </td>
                                 <td style="display: none">10/15/2017</td>
                                 <td style="display: none">
-                                    <span class="label label-lg font-weight-bold label-light-info label-inline">Info</span>
+                                    <span
+                                        class="label label-lg font-weight-bold label-light-info label-inline">Info</span>
                                 </td>
                                 <td style="display: none">
-                                    <span class="label label-danger label-dot mr-2"></span><span class="font-weight-bold text-danger">Online</span>
+                                    <span class="label label-danger label-dot mr-2"></span><span
+                                        class="font-weight-bold text-danger">Online</span>
                                 </td>
                                 <td style="text-align: center;">
 
-                                    <a routerLink="/mostrar" class="btn btn-primary font-weight-bolder" (click)="Mostrar(f)">
+                                    <a routerLink="/mostrar" class="btn btn-primary font-weight-bolder"
+                                        (click)="Mostrar(f)">
                                         <span class="svg-icon svg-icon-md">
-                      <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                        height="24px" viewBox="0 0 24 24" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <rect x="0" y="0" width="24" height="24"></rect>
-                          <circle fill="#000000" cx="9" cy="15" r="6"></circle>
-                          <path
-                            d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
-                            fill="#000000" opacity="0.3"></path>
-                        </g>
-                      </svg>
-                      <!--end::Svg Icon--> </span>Ver</a>
+                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"></rect>
+                                                    <circle fill="#000000" cx="9" cy="15" r="6"></circle>
+                                                    <path
+                                                        d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                                        fill="#000000" opacity="0.3"></path>
+                                                </g>
+                                            </svg>
+                                            <!--end::Svg Icon--> </span>Ver</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -157,11 +174,11 @@
                     <div class="dataTables_paginate paging_simple_numbers" id="kt_datatable_paginate">
                         <ul class="pagination">
                             <button (click)="paginacion(-10)" class="btn btn-secondary">
-                Anteriores
-              </button> &nbsp;
+                                Anteriores
+                            </button> &nbsp;
                             <button (click)="paginacion(10)" class="btn btn-secondary">
-                Siguientes
-              </button>
+                                Siguientes
+                            </button>
                         </ul>
                     </div>
                 </div>
@@ -170,6 +187,7 @@
         <!--end: Datatable-->
     </div>
 </div>
+
 <ng-container *ngIf='Showllamadas'>
     <app-mostrar [llamada]='form'></app-mostrar>
 </ng-container>
