@@ -35,6 +35,8 @@ import { RegistrosComponent } from "./pages/registros/registros.component";
 import { IndicadoresModule } from "./pages/indicadores/indicadores.module";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { GeolocationComponent } from "./pages/geolocation/geolocation.component";
+import { AgmCoreModule } from "@agm/core";
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -67,7 +69,9 @@ export function getHighlightLanguages() {
     IndicadoresComponent,
     ExportarComponent,
     RegllamadaComponent,
+    GeolocationComponent,
   ],
+  exports: [GeolocationComponent],
   imports: [
     BrowserModule,
     ToastrModule.forRoot({
@@ -97,6 +101,10 @@ export function getHighlightLanguages() {
     IndicadoresModule,
     NgApexchartsModule,
     GooglePlaceModule,
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyBYRqoobVhyOTBqYOUzsqwziaOV5IlLtL0",
+      libraries: ["places"],
+    }),
   ],
   providers: [
     {

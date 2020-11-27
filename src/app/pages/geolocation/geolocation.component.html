@@ -1,0 +1,39 @@
+<div class="fondo-geolocation oculto" [class.oculto]='geolocationService.ocultarMap'>
+    <div class="modal position-relative d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Geolocalizar el domicilio</h5>
+                    <button type="button" (click)='cerrarMap()' class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Ingrese los datos del domicilio</p>
+                    <div>
+                        <div class="">
+                            <input class="form-control form-control-solid" type="text" ngx-google-places-autocomplete
+                                [options]='options' #placesRef="ngx-places"
+                                (onAddressChange)="handleAddressChange($event)" />
+                            <span class="form-text text-muted"></span>
+                        </div>
+                    </div>
+                    <agm-map [latitude]="latitud" [longitude]="longitud" [zoom]='zoom' [mapTypeId]='mapTypeId'>
+                        <agm-marker [latitude]="latitud" [longitude]="longitud">
+                            <agm-info-window>
+                                Info
+
+                            </agm-info-window>>
+
+                        </agm-marker>
+                    </agm-map>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)='cerrarMap()' class="btn btn-secondary"
+                        data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

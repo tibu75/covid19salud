@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, NgModule } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  NgModule,
+  ViewChild,
+} from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -16,9 +22,10 @@ import { Form0800Service } from "./../../../services/form0800/form0800.service";
 import { Localidades } from "../../models/localidades";
 
 import * as moment from "moment";
-import { debounce, debounceTime } from "rxjs/operators";
+import { debounceTime } from "rxjs/operators";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 
+import { GeolocationService } from "../../../services/geomap/geolocation.service";
 @Component({
   selector: "app-registro",
   templateUrl: "./registro.component.html",
@@ -84,7 +91,8 @@ export class RegistroComponent implements OnInit {
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private toast: ToastrService,
-    private localidadesService: LocalidadesService
+    private localidadesService: LocalidadesService,
+    private geolocationService: GeolocationService
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
@@ -104,6 +112,10 @@ export class RegistroComponent implements OnInit {
         positionClass: "toast-top-center",
       }
     );
+  }
+  cargarGeolocation(personaForm) {
+    console.log(personaForm);
+    this.geolocationService.openGeolocation();
   }
 
   cargarLocalidades() {
