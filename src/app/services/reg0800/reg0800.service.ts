@@ -43,4 +43,9 @@ export class Reg0800Service {
       .post<FormsLlamada[]>(url, query)
       .pipe(map((resp: any) => resp.data));
   }
+
+  indicadores(): Observable<Reg0800> {
+    let url = `${API_USERS_URL}/indicadores`;
+    return this.http.get<Reg0800>(url);
+  }
 }

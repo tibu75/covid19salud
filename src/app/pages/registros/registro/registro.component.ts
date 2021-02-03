@@ -18,21 +18,27 @@ import { Subscription, Observable, BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { LocalidadesService } from "./../../../services/localidades/localidades.service";
-import { Form0800Service } from "./../../../services/form0800/form0800.service";
+
 import { Localidades } from "../../models/localidades";
+import { opc_form } from "../../../interfaces/opc_form.interface";
 
 import * as moment from "moment";
 import { debounceTime } from "rxjs/operators";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 
 import { GeolocationService } from "../../../services/geomap/geolocation.service";
+import { reduceTicks } from "@swimlane/ngx-charts";
+
 @Component({
   selector: "app-registro",
   templateUrl: "./registro.component.html",
 })
 export class RegistroComponent implements OnInit {
   //Formulario
+  opc_Forms: opc_form = { op1: "covid", op2: "vacuna" };
   personaForm: FormGroup;
+  vacunaForm: FormGroup;
+
   sintomas = "No";
   con_caso_sos = "No";
   enf_actual = "No";
@@ -48,7 +54,6 @@ export class RegistroComponent implements OnInit {
   req_seguimiento = "No";
   laboratorio = "Privado";
   whatsapp = "No";
-
   antencedentes_p = "No";
   toma_medicamentos = "";
   vivienda_personas = "";
@@ -56,7 +61,6 @@ export class RegistroComponent implements OnInit {
   sexo = "M";
   tipo_registro = "Sin Sintomas";
   realizo_hisopado = "No";
-
   atencion_domiciliaria = "No";
   cert_aislamiento = "No";
   resultado_hisopado = "No";
@@ -66,9 +70,26 @@ export class RegistroComponent implements OnInit {
   obs_resultado_hisopado = "";
   obs_derivacion_107 = "";
   obs_mov_propia = "";
-
   edad;
   mostrarEdad;
+
+  vac_factor_riesgo_patologias = "No";
+  vac_obs_factor = "";
+  vac_tratamiento = "No";
+  vac_especificar = "";
+  vac_medicacion = "";
+  vac_tratamiento_plasma = "No";
+  vac_estudios_rutina = "No";
+  vac_obs_est_rut = "";
+  vac_gripe_camp_ant = "No";
+  vac_enfermedad_covid = "No";
+  vac_covid_cuando;
+  vac_suministro_vac = "No";
+  vac_efector;
+  vac_que_dosis = "primera";
+  vac_sintomas_adm_vac;
+  vac_cierre_contacto;
+
   private isLoadingSubject: BehaviorSubject<boolean>;
   public isLoading$: Observable<boolean>;
   public fechahoy: string = moment().format("YYYY-MM-DD");
@@ -82,6 +103,7 @@ export class RegistroComponent implements OnInit {
   private unsubscribe: Subscription[] = [];
   public localidades: Localidades[] = [];
   public errorMessage: string;
+  public cargar_form: string;
 
   constructor(
     public _renaperService: RenaperService,
@@ -97,6 +119,7 @@ export class RegistroComponent implements OnInit {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
     this.initForm();
+    this.vacForm();
     this.activarInicio();
     this.cdr.markForCheck();
   }
@@ -113,8 +136,17 @@ export class RegistroComponent implements OnInit {
       }
     );
   }
+  show_form(opciones) {
+    let op = opciones;
+    if (op === this.opc_Forms.op1) {
+      this.cargar_form = op;
+    } else if (op === this.opc_Forms.op2) {
+      this.cargar_form = op;
+    }
+    console.log("show_Form", this.cargar_form);
+  }
   cargarGeolocation(personaForm) {
-    console.log(personaForm);
+    // console.log(personaForm);
     this.geolocationService.openGeolocation();
   }
 
@@ -131,6 +163,7 @@ export class RegistroComponent implements OnInit {
       const timeDiff = Math.abs(Date.now() - convertAge.getTime());
       this.mostrarEdad = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
       this.personaForm.patchValue({ persona: { edad: this.mostrarEdad } });
+      this.vacunaForm.patchValue({ persona: { edad: this.mostrarEdad } });
       //console.log(this.personaForm);
     }
   }
@@ -188,6 +221,7 @@ export class RegistroComponent implements OnInit {
       llamada: this.fb.group({
         nroForm: [null],
         fecha: [""],
+        opc_form: [""],
         tipo_llamada: ["Entrada"],
         motivo: ["", [Validators.required]],
         sintomas: ["No"],
@@ -242,6 +276,7 @@ export class RegistroComponent implements OnInit {
           [Validators.required],
         ],
         fec_salud: [{ value: "", disabled: true }, [Validators.required]],
+
         cierre_contacto: ["", [Validators.required]],
         usuario: [""],
       }),
@@ -257,7 +292,7 @@ export class RegistroComponent implements OnInit {
       nroForm: [null],
     });
     this.personaForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
-      console.log(value);
+      console.log("covid", value);
     });
     //  //console.log(this.personaForm);
   }
@@ -269,10 +304,14 @@ export class RegistroComponent implements OnInit {
     }&sexo=${this.personaForm.get("persona.sexo").value}`;
 
     this._registroService
+      // Busca primero que no tenga un registro cargado
       .getOneRegistro(this.personaForm.get("persona.documento").value)
       .subscribe((data: any) => {
+        console.log("data", data);
         if (data.ok === false) {
+          //Si no existe registro busca en renaper y guarda los datos. en la bd de persona.
           this._personaService.getPersona(params).subscribe((data: any) => {
+            console.log(data);
             if (data.datos.ID_TRAMITE_PRINCIPAL !== 0) {
               this.buscar_datos = false;
               this.cargar_datos = true;
@@ -283,10 +322,11 @@ export class RegistroComponent implements OnInit {
               ).value;
               data.datos.sexo = this.personaForm.get("persona.sexo").value;
               this.initForm(data.datos);
+              this.vacForm(data.datos);
               this.edad = this.personaForm.get("persona.fechaNacimiento").value;
               this.calcularEdad();
 
-              console.log(this.nombre);
+              //console.log(this.nombre);
             } else {
               this.toast.error(
                 "Persona No encontrada, por favor Verifique los datos ingresados."
@@ -436,10 +476,38 @@ export class RegistroComponent implements OnInit {
   }
 
   get valido() {
-    return this.personaForm.valid;
+    if (this.cargar_form === this.opc_Forms.op1) {
+      this.personaForm.patchValue({ llamada: { opc_form: this.cargar_form } });
+      return this.personaForm.valid;
+    } else {
+      this.vacunaForm.patchValue({
+        persona: { telefono: this.personaForm.get("persona.telefono").value },
+      });
+      this.vacunaForm.patchValue({
+        persona: { localidad: this.personaForm.get("persona.localidad").value },
+      });
+      this.vacunaForm.patchValue({
+        persona: { piso: this.personaForm.get("persona.piso").value },
+      });
+      this.vacunaForm.patchValue({
+        persona: {
+          departamento: this.personaForm.get("persona.departamento").value,
+        },
+      });
+      this.vacunaForm.patchValue({
+        persona: { numero: this.personaForm.get("persona.numero").value },
+      });
+      this.vacunaForm.patchValue({ llamada: { opc_form: this.cargar_form } });
+      return this.vacunaForm.valid;
+    }
   }
+
   get novalido() {
-    return this.personaForm.invalid;
+    if (this.cargar_form === this.opc_Forms.op1) {
+      return this.personaForm.invalid;
+    } else {
+      return this.vacunaForm.invalid;
+    }
   }
 
   activarSintomas() {
@@ -592,6 +660,233 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  ///////////////////////////
+  /// VacunaForm//////
+
+  vacForm(datos?) {
+    this.vacunaForm = this.fb.group({
+      persona: this.fb.group({
+        nombre: [datos ? datos.nombres : ""],
+        apellido: [datos ? datos.apellido : ""],
+        documento: [
+          datos ? datos.documento : "",
+          [Validators.required, Validators.maxLength(8)],
+        ],
+        fechaNacimiento: [datos ? datos.fechaNacimiento : ""],
+        edad: [""],
+        sexo: [datos ? datos.sexo : "M"],
+        telefono: [
+          "",
+          [
+            Validators.required,
+            Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
+          ],
+        ],
+        calle: [
+          datos ? datos.calle : "",
+          [Validators.required, Validators.maxLength(50)],
+        ],
+        numero: [
+          datos ? datos.numero : "-",
+          [Validators.required, Validators.maxLength(4)],
+        ],
+        departamento: [
+          datos ? datos.departamento : "-",
+          [Validators.required, Validators.maxLength(5)],
+        ],
+        piso: [
+          datos ? datos.piso : "-",
+          [Validators.required, Validators.maxLength(5)],
+        ],
+        cpostal: [
+          datos ? datos.cpostal : "",
+          [Validators.required, Validators.maxLength(4)],
+        ],
+        localidad: ["", [Validators.required]],
+        provincia: [
+          datos ? datos.provincia : "",
+          [Validators.required, Validators.maxLength(30)],
+        ],
+        pais: [
+          datos ? datos.pais : "",
+          [Validators.required, Validators.maxLength(30)],
+        ],
+        img: [datos ? datos.foto : ""],
+      }),
+      llamada: this.fb.group({
+        nroForm: [null],
+        fecha: [""],
+        opc_form: [""],
+        tipo_llamada: ["Entrada"],
+        usuario: [""],
+        vacuna_form: this.fb.group({
+          vac_motivo: ["", [Validators.required]],
+          vac_factor_riesgo_patologias: ["No"],
+          vac_obs_factor: [
+            { value: "", disabled: true },
+            [Validators.required],
+          ],
+          vac_tratamiento: ["No"],
+          vac_especificar: [
+            { value: "No", disabled: true },
+            [Validators.required],
+          ],
+          vac_medicacion: [
+            { value: "No", disabled: true },
+            [Validators.required],
+          ],
+          vac_tratamiento_plasma: ["No"],
+          vac_estudios_rutina: ["No"],
+          vac_obs_est_rut: [
+            { value: "", disabled: true },
+            [Validators.required],
+          ],
+          vac_gripe_camp_ant: ["No"],
+          vac_enfermedad_covid: [{ value: "No" }, [Validators.required]],
+          vac_covid_cuando: [
+            { value: "No", disabled: true },
+            [Validators.required],
+          ],
+          vac_suministro_vac: [{ value: "No" }, [Validators.required]],
+          vac_fec_adm_vac: [
+            { value: "", disabled: true },
+            [Validators.required],
+          ],
+          vac_efector: [{ value: "", disabled: true }, [Validators.required]],
+          vac_que_dosis: [{ value: "", disabled: true }, [Validators.required]],
+          vac_sintomas_adm_vac: [
+            { value: "", disabled: true },
+            [Validators.required],
+          ],
+          vac_cierre_contacto: ["", [Validators.required]],
+        }),
+      }),
+      usuario: [null],
+      fecha: [""],
+      nroForm: [null],
+    });
+    this.vacunaForm.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe((value) => console.log("Vacuna Form", value));
+  }
+
+  ////////////////////////////////////////////////////
+  // Funciones de Form Vacuna//////////////////////
+  //////////////////////////////////////////////////
+
+  get campo_vac_Telefono() {
+    return this.vacunaForm.get("persona.telefono");
+  }
+  get campo_vac_Calle() {
+    return this.vacunaForm.get("persona.calle");
+  }
+  get campo_vac_Numero() {
+    return this.vacunaForm.get("persona.numero");
+  }
+  get campo_vac_Piso() {
+    return this.vacunaForm.get("persona.piso");
+  }
+  get campo_vac_Depto() {
+    return this.vacunaForm.get("persona.departamento");
+  }
+  get campo_vac_Localidad() {
+    return this.vacunaForm.get("persona.localidad");
+  }
+  get campoVacMotivo() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_motivo");
+  }
+  get campoVacCierre() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_cierre_contacto");
+  }
+
+  get campo_Obs_fac_patologias() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_obs_factor");
+  }
+  get campo_vac_especificar() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_especificar");
+  }
+  get campo_vac_medicacion() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_medicacion");
+  }
+  get campo_vac_obs_est_rut() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_obs_est_rut");
+  }
+
+  get campo_vac_enfermedad_covid() {
+    return this.vacunaForm.get("");
+  }
+  get campo_vac_covid_cuando() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_covid_cuando");
+  }
+
+  get campo_vac_efector() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_efector");
+  }
+  get campo_vac_que_dosis() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_que_dosis");
+  }
+  get campo_vac_sintomas_adm_vac() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_sintomas_adm_vac");
+  }
+  get campo_vac_fec_adm_vac() {
+    return this.vacunaForm.get("llamada.vacuna_form.vac_fec_adm_vac");
+  }
+
+  activarFactorRiesgo() {
+    if (this.vac_factor_riesgo_patologias === "Si") {
+      this.campo_Obs_fac_patologias.enable();
+    } else {
+      this.campo_Obs_fac_patologias.disable();
+      this.campo_Obs_fac_patologias.reset();
+    }
+  }
+
+  activarVac_Tratamiento() {
+    if (this.vac_tratamiento === "Si") {
+      this.campo_vac_especificar.enable();
+      this.campo_vac_medicacion.enable();
+    } else {
+      this.campo_vac_especificar.disable();
+      this.campo_vac_especificar.reset();
+      this.campo_vac_medicacion.disable();
+      this.campo_vac_medicacion.reset();
+    }
+  }
+  activar_Vac_estudios_rutina() {
+    if (this.vac_estudios_rutina === "Si") {
+      this.campo_vac_obs_est_rut.enable();
+    } else {
+      this.campo_vac_obs_est_rut.disable();
+      this.campo_vac_obs_est_rut.reset();
+    }
+  }
+  activar_vac_enfermedad_covid() {
+    if (this.vac_enfermedad_covid === "Si") {
+      this.campo_vac_covid_cuando.enable();
+    } else {
+      this.campo_vac_covid_cuando.disable();
+      this.campo_vac_covid_cuando.reset();
+    }
+  }
+
+  activar_campos_vacunas() {
+    if (this.vac_suministro_vac === "Si") {
+      this.campo_vac_efector.enable();
+      this.campo_vac_que_dosis.enable();
+      this.campo_vac_sintomas_adm_vac.enable();
+      this.campo_vac_fec_adm_vac.enable();
+    } else {
+      this.campo_vac_efector.disable();
+      this.campo_vac_efector.reset();
+      this.campo_vac_que_dosis.disable();
+      this.campo_vac_que_dosis.reset();
+      this.campo_vac_sintomas_adm_vac.disable();
+      this.campo_vac_sintomas_adm_vac.reset();
+      this.campo_vac_fec_adm_vac.disable();
+      this.campo_vac_fec_adm_vac.reset();
+    }
+  }
+
   submit() {
     // Acá están todos los datos del formulario para guardar en la BD
     this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
@@ -612,26 +907,53 @@ export class RegistroComponent implements OnInit {
   }
 
   guardarForm(event: Event) {
-    event.preventDefault();
-    // Acá están todos los datos del formulario para guardar en la BD
-    this.personaForm.patchValue({
-      llamada: { usuario: sessionStorage.getItem("ID") },
-    });
-    this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
-
-    let datosPersona = this.personaForm.value;
-    console.log("Datos de la Persona: ", datosPersona);
-
-    if (this.personaForm.valid) {
-      this._registroService.createRegistro(datosPersona).subscribe((data) => {
-        /* 
-				let pepe = data; // Eliminar esta línea si anda todo bien */
+    if (this.cargar_form === this.opc_Forms.op1) {
+      event.preventDefault();
+      // Acá están todos los datos del formulario para guardar en la BD
+      this.personaForm.patchValue({
+        llamada: { usuario: sessionStorage.getItem("ID") },
       });
-      this.router.navigate(["/registros"]);
+      this.personaForm.patchValue({ usuario: sessionStorage.getItem("ID") });
+
+      let datosPersona = this.personaForm.value;
+      //console.log("Datos de la Persona: ", datosPersona);
+
+      if (this.personaForm.valid) {
+        this._registroService.createRegistro(datosPersona).subscribe((data) => {
+          /* 
+				let pepe = data; // Eliminar esta línea si anda todo bien */
+        });
+        this.router.navigate(["/registros"]);
+      } else {
+        this.personaForm.markAllAsTouched();
+        //console.log(this.personaForm);
+      }
+      // this.router.navigateByUrl('/registros');
     } else {
-      this.personaForm.markAllAsTouched();
-      //console.log(this.personaForm);
+      event.preventDefault();
+      // Acá están todos los datos del formulario para guardar en la BD
+      this.vacunaForm.patchValue({
+        usuario: sessionStorage.getItem("ID"),
+      });
+      this.vacunaForm.patchValue({
+        llamada: { usuario: sessionStorage.getItem("ID") },
+      });
+
+      let datosPersona = this.vacunaForm.value;
+
+      console.log("Datos de la Persona form vacuna: ", datosPersona);
+
+      if (this.vacunaForm.valid) {
+        this._registroService.createRegistro(datosPersona).subscribe((data) => {
+          /* 
+				let pepe = data; // Eliminar esta línea si anda todo bien */
+        });
+        this.router.navigate(["/registros"]);
+      } else {
+        this.vacunaForm.markAllAsTouched();
+        //console.log(this.personaForm);
+      }
+      // this.router.navigateByUrl('/registros');
     }
-    // this.router.navigateByUrl('/registros');
   }
 }

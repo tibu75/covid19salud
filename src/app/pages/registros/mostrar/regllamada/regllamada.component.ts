@@ -8,6 +8,7 @@ import {
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { opc_form } from "../../../../interfaces/opc_form.interface";
 import * as moment from "moment";
 
 @Component({
@@ -16,40 +17,61 @@ import * as moment from "moment";
   styleUrls: ["./regllamada.component.scss"],
 })
 export class RegllamadaComponent implements OnInit, AfterViewInit {
+  opc_Forms: opc_form = { op1: "covid", op2: "vacuna" };
+  vacunaForm: FormGroup;
   personaForm: FormGroup;
-  tipollamada = this.datos.tipo_llamada;
-  sintomas = this.datos.sintomas;
-  con_caso_sos = this.datos.con_caso_sos;
-  enf_actual = this.datos.enf_actual;
-  convivientes = this.datos.convivientes;
-  intervencion = this.datos.intervencion;
-  cri_hisopado = this.datos.cri_hisopado;
-  mov_propia = this.datos.mov_propia;
-  der_enfermeria = this.datos.der_enfermeria;
-  sol_hisopado = this.datos.sol_hisopado;
-  cer_5dias = this.datos.cer_5dias;
-  cer_contacto = this.datos.cer_contacto;
-  cas_positivo = this.datos.cas_positivo;
-  req_seguimiento = this.datos.req_seguimiento;
-  laboratorio = this.datos.laboratorio;
-  whatsapp = this.datos.whatsapp;
-  antencedentes_p = this.datos.antencedentes_p;
-  toma_medicamentos = this.datos.toma_medicamentos;
-  vivienda_personas = this.datos.vivienda_personas;
-  nombre = this.datos.nombre;
-  sexo = this.datos.sexo;
-  tipo_registro = this.datos.tipo_registro;
-  realizo_hisopado = this.datos.realizo_hisopado;
 
-  atencion_domiciliaria = this.datos.atencion_domiciliaria;
-  cert_aislamiento = this.datos.cert_aislamiento;
-  resultado_hisopado = this.datos.resultado_hisopado;
-  derivacion_107 = this.datos.derivacion_107;
-  obs_atencion_domiciliaria = this.datos.obs_atencion_domiciliaria;
-  obs_cert_aislamiento = this.datos.obs_cert_aislamiento;
-  obs_resultado_hisopado = this.datos.obs_resultado_hisopado;
-  obs_derivacion_107 = this.datos.obs_derivacion_107;
-  obs_mov_propia = this.datos.obs_mov_propia;
+  // variables del formulario covid
+  tipoLlamada: string;
+  sintomas: string;
+  con_caso_sos: string;
+  enf_actual: string;
+  convivientes: string;
+  intervencion: string;
+  cri_hisopado: string;
+  mov_propia: string;
+  der_enfermeria: string;
+  sol_hisopado: string;
+  cer_5dias: string;
+  cer_contacto: string;
+  cas_positivo: string;
+  req_seguimiento: string;
+  antencedentes_p: string;
+  toma_medicamentos: string;
+  vivienda_personas: string;
+  nombre: string;
+  sexo: string;
+  tipo_registro: string;
+  realizo_hisopado: string;
+  laboratorio: string;
+  whatsapp: string;
+  atencion_domiciliaria: string;
+  cert_aislamiento: string;
+  resultado_hisopado: string;
+  derivacion_107: string;
+  obs_atencion_domiciliaria: string;
+  obs_cert_aislamiento: string;
+  obs_resultado_hisopado: string;
+  obs_derivacion_107: string;
+  obs_mov_propia: string;
+
+  /// variables del formulario vacunas
+  vac_tipoLlamada: string;
+  vac_factor_riesgo_patologias: string;
+  vac_obs_factor: string;
+  vac_especificar: string;
+  vac_tratamiento: string;
+  vac_tratamiento_plasma: string;
+  vac_medicacion: string;
+  vac_estudios_rutina: string;
+  vac_obs_est_rut: string;
+  vac_gripe_camp_ant: string;
+  vac_enfermedad_covid: string;
+  vac_covid_cuando: string;
+  vac_suministro_vac: string;
+  vac_efector: string;
+  vac_que_dosis: string;
+  vac_sintomas_adm_vac: string;
 
   edad;
   mostrarEdad;
@@ -62,6 +84,8 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
   public guardar: boolean = false;
   public sololectura: boolean;
   public errorMessage: string;
+  cargar_form: any;
+  opcion: any;
 
   constructor(
     private fb: FormBuilder,
@@ -71,12 +95,15 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    console.log("FORMMMMM", this.datos.vacuna_form);
+    this.opcion = this.datos.opc_form;
+    this.show_form();
+
     this.cdr.markForCheck();
   }
 
   ngAfterViewInit(): void {
-    this.initForm();
+    this.show_form();
   }
 
   initForm() {
@@ -129,12 +156,70 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
       }),
     });
     //console.log("esto se cargo");
-    console.log(this.personaForm);
+    //  console.log(this.personaForm);
 
     //console.log(this.edad);
     //console.log(this.mostrar_sintomas, this.mostrar_hisopado);
 
     this.cdr.markForCheck();
+  }
+
+  show_form() {
+    if (this.opcion === this.opc_Forms.op1) {
+      this.tipoLlamada = this.datos.tipoLlamada;
+      this.sintomas = this.datos.sintomas;
+      this.con_caso_sos = this.datos.con_caso_sos;
+      this.enf_actual = this.datos.enf_actual;
+      this.convivientes = this.datos.convivientes;
+      this.intervencion = this.datos.intervencion;
+      this.cri_hisopado = this.datos.cri_hisopado;
+      this.mov_propia = this.datos.mov_propia;
+      this.der_enfermeria = this.datos.der_enfermeria;
+      this.sol_hisopado = this.datos.sol_hisopado;
+      this.cer_5dias = this.datos.cer_5dias;
+      this.cer_contacto = this.datos.cer_contacto;
+      this.cas_positivo = this.datos.cas_positivo;
+      this.req_seguimiento = this.datos.req_seguimiento;
+      this.antencedentes_p = this.datos.antencedentes_p;
+      this.toma_medicamentos = this.datos.toma_medicamentos;
+      this.vivienda_personas = this.datos.vivienda_personas;
+      this.nombre = this.datos.nombre;
+      this.sexo = this.datos.sexo;
+      this.tipo_registro = this.datos.tipo_registro;
+      this.realizo_hisopado = this.datos.realizo_hisopado;
+      this.laboratorio = this.datos.laboratorio;
+      this.whatsapp = this.datos.whatsapp;
+      this.atencion_domiciliaria = this.datos.atencion_domiciliaria;
+      this.cert_aislamiento = this.datos.cert_aislamiento;
+      this.resultado_hisopado = this.datos.resultado_hisopado;
+      this.derivacion_107 = this.datos.derivacion_107;
+      this.obs_atencion_domiciliaria = this.datos.obs_atencion_domiciliaria;
+      this.obs_cert_aislamiento = this.datos.obs_cert_aislamiento;
+      this.obs_resultado_hisopado = this.datos.obs_resultado_hisopado;
+      this.obs_derivacion_107 = this.datos.obs_derivacion_107;
+      this.obs_mov_propia = this.datos.obs_mov_propia;
+
+      this.initForm();
+    } else {
+      this.vac_tipoLlamada = this.datos.vacuna_form.vac_tipoLlamada;
+      this.vac_factor_riesgo_patologias = this.datos.vacuna_form.vac_factor_riesgo_patologias;
+      this.vac_obs_factor = this.datos.vacuna_form.vac_obs_factor;
+      this.vac_especificar = this.datos.vacuna_form.vac_especificar;
+      this.vac_tratamiento = this.datos.vacuna_form.vac_tratamiento;
+      this.vac_tratamiento_plasma = this.datos.vacuna_form.vac_tratamiento_plasma;
+      this.vac_medicacion = this.datos.vacuna_form.vac_medicacion;
+      this.vac_estudios_rutina = this.datos.vacuna_form.vac_estudios_rutina;
+      this.vac_obs_est_rut = this.datos.vacuna_form.vac_obs_est_rut;
+      this.vac_gripe_camp_ant = this.datos.vacuna_form.vac_gripe_camp_ant;
+      this.vac_enfermedad_covid = this.datos.vacuna_form.vac_enfermedad_covid;
+      this.vac_covid_cuando = this.datos.vacuna_form.vac_covid_cuando;
+      this.vac_suministro_vac = this.datos.vacuna_form.vac_suministro_vac;
+      this.vac_efector = this.datos.vacuna_form.vac_efector;
+      this.vac_que_dosis = this.datos.vacuna_form.vac_que_dosis;
+      this.vac_sintomas_adm_vac = this.datos.vacuna_form.vac_sintomas_adm_vac;
+
+      this.vacForm();
+    }
   }
 
   onClickNo(): void {
@@ -415,6 +500,136 @@ export class RegllamadaComponent implements OnInit, AfterViewInit {
     } else {
       this.campoDetRequerimiento.disable();
       this.campoDetRequerimiento.reset("");
+    }
+  }
+
+  ////////////////////////////////////////////////////
+  // Funciones de Form Vacuna//////////////////////
+  //////////////////////////////////////////////////
+  vacForm() {
+    this.vacunaForm = this.fb.group({
+      tipo_llamada: [this.vac_tipoLlamada],
+      vacuna_form: this.fb.group({
+        nroForm: [this.datos.nroForm],
+        fecha: [this.datos.fecha],
+        tipo_llamada: [this.datos.tipo_llamada],
+        vac_motivo: [this.datos.vacuna_form.vac_motivo],
+        vac_factor_riesgo_patologias: [
+          this.datos.vacuna_form.vac_factor_riesgo_patologias,
+        ],
+        vac_obs_factor: [this.datos.vacuna_form.vac_obs_factor],
+        vac_tratamiento: [this.datos.vacuna_form.vac_tratamiento],
+        vac_especificar: [this.datos.vacuna_form.vac_especificar],
+        vac_medicacion: [this.datos.vacuna_form.vac_medicacion],
+        vac_tratamiento_plasma: [this.datos.vacuna_form.vac_tratamiento_plasma],
+        vac_estudios_rutina: [this.datos.vacuna_form.vac_estudios_rutina],
+        vac_obs_est_rut: [this.datos.vacuna_form.vac_obs_est_rut],
+        vac_gripe_camp_ant: [this.datos.vacuna_form.vac_gripe_camp_ant],
+        vac_enfermedad_covid: [this.datos.vacuna_form.vac_enfermedad_covid],
+        vac_covid_cuando: [this.datos.vacuna_form.vac_covid_cuando],
+        vac_suministro_vac: [this.datos.vacuna_form.vac_suministro_vac],
+        vac_fec_adm_vac: [this.datos.vacuna_form.vac_fec_adm_vac],
+        vac_efector: [this.datos.vacuna_form.vac_efector],
+        vac_que_dosis: [this.datos.vacuna_form.vac_que_dosis],
+        vac_sintomas_adm_vac: [this.datos.vacuna_form.vac_sintomas_adm_vac],
+        vac_cierre_contacto: [this.datos.vacuna_form.vac_cierre_contacto],
+      }),
+      usuario: [""],
+    });
+    this.cdr.markForCheck();
+  }
+
+  get campoVacMotivo() {
+    return this.vacunaForm.get("vacuna_form.vac_motivo");
+  }
+  get campoVacCierre() {
+    return this.vacunaForm.get("vacuna_form.vac_cierre_contacto");
+  }
+
+  get campo_Obs_fac_patologias() {
+    return this.vacunaForm.get("vacuna_form.vac_obs_factor");
+  }
+  get campo_vac_especificar() {
+    return this.vacunaForm.get("vacuna_form.vac_especificar");
+  }
+  get campo_vac_medicacion() {
+    return this.vacunaForm.get("vacuna_form.vac_medicacion");
+  }
+  get campo_vac_obs_est_rut() {
+    return this.vacunaForm.get("vacuna_form.vac_obs_est_rut");
+  }
+
+  get campo_vac_enfermedad_covid() {
+    return this.vacunaForm.get("");
+  }
+  get campo_vac_covid_cuando() {
+    return this.vacunaForm.get("vacuna_form.vac_covid_cuando");
+  }
+
+  get campo_vac_efector() {
+    return this.vacunaForm.get("vacuna_form.vac_efector");
+  }
+  get campo_vac_que_dosis() {
+    return this.vacunaForm.get("vacuna_form.vac_que_dosis");
+  }
+  get campo_vac_sintomas_adm_vac() {
+    return this.vacunaForm.get("vacuna_form.vac_sintomas_adm_vac");
+  }
+  get campo_vac_fec_adm_vac() {
+    return this.vacunaForm.get("vacuna_form.vac_fec_adm_vac");
+  }
+  activarFactorRiesgo() {
+    if (this.vac_factor_riesgo_patologias === "Si") {
+      this.campo_Obs_fac_patologias.enable();
+    } else {
+      this.campo_Obs_fac_patologias.disable();
+      this.campo_Obs_fac_patologias.reset();
+    }
+  }
+
+  activarVac_Tratamiento() {
+    if (this.vac_tratamiento === "Si") {
+      this.campo_vac_especificar.enable();
+      this.campo_vac_medicacion.enable();
+    } else {
+      this.campo_vac_especificar.disable();
+      this.campo_vac_especificar.reset();
+      this.campo_vac_medicacion.disable();
+      this.campo_vac_medicacion.reset();
+    }
+  }
+  activar_Vac_estudios_rutina() {
+    if (this.vac_estudios_rutina === "Si") {
+      this.campo_vac_obs_est_rut.enable();
+    } else {
+      this.campo_vac_obs_est_rut.disable();
+      this.campo_vac_obs_est_rut.reset();
+    }
+  }
+  activar_vac_enfermedad_covid() {
+    if (this.vac_enfermedad_covid === "Si") {
+      this.campo_vac_covid_cuando.enable();
+    } else {
+      this.campo_vac_covid_cuando.disable();
+      this.campo_vac_covid_cuando.reset();
+    }
+  }
+
+  activar_campos_vacunas() {
+    if (this.vac_suministro_vac === "Si") {
+      this.campo_vac_efector.enable();
+      this.campo_vac_que_dosis.enable();
+      this.campo_vac_sintomas_adm_vac.enable();
+      this.campo_vac_fec_adm_vac.enable();
+    } else {
+      this.campo_vac_efector.disable();
+      this.campo_vac_efector.reset();
+      this.campo_vac_que_dosis.disable();
+      this.campo_vac_que_dosis.reset();
+      this.campo_vac_sintomas_adm_vac.disable();
+      this.campo_vac_sintomas_adm_vac.reset();
+      this.campo_vac_fec_adm_vac.disable();
+      this.campo_vac_fec_adm_vac.reset();
     }
   }
 }

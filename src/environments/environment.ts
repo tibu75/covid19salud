@@ -12,10 +12,11 @@ export const environment = {
   MENU: "MENU",
   isMockEnabled: false,
 
-  //"http://localhost:8017",
+  apiUrl: "https://0800covid.ciudadanianqn.gob.ar:3222",
   //"http://10.1.142.117:3222",
-  apiUrl: "http://localhost:8017",
-  // "https://0800covid.ciudadanianqn.gob.ar:3222",
+
+  //"http://localhost:3222",
+  //"https://0800covid.ciudadanianqn.gob.ar:3222",
   //"http://192.168.24.197:8017",
   //"http://181.209.23.177:8017",
 };

@@ -6,6 +6,7 @@ export class FormsLlamada {
       {
         nroForm: string;
         fecha: string;
+        opc_form: string;
         tipo_llamada: string;
         motivo: string;
         sintomas: string;
@@ -45,6 +46,26 @@ export class FormsLlamada {
         whatsapp: string;
         det_requerimiento: string;
         fec_salud: string;
+        vacuna_form: {
+          vac_motivo: string;
+          vac_factor_riesgo_patologias: string;
+          vac_obs_factor: string;
+          vac_tratamiento: string;
+          vac_especificar: string;
+          vac_medicacion: string;
+          vac_tratamiento_plasma: string;
+          vac_estudios_rutina: string;
+          vac_obs_est_rut: string;
+          vac_gripe_camp_ant: string;
+          vac_enfermedad_covid: string;
+          vac_covid_cuando: string;
+          vac_suministro_vac: string;
+          vac_fec_adm_vac: string;
+          vac_efector: string;
+          vac_que_dosis: string;
+          vac_sintomas_adm_vac: string;
+          vac_cierre_contacto: string;
+        };
         cierre_contacto: string;
         usuario: string;
       }

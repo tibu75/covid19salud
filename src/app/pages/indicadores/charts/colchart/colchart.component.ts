@@ -1,6 +1,11 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { SocketService } from "src/app/services/socket/socket.service";
-
 
 @Component({
   selector: "app-colchart",
@@ -11,14 +16,13 @@ export class ColchartComponent implements OnInit, AfterViewInit {
   @Input() labelsFec: any;
   @Input() dataFec: any;
   chartOptions: any = {};
-  constructor(private srv: SocketService) { }
-
+  constructor(private srv: SocketService) {}
 
   ngOnInit(): void {
-    this.srv.listen("dataUpdate").subscribe((res: any) => {
+    /* this.srv.listen("dataUpdate").subscribe((res: any) => {
       console.log(res);
       this.chartOptions = this.update();
-    });
+    }); */
   }
   ngAfterViewInit(): void {
     console.log("NGAFTERINIT ColCharts: ", this.dataFec);
@@ -32,20 +36,19 @@ export class ColchartComponent implements OnInit, AfterViewInit {
       series: [
         {
           name: "Datos Diarios",
-          data: []
-        }
+          data: [],
+        },
       ],
       chart: {
         height: 490,
-        type: "bar"
+        type: "bar",
       },
       plotOptions: {
         bar: {
-
           dataLabels: {
-            position: "top" // top, center, bottom
-          }
-        }
+            position: "top", // top, center, bottom
+          },
+        },
       },
       responsive: [
         {
@@ -56,9 +59,9 @@ export class ColchartComponent implements OnInit, AfterViewInit {
               width: 300,
             },
             legend: {
-              position: "bottom"
-            }
-          }
+              position: "bottom",
+            },
+          },
         },
         {
           breakpoint: 1366,
@@ -67,10 +70,10 @@ export class ColchartComponent implements OnInit, AfterViewInit {
               height: 440,
             },
             legend: {
-              position: "bottom"
-            }
-          }
-        }
+              position: "bottom",
+            },
+          },
+        },
       ],
       dataLabels: {
         enabled: true,
@@ -80,22 +83,20 @@ export class ColchartComponent implements OnInit, AfterViewInit {
         offsetY: 10,
         style: {
           fontSize: "12px",
-          colors: ["#304758"]
-        }
+          colors: ["#304758"],
+        },
       },
       xaxis: {
-        categories: [
-
-        ],
+        categories: [],
         position: "bottom",
         labels: {
-          offsetY: 0
+          offsetY: 0,
         },
         axisBorder: {
-          show: true
+          show: true,
         },
         axisTicks: {
-          show: true
+          show: true,
         },
         crosshairs: {
           fill: {
@@ -105,14 +106,14 @@ export class ColchartComponent implements OnInit, AfterViewInit {
               colorTo: "#BED1E6",
               stops: [0, 50],
               opacityFrom: 0.4,
-              opacityTo: 0.5
-            }
-          }
+              opacityTo: 0.5,
+            },
+          },
         },
         tooltip: {
           enabled: true,
-          offsetY: -35
-        }
+          offsetY: -35,
+        },
       },
       fill: {
         type: "gradient",
@@ -124,22 +125,22 @@ export class ColchartComponent implements OnInit, AfterViewInit {
           inverseColors: true,
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [50, 0, 100, 100]
-        }
+          stops: [50, 0, 100, 100],
+        },
       },
       yaxis: {
         axisBorder: {
-          show: true
+          show: true,
         },
         axisTicks: {
-          show: true
+          show: true,
         },
         labels: {
           show: true,
           formatter: function (val) {
             return val + "";
-          }
-        }
+          },
+        },
       },
       title: {
         text: "",
@@ -147,16 +148,15 @@ export class ColchartComponent implements OnInit, AfterViewInit {
         offsetY: 320,
         align: "center",
         style: {
-          color: "#444"
-        }
-      }
-    }
+          color: "#444",
+        },
+      },
+    };
     opciones.series[0].data = this.dataFec;
     opciones.xaxis.categories = this.labelsFec;
     return opciones;
-  };
+  }
   /* 
     this.barChartData[0].data = this.dataFec;
     this.barChartLabels = this.labelsFec; */
 }
-

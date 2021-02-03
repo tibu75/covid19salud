@@ -11,19 +11,24 @@ import { MostrarService } from "src/app/services/mostrar/mostrar.service";
 import { MatDialog } from "@angular/material/dialog";
 import { RegllamadaComponent } from "./regllamada/regllamada.component";
 import { FormsLlamada } from "../../models/form0800covid2";
+import { opc_form } from "../../../interfaces/opc_form.interface";
 
 @Component({
   selector: "app-mostrar",
   templateUrl: "./mostrar.component.html",
 })
 export class MostrarComponent implements OnInit, AfterViewInit {
+  opc_Forms: opc_form = { op1: "covid", op2: "vacuna" };
   closeResult: string;
-  personaForm: FormGroup;
+
+  vacunaForm: FormGroup;
   data: any = {};
+  ult_registro: any = {};
   edad: string = "";
   mostrarEdad: number;
   mostrarFecha: string;
   mostrarFechaHisopado: string;
+  trabajo: string;
   public mostrar_hisopado: boolean = false;
   public mostrar_sintomas: boolean = false;
   public cargar_datos: boolean = true;
@@ -41,9 +46,10 @@ export class MostrarComponent implements OnInit, AfterViewInit {
     public mostrarForm: MostrarService,
     private cdr: ChangeDetectorRef,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   MostrarRegistro(idform): void {
+    console.log("mostrarRegistros");
     let dialogref = this.dialog.open(RegllamadaComponent, {
       width: "90%",
       data: idform,
@@ -58,18 +64,34 @@ export class MostrarComponent implements OnInit, AfterViewInit {
   @Input() llamada: any;
 
   ngOnInit(): void {
-    this.initForm();
     this.form = this.mostrarForm.registro.llamada;
+
+    this.DesplegarTrabajo();
+
+    if (this.trabajo === "vacuna") {
+      this.initForm();
+      this.cdr.markForCheck();
+    } else {
+      this.covidForm();
+      this.cdr.markForCheck();
+    }
+
+    // console.log("formulario", this.vacunaForm.controls.persona.value);
     this.cdr.markForCheck();
   }
 
   ngAfterViewInit(): void {
     this.initForm();
+    this.covidForm();
   }
 
+  DesplegarTrabajo() {
+    this.trabajo = this.opc_Forms.op2;
+    this.cdr.markForCheck();
+  }
   Entrada() {
     this.mostrarForm.tipo_llamada = "Entrada";
-    this.mostrarForm.ultimoReg = this.mostrarForm.registro.llamada.length - 1;
+    this.ult_registro = this.mostrarForm.registro.llamada.length - 1;
   }
   Salida() {
     this.mostrarForm.tipo_llamada = "Salida";
@@ -79,12 +101,11 @@ export class MostrarComponent implements OnInit, AfterViewInit {
   Mostrar(idform) {
     console.log(idform);
     this.mostrarForm.registro = idform;
-
     this.cdr.markForCheck();
   }
 
   initForm() {
-    this.personaForm = this.fb.group({
+    this.vacunaForm = this.fb.group({
       persona: this.fb.group({
         nombre: [this.mostrarForm.registro.persona.nombre],
         apellido: [this.mostrarForm.registro.persona.apellido],
@@ -101,20 +122,45 @@ export class MostrarComponent implements OnInit, AfterViewInit {
         provincia: [this.mostrarForm.registro.persona.provincia],
         img: [this.mostrarForm.registro.persona.img],
       }),
-      trabajo: this.fb.group({
+      /* trabajo: this.fb.group({
         lugar: [this.mostrarForm.registro.trabajo[0].localidad],
         telefono: [this.mostrarForm.registro.trabajo[0].telefono],
         calle: [this.mostrarForm.registro.trabajo[0].calle],
         numero: [this.mostrarForm.registro.trabajo[0].numero],
         localidad: [this.mostrarForm.registro.trabajo[0].localidad],
-      }),
+      }), */
     });
-    //console.log("esto se cargo");
-    console.log(this.mostrarForm);
-
     //console.log(this.edad);
     //console.log(this.mostrar_sintomas, this.mostrar_hisopado);
 
+    this.cdr.markForCheck();
+  }
+  covidForm() {
+    this.vacunaForm = this.fb.group({
+      persona: this.fb.group({
+        nombre: [this.mostrarForm.registro.persona.nombre],
+        apellido: [this.mostrarForm.registro.persona.apellido],
+        documento: [this.mostrarForm.registro.persona.documento],
+        fechaNacimiento: [this.mostrarForm.registro.persona.fechaNacimiento],
+        edad: [this.mostrarForm.registro.persona.edad],
+        sexo: [this.mostrarForm.registro.persona.sexo],
+        telefono: [this.mostrarForm.registro.persona.telefono],
+        calle: [this.mostrarForm.registro.persona.calle],
+        numero: [this.mostrarForm.registro.persona.numero],
+        departamento: [this.mostrarForm.registro.persona.departamento],
+        piso: [this.mostrarForm.registro.persona.piso],
+        localidad: [this.mostrarForm.registro.persona.localidad],
+        provincia: [this.mostrarForm.registro.persona.provincia],
+        img: [this.mostrarForm.registro.persona.img],
+      }),
+      /*  trabajo: this.fb.group({
+        lugar: [this.mostrarForm.registro.trabajo[0].localidad],
+        telefono: [this.mostrarForm.registro.trabajo[0].telefono],
+        calle: [this.mostrarForm.registro.trabajo[0].calle],
+        numero: [this.mostrarForm.registro.trabajo[0].numero],
+        localidad: [this.mostrarForm.registro.trabajo[0].localidad],
+      }), */
+    });
     this.cdr.markForCheck();
   }
 

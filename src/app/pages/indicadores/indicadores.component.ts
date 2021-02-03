@@ -1,15 +1,16 @@
-import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  AfterViewInit,
+} from "@angular/core";
 import { Localidades } from "../models/localidades";
 import { LocalidadesService } from "../../services/localidades/localidades.service";
-import { MostrarService } from "src/app/services/mostrar/mostrar.service";
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 import { FormsLlamada } from "../models/form0800covid2";
 import { Form0800Service } from "../../services/form0800/form0800.service";
 import * as moment from "moment";
 import { SocketService } from "src/app/services/socket/socket.service";
-import filter from "../../../assets/plugins/formvalidation/src/js/core/filter";
-import lessThan from "../../../assets/plugins/formvalidation/src/js/validators/lessThan";
-import stringLength from "../../../assets/plugins/formvalidation/src/js/validators/stringLength";
 
 @Component({
   selector: "app-indicadores",
@@ -28,6 +29,13 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
   soloLectura: boolean;
   data: any = [];
   dni: any = [];
+  public formulario: boolean = false;
+  public vacuna: boolean = false;
+  public form_Covid: number = 0;
+  public form_Vacuna: number = 0;
+  public aplico_Vacuna: number = 0;
+  public primeraD_Vacuna: number = 0;
+  public segundaD_Vacuna: number = 0;
   public conSintomas: number = 0;
   public sinSintomas: number = 0;
   public sintomas: boolean = false;
@@ -68,12 +76,14 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
 
   cargarForms() {
     this.cargando = true;
-    this.reg0800Service.getRegistrosTodos(5000).subscribe(({ total, registros }) => {
+
+    this.reg0800Service.indicadores().subscribe(({ total, registros }) => {
       console.log("cargarForms: Registros ", registros);
       console.log("Total de Personas: ", total);
       this.form = registros;
       this.filtrar();
       this.filtrarUlt7();
+      this.BuscarCantFormu();
       this.BuscarRegSintomas();
       this.totalForm = total;
       this.cdr.markForCheck();
@@ -91,10 +101,8 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     let fd = "2020-10-22" + time;
     let fh = moment().format("YYYY-MM-DD") + time;
     this.persona = this.form.map((item) => {
-      const documento = { documento: item.persona.documento };
-      const edad = { edad: item.persona.edad };
       const localidad = { localidad: item.persona.localidad };
-      const per = Object.assign(documento, edad, localidad);
+      const per = Object.assign(localidad);
       return per;
     });
 
@@ -157,11 +165,14 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     let labelsFecTemp: string[] = [];
     const time = "T03:00:00.000Z";
     const acu = 1;
-    let fd = moment(Date.now() - 6 * 24 * 3600 * 1000).format("YYYY-MM-DD") + time;
+    let fd =
+      moment(Date.now() - 6 * 24 * 3600 * 1000).format("YYYY-MM-DD") + time;
     let fh = moment().format("YYYY-MM-DD") + time;
     let f7: any[] = [];
     for (let dia = 6; dia >= 0; dia--) {
-      f7.push(moment(Date.now() - dia * 24 * 3600 * 1000).format("YYYY-MM-DD") + time);
+      f7.push(
+        moment(Date.now() - dia * 24 * 3600 * 1000).format("YYYY-MM-DD") + time
+      );
     }
     const llamada = this.form.reduce(
       (obj, value, i) => ({
@@ -201,9 +212,10 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
       const fil = elm.fecha >= fd && elm.fecha <= fh;
       return fil;
     });
-    console.log("RESULTADO: ", resultado);
+    // console.log("RESULTADO: ", resultado);
     f7.forEach((porFec) => {
-      const totalFechas = resultado.filter((busFec) => busFec.fecha === porFec).length;
+      const totalFechas = resultado.filter((busFec) => busFec.fecha === porFec)
+        .length;
       datosFecTemp.push(totalFechas);
     });
     f7.forEach((porFec) => {
@@ -214,9 +226,56 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
 
     this.datosFec = datosFecTemp;
     this.labelsFec = labelsFecTemp;
-    console.log("Los datos a pasar son Por Fecha : ", this.labelsFec, this.datosFec);
+    console.log(
+      "Los datos a pasar son Por Fecha : ",
+      this.labelsFec,
+      this.datosFec
+    );
     console.log("filtro Paso Por Fecha", resultado);
+
     this.cdr.markForCheck();
+  }
+
+  BuscarCantFormu() {
+    let acum = 0;
+    let vacum = 0;
+    this.form_Covid = 0;
+    this.form_Vacuna = 0;
+    this.aplico_Vacuna = 0;
+    this.segundaD_Vacuna = 0;
+    this.primeraD_Vacuna = 0;
+    //console.log("form antes de filtoro", this.form);
+    this.form.forEach((x) => {
+      this.formulario = false;
+      x.llamada.forEach((data) => {
+        if (data.opc_form === "covid") {
+          this.formulario = true;
+        }
+        acum++;
+        if (data.opc_form === "vacuna") {
+          if (data.vacuna_form.vac_suministro_vac === "Si") {
+            this.aplico_Vacuna++;
+          }
+
+          if (data.vacuna_form.vac_que_dosis === "primera") {
+            this.primeraD_Vacuna++;
+          }
+          if (data.vacuna_form.vac_que_dosis === "segunda") {
+            this.segundaD_Vacuna++;
+          }
+        }
+      });
+      if (this.formulario) {
+        this.form_Covid++;
+      } else {
+        this.form_Vacuna++;
+      }
+    });
+    /* console.log("Vacuna", this.aplico_Vacuna);
+    console.log("1dosis", this.primeraD_Vacuna);
+    console.log("2dosis", this.segundaD_Vacuna);
+    console.log("form covid", this.form_Covid);
+    console.log("form Vacuna ", this.form_Vacuna); */
   }
 
   BuscarRegSintomas() {

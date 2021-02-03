@@ -1,13 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef, NgModule } from "@angular/core";
-import { Form0800Service } from "../../services/form0800/form0800.service";
 import { FormsLlamada } from "../models/form0800covid2";
 import { Localidades } from "../models/localidades";
 import { LocalidadesService } from "../../services/localidades/localidades.service";
-import { ExporterService } from "../../services/exporter/exporter.service";
 import { BusquedasService } from "src/app/services/busqueda/busquedas.service";
 import { MostrarService } from "src/app/services/mostrar/mostrar.service";
-import { Router } from "@angular/router";
-
 import { Reg0800Service } from "src/app/services/reg0800/reg0800.service";
 
 @Component({
@@ -29,14 +25,12 @@ export class RegistrosComponent implements OnInit {
   dni: any = [];
 
   constructor(
-    private form0800Service: Form0800Service,
     private reg0800Service: Reg0800Service,
     private localidadesService: LocalidadesService,
     private busquedaService: BusquedasService,
     private cdr: ChangeDetectorRef,
-    private excelExports: ExporterService,
-    private mostrarForm: MostrarService,
-    private router: Router
+
+    private mostrarForm: MostrarService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +44,10 @@ export class RegistrosComponent implements OnInit {
       this.localidades = data;
       this.cdr.markForCheck();
     });
+  }
+  reset() {
+    this.cargarForms();
+    this.cdr.markForCheck();
   }
 
   cargarForms() {
@@ -81,7 +79,7 @@ export class RegistrosComponent implements OnInit {
     });
   }
   Mostrar(idform) {
-    //console.log(idform);
+    // console.log("mostrar", idform);
     this.mostrarForm.registro = idform;
 
     this.cdr.markForCheck();
@@ -98,11 +96,4 @@ export class RegistrosComponent implements OnInit {
     this.cdr.markForCheck();
     this.cargarForms();
   }
-
-  /* cargarXls() {
-    this.form0800Service.getXls().subscribe((Xls: any) => {
-      this.xls = Xls.Xls;
-      this.cdr.markForCheck();
-    });
-  } */
 }

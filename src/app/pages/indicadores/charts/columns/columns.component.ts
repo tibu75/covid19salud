@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { SocketService } from "src/app/services/socket/socket.service";
 
 @Component({
@@ -7,7 +13,6 @@ import { SocketService } from "src/app/services/socket/socket.service";
   styleUrls: ["./columns.component.scss"],
 })
 export class ColumnsComponent implements OnInit, AfterViewInit {
-
   @Input() labelsLoc: any[];
   @Input() dataLoc: any[];
   chartOptions: any = {};
@@ -25,18 +30,30 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     console.log("Datos ingresados al ngOnInit Columns: ", this.dataLoc);
 
-    this.srv.listen("dataUpdate").subscribe((res: any) => {
+    /* this.srv.listen("dataUpdate").subscribe((res: any) => {
       console.log(res);
       this.chartOptions = this.update();
-    });
+    }); */
   }
 
   // events
-  public chartClicked({ event, active }: { event: MouseEvent; active: {}[] }): void {
+  public chartClicked({
+    event,
+    active,
+  }: {
+    event: MouseEvent;
+    active: {}[];
+  }): void {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent; active: {}[] }): void {
+  public chartHovered({
+    event,
+    active,
+  }: {
+    event: MouseEvent;
+    active: {}[];
+  }): void {
     console.log(event, active);
   }
 
@@ -48,20 +65,20 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
       series: [
         {
           name: "Datos Diarios",
-          data: []
-        }
+          data: [],
+        },
       ],
       chart: {
         height: 680,
-        type: "bar"
+        type: "bar",
       },
       plotOptions: {
         bar: {
           horizontal: true,
           dataLabels: {
-            position: "top" // top, center, bottom
-          }
-        }
+            position: "top", // top, center, bottom
+          },
+        },
       },
       responsive: [
         {
@@ -72,9 +89,9 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
               width: 300,
             },
             legend: {
-              position: "bottom"
-            }
-          }
+              position: "bottom",
+            },
+          },
         },
         {
           breakpoint: 1366,
@@ -83,10 +100,10 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
               height: 500,
             },
             legend: {
-              position: "bottom"
-            }
-          }
-        }
+              position: "bottom",
+            },
+          },
+        },
       ],
       dataLabels: {
         enabled: true,
@@ -96,27 +113,25 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
         offsetY: 0,
         style: {
           fontSize: "12px",
-          colors: ["#304758"]
-        }
+          colors: ["#304758"],
+        },
       },
       stroke: {
         show: true,
         width: 1,
-        colors: ['#fff']
+        colors: ["#fff"],
       },
       xaxis: {
-        categories: [
-
-        ],
+        categories: [],
         position: "bottom",
         labels: {
-          offsetY: 0
+          offsetY: 0,
         },
         axisBorder: {
-          show: true
+          show: true,
         },
         axisTicks: {
-          show: true
+          show: true,
         },
         crosshairs: {
           fill: {
@@ -126,14 +141,14 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
               colorTo: "#BED1E6",
               stops: [0, 50],
               opacityFrom: 0.4,
-              opacityTo: 0.5
-            }
-          }
+              opacityTo: 0.5,
+            },
+          },
         },
         tooltip: {
           enabled: true,
-          offsetY: -35
-        }
+          offsetY: -35,
+        },
       },
       fill: {
         type: "gradient",
@@ -145,22 +160,22 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
           inverseColors: true,
           opacityFrom: 1,
           opacityTo: 1,
-          stops: [50, 0, 100, 100]
-        }
+          stops: [50, 0, 100, 100],
+        },
       },
       yaxis: {
         axisBorder: {
-          show: true
+          show: true,
         },
         axisTicks: {
-          show: true
+          show: true,
         },
         labels: {
           show: true,
           formatter: function (val) {
             return val + "";
-          }
-        }
+          },
+        },
       },
       title: {
         text: "",
@@ -168,10 +183,10 @@ export class ColumnsComponent implements OnInit, AfterViewInit {
         offsetY: 320,
         align: "center",
         style: {
-          color: "#444"
-        }
-      }
-    }
+          color: "#444",
+        },
+      },
+    };
     opciones.series[0].data = this.dataLoc;
     opciones.xaxis.categories = this.labelsLoc;
     return opciones;
