@@ -11,6 +11,7 @@ import { FormsLlamada } from "../models/form0800covid2";
 import { Form0800Service } from "../../services/form0800/form0800.service";
 import * as moment from "moment";
 import { SocketService } from "src/app/services/socket/socket.service";
+import { opc_form } from '../../interfaces/opc_form.interface';
 
 @Component({
   selector: "app-indicadores",
@@ -36,6 +37,10 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
   public aplico_Vacuna: number = 0;
   public primeraD_Vacuna: number = 0;
   public segundaD_Vacuna: number = 0;
+  public recibidasCovid: number = 0;
+  public realizadasCovid: number = 0;
+  public recibidasVacuna: number = 0;
+  public realizadasVacuna: number = 0;
   public conSintomas: number = 0;
   public sinSintomas: number = 0;
   public sintomas: boolean = false;
@@ -44,7 +49,10 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
   public labelsLoc: string[];
   public labelsFec: string[];
   public datosLoc: number[];
-  public datosFec: number[];
+  public datosCovidFec: number[];
+  public datosVacunaFec: number[];
+  public colorCovid: string = "#ffa200";
+  public colorVacunatorio: string = "#ff009c";
 
   constructor(
     public reg0800Service: Reg0800Service,
@@ -63,8 +71,9 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.wsService.listen("dataUpdate").subscribe((data) => {
-      console.log("Inicia Indicadores AfterInit: ", data);
+      console.log(" +++++++++++++++++++++ ESCUCHANDO INDICADORES: ", data);
       this.cargarForms();
+      this.cdr.markForCheck();
     });
   }
   cargarLocalidades() {
@@ -78,8 +87,8 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     this.cargando = true;
 
     this.reg0800Service.indicadores().subscribe(({ total, registros }) => {
-      console.log("cargarForms: Registros ", registros);
-      console.log("Total de Personas: ", total);
+      //console.log("cargarForms: Registros ", registros);
+      //console.log("Total de Personas: ", total);
       this.form = registros;
       this.filtrar();
       this.filtrarUlt7();
@@ -161,7 +170,8 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     this.cdr.markForCheck();
   }
   filtrarUlt7() {
-    let datosFecTemp: number[] = [];
+    let datosCovidFecTemp: number[] = [];
+    let datosVacunaFecTemp: number[] = [];
     let labelsFecTemp: string[] = [];
     const time = "T03:00:00.000Z";
     const acu = 1;
@@ -208,30 +218,44 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
       return consulta;
     };
     const obj = exportConsulta(this.persona, call);
-    const resultado = obj.filter((elm) => {
-      const fil = elm.fecha >= fd && elm.fecha <= fh;
+    const resultadoCovid = obj.filter((elm) => {
+      const fil = elm.opc_form === "covid" && elm.fecha >= fd && elm.fecha <= fh;
       return fil;
     });
-    // console.log("RESULTADO: ", resultado);
-    f7.forEach((porFec) => {
-      const totalFechas = resultado.filter((busFec) => busFec.fecha === porFec)
-        .length;
-      datosFecTemp.push(totalFechas);
+    const resultadoVacuna = obj.filter((elm) => {
+      const fil = elm.opc_form === "vacuna" && elm.fecha >= fd && elm.fecha <= fh;
+      return fil;
     });
-    f7.forEach((porFec) => {
-      let temp = porFec.substring(5);
-      temp = temp.split("T", 1);
-      labelsFecTemp.push(...temp);
-    });
+    //console.log("RESULTADO: ", resultado);
 
-    this.datosFec = datosFecTemp;
+    f7.forEach((porFec) => {
+      //console.log("Porfec: ", porFec);
+      const totalFechasCovid = resultadoCovid.filter((busFec) => busFec.fecha === porFec).length;
+      datosCovidFecTemp.push(totalFechasCovid);
+
+    }),
+      f7.forEach((porFec) => {
+        //console.log("Porfec: ", porFec);
+        const totalFechasVacuna = resultadoVacuna.filter((busFec) => busFec.fecha === porFec).length;
+        datosVacunaFecTemp.push(totalFechasVacuna);
+
+      }),
+
+      f7.forEach((porFec) => {
+        let temp = porFec.substring(5);
+        temp = temp.split("T", 1);
+        labelsFecTemp.push(...temp);
+      });
+
+    this.datosCovidFec = datosCovidFecTemp;
+    this.datosVacunaFec = datosVacunaFecTemp;
     this.labelsFec = labelsFecTemp;
-    console.log(
-      "Los datos a pasar son Por Fecha : ",
-      this.labelsFec,
-      this.datosFec
-    );
-    console.log("filtro Paso Por Fecha", resultado);
+    /* console.log("Los datos a pasar son Por Fecha : ",
+   this.labelsFec,
+     this.datosCovidFec,
+     this.datosVacunaFec,
+   ); */
+    // console.log("filtro Paso Por Fecha", resultado);
 
     this.cdr.markForCheck();
   }
@@ -265,11 +289,11 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
           }
         }
       });
-      if (this.formulario) {
-        this.form_Covid++;
-      } else {
-        this.form_Vacuna++;
-      }
+      /*  if (this.formulario) {
+         this.form_Covid++;
+       } else {
+         this.form_Vacuna++;
+       } */
     });
     /* console.log("Vacuna", this.aplico_Vacuna);
     console.log("1dosis", this.primeraD_Vacuna);
@@ -283,6 +307,12 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
     this.conSintomas = 0;
     this.sinSintomas = 0;
     this.cantRegistros = 0;
+    this.form_Covid = 0;
+    this.form_Vacuna = 0;
+    this.realizadasCovid = 0;
+    this.recibidasCovid = 0;
+    this.realizadasVacuna = 0;
+    this.recibidasVacuna = 0;
     this.form.forEach((x) => {
       this.sintomas = false;
       x.llamada.forEach((y) => {
@@ -290,6 +320,13 @@ export class IndicadoresComponent implements OnInit, AfterViewInit {
           this.sintomas = true;
         }
         acum++;
+        if (y.opc_form == "covid") {
+          this.form_Covid++;
+          y.tipo_llamada === "Entrada" ? this.recibidasCovid++ : this.realizadasCovid++;
+        } else {
+          this.form_Vacuna++;
+          y.tipo_llamada === "Entrada" ? this.recibidasVacuna++ : this.realizadasVacuna++;
+        };
       });
       if (this.sintomas) {
         this.conSintomas++;

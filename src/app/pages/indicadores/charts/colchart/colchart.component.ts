@@ -1,11 +1,13 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
   ViewChild,
 } from "@angular/core";
 import { SocketService } from "src/app/services/socket/socket.service";
+import color from '../../../../../assets/plugins/formvalidation/src/js/validators/color';
 
 @Component({
   selector: "app-colchart",
@@ -15,18 +17,21 @@ import { SocketService } from "src/app/services/socket/socket.service";
 export class ColchartComponent implements OnInit, AfterViewInit {
   @Input() labelsFec: any;
   @Input() dataFec: any;
+  @Input() color: any;
   chartOptions: any = {};
-  constructor(private srv: SocketService) {}
+  constructor(private srv: SocketService, private cdr: ChangeDetectorRef,) { }
 
   ngOnInit(): void {
-    /* this.srv.listen("dataUpdate").subscribe((res: any) => {
-      console.log(res);
+    this.srv.listen("dataUpdate").subscribe((res: any) => {
+      console.log("////////////////////// Init Chart", res);
       this.chartOptions = this.update();
-    }); */
+      this.cdr.markForCheck();
+    });
   }
   ngAfterViewInit(): void {
-    console.log("NGAFTERINIT ColCharts: ", this.dataFec);
+    console.log("/////NGAFTERINIT ColCharts: ", this.dataFec);
     this.chartOptions = this.update();
+    this.cdr.markForCheck();
   }
 
   public update() {
@@ -116,17 +121,8 @@ export class ColchartComponent implements OnInit, AfterViewInit {
         },
       },
       fill: {
-        type: "gradient",
-        gradient: {
-          shade: "light",
-          type: "horizontal",
-          shadeIntensity: 0.25,
-          gradientToColors: undefined,
-          inverseColors: true,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [50, 0, 100, 100],
-        },
+        type: "solid",
+        colors: []
       },
       yaxis: {
         axisBorder: {
@@ -154,6 +150,7 @@ export class ColchartComponent implements OnInit, AfterViewInit {
     };
     opciones.series[0].data = this.dataFec;
     opciones.xaxis.categories = this.labelsFec;
+    opciones.fill.colors[0] = this.color;
     return opciones;
   }
   /* 
